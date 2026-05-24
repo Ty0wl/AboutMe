@@ -294,3 +294,16 @@ body {
         align-items: flex-start;
     }
 }
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    /* остальные стили остаются */
+}
