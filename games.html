@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>AboutMe - Игровая таблица</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">&lt;AboutMe&gt;</div>
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">Домашняя страница</a>
+            <a href="games.html" class="nav-btn active">Игровая таблица</a>
+        </div>
+    </nav>
+
+    <main class="games-container">
+        <div class="legend-box">
+            <h3 class="legend-title">Легенда оценок:</h3>
+            <div class="legend-items">
+                <div class="legend-item"><span class="grade-badge grade-a-plus">A+</span> <span>Шедевр</span></div>
+                <div class="legend-item"><span class="grade-badge grade-a">A</span> <span>Отлично</span></div>
+                <div class="legend-item"><span class="grade-badge grade-b">B</span> <span>Хорошо</span></div>
+                <div class="legend-item"><span class="grade-badge grade-c">C</span> <span>Неплохо</span></div>
+                <div class="legend-item"><span class="grade-badge grade-d">D</span> <span>Слабо</span></div>
+            </div>
+        </div>
+
+        <div class="sort-panel">
+            <span class="sort-label">Сортировать по:</span>
+            <button class="sort-btn" data-sort="id">ID</button>
+            <button class="sort-btn" data-sort="name">Название</button>
+            <button class="sort-btn" data-sort="year">Год</button>
+            <button class="sort-btn" data-sort="type">Тип</button>
+            <button class="sort-btn" data-sort="genre">Жанр</button>
+            <button class="sort-btn" data-sort="grade">Оценка</button>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="games-table">
+                <thead>
+                    <tr>
+                        <th>Обложка</th>
+                        <th>Год</th>
+                        <th>Тип</th>
+                        <th>Жанр</th>
+                        <th>Название</th>
+                        <th>Оценка</th>
+                    </tr>
+                </thead>
+                <tbody id="games-table-body">
+                    <!-- Данные загружаются из JSON -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
