@@ -76,14 +76,14 @@ body {
 }
 
 .cat-section {
-    flex: 0 0 50%;
+    flex: 0 0 40%;
     display: flex;
     justify-content: center;
 }
 
 .cat-image {
     width: 100%;
-    max-width: 400px; 
+    max-width: 880px; 
     height: auto;
     object-fit: contain;
 }
