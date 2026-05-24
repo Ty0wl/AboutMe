@@ -29,7 +29,7 @@ body {
     left: 0;
     right: 0;
     background-color: #242638;
-    padding: 8px 20px;
+    padding: 5px 15px;
     display: flex;
     align-items: center;
     z-index: 1000;
@@ -37,7 +37,7 @@ body {
 }
 
 .nav-brand {
-    font-size: 24px;
+    font-size: 20px;
     color: #525963;
     font-weight: bold;
     letter-spacing: 2px;
@@ -46,20 +46,38 @@ body {
 
 .nav-buttons {
     display: flex;
-    gap: 15px;
+    gap: 10px;
 }
 
 .nav-btn {
-    padding: 8px 15px;
+    padding: 5px 10px;
     background-color: transparent;
     color: #FFFFFF;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 14px;
     font-family: 'LCD Smartie', monospace;
     border: 2px solid #525963;
     cursor: pointer;
     transition: all 0.3s;
 }
+
+.nav-btn:hover {
+    background-color: #525963;
+    transform: translateY(-1px);
+}
+
+.nav-btn.active {
+    background-color: #525963;
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
 
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
 .home-container {
