@@ -297,3 +297,25 @@ body {
         font-size: 20px;
     }
 }
+
+@font-face {
+    font-family: 'LCD Smartie';
+    src: url('fonts/LCDSmartie.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* 🔑 Чтобы текст показывался сразу */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'LCD Smartie', monospace;
+    background-color: #1A1626;
+    color: #FFFFFF;
+    font-size: 18px;
+    line-height: 1.6;
+}
