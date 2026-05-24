@@ -18,7 +18,7 @@ body {
     font-family: 'LCD Smartie', monospace;
     background-color: #1A1626;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .nav-brand {
-    font-size: 20px;
+    font-size: 16px;
     color: #525963;
     font-weight: bold;
     letter-spacing: 2px;
@@ -47,6 +47,7 @@ body {
 .nav-buttons {
     display: flex;
     gap: 10px;
+    order: -1;
 }
 
 .nav-btn {
@@ -54,7 +55,7 @@ body {
     background-color: transparent;
     color: #FFFFFF;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
     font-family: 'LCD Smartie', monospace;
     border: 2px solid #525963;
     cursor: pointer;
@@ -71,8 +72,8 @@ body {
 }
 
 .nav-icon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     margin-right: 5px;
     vertical-align: middle;
     object-fit: contain;
@@ -113,14 +114,14 @@ body {
 
 .main-title {
     color: #F79617;
-    font-size: 36px;
+    font-size: 28px;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .main-text {
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 20px;
     line-height: 1.8;
 }
@@ -144,7 +145,7 @@ body {
 
 .legend-title {
     color: #F79617;
-    font-size: 24px;
+    font-size: 18px;
     margin-bottom: 15px;
 }
 
@@ -158,7 +159,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 /* Панель сортировки */
@@ -175,17 +176,17 @@ body {
 
 .sort-label {
     color: #F79617;
-    font-size: 18px;
+    font-size: 14px;
     margin-right: 10px;
 }
 
 .sort-btn {
-    padding: 8px 15px;
+    padding: 6px 12px;
     background-color: #1A1626;
     color: #FFFFFF;
     border: 2px solid #525963;
     font-family: 'LCD Smartie', monospace;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -209,7 +210,7 @@ body {
 .games-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .games-table thead {
@@ -217,15 +218,15 @@ body {
 }
 
 .games-table th {
-    padding: 15px 10px;
+    padding: 12px 8px;
     color: #F79617;
     border: 2px solid #525963;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .games-table td {
-    padding: 12px 10px;
+    padding: 10px 8px;
     border: 2px solid #525963;
     text-align: center;
     vertical-align: middle;
@@ -238,8 +239,8 @@ body {
 
 /* Обложка игры */
 .game-cover {
-    width: 100px;
-    height: 140px;
+    width: 108px;
+    height: 108px;
     object-fit: cover;
     border: 2px solid #525963;
 }
@@ -247,12 +248,12 @@ body {
 /* Бейджи оценок */
 .grade-badge {
     display: inline-block;
-    padding: 6px 12px;
-    font-size: 20px;
+    padding: 5px 10px;
+    font-size: 16px;
     font-weight: bold;
     color: #FFFFFF;
     text-align: center;
-    min-width: 50px;
+    min-width: 40px;
 }
 
 .grade-a-plus { background-color: #13AD66; }
