@@ -61,15 +61,6 @@ body {
     transition: all 0.3s;
 }
 
-.nav-btn:hover {
-    background-color: #525963;
-    transform: translateY(-2px);
-}
-
-.nav-btn.active {
-    background-color: #525963;
-}
-
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
 .home-container {
     margin-top: 80px;
