@@ -1,3 +1,13 @@
+/* ===== ШРИФТЫ ===== */
+@font-face {
+    font-family: 'LCD Smartie';
+    src: url('resources/fonts/LCDSmartie/LCDSmartie-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ===== БАЗОВЫЕ НАСТРОЙКИ ===== */
 * {
     margin: 0;
     padding: 0;
@@ -5,11 +15,11 @@
 }
 
 body {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'LCD Smartie', monospace;
     background-color: #1A1626;
     color: #FFFFFF;
-    font-size: 14px; 
-    line-height: 1.8;
+    font-size: 18px;
+    line-height: 1.6;
 }
 
 /* ===== НАВИГАЦИЯ ===== */
@@ -19,36 +29,45 @@ body {
     left: 0;
     right: 0;
     background-color: #242638;
-    padding: 15px 30px;
+    padding: 8px 20px;
     display: flex;
     align-items: center;
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-nav-brand {
-    font-size: 28px;
+.nav-brand {
+    font-size: 24px;
     color: #525963;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-left: auto; 
+    margin-left: auto;
 }
+
 .nav-buttons {
     display: flex;
     gap: 15px;
-    order: -1;
 }
 
 .nav-btn {
-    padding: 10px 20px;
+    padding: 8px 15px;
     background-color: transparent;
     color: #FFFFFF;
     text-decoration: none;
-    font-size: 20px;
-    font-family: 'VT323', monospace;
+    font-size: 18px;
+    font-family: 'LCD Smartie', monospace;
     border: 2px solid #525963;
     cursor: pointer;
     transition: all 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: #525963;
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background-color: #525963;
 }
 
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
@@ -66,14 +85,14 @@ nav-brand {
 }
 
 .cat-section {
-    flex: 0 0 40%; 
+    flex: 0 0 50%;
     display: flex;
     justify-content: center;
 }
 
 .cat-image {
     width: 100%;
-    max-width: 420px; 
+    max-width: 400px; 
     height: auto;
     object-fit: contain;
 }
@@ -85,14 +104,14 @@ nav-brand {
 
 .main-title {
     color: #F79617;
-    font-size: 48px;
+    font-size: 36px;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .main-text {
     color: #FFFFFF;
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 20px;
     line-height: 1.8;
 }
@@ -116,7 +135,7 @@ nav-brand {
 
 .legend-title {
     color: #F79617;
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 15px;
 }
 
@@ -130,7 +149,7 @@ nav-brand {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 /* Панель сортировки */
@@ -147,7 +166,7 @@ nav-brand {
 
 .sort-label {
     color: #F79617;
-    font-size: 22px;
+    font-size: 18px;
     margin-right: 10px;
 }
 
@@ -156,8 +175,8 @@ nav-brand {
     background-color: #1A1626;
     color: #FFFFFF;
     border: 2px solid #525963;
-    font-family: 'VT323', monospace;
-    font-size: 18px;
+    font-family: 'LCD Smartie', monospace;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -181,7 +200,7 @@ nav-brand {
 .games-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .games-table thead {
@@ -193,7 +212,7 @@ nav-brand {
     color: #F79617;
     border: 2px solid #525963;
     text-align: center;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .games-table td {
@@ -210,8 +229,8 @@ nav-brand {
 
 /* Обложка игры */
 .game-cover {
-    width: 120px;
-    height: 160px;
+    width: 100px;
+    height: 140px;
     object-fit: cover;
     border: 2px solid #525963;
 }
@@ -219,46 +238,32 @@ nav-brand {
 /* Бейджи оценок */
 .grade-badge {
     display: inline-block;
-    padding: 8px 15px;
-    font-size: 24px;
+    padding: 6px 12px;
+    font-size: 20px;
     font-weight: bold;
     color: #FFFFFF;
     text-align: center;
-    min-width: 60px;
+    min-width: 50px;
 }
 
-.grade-a-plus {
-    background-color: #13AD66;
-}
-
-.grade-a {
-    background-color: #91DB69;
-}
-
-.grade-b {
-    background-color: #4D9BE6;
-}
-
-.grade-c {
-    background-color: #F79617;
-}
-
-.grade-d {
-    background-color: #F04F78;
-}
+.grade-a-plus { background-color: #13AD66; }
+.grade-a { background-color: #91DB69; }
+.grade-b { background-color: #4D9BE6; }
+.grade-c { background-color: #F79617; }
+.grade-d { background-color: #F04F78; }
 
 /* Адаптивность */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        gap: 15px;
-        padding: 15px;
+        gap: 10px;
+        padding: 10px;
     }
 
     .nav-brand {
         margin-left: 0;
         margin-right: 0;
-        order: -1; /* На мобилке название уходит наверх */
+        order: -1;
     }
 
     .nav-buttons {
@@ -273,7 +278,7 @@ nav-brand {
 
     .home-container {
         flex-direction: column;
-        margin-top: 140px;
+        margin-top: 120px;
     }
 
     .text-section {
@@ -281,32 +286,10 @@ nav-brand {
     }
 
     .main-title {
-        font-size: 36px;
+        font-size: 28px;
     }
 
     .main-text {
-        font-size: 20px;
+        font-size: 18px;
     }
-}
-
-@font-face {
-    font-family: 'LCD Smartie';
-    src: url('resources/fonts/LCDSmartie/LCDSmartie-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'LCD Smartie', monospace;
-    background-color: transparent;
-    color: #FFFFFF;
-    font-size: 18px;
-    line-height: 1.6;
 }
