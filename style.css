@@ -65,25 +65,31 @@ body {
     margin-top: 80px;
     padding: 40px 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center;
     gap: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cat-section {
-    margin: 20px 0;
+    flex: 0 0 40%; 
+    display: flex;
+    justify-content: center;
 }
 
 .cat-image {
-    max-width: 400px;
     width: 100%;
-    border: 4px solid #525963;
-    box-shadow: 0 0 20px rgba(82, 89, 99, 0.5);
+    max-width: 420px; 
+    height: auto;
+    object-fit: contain;
 }
 
 .text-section {
-    max-width: 800px;
-    text-align: center;
+    flex: 1; 
+    text-align: left;
 }
 
 .main-title {
@@ -258,6 +264,12 @@ body {
         padding: 15px;
     }
 
+    .nav-brand {
+        margin-left: 0;
+        margin-right: 0;
+        order: -1; /* На мобилке название уходит наверх */
+    }
+
     .nav-buttons {
         flex-direction: column;
         width: 100%;
@@ -269,7 +281,12 @@ body {
     }
 
     .home-container {
+        flex-direction: column; /* 🔑 На узких экранах обратно в столбик */
         margin-top: 140px;
+    }
+
+    .text-section {
+        text-align: center;
     }
 
     .main-title {
@@ -279,31 +296,4 @@ body {
     .main-text {
         font-size: 20px;
     }
-
-    .games-table {
-        font-size: 16px;
-    }
-
-    .game-cover {
-        width: 80px;
-        height: 110px;
-    }
-
-    .sort-panel {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-.nav-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    vertical-align: middle;
-    object-fit: contain;
-}
-
-.nav-btn {
-    display: inline-flex;
-    align-items: center;
-    /* остальные стили остаются */
 }
