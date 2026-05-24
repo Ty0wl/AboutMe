@@ -272,7 +272,7 @@ nav-brand {
     }
 
     .home-container {
-        flex-direction: column; /* 🔑 На узких экранах обратно в столбик */
+        flex-direction: column;
         margin-top: 140px;
     }
 
@@ -291,10 +291,10 @@ nav-brand {
 
 @font-face {
     font-family: 'LCD Smartie';
-    src: url('fonts/LCDSmartie.ttf') format('truetype');
+    src: url('resources/fonts/LCDSmartie/LCDSmartie-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-    font-display: swap; /* 🔑 Чтобы текст показывался сразу */
+    font-display: swap;
 }
 
 * {
@@ -305,7 +305,7 @@ nav-brand {
 
 body {
     font-family: 'LCD Smartie', monospace;
-    background-color: #1A1626;
+    background-color: transparent;
     color: #FFFFFF;
     font-size: 18px;
     line-height: 1.6;
