@@ -223,5 +223,77 @@
     "genre": "Horror, Strategy, Tabletop",
     "name": "Buckshot Roulette",
     "grade": "A"
+  },
+  {
+    "id": 36,
+    "cover": "resources/gfx/covers/inscryption.png",
+    "year": 2021,
+    "type": "Game",
+    "genre": "Horror, Strategy, Tabletop",
+    "name": "Inscryption",
+    "grade": "A+"
+  },
+  {
+    "id": 38,
+    "cover": "resources/gfx/covers/dead cells.jpg",
+    "year": 2016,
+    "type": "Game",
+    "genre": "Action, Roguevania",
+    "name": "Dead Cells",
+    "grade": "A"
+  },
+  {
+    "id": 39,
+    "cover": "resources/gfx/covers/dead cells medley of pain.png",
+    "year": "2020-2023",
+    "type": "DLC Bundle",
+    "genre": "Action, Roguevania",
+    "name": "Dead Cells: Medley of Pain",
+    "grade": "A+"
+  },
+  {
+    "id": 41,
+    "cover": "resources/gfx/covers/shift happens.png",
+    "year": 2017,
+    "type": "Game",
+    "genre": "Puzzle, Platformer, Co-op",
+    "name": "Shift Happens",
+    "grade": "A"
+  },
+  {
+    "id": 43,
+    "cover": "resources/gfx/covers/revita.png",
+    "year": 2022,
+    "type": "Game",
+    "genre": "Action, Roguelike",
+    "name": "Revita",
+    "grade": "B"
+  },
+  {
+    "id": 45,
+    "cover": "resources/gfx/covers/no nine sols.png",
+    "year": 2024,
+    "type": "Game",
+    "genre": "Metroidvania, Souls-like",
+    "name": "Nine Sols",
+    "grade": "A"
+  },
+  {
+    "id": 47,
+    "cover": "resources/gfx/covers/deep rock galactic.png",
+    "year": 2020,
+    "type": "Game",
+    "genre": "FPS, Online Co-op",
+    "name": "Deep Rock Galactic",
+    "grade": "A+"
+  },
+  {
+    "id": 50,
+    "cover": "resources/gfx/covers/the last campfire.png",
+    "year": 2021,
+    "type": "Game",
+    "genre": "Puzzle, Adventure",
+    "name": "The Last Campfire",
+    "grade": "A"
   }
 ]
