@@ -280,30 +280,40 @@ body {
 /* Адаптивность */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
+        flex-direction: row;
+        gap: 8px;
+        padding: 5px 10px;
+        flex-wrap: wrap;
     }
 
     .nav-brand {
-        margin-left: 0;
+        margin-left: auto;
         margin-right: 0;
-        order: -1;
+        font-size: 14px;
     }
 
     .nav-buttons {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        width: auto;
+        gap: 8px;
+        order: 0;
     }
 
     .nav-btn {
+        width: 32px;
+        height: 32px;
+        padding: 0;
         text-align: center;
-        width: 100%;
+    }
+
+    .nav-icon {
+        width: 16px;
+        height: 16px;
     }
 
     .home-container {
         flex-direction: column;
-        margin-top: 120px;
+        margin-top: 60px;
     }
 
     .text-section {
@@ -311,11 +321,37 @@ body {
     }
 
     .main-title {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .main-text {
-        font-family: 'PixelBody', monospace;
-        font-size: 16px;
+        font-size: 14px;
+    }
+
+    /* Для страницы с играми */
+    .games-container {
+        margin-top: 60px;
+    }
+
+    .legend-item {
+        font-size: 12px;
+    }
+
+    .sort-panel {
+        flex-wrap: wrap;
+    }
+
+    .sort-btn {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .games-table {
+        font-size: 12px;
+    }
+
+    .game-cover {
+        width: 60px;
+        height: 60px;
     }
 }
