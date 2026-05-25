@@ -1,6 +1,14 @@
 /* ===== ШРИФТЫ ===== */
 @font-face {
-    font-family: 'Minecraft';
+    font-family: 'PixelTitle';
+    src: url('resources/fonts/SonicX1/SonicX1.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PixelBody';
     src: url('resources/fonts/Minecraft/Minecraft.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
@@ -15,7 +23,7 @@
 }
 
 body {
-    font-family: 'LCD Smartie', monospace;
+    font-family: 'PixelBody', monospace;
     background-color: #1A1626;
     color: #FFFFFF;
     font-size: 14px;
@@ -51,6 +59,7 @@ body {
 }
 
 .nav-btn {
+    font-family: 'PixelBody', monospace;
     width: 40px;
     height: 40px;
     padding: 0;
@@ -96,7 +105,7 @@ body {
 }
 
 .cat-section {
-    flex: 0 0 35%;
+    flex: 0 0 33%;
     display: flex;
     justify-content: center;
 }
@@ -114,6 +123,7 @@ body {
 }
 
 .main-title {
+    font-family: 'PixelTitle', sans-serif;
     color: #F79617;
     font-size: 28px;
     margin-bottom: 30px;
@@ -145,6 +155,7 @@ body {
 }
 
 .legend-title {
+    font-family: 'PixelTitle', sans-serif;
     color: #F79617;
     font-size: 18px;
     margin-bottom: 15px;
@@ -176,6 +187,7 @@ body {
 }
 
 .sort-label {
+    font-family: 'PixelTitle', sans-serif;
     color: #F79617;
     font-size: 14px;
     margin-right: 10px;
@@ -209,6 +221,7 @@ body {
 }
 
 .games-table {
+    font-family: 'PixelBody', monospace;
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
@@ -248,6 +261,7 @@ body {
 
 /* Бейджи оценок */
 .grade-badge {
+    font-family: 'PixelBody', monospace;
     display: inline-block;
     padding: 5px 10px;
     font-size: 16px;
@@ -301,6 +315,7 @@ body {
     }
 
     .main-text {
+        font-family: 'PixelBody', monospace;
         font-size: 18px;
     }
 }
