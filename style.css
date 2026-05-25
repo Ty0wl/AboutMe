@@ -95,7 +95,7 @@ body {
 }
 
 .cat-section {
-    flex: 0 0 40%;
+    flex: 0 0 35%;
     display: flex;
     justify-content: center;
 }
