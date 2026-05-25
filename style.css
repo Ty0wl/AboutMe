@@ -60,8 +60,8 @@ body {
 
 .nav-btn {
     font-family: 'PixelBody', monospace;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     padding: 0;
     background-color: transparent;
     border: 2px solid #525963;
@@ -83,8 +83,8 @@ body {
 }
 
 .nav-icon {
-    width: 22px;
-    height: 22px;
+    width: 25px;
+    height: 25px;
     margin: 0;
     object-fit: contain;
 }

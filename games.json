@@ -9,7 +9,7 @@
     "grade": "A+"
   },
   {
-    "id": 2,
+    "id": 3,
     "cover": "resources/gfx/covers/castle crashers remastered.png",
     "year": 2012,
     "type": "Game Edition",
@@ -18,21 +18,210 @@
     "grade": "A+"
   },
   {
-    "id": 3,
+    "id": 4,
     "cover": "resources/gfx/covers/battleblock theater.png",
     "year": 2014,
     "type": "Game",
-    "genre": "2D-Platformer, Co-op",
+    "genre": "Platformer, Co-op",
     "name": "BattleBlock Theater",
     "grade": "A"
   },
   {
-    "id": 4,
+    "id": 5,
     "cover": "resources/gfx/covers/journey of a roach.png",
     "year": 2013,
     "type": "Game",
     "genre": "Point&Click, Puzzle",
     "name": "Journey of a Roach",
     "grade": "A+"
+  },
+  {
+    "id": 6,
+    "cover": "resources/gfx/covers/bioshock remastered.png",
+    "year": "2007 / 2016",
+    "type": "Game Edition",
+    "genre": "FPS, Immersive-Sim",
+    "name": "BioShock / Remastered",
+    "grade": "A+"
+  },
+  {
+    "id": 7,
+    "cover": "resources/gfx/covers/bioshock 2 remastered.png",
+    "year": "2010 / 2016",
+    "type": "Game Edition",
+    "genre": "FPS, Immersive-Sim",
+    "name": "BioShock 2 / Remastered",
+    "grade": "B"
+  },
+  {
+    "id": 8,
+    "cover": "resources/gfx/covers/bioshock 2 minervas den remastered.png",
+    "year": "2010 / 2016",
+    "type": "DLC",
+    "genre": "FPS, Immersive-Sim",
+    "name": "BioShock 2: Minerva's Den / Remastered",
+    "grade": "A"
+  },
+  {
+    "id": 9,
+    "cover": "resources/gfx/covers/bioshock infinite.png",
+    "year": 2013,
+    "type": "Game",
+    "genre": "FPS, Immersive-Sim",
+    "name": "BioShock Infinite",
+    "grade": "A+"
+  },
+  {
+    "id": 10,
+    "cover": "resources/gfx/covers/bioshock infinite burial at sea ep.1.png",
+    "year": 2013,
+    "type": "DLC",
+    "genre": "FPS, Immersive-Sim",
+    "name": "BioShock Infinite: Burial at Sea Ep.1",
+    "grade": "B"
+  },
+  {
+    "id": 11,
+    "cover": "resources/gfx/covers/bioshock infinite burial at sea ep.2.png",
+    "year": 2014,
+    "type": "DLC",
+    "genre": "Stealth, Immersive-Sim",
+    "name": "BioShock Infinite: Burial at Sea Ep.2",
+    "grade": "A+"
+  },
+  {
+    "id": 12,
+    "cover": "resources/gfx/covers/mark of the ninja remastered.png",
+    "year": "2012 / 2018",
+    "type": "Game Edition",
+    "genre": "Stealth, Platformer",
+    "name": "Mark of the Ninja: Remastered",
+    "grade": "A"
+  },
+  {
+    "id": 13,
+    "cover": "resources/gfx/covers/tboi rebirth.png",
+    "year": 2014,
+    "type": "Game",
+    "genre": "Action, Roguelike",
+    "name": "The binding of Isaac: Rebirth",
+    "grade": "A"
+  },
+  {
+    "id": 14,
+    "cover": "resources/gfx/covers/tboi ab ab+.png",
+    "year": "2015 / 2017",
+    "type": "DLC Bundle",
+    "genre": "Action, Roguelike",
+    "name": "TBOI: Afterbirth / Afterbirth+",
+    "grade": "C"
+  },
+  {
+    "id": 15,
+    "cover": "resources/gfx/covers/tboi rep rep+.png",
+    "year": "2021 / 2024",
+    "type": "DLC Bundle",
+    "genre": "Action, Roguelike",
+    "name": "TBOI: Repentance / Repentance+",
+    "grade": "A+"
+  },
+  {
+    "id": 16,
+    "cover": "resources/gfx/covers/dont starve together.png",
+    "year": 2016,
+    "type": "Game",
+    "genre": "Survival, Online Co-op",
+    "name": "Don't Starve Together",
+    "grade": "A"
+  },
+  {
+    "id": 20,
+    "cover": "resources/gfx/covers/gloomwood.png",
+    "year": 2022,
+    "type": "Game",
+    "genre": "Stealth, Horror",
+    "name": "Gloomwood",
+    "grade": "A"
+  },
+  {
+    "id": 21,
+    "cover": "resources/gfx/covers/darksiders warmastered.png",
+    "year": 2016,
+    "type": "Game Edition",
+    "genre": "Slasher, Metroidvania",
+    "name": "Darksiders Warmastered Edition",
+    "grade": "A"
+  },
+  {
+    "id": 24,
+    "cover": "resources/gfx/covers/alan wake.png",
+    "year": 2012,
+    "type": "Game",
+    "genre": "Survival Horror, Action",
+    "name": "Alan Wake",
+    "grade": "A+"
+  },
+  {
+    "id": 26,
+    "cover": "resources/gfx/covers/dishonored defenitive edition.png",
+    "year": 2013,
+    "type": "Game Edition",
+    "genre": "Stealth, Action",
+    "name": "Dishonored: Definitive Edition",
+    "grade": "A+"
+  },
+  {
+    "id": 27,
+    "cover": "resources/gfx/covers/dishonored 2.png",
+    "year": 2016,
+    "type": "Game",
+    "genre": "Stealth, Action",
+    "name": "Dishonored 2",
+    "grade": "A+"
+  },
+  {
+    "id": 29,
+    "cover": "resources/gfx/covers/deaths door.png",
+    "year": 2021,
+    "type": "Game",
+    "genre": "Metroidvania, Souls-like",
+    "name": "Death's Door",
+    "grade": "A+"
+  },
+  {
+    "id": 30,
+    "cover": "resources/gfx/covers/enter the gungeon.png",
+    "year": 2016,
+    "type": "Game",
+    "genre": "Action, Rougelike",
+    "name": "Enter the Gungeon",
+    "grade": "A+"
+  },
+  {
+    "id": 32,
+    "cover": "resources/gfx/covers/tomb raider goty.png",
+    "year": 2016,
+    "type": "Game Edition",
+    "genre": "Action, Rougelike",
+    "name": "Tomb Raider: Game of the Year Edition",
+    "grade": "A+"
+  },
+  {
+    "id": 34,
+    "cover": "resources/gfx/covers/kunai.png",
+    "year": 2020,
+    "type": "Game",
+    "genre": "Metroidvania, Adventure",
+    "name": "KUNAI",
+    "grade": "B"
+  },
+  {
+    "id": 35,
+    "cover": "resources/gfx/covers/buckshot roulette.png",
+    "year": 2023,
+    "type": "Game",
+    "genre": "Horror, Strategy, Tabletop",
+    "name": "Buckshot Roulette",
+    "grade": "A"
   }
 ]
