@@ -51,15 +51,17 @@ body {
 }
 
 .nav-btn {
-    padding: 5px 10px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
     background-color: transparent;
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 12px;
-    font-family: 'LCD Smartie', monospace;
     border: 2px solid #525963;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.3s;
+    text-decoration: none;
 }
 
 .nav-btn:hover {
@@ -72,10 +74,9 @@ body {
 }
 
 .nav-icon {
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
-    vertical-align: middle;
+    width: 22px;
+    height: 22px;
+    margin: 0;
     object-fit: contain;
 }
 
