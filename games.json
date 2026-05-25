@@ -1,29 +1,38 @@
 [
   {
     "id": 1,
-    "cover": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg",
+    "cover": "resources/gfx/covers/hollow knight voidheart edition.png",
     "year": 2017,
     "type": "Game Edition",
-    "genre": "Metroidvania",
+    "genre": "Metroidvania, Souls-like",
     "name": "Hollow Knight: Voidheart Edition",
     "grade": "A+"
   },
   {
     "id": 2,
-    "cover": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/header.jpg",
-    "year": 2015,
-    "type": "Game",
-    "genre": "RPG",
-    "name": "The Witcher 3: Wild Hunt",
+    "cover": "resources/gfx/covers/castle crashers remastered.png",
+    "year": 2012,
+    "type": "Game Edition",
+    "genre": "Beat'em Up, Co-op",
+    "name": "Castle Crashers Remastered",
     "grade": "A+"
   },
   {
     "id": 3,
-    "cover": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/header.jpg",
-    "year": 2019,
+    "cover": "resources/gfx/covers/battleblock theater.png",
+    "year": 2014,
     "type": "Game",
-    "genre": "RPG",
-    "name": "Cyberpunk 2077",
-    "grade": "B"
+    "genre": "2D-Platformer, Co-op",
+    "name": "BattleBlock Theater",
+    "grade": "A"
+  },
+  {
+    "id": 4,
+    "cover": "resources/gfx/covers/journey of a roach.png",
+    "year": 2013,
+    "type": "Game",
+    "genre": "Point&Click, Puzzle",
+    "name": "Journey of a Roach",
+    "grade": "A+"
   }
 ]
