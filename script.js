@@ -253,35 +253,3 @@ function sortGames(field) {
     renderTable();
     setupGradeClicks();
 }
-
-// ===== ДИНАМИЧЕСКИЕ ИКОНКИ НАВИГАЦИИ =====
-function setupNavIconHover() {
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        const icon = btn.querySelector('.nav-icon');
-        if (!icon) return;
-
-        const href = btn.getAttribute('href');
-        const isHome = href === 'index.html';
-        const isGames = href === 'games.html';
-        if (!isHome && !isGames) return;
-
-        const type = isHome ? 'home' : 'games';
-        const offSrc = `https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_${type}_off.png`;
-        const onSrc  = `https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_${type}_on.png`;
-
-        const isActive = btn.classList.contains('active');
-
-        btn.onmouseenter = null;
-        btn.onmouseleave = null;
-
-        if (isActive) {
-            icon.src = onSrc;
-        } else {
-            icon.src = offSrc;
-            btn.onmouseenter = () => { icon.src = onSrc; };
-            btn.onmouseleave = () => { icon.src = offSrc; };
-        }
-        
-        console.log(` [${type}] Активна: ${isActive} | Текущий src: ${icon.src}`);
-    });
-}

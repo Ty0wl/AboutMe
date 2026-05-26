@@ -98,7 +98,7 @@ body {
 .nav-btn.active {
     background-color: var(--border);
     border-color: var(--accent);
-    box-shadow: 0 0 8px rgba(247, 150, 23, 0.3);
+    box-shadow: 0 0 8px #F79617;
 }
 
 .nav-btn.active .nav-icon {
