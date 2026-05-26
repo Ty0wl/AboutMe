@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     setupSortButtons();
     setupModalEvents();
     setupLegendParticles();
+    setupNavIconHover();
 });
 
 async function loadReviews() {
@@ -82,8 +83,11 @@ function setupGradeClicks() {
 }
 
 function setupLegendParticles() {
+    console.log('🔍 setupLegendParticles вызвана');
+    
     const legendBadges = document.querySelectorAll('.legend-box .grade-badge');
-
+    console.log(`Найдено бейджей в легенде: ${legendBadges.length}`);
+    
     const gradeParticleMap = {
         'grade-a-plus': 'resources/gfx/particles/particle_a_plus.png',
         'grade-a':      'resources/gfx/particles/particle_a.png',
@@ -92,17 +96,25 @@ function setupLegendParticles() {
         'grade-d':      'resources/gfx/particles/particle_d.png'
     };
 
-    legendBadges.forEach(badge => {
+    legendBadges.forEach((badge, index) => {
+        console.log(`[${index}] Бейдж:`, badge.textContent, 'Классы:', Array.from(badge.classList));
         badge.style.cursor = 'pointer';
+        
         badge.addEventListener('click', (e) => {
+            console.log('КЛИК по бейджу!', badge.textContent);
+            e.stopPropagation();
+            
             const rect = badge.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
             
-            let particleSrc = 'resources/gfx/particles/particle_default.png';
+            console.log(`Координаты: x=${x}, y=${y}`);
+            
+            let particleSrc = 'resources/gfx/particles/particle_a.png';
             for (const [cls, src] of Object.entries(gradeParticleMap)) {
                 if (badge.classList.contains(cls)) {
                     particleSrc = src;
+                    console.log(`Найдена частица для ${cls}: ${particleSrc}`);
                     break;
                 }
             }
@@ -113,38 +125,45 @@ function setupLegendParticles() {
 }
 
 function spawnParticles(originX, originY, imagePath) {
-    const count = 12; // Количество частиц за клик
+    console.log(`💥 spawnParticles вызвана с: ${imagePath}`);
+    
+    const count = 15;
     for (let i = 0; i < count; i++) {
         const img = document.createElement('img');
-        img.src = imagePath;
+        img.src = `${imagePath}?t=${Date.now()}`;
+        img.alt = 'particle';
         
         Object.assign(img.style, {
             position: 'fixed',
             left: `${originX}px`,
             top: `${originY}px`,
-            width: '18px',
-            height: '18px',
+            width: '20px',
+            height: '20px',
             pointerEvents: 'none',
             zIndex: '3000',
-            transition: 'all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1)',
+            transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
             opacity: '1',
-            transform: 'translate(-50%, -50%) scale(1)'
+            transform: 'translate(-50%, -50%) scale(1)',
+            imageRendering: 'pixelated'
         });
         
         document.body.appendChild(img);
+        console.log(`Частица ${i} создана`);
 
-        // Случайный вектор разлёта
         const angle = Math.random() * Math.PI * 2;
-        const distance = 45 + Math.random() * 65;
+        const distance = 50 + Math.random() * 80;
         const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance - 25; // лёгкий подъём
+        const ty = Math.sin(angle) * distance - 30;
 
         requestAnimationFrame(() => {
-            img.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.2)`;
+            img.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
             img.style.opacity = '0';
         });
 
-        setTimeout(() => img.remove(), 750);
+        setTimeout(() => {
+            img.remove();
+            console.log(`🗑️ Частица ${i} удалена`);
+        }, 850);
     }
 }
 
@@ -285,13 +304,3 @@ function setupNavIconHover() {
         });
     });
 }
-
-// Вызываем функцию при загрузке страницы
-document.addEventListener('DOMContentLoaded', async function() {
-    await loadReviews();
-    await loadGames();
-    setupSortButtons();
-    setupModalEvents();
-    setupLegendParticles();
-    setupNavIconHover(); // 🔥 ДОБАВЬ ЭТУ СТРОКУ
-});
