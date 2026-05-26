@@ -16,7 +16,6 @@
 }
 
 /* ========== ЦВЕТА ============ */
-
 :root {
     --bg-dark: #1A1626;
     --bg-panel: #242638;
@@ -147,7 +146,6 @@ body {
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
 .home-container {
     margin-top: 80px;
@@ -226,13 +224,11 @@ body {
     align-items: center;
 }
 
-
 .legend-item {
-    font-size: 11px;
-    justify-content: center;
-    padding: 8px;
-    background: transparent;
-    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
 }
 
 .legend-item .grade-badge {
@@ -243,28 +239,28 @@ body {
 
 /* Панель сортировки */
 .sort-panel {
-    background-color: #242638;
+    background-color: var(--bg-panel);
     padding: 15px 20px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    border: 2px solid #525963;
+    border: 2px solid var(--border);
 }
 
 .sort-label {
     font-family: 'PixelTitle', sans-serif;
-    color: #F79617;
+    color: var(--accent);
     font-size: 14px;
     margin-right: 10px;
 }
 
 .sort-btn {
     padding: 6px 12px;
-    background-color: #1A1626;
-    color: #FFFFFF;
-    border: 2px solid #525963;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    border: 2px solid var(--border);
     font-family: 'PixelBody', monospace;
     font-size: 14px;
     cursor: pointer;
@@ -272,19 +268,19 @@ body {
 }
 
 .sort-btn:hover {
-    background-color: #525963;
+    background-color: var(--border);
     transform: translateY(-2px);
 }
 
 .sort-btn.active {
-    background-color: #525963;
+    background-color: var(--border);
 }
 
 /* Таблица */
 .table-wrapper {
     overflow-x: auto;
-    background-color: #242638;
-    border: 2px solid #525963;
+    background-color: var(--bg-panel);
+    border: 2px solid var(--border);
 }
 
 .games-table {
@@ -295,23 +291,23 @@ body {
 }
 
 .games-table thead {
-    background-color: #1A1626;
+    background-color: var(--bg-dark);
 }
 
 .games-table th {
     padding: 12px 8px;
-    color: #F79617;
-    border: 2px solid #525963;
+    color: var(--accent);
+    border: 2px solid var(--border);
     text-align: center;
     font-size: 16px;
 }
 
 .games-table td {
     padding: 10px 8px;
-    border: 2px solid #525963;
+    border: 2px solid var(--border);
     text-align: center;
     vertical-align: middle;
-    background-color: #1A1626;
+    background-color: var(--bg-dark);
 }
 
 .games-table tbody tr:hover {
@@ -319,6 +315,10 @@ body {
 }
 
 .game-cover {
+    width: 108px;
+    height: 108px;
+    object-fit: cover;
+    border: 2px solid var(--border);
     transition: opacity 0.3s ease;
     opacity: 0;
 }
@@ -331,6 +331,7 @@ body {
     background: linear-gradient(90deg, #1A1626 25%, #242638 50%, #1A1626 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
+    border: none; /* Убираем рамку пока грузится */
 }
 
 @keyframes loading {
@@ -377,8 +378,8 @@ body {
 .modal-overlay.active { display: flex; }
 
 .modal-content {
-    background-color: #242638;
-    border: 3px solid #525963;
+    background-color: var(--bg-panel);
+    border: 3px solid var(--border);
     padding: 25px;
     max-width: 650px;
     width: 90%;
@@ -406,7 +407,7 @@ body {
 
 .modal-title {
     font-family: 'PixelTitle', sans-serif;
-    color: #F79617;
+    color: var(--accent);
     font-size: 18px;
     margin-bottom: 15px;
     padding-right: 45px;
@@ -414,7 +415,7 @@ body {
 
 .modal-text {
     font-family: 'PixelBody', monospace;
-    color: #FFFFFF;
+    color: var(--text);
     font-size: 16px;
     line-height: 1.6;
     text-align: justify;
@@ -431,7 +432,7 @@ body {
     transform: translate(-50%, 150%);
     
     display: flex;
-    background-color: #242638;
+    background-color: var(--bg-panel);
     border: 2px solid #F04F78;
     padding: 15px 25px;
     z-index: 2000;
@@ -506,7 +507,6 @@ body {
         height: 22px;
     }
 
-    /* ===== ИНФОРМАЦИОННЫЙ БЛОК ===== */
     .info-section {
         padding: 15px;
         margin-bottom: 20px;
@@ -537,6 +537,7 @@ body {
         justify-content: flex-start;
         background: rgba(0,0,0,0.1);
         border-radius: 4px;
+        padding: 6px;
     }
 
     .legend-item .grade-badge {
@@ -545,7 +546,6 @@ body {
         font-size: 14px;
     }
 
-    /* ===== ПАНЕЛЬ СОРТИРОВКИ ===== */
     .sort-panel {
         padding: 12px 15px;
         margin-bottom: 15px;
@@ -567,7 +567,6 @@ body {
         min-width: 80px;
     }
 
-    /* ===== ТАБЛИЦА ===== */
     .games-table {
         font-size: 11px;
     }
@@ -592,7 +591,6 @@ body {
         font-size: 15px;
     }
 
-    /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
     .home-container {
         flex-direction: column;
         margin-top: 60px;
@@ -622,7 +620,6 @@ body {
         line-height: 1.6;
     }
 
-    /* ===== МОДАЛЬНОЕ ОКНО ===== */
     .modal-content {
         padding: 20px 15px;
         width: 95%;
@@ -643,7 +640,6 @@ body {
         height: 28px;
     }
 
-    /* ===== УВЕДОМЛЕНИЕ (TOAST) ===== */
     .toast-notification {
         padding: 12px 18px;
         bottom: 15px;
@@ -651,7 +647,7 @@ body {
     }
 
     .toast-notification span {
-        font-size: 8px;
+        font-size: 11px; 
     }
 
     .toast-close-icon {
