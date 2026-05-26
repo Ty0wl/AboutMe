@@ -4,71 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>AboutMe - Игровая таблица</title>
+    <title>AboutMe - Game Catalog</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="resources/gfx/ui/pageicon_cat.png">
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">&lt;AboutMe&gt;</div>
         <div class="nav-buttons">
-        <a href="index.html" class="nav-btn">
-            <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_off.png" alt="" class="nav-icon">
-        </a>
-        <a href="games.html" class="nav-btn active">
-            <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_selected.png" alt="" class="nav-icon">
-        </a>
+            <!-- Кнопка настроек -->
+            <a href="#" class="nav-btn settings-trigger" id="settings-btn">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_settings_off.png" alt="" class="nav-icon">
+            </a>
+            <a href="index.html" class="nav-btn">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_off.png" alt="" class="nav-icon">
+            </a>
+            <a href="games.html" class="nav-btn active">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_selected.png" alt="" class="nav-icon">
+            </a>
         </div>
+        <div class="nav-brand">&lt;AboutMe&gt;</div>
     </nav>
+
+    <!-- Панель настроек -->
+    <div class="settings-overlay" id="settings-overlay"></div>
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-header">
+            <h3 data-i18n="settings_title">Настройки</h3>
+            <button class="settings-close" id="settings-close">✕</button>
+        </div>
+        <div class="settings-content">
+            <div class="setting-item">
+                <span data-i18n="lang_label">Язык интерфейса</span>
+                <div class="lang-select-wrapper">
+                    <select id="language-selector" class="pixel-select">
+                        <option value="ru"> Русский</option>
+                        <option value="en"> English</option>
+                    </select>
+                    <div class="select-arrow">▼</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="games-container">
     
     <section class="info-section">
         <div class="welcome-text">
-            <h3 class="welcome-title">Добро пожаловать в каталог!</h3>
-            <p class="welcome-desc">
+            <h3 class="welcome-title" data-i18n="welcome_title">Добро пожаловать в каталог!</h3>
+            <p class="welcome-desc" data-i18n="welcome_desc">
                 Здесь собраны все игры, которые я прошёл, с моими личными оценками и подробными рецензиями. 
                 Нажми на <span class="highlight-word">оценку в таблице</span>, чтобы прочитать отзыв. 
                 Используй кнопки сверху для сортировки списка по любому параметру.
             </p>
         </div>
 
-        <!-- Разделительная линия -->
         <div class="section-divider"></div>
 
         <div class="legend-box">
-            <h3 class="legend-title">Легенда оценок:</h3>
+            <h3 class="legend-title" data-i18n="legend_title">Легенда оценок:</h3>
             <div class="legend-items">
-                <div class="legend-item"><span class="grade-badge grade-a-plus">A+</span> <span>   Бегом играть!</span></div>
-                <div class="legend-item"><span class="grade-badge grade-a">A</span> <span>   Рекомендую</span></div>
-                <div class="legend-item"><span class="grade-badge grade-b">B</span> <span>   Одноразово</span></div>
-                <div class="legend-item"><span class="grade-badge grade-c">C</span> <span>   Плохо</span></div>
-                <div class="legend-item"><span class="grade-badge grade-d">D</span> <span>   Слабо</span></div>
+                <div class="legend-item"><span class="grade-badge grade-a-plus">A+</span> <span data-i18n="grade_a_plus">Бегом играть!</span></div>
+                <div class="legend-item"><span class="grade-badge grade-a">A</span> <span data-i18n="grade_a">Рекомендую</span></div>
+                <div class="legend-item"><span class="grade-badge grade-b">B</span> <span data-i18n="grade_b">Одноразово</span></div>
+                <div class="legend-item"><span class="grade-badge grade-c">C</span> <span data-i18n="grade_c">Плохо</span></div>
+                <div class="legend-item"><span class="grade-badge grade-d">D</span> <span data-i18n="grade_d">Слабо</span></div>
             </div>
         </div>
     </section>
 
-    <!-- Панель сортировки и таблица остаются визуально отделёнными -->
     <div class="sort-panel">
-        <span class="sort-label">Сортировать по:</span>
+        <span class="sort-label" data-i18n="sort_label">Сортировать по:</span>
         <button class="sort-btn" data-sort="id">ID</button>
-        <button class="sort-btn" data-sort="name">Название</button>
-        <button class="sort-btn" data-sort="year">Год</button>
-        <button class="sort-btn" data-sort="type">Тип</button>
-        <button class="sort-btn" data-sort="genre">Жанр</button>
-        <button class="sort-btn" data-sort="grade">Оценка</button>
+        <button class="sort-btn" data-sort="name" data-i18n="sort_name">Название</button>
+        <button class="sort-btn" data-sort="year" data-i18n="sort_year">Год</button>
+        <button class="sort-btn" data-sort="type" data-i18n="sort_type">Тип</button>
+        <button class="sort-btn" data-sort="genre" data-i18n="sort_genre">Жанр</button>
+        <button class="sort-btn" data-sort="grade" data-i18n="sort_grade">Оценка</button>
     </div>
 
     <div class="table-wrapper">
     <table class="games-table">
         <thead>
             <tr>
-                <th>Обложка</th>
-                <th>Год</th>
-                <th>Тип</th>
-                <th>Жанр</th>
-                <th>Название</th>
-                <th>Оценка</th>
+                <th data-i18n="th_cover">Обложка</th>
+                <th data-i18n="th_year">Год</th>
+                <th data-i18n="th_type">Тип</th>
+                <th data-i18n="th_genre">Жанр</th>
+                <th data-i18n="th_name">Название</th>
+                <th data-i18n="th_grade">Оценка</th>
             </tr>
         </thead>
         <tbody id="games-table-body">
@@ -77,26 +100,25 @@
     </div>
 </main>
 
-    <!-- Всплывающее окно рецензии -->
+    <!-- Модальное окно -->
     <div id="review-modal" class="modal-overlay">
         <div class="modal-content">
             <button id="modal-close" class="modal-close-btn">
-                <img src="resources/gfx/ui/icon_close_off.png" alt="Закрыть" class="close-icon">
+                <img src="resources/gfx/ui/icon_close_off.png" alt="Close" class="close-icon">
             </button>
             <h2 id="modal-title" class="modal-title">Название игры</h2>
             <p id="modal-text" class="modal-text">Текст рецензии...</p>
         </div>
     </div>
 
-    <!-- Уведомление снизу -->
+    <!-- Уведомление -->
     <div id="review-toast" class="toast-notification">
-        <span>Рецензия ещё не добавлена!</span>
+        <span data-i18n="toast_text">Рецензия ещё не добавлена!</span>
         <button id="toast-close" class="toast-close-btn">
-            <img src="resources/gfx/ui/icon_close_off.png" alt="Закрыть" class="toast-close-icon">
+            <img src="resources/gfx/ui/icon_close_off.png" alt="Close" class="toast-close-icon">
         </button>
     </div>
 
     <script src="script.js"></script>
 </body>
-
 </html>

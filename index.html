@@ -10,27 +10,54 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-brand">&lt;AboutMe&gt;</div>
         <div class="nav-buttons">
-        <a href="index.html" class="nav-btn active">
-            <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_selected.png" alt="" class="nav-icon">
-        </a>
-        <a href="games.html" class="nav-btn">
-            <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_off.png" alt="" class="nav-icon">
-        </a>
+            <!-- Кнопка настроек -->
+            <a href="#" class="nav-btn settings-trigger" id="settings-btn">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_settings_off.png" alt="" class="nav-icon">
+            </a>
+            <a href="index.html" class="nav-btn active">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_selected.png" alt="" class="nav-icon">
+            </a>
+            <a href="games.html" class="nav-btn">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_off.png" alt="" class="nav-icon">
+            </a>
         </div>
+        <div class="nav-brand">&lt;AboutMe&gt;</div>
     </nav>
+
+    <!-- Панель настроек -->
+    <div class="settings-overlay" id="settings-overlay"></div>
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-header">
+            <h3 data-i18n="settings_title">Настройки</h3>
+            <button class="settings-close" id="settings-close">✕</button>
+        </div>
+        <div class="settings-content">
+            <div class="setting-item">
+                <span data-i18n="lang_label">Язык интерфейса</span>
+                <div class="lang-select-wrapper">
+                    <select id="language-selector" class="pixel-select">
+                        <option value="ru">🇷 Русский</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                    <div class="select-arrow">▼</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main class="home-container">
         <div class="cat-section">
             <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/cat.png" alt="Cat" class="cat-image">
         </div>
         <div class="text-section">
-            <h1 class="main-title">Привет, я – Ty0wl!</h1>
-            <p class="main-text">
+            <h1 class="main-title" data-i18n="main_title">Привет, я – Ty0wl!</h1>
+            <p class="main-text" data-i18n="main_text">
                 Добро пожаловать на мою персональную страницу! Пока что здесь есть только мои рецензии на игры, но дальше - больше!
             </p>
         </div>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

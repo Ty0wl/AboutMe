@@ -5,7 +5,13 @@ let currentSort = 'id';
 let sortDirection = {};
 let toastTimeout;
 
-// ===== ИНИЦИАЛИЗАЦИЯ =====
+// ===== ГЛОБАЛЬНЫЕ НАСТРОЙКИ =====
+const settings = {
+    defaultLang: 'ru',
+    storageKey: 'site_language'
+};
+
+// ===== ИНИЦИАЛИЗАЦИЯ (ОДИН ВЫЗОВ) =====
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('🚀 Инициализация сайта...');
     try {
@@ -13,8 +19,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         await loadGames();
         setupSortButtons();
         setupModalEvents();
+        setupGradeClicks();
+        initSettings();
         
-        // Запускаем эффекты с небольшой задержкой
         setTimeout(() => {
             setupLegendParticles();
         }, 100);
@@ -42,7 +49,6 @@ async function loadGames() {
         if (!response.ok) throw new Error('Ошибка загрузки данных');
         gamesData = await response.json();
         renderTable();
-        setupGradeClicks();
         console.log('✅ games.json загружен');
     } catch (error) {
         console.error('❌ Ошибка games.json:', error);
@@ -53,6 +59,7 @@ async function loadGames() {
     }
 }
 
+// ===== ОТРИСОВКА ТАБЛИЦЫ =====
 function renderTable() {
     const tbody = document.getElementById('games-table-body');
     if (!tbody) return;
@@ -115,11 +122,6 @@ function setupLegendParticles() {
         'grade-d':      'resources/gfx/particles/particle_d.png'
     };
 
-    const gradeColorMap = {
-        'grade-a-plus': '#13AD66', 'grade-a': '#91DB69', 'grade-b': '#4D9BE6',
-        'grade-c': '#F79617', 'grade-d': '#F04F78'
-    };
-
     badges.forEach(badge => {
         badge.style.cursor = 'pointer';
         badge.addEventListener('click', (e) => {
@@ -128,18 +130,15 @@ function setupLegendParticles() {
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
             
-            let particlePath = '';
-            let particleColor = '#FFFFFF';
-            
+            let particlePath = 'resources/gfx/particles/particle_a.png';
             for (const [cls, path] of Object.entries(gradeParticleMap)) {
                 if (badge.classList.contains(cls)) {
                     particlePath = path;
-                    particleColor = gradeColorMap[cls];
                     break;
                 }
             }
             
-            spawnParticles(x, y, particlePath, particleColor);
+            spawnParticles(x, y, particlePath);
         });
     });
 }
@@ -152,7 +151,6 @@ function spawnParticles(originX, originY, imagePath) {
         particle.src = `${imagePath}?t=${Date.now()}-${i}`;
         particle.alt = '';
         
-        // Стили
         particle.style.position = 'fixed';
         particle.style.left = originX + 'px';
         particle.style.top = originY + 'px';
@@ -166,13 +164,11 @@ function spawnParticles(originX, originY, imagePath) {
         
         document.body.appendChild(particle);
         
-        // Анимация
         const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
         const distance = 70 + Math.random() * 60;
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance - 30;
         
-        // Форс перерисовки
         particle.offsetHeight;
         
         particle.style.transition = 'all 0.75s cubic-bezier(0.2, 0.8, 0.2, 1)';
@@ -247,4 +243,63 @@ function sortGames(field) {
     });
     renderTable();
     setupGradeClicks();
+}
+
+// ===== СИСТЕМА ПЕРЕВОДОВ =====
+async function setLanguage(langCode) {
+    console.log(`🌐 Загрузка языка: ${langCode}`);
+    localStorage.setItem(settings.storageKey, langCode);
+    
+    const selector = document.getElementById('language-selector');
+    if (selector) selector.value = langCode;
+
+    try {
+        const response = await fetch(`translations/${langCode}.json`);
+        if (!response.ok) throw new Error('JSON не найден');
+        const dictionary = await response.json();
+
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (dictionary[key]) {
+                element.textContent = dictionary[key];
+            }
+        });
+
+    } catch (error) {
+        console.error(`❌ Ошибка загрузки языка ${langCode}:`, error);
+        if (langCode !== 'ru') setLanguage('ru'); 
+    }
+}
+
+// ===== ИНИЦИАЛИЗАЦИЯ НАСТРОЕК =====
+function initSettings() {
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsPanel = document.getElementById('settings-panel');
+    const overlay = document.getElementById('settings-overlay');
+    const closeBtn = document.getElementById('settings-close');
+    const langSelector = document.getElementById('language-selector');
+
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            settingsPanel.classList.add('active');
+            overlay.classList.add('active');
+        });
+    }
+    if (closeBtn) closeBtn.addEventListener('click', closePanel);
+    if (overlay) overlay.addEventListener('click', closePanel);
+
+    function closePanel() {
+        settingsPanel.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+
+    if (langSelector) {
+        langSelector.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+    }
+
+    const savedLang = localStorage.getItem(settings.storageKey) || settings.defaultLang;
+    setLanguage(savedLang);
 }

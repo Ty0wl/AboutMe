@@ -455,7 +455,178 @@ body {
 }
 .toast-close-btn:hover .toast-close-icon { filter: brightness(1.2); }
 
-/* Адаптивность */
+/* ===== СТИЛИ ДЛЯ ВЫБОРА ЯЗЫКА ===== */
+.lang-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 130px; /* Ширина кнопки */
+}
+
+.pixel-select {
+    width: 100%;
+    padding: 6px 30px 6px 10px; /* Место под стрелку */
+    font-family: 'PixelBody', monospace;
+    font-size: 12px;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    appearance: none; /* Убираем стандартный вид браузера */
+    -webkit-appearance: none;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.pixel-select:hover {
+    border-color: var(--accent);
+}
+
+.pixel-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(247, 150, 23, 0.3);
+}
+
+/* Стилизация опций внутри списка */
+.pixel-select option {
+    background-color: var(--bg-dark);
+    color: var(--text);
+    padding: 5px;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    pointer-events: none; /* Клик проходит сквозь стрелку */
+    font-size: 10px;
+}
+
+/* ===== ПАНЕЛЬ НАСТРОЕК ===== */
+.settings-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.settings-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.settings-panel {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 300px; /* 🔥 Десктопная ширина */
+    background-color: var(--bg-panel);
+    border-right: 2px solid var(--accent);
+    z-index: 2001;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px;
+    box-shadow: 5px 0 20px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.settings-panel.active {
+    transform: translateX(0);
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+}
+
+.settings-header h3 {
+    font-family: 'PixelTitle', sans-serif;
+    color: var(--accent);
+    font-size: 20px;
+}
+
+.settings-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.settings-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'PixelBody', monospace;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* ===== ВЫПАДАЮЩИЙ СПИСОК ЯЗЫКА ===== */
+.lang-select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 130px;
+}
+
+.pixel-select {
+    width: 100%;
+    padding: 6px 30px 6px 10px;
+    font-family: 'PixelBody', monospace;
+    font-size: 12px;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.pixel-select:hover {
+    border-color: var(--accent);
+}
+
+.pixel-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(247, 150, 23, 0.3);
+}
+
+.pixel-select option {
+    background-color: var(--bg-dark);
+    color: var(--text);
+    padding: 5px;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    pointer-events: none;
+    font-size: 10px;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: row;
@@ -463,21 +634,18 @@ body {
         padding: 5px 10px;
         flex-wrap: nowrap;
     }
-
     .nav-brand {
         margin-left: auto;
         margin-right: 0;
         font-size: 12px;
         white-space: nowrap;
     }
-
     .nav-buttons {
         flex-direction: row;
         width: auto;
         gap: 8px;
         order: 0;
     }
-
     .nav-btn {
         width: 40px;
         height: 40px;
@@ -485,33 +653,27 @@ body {
         text-align: center;
         flex-shrink: 0;
     }
-
     .nav-icon {
         width: 22px;
         height: 22px;
     }
-
     .info-section {
         padding: 15px;
         margin-bottom: 20px;
         gap: 15px;
     }
-
     .welcome-title {
         font-size: 18px;
         margin-bottom: 6px;
     }
-
     .welcome-desc {
         font-size: 12px;
         line-height: 1.5;
     }
-
     .legend-title {
         font-size: 16px;
         margin-bottom: 12px;
     }
-
     .legend-items {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -523,19 +685,16 @@ body {
         border-radius: 4px;
         padding: 6px;
     }
-
     .legend-item .grade-badge {
         width: 24px;
         height: 24px;
         font-size: 14px;
     }
-
     .sort-panel {
         padding: 12px 15px;
         margin-bottom: 15px;
         gap: 8px;
     }
-
     .sort-label {
         font-size: 12px;
         margin-right: 0;
@@ -543,99 +702,93 @@ body {
         text-align: center;
         margin-bottom: 5px;
     }
-
     .sort-btn {
         font-size: 11px;
         padding: 6px 10px; 
         flex: 1 1 calc(33.333% - 8px);
         min-width: 80px;
     }
-
     .games-table {
         font-size: 11px;
     }
-
     .games-table th {
         font-size: 12px;
         padding: 8px 5px;
     }
-
     .games-table td {
         padding: 8px 5px;
     }
-
     .game-cover {
         width: 50px;
         height: 50px;
     }
-
     .grade-badge {
         width: 36px;
         height: 36px;
         font-size: 15px;
     }
-
     .home-container {
         flex-direction: column;
         margin-top: 60px;
         padding: 20px 15px;
         gap: 25px;
     }
-
     .cat-section {
         flex: 0 0 100%;
     }
-
     .cat-image {
         max-width: 300px;
     }
-
     .text-section {
         text-align: center;
     }
-
     .main-title {
         font-size: 20px;
         margin-bottom: 20px;
     }
-
     .main-text {
         font-size: 13px;
         line-height: 1.6;
     }
-
     .modal-content {
         padding: 20px 15px;
         width: 95%;
     }
-
     .modal-title {
         font-size: 16px;
         padding-right: 35px;
     }
-
     .modal-text {
         font-size: 13px;
         line-height: 1.5;
     }
-
     .close-icon {
         width: 28px;
         height: 28px;
     }
-
     .toast-notification {
         padding: 12px 18px;
         bottom: 15px;
         gap: 12px;
     }
-
     .toast-notification span {
         font-size: 11px; 
     }
-
     .toast-close-icon {
         width: 24px;
         height: 24px;
     }
+    .settings-panel {
+        width: 85%;
+    }
+    .lang-select-wrapper {
+        width: 100%;
+    }
+    .settings-panel {
+        width: 85%; /* 🔥 Мобильная ширина */
+    }
+    .lang-select-wrapper {
+        width: 100%;
+    }
+
 }
