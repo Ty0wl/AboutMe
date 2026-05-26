@@ -274,29 +274,20 @@ function setupNavIconHover() {
         const icon = btn.querySelector('.nav-icon');
         if (!icon) return;
         
-        // Получаем базовый URL иконки
         const originalSrc = icon.src;
         
-        // Определяем, какая это кнопка (домой или игры)
-        const isHomeBtn = btn.getAttribute('href') === 'index.html';
-        const isGamesBtn = btn.getAttribute('href') === 'games.html';
+        const srcParts = originalSrc.split('/');
+        const fileName = srcParts[srcParts.length - 1];
+        const baseName = fileName.replace(/_off\.png$/, '').replace(/_on\.png$/, '');
         
-        // Формируем URL для "on" версии
-        let hoverSrc = '';
-        if (isHomeBtn) {
-            hoverSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_on.png';
-        } else if (isGamesBtn) {
-            hoverSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_off.png';
-        }
+        const hoverSrc = originalSrc.replace(/_off\.png$/, '_on.png').replace(/_on\.png$/, '_on.png');
         
-        // Событие наведения
         btn.addEventListener('mouseenter', () => {
             if (!btn.classList.contains('active')) {
                 icon.src = hoverSrc;
             }
         });
         
-        // Событие ухода мыши
         btn.addEventListener('mouseleave', () => {
             if (!btn.classList.contains('active')) {
                 icon.src = originalSrc;
