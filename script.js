@@ -1,27 +1,43 @@
+// ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
 let gamesData = [];
 let reviewsData = {};
 let currentSort = 'id';
 let sortDirection = {};
 let toastTimeout;
 
+// ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', async function() {
-    await loadReviews();
-    await loadGames();
-    setupSortButtons();
-    setupModalEvents();
-    setupLegendParticles();
-    setupNavIconHover();
+    console.log('🚀 Инициализация сайта...');
+    try {
+        await loadReviews();
+        await loadGames();
+        setupSortButtons();
+        setupModalEvents();
+        setupNavIconHover();
+        
+        // Небольшая задержка для гарантии готовности DOM
+        setTimeout(() => {
+            try {
+                setupLegendParticles();
+            } catch (err) {
+                console.error('❌ Ошибка в setupLegendParticles:', err);
+            }
+        }, 100);
+    } catch (err) {
+        console.error('❌ Критическая ошибка инициализации:', err);
+    }
 });
 
+// ===== ЗАГРУЗКА ДАННЫХ =====
 async function loadReviews() {
     try {
         const res = await fetch('reviews.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         reviewsData = await res.json();
-        console.log('reviews.json загружен:', Object.keys(reviewsData));
+        console.log('✅ reviews.json загружен:', Object.keys(reviewsData));
         return reviewsData;
     } catch (err) {
-        console.error('Ошибка reviews.json:', err);
+        console.error('❌ Ошибка reviews.json:', err);
         reviewsData = {};
         return {};
     }
@@ -34,16 +50,21 @@ async function loadGames() {
         gamesData = await response.json();
         renderTable();
         setupGradeClicks();
-        console.log('games.json загружен, таблица отрисована');
+        console.log('✅ games.json загружен, таблица отрисована');
     } catch (error) {
-        console.error('Ошибка games.json:', error);
-        document.getElementById('games-table-body').innerHTML = 
-            '<tr><td colspan="6" style="color: #F04F78; font-size: 24px;">Ошибка загрузки данных</td></tr>';
+        console.error('❌ Ошибка games.json:', error);
+        const tbody = document.getElementById('games-table-body');
+        if (tbody) {
+            tbody.innerHTML = '<tr><td colspan="6" style="color: #F04F78; font-size: 24px; text-align: center; padding: 20px;">Ошибка загрузки данных</td></tr>';
+        }
     }
 }
 
+// ===== ОТРИСОВКА ТАБЛИЦЫ =====
 function renderTable() {
     const tbody = document.getElementById('games-table-body');
+    if (!tbody) return;
+    
     tbody.innerHTML = '';
 
     gamesData.forEach(game => {
@@ -66,8 +87,10 @@ function renderTable() {
     });
 }
 
+// ===== КЛИКИ ПО ОЦЕНКАМ В ТАБЛИЦЕ =====
 function setupGradeClicks() {
-    document.querySelectorAll('#games-table-body .grade-badge').forEach(badge => {
+    const badges = document.querySelectorAll('#games-table-body .grade-badge');
+    badges.forEach(badge => {
         badge.style.cursor = 'pointer';
         badge.addEventListener('click', function() {
             const gameId = this.getAttribute('data-id');
@@ -82,100 +105,110 @@ function setupGradeClicks() {
     });
 }
 
+// ===== ЧАСТИЦЫ ДЛЯ ЛЕГЕНДЫ (PNG-версия) =====
 function setupLegendParticles() {
-    console.log('🔍 setupLegendParticles вызвана');
-    
-    const legendBadges = document.querySelectorAll('.legend-box .grade-badge');
-    console.log(`📊 Найдено бейджей в легенде: ${legendBadges.length}`);
-    
-    const gradeColorMap = {
-        'grade-a-plus': '#13AD66',
-        'grade-a':      '#91DB69',
-        'grade-b':      '#4D9BE6',
-        'grade-c':      '#F79617',
-        'grade-d':      '#F04F78'
+    console.log('🔍 setupLegendParticles: запуск');
+    const badges = document.querySelectorAll('.legend-box .grade-badge');
+    console.log(`📊 Найдено бейджей в легенде: ${badges.length}`);
+
+    if (badges.length === 0) {
+        console.warn('⚠️ Бейджи легенды не найдены! Проверь HTML.');
+        return;
+    }
+
+    // 🔥 Пути к PNG-частицам (замени на свои реальные пути!)
+    const gradeParticleMap = {
+        'grade-a-plus': 'resources/gfx/particles/particle_a_plus.png',
+        'grade-a':      'resources/gfx/particles/particle_a.png',
+        'grade-b':      'resources/gfx/particles/particle_b.png',
+        'grade-c':      'resources/gfx/particles/particle_c.png',
+        'grade-d':      'resources/gfx/particles/particle_d.png'
     };
 
-    legendBadges.forEach((badge, index) => {
-        console.log(`[${index}] Бейдж: "${badge.textContent}", классы:`, Array.from(badge.classList));
+    badges.forEach((badge, index) => {
         badge.style.cursor = 'pointer';
         
         badge.addEventListener('click', (e) => {
-            console.log('🖱️ КЛИК по бейджу!', badge.textContent);
             e.stopPropagation();
             
             const rect = badge.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
-            console.log(`📍 Координаты: x=${x}, y=${y}`);
             
-            let particleColor = '#F79617';
-            for (const [cls, color] of Object.entries(gradeColorMap)) {
+            // Определяем путь к частице по классу
+            let particlePath = 'resources/gfx/particles/particle_default.png';
+            for (const [cls, path] of Object.entries(gradeParticleMap)) {
                 if (badge.classList.contains(cls)) {
-                    particleColor = color;
-                    console.log(`✅ Цвет для ${cls}: ${particleColor}`);
+                    particlePath = path;
                     break;
                 }
             }
             
-            spawnParticles(x, y, particleColor);
+            spawnParticles(x, y, particlePath);
         });
+        console.log(`✅ Слушатель добавлен на бейдж [${index}]: ${badge.textContent}`);
     });
+    console.log('✨ Все обработчики легенды активны');
 }
 
-function spawnParticles(originX, originY, color) {
-    console.log('💥 Частицы запущены, цвет:', color);
+function spawnParticles(originX, originY, imagePath) {
+    console.log(`💥 spawnParticles: старт (${imagePath})`);
     
     const count = 15;
+    
     for (let i = 0; i < count; i++) {
-        const particle = document.createElement('div');
+        const particle = document.createElement('img');
         
+        // Добавляем timestamp чтобы избежать кэширования
+        particle.src = `${imagePath}?t=${Date.now()}-${i}`;
+        particle.alt = 'particle';
+        
+        // 🔥 СТИЛИ ЧЕРЕЗ ОТДЕЛЬНЫЕ СВОЙСТВА (надёжнее, чем Object.assign)
         particle.style.position = 'fixed';
         particle.style.left = originX + 'px';
         particle.style.top = originY + 'px';
-        particle.style.width = '16px';
-        particle.style.height = '16px';
-        particle.style.backgroundColor = color;
-        particle.style.border = '2px solid white';
-        particle.style.borderRadius = '4px';
-        particle.style.boxSizing = 'border-box';
+        particle.style.width = '18px';
+        particle.style.height = '18px';
         particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '99999';
+        particle.style.zIndex = '999999';
         particle.style.opacity = '1';
+        particle.style.transform = 'translate(-50%, -50%) scale(1)';
+        particle.style.imageRendering = 'pixelated'; // Для чёткости пиксель-арта
         
         document.body.appendChild(particle);
         
-        // Анимация
-        const angle = (Math.PI * 2 * i) / count;
-        const distance = 80 + Math.random() * 50;
-        const endX = Math.cos(angle) * distance;
-        const endY = Math.sin(angle) * distance;
+        // Случайный вектор разлёта
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+        const distance = 70 + Math.random() * 60;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance - 30; // Лёгкий подъём вверх
         
-        // Форсируем перерисовку
-        particle.getBoundingClientRect();
+        // Форсируем перерисовку перед анимацией
+        particle.offsetHeight;
         
         // Применяем анимацию
-        particle.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
-        particle.style.transform = 'translate(' + endX + 'px, ' + endY + 'px) scale(0)';
+        particle.style.transition = 'all 0.75s cubic-bezier(0.2, 0.8, 0.2, 1)';
+        particle.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
         particle.style.opacity = '0';
         
-        // Удаляем
-        setTimeout(function() {
+        // Удаляем после анимации
+        setTimeout(() => {
             if (particle.parentNode) {
                 particle.parentNode.removeChild(particle);
             }
-        }, 850);
+        }, 800);
     }
+    console.log('✅ Все частицы запущены');
 }
 
-// Открытие модального окна
+// ===== МОДАЛЬНОЕ ОКНО РЕЦЕНЗИИ =====
 function openReviewModal(gameId) {
     const modal = document.getElementById('review-modal');
     const titleEl = document.getElementById('modal-title');
     const textEl = document.getElementById('modal-text');
 
     const review = reviewsData[String(gameId)];
-    console.log(`🔍 Поиск ID "${gameId}" в reviews.json →`, review);
+    console.log(`🔍 Поиск рецензии для ID "${gameId}":`, review);
 
     if (review && review.text) {
         titleEl.textContent = review.title || `Игра #${gameId}`;
@@ -195,6 +228,7 @@ function closeReviewModal() {
     document.body.style.overflow = '';
 }
 
+// ===== УВЕДОМЛЕНИЕ (TOAST) =====
 function showReviewToast() {
     const toast = document.getElementById('review-toast');
     toast.classList.add('active');
@@ -210,21 +244,23 @@ function closeReviewToast() {
     clearTimeout(toastTimeout);
 }
 
+// ===== ОБРАБОТЧИКИ МОДАЛКИ И ТОАСТА =====
 function setupModalEvents() {
     const modal = document.getElementById('review-modal');
     const modalCloseBtn = document.getElementById('modal-close');
     const toastCloseBtn = document.getElementById('toast-close');
 
-    if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeReviewModal);
-    if (toastCloseBtn) toastCloseBtn.addEventListener('click', closeReviewToast);
-
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', closeReviewModal);
+    }
+    if (toastCloseBtn) {
+        toastCloseBtn.addEventListener('click', closeReviewToast);
+    }
     if (modal) {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeReviewModal();
         });
     }
-
-    // Закрытие по Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeReviewModal();
@@ -233,6 +269,7 @@ function setupModalEvents() {
     });
 }
 
+// ===== СОРТИРОВКА ТАБЛИЦЫ =====
 function setupSortButtons() {
     const sortButtons = document.querySelectorAll('.sort-btn');
     sortButtons.forEach(btn => {
@@ -243,30 +280,37 @@ function setupSortButtons() {
             sortGames(sortField);
         });
     });
-    document.querySelector('[data-sort="id"]')?.classList.add('active');
+    const defaultBtn = document.querySelector('[data-sort="id"]');
+    if (defaultBtn) defaultBtn.classList.add('active');
 }
 
 function sortGames(field) {
-    if (!(field in sortDirection)) sortDirection[field] = 'asc';
-    else sortDirection[field] = sortDirection[field] === 'asc' ? 'desc' : 'asc';
+    if (!(field in sortDirection)) {
+        sortDirection[field] = 'asc';
+    } else {
+        sortDirection[field] = sortDirection[field] === 'asc' ? 'desc' : 'asc';
+    }
 
     gamesData.sort((a, b) => {
         let valA = a[field];
         let valB = b[field];
+        
         if (typeof valA === 'number' && typeof valB === 'number') {
             return sortDirection[field] === 'asc' ? valA - valB : valB - valA;
         }
+        
         valA = String(valA).toLowerCase();
         valB = String(valB).toLowerCase();
         return sortDirection[field] === 'asc' 
             ? valA.localeCompare(valB, 'ru') 
             : valB.localeCompare(valA, 'ru');
     });
+    
     renderTable();
-    setupGradeClicks(); // Перепривязка кликов после перерисовки
+    setupGradeClicks();
 }
 
-// ===== ДИНАМИЧЕСКАЯ СМЕНА ИКОНОК ПРИ НАВЕДЕНИИ =====
+// ===== ДИНАМИЧЕСКИЕ ИКОНКИ НАВИГАЦИИ =====
 function setupNavIconHover() {
     const navButtons = document.querySelectorAll('.nav-btn');
     
@@ -276,14 +320,11 @@ function setupNavIconHover() {
         
         const originalSrc = icon.src;
         
-        const srcParts = originalSrc.split('/');
-        const fileName = srcParts[srcParts.length - 1];
-        const baseName = fileName.replace(/_off\.png$/, '').replace(/_on\.png$/, '');
-        
-        const hoverSrc = originalSrc.replace(/_off\.png$/, '_on.png').replace(/_on\.png$/, '_on.png');
+        // Формируем hover-версию: _off → _on
+        const hoverSrc = originalSrc.replace(/_off\.png$/i, '_on.png');
         
         btn.addEventListener('mouseenter', () => {
-            if (!btn.classList.contains('active')) {
+            if (!btn.classList.contains('active') && originalSrc.includes('_off')) {
                 icon.src = hoverSrc;
             }
         });
