@@ -246,3 +246,52 @@ function sortGames(field) {
     renderTable();
     setupGradeClicks(); // Перепривязка кликов после перерисовки
 }
+
+// ===== ДИНАМИЧЕСКАЯ СМЕНА ИКОНОК ПРИ НАВЕДЕНИИ =====
+function setupNavIconHover() {
+    const navButtons = document.querySelectorAll('.nav-btn');
+    
+    navButtons.forEach(btn => {
+        const icon = btn.querySelector('.nav-icon');
+        if (!icon) return;
+        
+        // Получаем базовый URL иконки
+        const originalSrc = icon.src;
+        
+        // Определяем, какая это кнопка (домой или игры)
+        const isHomeBtn = btn.getAttribute('href') === 'index.html';
+        const isGamesBtn = btn.getAttribute('href') === 'games.html';
+        
+        // Формируем URL для "on" версии
+        let hoverSrc = '';
+        if (isHomeBtn) {
+            hoverSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_on.png';
+        } else if (isGamesBtn) {
+            hoverSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_off.png';
+        }
+        
+        // Событие наведения
+        btn.addEventListener('mouseenter', () => {
+            if (!btn.classList.contains('active')) {
+                icon.src = hoverSrc;
+            }
+        });
+        
+        // Событие ухода мыши
+        btn.addEventListener('mouseleave', () => {
+            if (!btn.classList.contains('active')) {
+                icon.src = originalSrc;
+            }
+        });
+    });
+}
+
+// Вызываем функцию при загрузке страницы
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadReviews();
+    await loadGames();
+    setupSortButtons();
+    setupModalEvents();
+    setupLegendParticles();
+    setupNavIconHover(); // 🔥 ДОБАВЬ ЭТУ СТРОКУ
+});
