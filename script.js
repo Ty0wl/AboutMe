@@ -53,71 +53,6 @@ async function loadGames() {
     }
 }
 
-// ===== LAZY LOADING С ВЫГРУЗКОЙ =====
-class ImageLazyLoader {
-    constructor() {
-        this.images = new Map(); // Храним данные об изображениях
-        this.observer = null;
-        this.init();
-    }
-    
-    init() {
-        // Создаём Observer
-        this.observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const img = entry.target;
-                
-                if (entry.isIntersecting) {
-                    // Изображение появилось на экране - загружаем
-                    this.loadImage(img);
-                    this.observer.observe(img); // Продолжаем следить
-                } else {
-                    // Изображение ушло с экрана - выгружаем
-                    this.unloadImage(img);
-                }
-            });
-        }, {
-            rootMargin: '100px', // Загружаем заранее (100px до появления)
-            threshold: 0
-        });
-    }
-    
-    loadImage(img) {
-        if (img.dataset.src && !img.src) {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-            img.classList.add('loaded');
-        }
-    }
-    
-    unloadImage(img) {
-        // Сохраняем src в data-атрибут
-        if (img.src && !img.dataset.src) {
-            img.dataset.src = img.src;
-        }
-        // Очищаем src (изображение выгружается из памяти)
-        img.src = '';
-        img.classList.remove('loaded');
-        img.classList.add('lazy');
-    }
-    
-    observe(img) {
-        if (img) {
-            this.observer.observe(img);
-        }
-    }
-    
-    unobserve(img) {
-        if (img) {
-            this.observer.unobserve(img);
-        }
-    }
-}
-
-// Создаём экземпляр
-const lazyLoader = new ImageLazyLoader();
-
-// ===== МОДИФИЦИРОВАННАЯ renderTable() =====
 function renderTable() {
     const tbody = document.getElementById('games-table-body');
     if (!tbody) return;
@@ -128,8 +63,10 @@ function renderTable() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>
-                <img alt="${game.name}" 
-                     class="game-cover lazy"
+                <img src="${game.cover}" 
+                     alt="${game.name}" 
+                     class="game-cover" 
+                     loading="lazy"
                      onerror="this.src='covers/no-image.jpg'">
             </td>
             <td>${game.year}</td>
@@ -144,13 +81,7 @@ function renderTable() {
                 </span>
             </td>
         `;
-        
-        const img = row.querySelector('.game-cover');
-        img.dataset.src = game.cover; // Сохраняем путь
         tbody.appendChild(row);
-        
-        // Начинаем следить за изображением
-        lazyLoader.observe(img);
     });
 }
 

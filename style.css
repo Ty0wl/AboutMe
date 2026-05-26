@@ -323,22 +323,6 @@ body {
     opacity: 0;
 }
 
-.game-cover.loaded {
-    opacity: 1;
-}
-
-.game-cover.lazy {
-    background: linear-gradient(90deg, #1A1626 25%, #242638 50%, #1A1626 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-    border: none; /* Убираем рамку пока грузится */
-}
-
-@keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
 /* Бейджи оценок */
 .grade-badge {
     display: inline-flex;
