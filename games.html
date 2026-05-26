@@ -62,6 +62,25 @@
         </div>
     </main>
 
+    <!-- Всплывающее окно рецензии -->
+    <div id="review-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close-btn">
+                <img src="resources/gfx/ui/icon_close_on.png" alt="Закрыть" class="close-icon">
+            </button>
+            <h2 id="modal-title" class="modal-title">Название игры</h2>
+            <p id="modal-text" class="modal-text">Текст рецензии...</p>
+        </div>
+    </div>
+
+    <!-- Уведомление снизу -->
+    <div id="review-toast" class="toast-notification">
+        <span>Рецензия ещё не добавлена!</span>
+        <button id="toast-close" class="toast-close-btn">✕</button>
+    </div>
+
     <script src="script.js"></script>
+</body>
+</html>
 </body>
 </html>

@@ -6,7 +6,8 @@
     "type": "Game Edition",
     "genre": "Metroidvania, Souls-like",
     "name": "Hollow Knight: Voidheart Edition",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 1
   },
   {
     "id": 3,
@@ -15,7 +16,8 @@
     "type": "Game Edition",
     "genre": "Beat'em Up, Co-op",
     "name": "Castle Crashers Remastered",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 4,
@@ -24,7 +26,8 @@
     "type": "Game",
     "genre": "Platformer, Co-op",
     "name": "BattleBlock Theater",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 5,
@@ -33,7 +36,8 @@
     "type": "Game",
     "genre": "Point&Click, Puzzle",
     "name": "Journey of a Roach",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 6,
@@ -42,7 +46,8 @@
     "type": "Game Edition",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock / Remastered",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 7,
@@ -51,7 +56,8 @@
     "type": "Game Edition",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock 2 / Remastered",
-    "grade": "B"
+    "grade": "B",
+    "review": 0
   },
   {
     "id": 8,
@@ -60,7 +66,8 @@
     "type": "DLC",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock 2: Minerva's Den / Remastered",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 9,
@@ -69,7 +76,8 @@
     "type": "Game",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock Infinite",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 10,
@@ -78,7 +86,8 @@
     "type": "DLC",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock Infinite: Burial at Sea Ep.1",
-    "grade": "B"
+    "grade": "B",
+    "review": 0
   },
   {
     "id": 11,
@@ -87,7 +96,8 @@
     "type": "DLC",
     "genre": "Stealth, Immersive-Sim",
     "name": "BioShock Infinite: Burial at Sea Ep.2",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 12,
@@ -96,7 +106,8 @@
     "type": "Game Edition",
     "genre": "Stealth, Platformer",
     "name": "Mark of the Ninja: Remastered",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 13,
@@ -105,7 +116,8 @@
     "type": "Game",
     "genre": "Action, Roguelike",
     "name": "The binding of Isaac: Rebirth",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 14,
@@ -114,7 +126,8 @@
     "type": "DLC Bundle",
     "genre": "Action, Roguelike",
     "name": "TBOI: Afterbirth / Afterbirth+",
-    "grade": "C"
+    "grade": "C",
+    "review": 0
   },
   {
     "id": 15,
@@ -123,7 +136,8 @@
     "type": "DLC Bundle",
     "genre": "Action, Roguelike",
     "name": "TBOI: Repentance / Repentance+",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 16,
@@ -132,7 +146,8 @@
     "type": "Game",
     "genre": "Survival, Online Co-op",
     "name": "Don't Starve Together",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 20,
@@ -141,7 +156,8 @@
     "type": "Game",
     "genre": "Stealth, Horror",
     "name": "Gloomwood",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 21,
@@ -150,7 +166,8 @@
     "type": "Game Edition",
     "genre": "Slasher, Metroidvania",
     "name": "Darksiders Warmastered Edition",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 24,
@@ -159,7 +176,8 @@
     "type": "Game",
     "genre": "Survival Horror, Action",
     "name": "Alan Wake",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 26,
@@ -168,7 +186,8 @@
     "type": "Game Edition",
     "genre": "Stealth, Action",
     "name": "Dishonored: Definitive Edition",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 27,
@@ -177,7 +196,8 @@
     "type": "Game",
     "genre": "Stealth, Action",
     "name": "Dishonored 2",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 29,
@@ -186,7 +206,8 @@
     "type": "Game",
     "genre": "Metroidvania, Souls-like",
     "name": "Death's Door",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 30,
@@ -195,7 +216,8 @@
     "type": "Game",
     "genre": "Action, Rougelike",
     "name": "Enter the Gungeon",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 32,
@@ -204,7 +226,8 @@
     "type": "Game Edition",
     "genre": "Action Adventure, Survival",
     "name": "Tomb Raider: Game of the Year Edition",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 34,
@@ -213,7 +236,8 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "KUNAI",
-    "grade": "B"
+    "grade": "B",
+    "review": 0
   },
   {
     "id": 35,
@@ -222,7 +246,8 @@
     "type": "Game",
     "genre": "Horror, Strategy, Tabletop",
     "name": "Buckshot Roulette",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 36,
@@ -231,7 +256,8 @@
     "type": "Game",
     "genre": "Horror, Strategy, Tabletop",
     "name": "Inscryption",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 38,
@@ -240,7 +266,8 @@
     "type": "Game",
     "genre": "Action, Roguevania",
     "name": "Dead Cells",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 39,
@@ -249,7 +276,8 @@
     "type": "DLC Bundle",
     "genre": "Action, Roguevania",
     "name": "Dead Cells: Medley of Pain",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 41,
@@ -258,7 +286,8 @@
     "type": "Game",
     "genre": "Puzzle, Platformer, Co-op",
     "name": "Shift Happens",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 43,
@@ -267,7 +296,8 @@
     "type": "Game",
     "genre": "Action, Roguelike",
     "name": "Revita",
-    "grade": "B"
+    "grade": "B",
+    "review": 0
   },
   {
     "id": 45,
@@ -276,7 +306,8 @@
     "type": "Game",
     "genre": "Metroidvania, Souls-like",
     "name": "Nine Sols",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 47,
@@ -285,7 +316,8 @@
     "type": "Game",
     "genre": "FPS, Online Co-op",
     "name": "Deep Rock Galactic",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
   {
     "id": 50,
@@ -294,7 +326,8 @@
     "type": "Game",
     "genre": "Puzzle, Adventure",
     "name": "The Last Campfire",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
     {
     "id": 51,
@@ -303,7 +336,8 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Haiku, the Robot",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
     {
     "id": 52,
@@ -312,7 +346,8 @@
     "type": "Game Edition",
     "genre": "Tower Defense, Strategy",
     "name": "Plants vs. Zombies: Game of the Year Edition",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
     {
     "id": 55,
@@ -321,7 +356,8 @@
     "type": "Game",
     "genre": "Action, Adventure, Casual",
     "name": "Turnip Boy Commits Tax Evasion",
-    "grade": "B"
+    "grade": "B",
+    "review": 0
   },
     {
     "id": 58,
@@ -330,7 +366,8 @@
     "type": "Game",
     "genre": "Escape Room, Horror",
     "name": "Is this game trying to kill me?",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
     {
     "id": 61,
@@ -339,7 +376,8 @@
     "type": "Game",
     "genre": "Metroidvania, Shoot'em up",
     "name": "Minishoot' Adventures",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
     {
     "id": 62,
@@ -348,7 +386,8 @@
     "type": "Game",
     "genre": "Sandbox, Survival",
     "name": "Minecraft",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
     {
     "id": 63,
@@ -357,7 +396,8 @@
     "type": "Game",
     "genre": "Platformer, Rougelike",
     "name": "ScourgeBringer",
-    "grade": "C"
+    "grade": "C",
+    "review": 0
   },
     {
     "id": 67,
@@ -366,7 +406,8 @@
     "type": "Game",
     "genre": "Visual Novell, Horror",
     "name": "MiSide",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
     {
     "id": 70,
@@ -375,7 +416,8 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Supraland",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
     {
     "id": 71,
@@ -384,7 +426,8 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Supraland: Six Inches Under",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   },
     {
     "id": 74,
@@ -393,7 +436,8 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Hob",
-    "grade": "A"
+    "grade": "A",
+    "review": 0
   },
     {
     "id": 75,
@@ -402,6 +446,7 @@
     "type": "Game",
     "genre": "FPS, Rougelike",
     "name": "Roboquest",
-    "grade": "A+"
+    "grade": "A+",
+    "review": 0
   }
 ]

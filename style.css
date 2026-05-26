@@ -277,6 +277,89 @@ body {
 .grade-c { background-color: #F79617; }
 .grade-d { background-color: #F04F78; }
 
+/* ===== МОДАЛЬНОЕ ОКНО ===== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(10, 8, 15, 0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+.modal-overlay.active { display: flex; }
+
+.modal-content {
+    background-color: #242638;
+    border: 3px solid #525963;
+    padding: 25px;
+    max-width: 650px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.7);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+.close-icon { width: 24px; height: 24px; object-fit: contain; }
+
+.modal-title {
+    font-family: 'PixelTitle', sans-serif;
+    color: #F79617;
+    font-size: 22px;
+    margin-bottom: 15px;
+    padding-right: 40px;
+}
+
+.modal-text {
+    font-family: 'PixelBody', monospace;
+    color: #FFFFFF;
+    font-size: 15px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+/* ===== УВЕДОМЛЕНИЕ (TOAST) ===== */
+.toast-notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #242638;
+    border: 2px solid #F04F78;
+    padding: 12px 20px;
+    z-index: 2000;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.toast-notification.active { display: flex; }
+
+.toast-notification span {
+    font-family: 'PixelBody', monospace;
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+.toast-close-btn {
+    background: transparent;
+    border: 1px solid #525963;
+    color: #FFF;
+    font-family: 'PixelBody', monospace;
+    cursor: pointer;
+    padding: 2px 8px;
+    font-size: 14px;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     .navbar {
