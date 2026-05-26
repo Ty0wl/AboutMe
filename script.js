@@ -53,7 +53,71 @@ async function loadGames() {
     }
 }
 
-// ===== ОТРИСОВКА ТАБЛИЦЫ =====
+// ===== LAZY LOADING С ВЫГРУЗКОЙ =====
+class ImageLazyLoader {
+    constructor() {
+        this.images = new Map(); // Храним данные об изображениях
+        this.observer = null;
+        this.init();
+    }
+    
+    init() {
+        // Создаём Observer
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const img = entry.target;
+                
+                if (entry.isIntersecting) {
+                    // Изображение появилось на экране - загружаем
+                    this.loadImage(img);
+                    this.observer.observe(img); // Продолжаем следить
+                } else {
+                    // Изображение ушло с экрана - выгружаем
+                    this.unloadImage(img);
+                }
+            });
+        }, {
+            rootMargin: '100px', // Загружаем заранее (100px до появления)
+            threshold: 0
+        });
+    }
+    
+    loadImage(img) {
+        if (img.dataset.src && !img.src) {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            img.classList.add('loaded');
+        }
+    }
+    
+    unloadImage(img) {
+        // Сохраняем src в data-атрибут
+        if (img.src && !img.dataset.src) {
+            img.dataset.src = img.src;
+        }
+        // Очищаем src (изображение выгружается из памяти)
+        img.src = '';
+        img.classList.remove('loaded');
+        img.classList.add('lazy');
+    }
+    
+    observe(img) {
+        if (img) {
+            this.observer.observe(img);
+        }
+    }
+    
+    unobserve(img) {
+        if (img) {
+            this.observer.unobserve(img);
+        }
+    }
+}
+
+// Создаём экземпляр
+const lazyLoader = new ImageLazyLoader();
+
+// ===== МОДИФИЦИРОВАННАЯ renderTable() =====
 function renderTable() {
     const tbody = document.getElementById('games-table-body');
     if (!tbody) return;
@@ -63,7 +127,11 @@ function renderTable() {
     gamesData.forEach(game => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td><img src="${game.cover}" alt="${game.name}" class="game-cover" onerror="this.src='covers/no-image.png'"></td>
+            <td>
+                <img alt="${game.name}" 
+                     class="game-cover lazy"
+                     onerror="this.src='covers/no-image.jpg'">
+            </td>
             <td>${game.year}</td>
             <td>${game.type}</td>
             <td>${game.genre}</td>
@@ -76,7 +144,13 @@ function renderTable() {
                 </span>
             </td>
         `;
+        
+        const img = row.querySelector('.game-cover');
+        img.dataset.src = game.cover; // Сохраняем путь
         tbody.appendChild(row);
+        
+        // Начинаем следить за изображением
+        lazyLoader.observe(img);
     });
 }
 
@@ -243,105 +317,4 @@ function sortGames(field) {
     });
     renderTable();
     setupGradeClicks();
-}
-
-// ===== LAZY LOADING С ВЫГРУЗКОЙ =====
-class ImageLazyLoader {
-    constructor() {
-        this.images = new Map(); // Храним данные об изображениях
-        this.observer = null;
-        this.init();
-    }
-    
-    init() {
-        // Создаём Observer
-        this.observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const img = entry.target;
-                
-                if (entry.isIntersecting) {
-                    // Изображение появилось на экране - загружаем
-                    this.loadImage(img);
-                    this.observer.observe(img); // Продолжаем следить
-                } else {
-                    // Изображение ушло с экрана - выгружаем
-                    this.unloadImage(img);
-                }
-            });
-        }, {
-            rootMargin: '100px', // Загружаем заранее (100px до появления)
-            threshold: 0
-        });
-    }
-    
-    loadImage(img) {
-        if (img.dataset.src && !img.src) {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy');
-            img.classList.add('loaded');
-        }
-    }
-    
-    unloadImage(img) {
-        // Сохраняем src в data-атрибут
-        if (img.src && !img.dataset.src) {
-            img.dataset.src = img.src;
-        }
-        // Очищаем src (изображение выгружается из памяти)
-        img.src = '';
-        img.classList.remove('loaded');
-        img.classList.add('lazy');
-    }
-    
-    observe(img) {
-        if (img) {
-            this.observer.observe(img);
-        }
-    }
-    
-    unobserve(img) {
-        if (img) {
-            this.observer.unobserve(img);
-        }
-    }
-}
-
-// Создаём экземпляр
-const lazyLoader = new ImageLazyLoader();
-
-// ===== МОДИФИЦИРОВАННАЯ renderTable() =====
-function renderTable() {
-    const tbody = document.getElementById('games-table-body');
-    if (!tbody) return;
-    
-    tbody.innerHTML = '';
-
-    gamesData.forEach(game => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>
-                <img alt="${game.name}" 
-                     class="game-cover lazy"
-                     onerror="this.src='covers/no-image.jpg'">
-            </td>
-            <td>${game.year}</td>
-            <td>${game.type}</td>
-            <td>${game.genre}</td>
-            <td>${game.name}</td>
-            <td>
-                <span class="grade-badge grade-${game.grade.toLowerCase().replace('+', '-plus')}" 
-                      data-id="${game.id}" 
-                      data-review="${game.review}">
-                    ${game.grade}
-                </span>
-            </td>
-        `;
-        
-        const img = row.querySelector('.game-cover');
-        img.dataset.src = game.cover; // Сохраняем путь
-        tbody.appendChild(row);
-        
-        // Начинаем следить за изображением
-        lazyLoader.observe(img);
-    });
 }
