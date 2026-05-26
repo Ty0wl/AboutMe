@@ -30,6 +30,50 @@ body {
     line-height: 1.6;
 }
 
+.info-section {
+    background-color: #242638;
+    border: 2px solid #525963;
+    padding: 25px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.welcome-title {
+    font-family: 'PixelTitle', sans-serif; /* Тот же шрифт, что у легенды */
+    color: #F79617; /* Оранжевый */
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.welcome-desc {
+    font-family: 'PixelBody', monospace;
+    color: #FFFFFF;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.highlight-word {
+    color: #F79617;
+    font-weight: bold;
+}
+
+.section-divider {
+    height: 1px;
+    background-color: #525963;
+    width: 100%;
+    opacity: 0.6;
+}
+
+.info-section .legend-box {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
 /* ===== НАВИГАЦИЯ ===== */
 .navbar {
     position: fixed;
@@ -346,19 +390,20 @@ body {
 
 /* ===== УВЕДОМЛЕНИЕ (TOAST) ===== */
 .toast-notification {
-    display: flex;
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translate(-50%, 150%);
     
+    display: flex;
     background-color: #242638;
     border: 2px solid #F04F78;
-    padding: 15px 20px;
+    padding: 15px 25px;
     z-index: 2000;
     align-items: center;
     gap: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+    max-width: 90vw;
     
     visibility: hidden;
     opacity: 0;
@@ -389,29 +434,6 @@ body {
     filter: brightness(0.9);
 }
 .toast-close-btn:hover .toast-close-icon { filter: brightness(1.2); }
-
-/* ===== БЛОК ОПИСАНИЯ ===== */
-.page-description {
-    background-color: #242638;
-    border: 2px solid #525963;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-
-.desc-title {
-    font-family: 'PixelTitle', sans-serif;
-    color: #F79617;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.desc-text {
-    font-family: 'PixelBody', monospace;
-    color: #FFFFFF;
-    font-size: 14px;
-    line-height: 1.6;
-    text-align: justify;
-}
 
 /* Адаптивность */
 @media (max-width: 768px) {

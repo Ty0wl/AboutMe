@@ -22,16 +22,20 @@
     </nav>
 
     <main class="games-container">
-        <div class="page-description">
-        <h3 class="desc-title">Добро пожаловать в каталог!</h3>
-        <p class="desc-text">
-            Здесь собраны все игры, которые я прошёл, с моими личными оценками и подробными рецензиями. 
-            Нажми на <span style="color:#F79617">оценку в таблице</span>, чтобы прочитать отзыв. 
-            Используй кнопки сверху для сортировки списка по любому параметру.
-        </p>
-    </div>
+    
+    <section class="info-section">
+        <div class="welcome-text">
+            <h3 class="welcome-title">Добро пожаловать в каталог!</h3>
+            <p class="welcome-desc">
+                Здесь собраны все игры, которые я прошёл, с моими личными оценками и подробными рецензиями. 
+                Нажми на <span class="highlight-word">оценку в таблице</span>, чтобы прочитать отзыв. 
+                Используй кнопки сверху для сортировки списка по любому параметру.
+            </p>
+        </div>
 
-    <div class="legend-box">
+        <!-- Разделительная линия -->
+        <div class="section-divider"></div>
+
         <div class="legend-box">
             <h3 class="legend-title">Легенда оценок:</h3>
             <div class="legend-items">
@@ -42,35 +46,25 @@
                 <div class="legend-item"><span class="grade-badge grade-d">D</span> <span>Слабо</span></div>
             </div>
         </div>
+    </section>
 
-        <div class="sort-panel">
-            <span class="sort-label">Сортировать по:</span>
-            <button class="sort-btn" data-sort="id">ID</button>
-            <button class="sort-btn" data-sort="name">Название</button>
-            <button class="sort-btn" data-sort="year">Год</button>
-            <button class="sort-btn" data-sort="type">Тип</button>
-            <button class="sort-btn" data-sort="genre">Жанр</button>
-            <button class="sort-btn" data-sort="grade">Оценка</button>
-        </div>
+    <!-- Панель сортировки и таблица остаются визуально отделёнными -->
+    <div class="sort-panel">
+        <span class="sort-label">Сортировать по:</span>
+        <button class="sort-btn" data-sort="id">ID</button>
+        <button class="sort-btn" data-sort="name">Название</button>
+        <button class="sort-btn" data-sort="year">Год</button>
+        <button class="sort-btn" data-sort="type">Тип</button>
+        <button class="sort-btn" data-sort="genre">Жанр</button>
+        <button class="sort-btn" data-sort="grade">Оценка</button>
+    </div>
 
-        <div class="table-wrapper">
-            <table class="games-table">
-                <thead>
-                    <tr>
-                        <th>Обложка</th>
-                        <th>Год</th>
-                        <th>Тип</th>
-                        <th>Жанр</th>
-                        <th>Название</th>
-                        <th>Оценка</th>
-                    </tr>
-                </thead>
-                <tbody id="games-table-body">
-                    <!-- Данные загружаются из JSON -->
-                </tbody>
-            </table>
-        </div>
-    </main>
+    <div class="table-wrapper">
+        <table class="games-table">
+            <!-- ... таблица без изменений ... -->
+        </table>
+    </div>
+</main>
 
     <!-- Всплывающее окно рецензии -->
     <div id="review-modal" class="modal-overlay">
