@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "cover": "resources/gfx/covers/hollow knight voidheart edition.png",
+    "cover": "resources/gfx/covers/hollow knight voidheart edition.jpg",
     "year": 2017,
     "type": "Game Edition",
     "genre": "Metroidvania, Souls-like",
@@ -11,7 +11,7 @@
   },
   {
     "id": 3,
-    "cover": "resources/gfx/covers/castle crashers remastered.png",
+    "cover": "resources/gfx/covers/castle crashers remastered.jpg",
     "year": 2012,
     "type": "Game Edition",
     "genre": "Beat'em Up, Co-op",
@@ -21,7 +21,7 @@
   },
   {
     "id": 4,
-    "cover": "resources/gfx/covers/battleblock theater.png",
+    "cover": "resources/gfx/covers/battleblock theater.jpg",
     "year": 2014,
     "type": "Game",
     "genre": "Platformer, Co-op",
@@ -31,7 +31,7 @@
   },
   {
     "id": 5,
-    "cover": "resources/gfx/covers/journey of a roach.png",
+    "cover": "resources/gfx/covers/journey of a roach.jpg",
     "year": 2013,
     "type": "Game",
     "genre": "Point&Click, Puzzle",
@@ -41,7 +41,7 @@
   },
   {
     "id": 6,
-    "cover": "resources/gfx/covers/bioshock remastered.png",
+    "cover": "resources/gfx/covers/bioshock remastered.jpg",
     "year": "2007 / 2016",
     "type": "Game Edition",
     "genre": "FPS, Immersive-Sim",
@@ -51,7 +51,7 @@
   },
   {
     "id": 7,
-    "cover": "resources/gfx/covers/bioshock 2 remastered.png",
+    "cover": "resources/gfx/covers/bioshock 2 remastered.jpg",
     "year": "2010 / 2016",
     "type": "Game Edition",
     "genre": "FPS, Immersive-Sim",
@@ -61,7 +61,7 @@
   },
   {
     "id": 8,
-    "cover": "resources/gfx/covers/bioshock 2 minervas den remastered.png",
+    "cover": "resources/gfx/covers/bioshock 2 minervas den remastered.jpg",
     "year": "2010 / 2016",
     "type": "DLC",
     "genre": "FPS, Immersive-Sim",
@@ -71,7 +71,7 @@
   },
   {
     "id": 9,
-    "cover": "resources/gfx/covers/bioshock infinite.png",
+    "cover": "resources/gfx/covers/bioshock infinite.jpg",
     "year": 2013,
     "type": "Game",
     "genre": "FPS, Immersive-Sim",
@@ -81,7 +81,7 @@
   },
   {
     "id": 10,
-    "cover": "resources/gfx/covers/bioshock infinite burial at sea ep.1.png",
+    "cover": "resources/gfx/covers/bioshock infinite burial at sea ep.1.jpg",
     "year": 2013,
     "type": "DLC",
     "genre": "FPS, Immersive-Sim",
@@ -91,7 +91,7 @@
   },
   {
     "id": 11,
-    "cover": "resources/gfx/covers/bioshock infinite burial at sea ep.2.png",
+    "cover": "resources/gfx/covers/bioshock infinite burial at sea ep.2.jpg",
     "year": 2014,
     "type": "DLC",
     "genre": "Stealth, Immersive-Sim",
@@ -101,7 +101,7 @@
   },
   {
     "id": 12,
-    "cover": "resources/gfx/covers/mark of the ninja remastered.png",
+    "cover": "resources/gfx/covers/mark of the ninja remastered.jpg",
     "year": "2012 / 2018",
     "type": "Game Edition",
     "genre": "Stealth, Platformer",
@@ -111,7 +111,7 @@
   },
   {
     "id": 13,
-    "cover": "resources/gfx/covers/tboi rebirth.png",
+    "cover": "resources/gfx/covers/tboi rebirth.jpg",
     "year": 2014,
     "type": "Game",
     "genre": "Action, Roguelike",
@@ -121,7 +121,7 @@
   },
   {
     "id": 14,
-    "cover": "resources/gfx/covers/tboi ab ab+.png",
+    "cover": "resources/gfx/covers/tboi ab ab+.jpg",
     "year": "2015 / 2017",
     "type": "DLC Bundle",
     "genre": "Action, Roguelike",
@@ -131,7 +131,7 @@
   },
   {
     "id": 15,
-    "cover": "resources/gfx/covers/tboi rep rep+.png",
+    "cover": "resources/gfx/covers/tboi rep rep+.jpg",
     "year": "2021 / 2024",
     "type": "DLC Bundle",
     "genre": "Action, Roguelike",
@@ -141,7 +141,7 @@
   },
   {
     "id": 16,
-    "cover": "resources/gfx/covers/dont starve together.png",
+    "cover": "resources/gfx/covers/dont starve together.jpg",
     "year": 2016,
     "type": "Game",
     "genre": "Survival, Online Co-op",
@@ -151,7 +151,7 @@
   },
   {
     "id": 20,
-    "cover": "resources/gfx/covers/gloomwood.png",
+    "cover": "resources/gfx/covers/gloomwood.jpg",
     "year": 2022,
     "type": "Game",
     "genre": "Stealth, Horror",
@@ -161,7 +161,7 @@
   },
   {
     "id": 21,
-    "cover": "resources/gfx/covers/darksiders warmastered.png",
+    "cover": "resources/gfx/covers/darksiders warmastered.jpg",
     "year": 2016,
     "type": "Game Edition",
     "genre": "Slasher, Metroidvania",
@@ -181,7 +181,7 @@
   },
   {
     "id": 26,
-    "cover": "resources/gfx/covers/dishonored defenitive edition.png",
+    "cover": "resources/gfx/covers/dishonored defenitive edition.jpg",
     "year": 2013,
     "type": "Game Edition",
     "genre": "Stealth, Action",
@@ -191,7 +191,7 @@
   },
   {
     "id": 27,
-    "cover": "resources/gfx/covers/dishonored 2.png",
+    "cover": "resources/gfx/covers/dishonored 2.jpg",
     "year": 2016,
     "type": "Game",
     "genre": "Stealth, Action",
@@ -201,7 +201,7 @@
   },
   {
     "id": 29,
-    "cover": "resources/gfx/covers/deaths door.png",
+    "cover": "resources/gfx/covers/deaths door.jpg",
     "year": 2021,
     "type": "Game",
     "genre": "Metroidvania, Souls-like",
@@ -211,7 +211,7 @@
   },
   {
     "id": 30,
-    "cover": "resources/gfx/covers/enter the gungeon.png",
+    "cover": "resources/gfx/covers/enter the gungeon.jpg",
     "year": 2016,
     "type": "Game",
     "genre": "Action, Rougelike",
@@ -221,7 +221,7 @@
   },
   {
     "id": 32,
-    "cover": "resources/gfx/covers/tomb raider goty.png",
+    "cover": "resources/gfx/covers/tomb raider goty.jpg",
     "year": 2016,
     "type": "Game Edition",
     "genre": "Action Adventure, Survival",
@@ -231,7 +231,7 @@
   },
   {
     "id": 34,
-    "cover": "resources/gfx/covers/kunai.png",
+    "cover": "resources/gfx/covers/kunai.jpg",
     "year": 2020,
     "type": "Game",
     "genre": "Metroidvania, Adventure",
@@ -241,7 +241,7 @@
   },
   {
     "id": 35,
-    "cover": "resources/gfx/covers/buckshot roulette.png",
+    "cover": "resources/gfx/covers/buckshot roulette.jpg",
     "year": 2023,
     "type": "Game",
     "genre": "Horror, Strategy, Tabletop",
@@ -251,7 +251,7 @@
   },
   {
     "id": 36,
-    "cover": "resources/gfx/covers/inscryption.png",
+    "cover": "resources/gfx/covers/inscryption.jpg",
     "year": 2021,
     "type": "Game",
     "genre": "Horror, Strategy, Tabletop",
@@ -271,7 +271,7 @@
   },
   {
     "id": 39,
-    "cover": "resources/gfx/covers/dead cells medley of pain.png",
+    "cover": "resources/gfx/covers/dead cells medley of pain.jpg",
     "year": "2020-2023",
     "type": "DLC Bundle",
     "genre": "Action, Roguevania",
@@ -281,7 +281,7 @@
   },
   {
     "id": 41,
-    "cover": "resources/gfx/covers/shift happens.png",
+    "cover": "resources/gfx/covers/shift happens.jpg",
     "year": 2017,
     "type": "Game",
     "genre": "Puzzle, Platformer, Co-op",
@@ -291,7 +291,7 @@
   },
   {
     "id": 43,
-    "cover": "resources/gfx/covers/revita.png",
+    "cover": "resources/gfx/covers/revita.jpg",
     "year": 2022,
     "type": "Game",
     "genre": "Action, Roguelike",
@@ -301,7 +301,7 @@
   },
   {
     "id": 45,
-    "cover": "resources/gfx/covers/no nine sols.png",
+    "cover": "resources/gfx/covers/no nine sols.jpg",
     "year": 2024,
     "type": "Game",
     "genre": "Metroidvania, Souls-like",
@@ -311,7 +311,7 @@
   },
   {
     "id": 47,
-    "cover": "resources/gfx/covers/deep rock galactic.png",
+    "cover": "resources/gfx/covers/deep rock galactic.jpg",
     "year": 2020,
     "type": "Game",
     "genre": "FPS, Online Co-op",
@@ -321,7 +321,7 @@
   },
   {
     "id": 50,
-    "cover": "resources/gfx/covers/the last campfire.png",
+    "cover": "resources/gfx/covers/the last campfire.jpg",
     "year": 2021,
     "type": "Game",
     "genre": "Puzzle, Adventure",
@@ -331,7 +331,7 @@
   },
     {
     "id": 51,
-    "cover": "resources/gfx/covers/haiku the robot.png",
+    "cover": "resources/gfx/covers/haiku the robot.jpg",
     "year": 2022,
     "type": "Game",
     "genre": "Metroidvania, Adventure",
@@ -341,7 +341,7 @@
   },
     {
     "id": 52,
-    "cover": "resources/gfx/covers/plants vs zombies.png",
+    "cover": "resources/gfx/covers/plants vs zombies.jpg",
     "year": 2009,
     "type": "Game Edition",
     "genre": "Tower Defense, Strategy",
@@ -351,7 +351,7 @@
   },
     {
     "id": 55,
-    "cover": "resources/gfx/covers/turnip boy commits tax evasion.png",
+    "cover": "resources/gfx/covers/turnip boy commits tax evasion.jpg",
     "year": 2021,
     "type": "Game",
     "genre": "Action, Adventure, Casual",
@@ -361,7 +361,7 @@
   },
     {
     "id": 58,
-    "cover": "resources/gfx/covers/is this game trying to kill me.png",
+    "cover": "resources/gfx/covers/is this game trying to kill me.jpg",
     "year": 2024,
     "type": "Game",
     "genre": "Escape Room, Horror",
@@ -371,7 +371,7 @@
   },
     {
     "id": 61,
-    "cover": "resources/gfx/covers/minishoot adventures.png",
+    "cover": "resources/gfx/covers/minishoot adventures.jpg",
     "year": 2024,
     "type": "Game",
     "genre": "Metroidvania, Shoot'em up",
@@ -381,7 +381,7 @@
   },
     {
     "id": 62,
-    "cover": "resources/gfx/covers/minecraft.png",
+    "cover": "resources/gfx/covers/minecraft.jpg",
     "year": 2009,
     "type": "Game",
     "genre": "Sandbox, Survival",
@@ -391,7 +391,7 @@
   },
     {
     "id": 63,
-    "cover": "resources/gfx/covers/scourgebringer.png",
+    "cover": "resources/gfx/covers/scourgebringer.jpg",
     "year": 2020,
     "type": "Game",
     "genre": "Platformer, Rougelike",
@@ -411,7 +411,7 @@
   },
     {
     "id": 70,
-    "cover": "resources/gfx/covers/supraland.png",
+    "cover": "resources/gfx/covers/supraland.jpg",
     "year": 2019,
     "type": "Game",
     "genre": "Metroidvania, Adventure",
@@ -421,7 +421,7 @@
   },
     {
     "id": 71,
-    "cover": "resources/gfx/covers/supraland six inches under.png",
+    "cover": "resources/gfx/covers/supraland six inches under.jpg",
     "year": 2022,
     "type": "Game",
     "genre": "Metroidvania, Adventure",
@@ -431,7 +431,7 @@
   },
     {
     "id": 74,
-    "cover": "resources/gfx/covers/hob.png",
+    "cover": "resources/gfx/covers/hob.jpg",
     "year": 2017,
     "type": "Game",
     "genre": "Metroidvania, Adventure",
@@ -441,7 +441,7 @@
   },
     {
     "id": 75,
-    "cover": "resources/gfx/covers/roboquest.png",
+    "cover": "resources/gfx/covers/roboquest.jpg",
     "year": 2023,
     "type": "Game",
     "genre": "FPS, Rougelike",
