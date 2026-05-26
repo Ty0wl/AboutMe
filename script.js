@@ -124,51 +124,48 @@ function setupLegendParticles() {
 }
 
 function spawnParticles(originX, originY, color) {
-    console.log(`💥 spawnParticles вызвана, цвет: ${color}, кол-во: 15`);
+    console.log(`💥 spawnParticles: старт (${color})`);
     
     const count = 15;
     for (let i = 0; i < count; i++) {
         const particle = document.createElement('div');
         
-        Object.assign(particle.style, {
-            position: 'fixed',
-            left: `${originX}px`,
-            top: `${originY}px`,
-            width: '14px',
-            height: '14px',
-            backgroundColor: color,
-            pointerEvents: 'none',
-            zIndex: '3000',
-            transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
-            opacity: '1',
-            transform: 'translate(-50%, -50%) scale(1)',
-            borderRadius: '2px',
-            boxShadow: `0 0 6px ${color}80`
-        });
+        // 🔥 МАКСИМАЛЬНО ПРОСТЫЕ И ЯВНЫЕ СТИЛИ
+        particle.style.position = 'fixed';
+        particle.style.left = originX + 'px';
+        particle.style.top = originY + 'px';
+        particle.style.width = '16px';
+        particle.style.height = '16px';
+        particle.style.backgroundColor = color;
+        particle.style.border = '2px solid #FFFFFF';
+        particle.style.boxSizing = 'border-box';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '99999';
+        particle.style.opacity = '1';
+        particle.style.borderRadius = '4px';
+        particle.style.transform = 'scale(1)';
+        particle.style.transition = 'none';
         
-        document.body.appendChild(particle);
-        console.log(`📦 Частица ${i+1}/${count} создана`);
+        document.documentElement.appendChild(particle);
 
-        // Случайный вектор разлёта
         const angle = Math.random() * Math.PI * 2;
-        const distance = 50 + Math.random() * 80;
-        const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance - 30; // лёгкий подъём вверх
+        const distance = 60 + Math.random() * 100;
+        const endX = Math.cos(angle) * distance;
+        const endY = Math.sin(angle) * distance - 40;
 
-        // Запуск анимации в следующем кадре
-        requestAnimationFrame(() => {
-            particle.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
-            particle.style.opacity = '0';
+        particle.animate([
+            { transform: 'translate(0, 0) scale(1)', opacity: 1, offset: 0 },
+            { transform: `translate(${endX}px, ${endY}px) scale(0)`, opacity: 0, offset: 1 }
+        ], {
+            duration: 800,
+            easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+            fill: 'forwards'
         });
 
-        // Удаление после анимации
-        setTimeout(() => {
-            particle.remove();
-            console.log(`🗑️ Частица ${i+1} удалена`);
-        }, 850);
+        setTimeout(() => particle.remove(), 850);
     }
-    console.log('✨ Все частицы запущены');
 }
+
 // Открытие модального окна
 function openReviewModal(gameId) {
     const modal = document.getElementById('review-modal');
