@@ -129,7 +129,6 @@ function setupLegendParticles() {
             let particlePath = '';
             let particleColor = '#FFFFFF';
             
-            // Определяем путь и цвет
             for (const [cls, path] of Object.entries(gradeParticleMap)) {
                 if (badge.classList.contains(cls)) {
                     particlePath = path;
@@ -143,7 +142,7 @@ function setupLegendParticles() {
     });
 }
 
-function spawnParticles(originX, originY, imagePath, fallbackColor) {
+function spawnParticles(originX, originY, imagePath) {
     const count = 15;
     
     for (let i = 0; i < count; i++) {
@@ -163,23 +162,19 @@ function spawnParticles(originX, originY, imagePath, fallbackColor) {
         particle.style.transform = 'translate(-50%, -50%) scale(1)';
         particle.style.imageRendering = 'pixelated';
         
-        // 🔥 FALLBACK: Если картинка битая, делаем её цветным квадратом
         particle.onerror = function() {
-            this.style.display = 'block';
-            this.style.backgroundColor = fallbackColor;
-            this.style.border = '2px solid white';
-            this.style.borderRadius = '2px';
+            console.error(' Частица не найдена:', imagePath);
+            this.remove();
         };
 
         document.body.appendChild(particle);
         
-        // Анимация
         const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
         const distance = 70 + Math.random() * 60;
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance - 30;
         
-        particle.offsetHeight; // Форс перерисовки
+        particle.offsetHeight;
         
         particle.style.transition = 'all 0.75s cubic-bezier(0.2, 0.8, 0.2, 1)';
         particle.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
@@ -257,39 +252,32 @@ function sortGames(field) {
 
 // ===== ДИНАМИЧЕСКИЕ ИКОНКИ НАВИГАЦИИ =====
 function setupNavIconHover() {
-    const navButtons = document.querySelectorAll('.nav-btn');
-    
-    navButtons.forEach(btn => {
+    document.querySelectorAll('.nav-btn').forEach(btn => {
         const icon = btn.querySelector('.nav-icon');
         if (!icon) return;
-        
-        const originalSrc = icon.src;
-        const isActive = btn.classList.contains('active');
-        
-        // Определяем, какая это кнопка, и формируем пути
+
         const href = btn.getAttribute('href');
-        let offSrc, onSrc;
-        
-        if (href === 'index.html') {
-            offSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_off.png';
-            onSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_on.png';
-        } else if (href === 'games.html') {
-            offSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_off.png';
-            onSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_on.png';
-        }
-        
+        const isHome = href === 'index.html';
+        const isGames = href === 'games.html';
+        if (!isHome && !isGames) return;
+
+        const type = isHome ? 'home' : 'games';
+        const offSrc = `https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_${type}_off.png`;
+        const onSrc  = `https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_${type}_on.png`;
+
+        const isActive = btn.classList.contains('active');
+
+        btn.onmouseenter = null;
+        btn.onmouseleave = null;
+
         if (isActive) {
             icon.src = onSrc;
         } else {
             icon.src = offSrc;
-            
-            btn.addEventListener('mouseenter', () => {
-                icon.src = onSrc;
-            });
-            
-            btn.addEventListener('mouseleave', () => {
-                icon.src = offSrc;
-            });
+            btn.onmouseenter = () => { icon.src = onSrc; };
+            btn.onmouseleave = () => { icon.src = offSrc; };
         }
+        
+        console.log(` [${type}] Активна: ${isActive} | Текущий src: ${icon.src}`);
     });
 }
