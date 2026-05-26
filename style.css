@@ -216,17 +216,18 @@ body {
 }
 
 .legend-items {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
 }
+
 
 .legend-item {
     font-size: 11px;
     justify-content: center;
     padding: 8px;
-    background-color: rgba(26, 22, 38, 0.3);
+    background: transparent;
     border-radius: 4px;
 }
 
@@ -516,10 +517,10 @@ body {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
-
     .legend-item {
-        font-size: 11px;
-        justify-content: center;
+        justify-content: flex-start;
+        background: rgba(0,0,0,0.1);
+        border-radius: 4px;
     }
 
     .legend-item .grade-badge {

@@ -13,18 +13,14 @@ document.addEventListener('DOMContentLoaded', async function() {
         await loadGames();
         setupSortButtons();
         setupModalEvents();
-        setupNavIconHover();
         
-        // Небольшая задержка для гарантии готовности DOM
+        // Запускаем эффекты с небольшой задержкой
         setTimeout(() => {
-            try {
-                setupLegendParticles();
-            } catch (err) {
-                console.error('❌ Ошибка в setupLegendParticles:', err);
-            }
+            setupNavIconHover();
+            setupLegendParticles();
         }, 100);
     } catch (err) {
-        console.error('❌ Критическая ошибка инициализации:', err);
+        console.error('❌ Ошибка инициализации:', err);
     }
 });
 
@@ -35,11 +31,9 @@ async function loadReviews() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         reviewsData = await res.json();
         console.log('✅ reviews.json загружен:', Object.keys(reviewsData));
-        return reviewsData;
     } catch (err) {
         console.error('❌ Ошибка reviews.json:', err);
         reviewsData = {};
-        return {};
     }
 }
 
@@ -50,12 +44,12 @@ async function loadGames() {
         gamesData = await response.json();
         renderTable();
         setupGradeClicks();
-        console.log('✅ games.json загружен, таблица отрисована');
+        console.log('✅ games.json загружен');
     } catch (error) {
         console.error('❌ Ошибка games.json:', error);
         const tbody = document.getElementById('games-table-body');
         if (tbody) {
-            tbody.innerHTML = '<tr><td colspan="6" style="color: #F04F78; font-size: 24px; text-align: center; padding: 20px;">Ошибка загрузки данных</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" style="color: #F04F78; text-align: center; padding: 20px;">Ошибка загрузки данных</td></tr>';
         }
     }
 }
@@ -105,18 +99,11 @@ function setupGradeClicks() {
     });
 }
 
-// ===== ЧАСТИЦЫ ДЛЯ ЛЕГЕНДЫ (PNG-версия) =====
+// ===== ЧАСТИЦЫ ДЛЯ ЛЕГЕНДЫ (PNG + FALLBACK) =====
 function setupLegendParticles() {
     console.log('🔍 setupLegendParticles: запуск');
     const badges = document.querySelectorAll('.legend-box .grade-badge');
-    console.log(`📊 Найдено бейджей в легенде: ${badges.length}`);
 
-    if (badges.length === 0) {
-        console.warn('⚠️ Бейджи легенды не найдены! Проверь HTML.');
-        return;
-    }
-
-    // 🔥 Пути к PNG-частицам (замени на свои реальные пути!)
     const gradeParticleMap = {
         'grade-a-plus': 'resources/gfx/particles/particle_a_plus.png',
         'grade-a':      'resources/gfx/particles/particle_a.png',
@@ -125,45 +112,46 @@ function setupLegendParticles() {
         'grade-d':      'resources/gfx/particles/particle_d.png'
     };
 
-    badges.forEach((badge, index) => {
+    // Цвета на случай, если картинка не загрузится
+    const gradeColorMap = {
+        'grade-a-plus': '#13AD66', 'grade-a': '#91DB69', 'grade-b': '#4D9BE6',
+        'grade-c': '#F79617', 'grade-d': '#F04F78'
+    };
+
+    badges.forEach(badge => {
         badge.style.cursor = 'pointer';
-        
         badge.addEventListener('click', (e) => {
             e.stopPropagation();
-            
             const rect = badge.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
             
-            // Определяем путь к частице по классу
-            let particlePath = 'resources/gfx/particles/particle_default.png';
+            let particlePath = '';
+            let particleColor = '#FFFFFF';
+            
+            // Определяем путь и цвет
             for (const [cls, path] of Object.entries(gradeParticleMap)) {
                 if (badge.classList.contains(cls)) {
                     particlePath = path;
+                    particleColor = gradeColorMap[cls];
                     break;
                 }
             }
             
-            spawnParticles(x, y, particlePath);
+            spawnParticles(x, y, particlePath, particleColor);
         });
-        console.log(`✅ Слушатель добавлен на бейдж [${index}]: ${badge.textContent}`);
     });
-    console.log('✨ Все обработчики легенды активны');
 }
 
-function spawnParticles(originX, originY, imagePath) {
-    console.log(`💥 spawnParticles: старт (${imagePath})`);
-    
+function spawnParticles(originX, originY, imagePath, fallbackColor) {
     const count = 15;
     
     for (let i = 0; i < count; i++) {
         const particle = document.createElement('img');
-        
-        // Добавляем timestamp чтобы избежать кэширования
-        particle.src = `${imagePath}?t=${Date.now()}-${i}`;
+        particle.src = `${imagePath}?t=${Date.now()}`; // Анти-кэш
         particle.alt = 'particle';
         
-        // 🔥 СТИЛИ ЧЕРЕЗ ОТДЕЛЬНЫЕ СВОЙСТВА (надёжнее, чем Object.assign)
+        // Стили
         particle.style.position = 'fixed';
         particle.style.left = originX + 'px';
         particle.style.top = originY + 'px';
@@ -173,139 +161,96 @@ function spawnParticles(originX, originY, imagePath) {
         particle.style.zIndex = '999999';
         particle.style.opacity = '1';
         particle.style.transform = 'translate(-50%, -50%) scale(1)';
-        particle.style.imageRendering = 'pixelated'; // Для чёткости пиксель-арта
+        particle.style.imageRendering = 'pixelated';
         
+        // 🔥 FALLBACK: Если картинка битая, делаем её цветным квадратом
+        particle.onerror = function() {
+            this.style.display = 'block';
+            this.style.backgroundColor = fallbackColor;
+            this.style.border = '2px solid white';
+            this.style.borderRadius = '2px';
+        };
+
         document.body.appendChild(particle);
         
-        // Случайный вектор разлёта
+        // Анимация
         const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
         const distance = 70 + Math.random() * 60;
         const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance - 30; // Лёгкий подъём вверх
+        const ty = Math.sin(angle) * distance - 30;
         
-        // Форсируем перерисовку перед анимацией
-        particle.offsetHeight;
+        particle.offsetHeight; // Форс перерисовки
         
-        // Применяем анимацию
         particle.style.transition = 'all 0.75s cubic-bezier(0.2, 0.8, 0.2, 1)';
         particle.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
         particle.style.opacity = '0';
         
-        // Удаляем после анимации
-        setTimeout(() => {
-            if (particle.parentNode) {
-                particle.parentNode.removeChild(particle);
-            }
-        }, 800);
+        setTimeout(() => { if (particle.parentNode) particle.remove(); }, 800);
     }
-    console.log('✅ Все частицы запущены');
 }
 
-// ===== МОДАЛЬНОЕ ОКНО РЕЦЕНЗИИ =====
+// ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
 function openReviewModal(gameId) {
     const modal = document.getElementById('review-modal');
-    const titleEl = document.getElementById('modal-title');
-    const textEl = document.getElementById('modal-text');
-
     const review = reviewsData[String(gameId)];
-    console.log(`🔍 Поиск рецензии для ID "${gameId}":`, review);
-
-    if (review && review.text) {
-        titleEl.textContent = review.title || `Игра #${gameId}`;
-        textEl.textContent = review.text;
-    } else {
-        titleEl.textContent = `Игра #${gameId}`;
-        textEl.textContent = 'Текст рецензии отсутствует.';
-    }
-
+    
+    document.getElementById('modal-title').textContent = review ? review.title : `Игра #${gameId}`;
+    document.getElementById('modal-text').textContent = review ? review.text : 'Текст рецензии отсутствует.';
+    
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeReviewModal() {
-    const modal = document.getElementById('review-modal');
-    modal.classList.remove('active');
+    document.getElementById('review-modal').classList.remove('active');
     document.body.style.overflow = '';
 }
 
-// ===== УВЕДОМЛЕНИЕ (TOAST) =====
 function showReviewToast() {
     const toast = document.getElementById('review-toast');
     toast.classList.add('active');
     clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => {
-        toast.classList.remove('active');
-    }, 5000);
+    toastTimeout = setTimeout(() => toast.classList.remove('active'), 5000);
 }
 
 function closeReviewToast() {
-    const toast = document.getElementById('review-toast');
-    toast.classList.remove('active');
+    document.getElementById('review-toast').classList.remove('active');
     clearTimeout(toastTimeout);
 }
 
-// ===== ОБРАБОТЧИКИ МОДАЛКИ И ТОАСТА =====
 function setupModalEvents() {
+    document.getElementById('modal-close')?.addEventListener('click', closeReviewModal);
+    document.getElementById('toast-close')?.addEventListener('click', closeReviewToast);
+    
     const modal = document.getElementById('review-modal');
-    const modalCloseBtn = document.getElementById('modal-close');
-    const toastCloseBtn = document.getElementById('toast-close');
-
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', closeReviewModal);
-    }
-    if (toastCloseBtn) {
-        toastCloseBtn.addEventListener('click', closeReviewToast);
-    }
     if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeReviewModal();
-        });
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeReviewModal(); });
     }
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeReviewModal();
-            closeReviewToast();
-        }
+        if (e.key === 'Escape') { closeReviewModal(); closeReviewToast(); }
     });
 }
 
-// ===== СОРТИРОВКА ТАБЛИЦЫ =====
+// ===== СОРТИРОВКА =====
 function setupSortButtons() {
-    const sortButtons = document.querySelectorAll('.sort-btn');
-    sortButtons.forEach(btn => {
+    document.querySelectorAll('.sort-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            const sortField = this.getAttribute('data-sort');
-            sortButtons.forEach(b => b.classList.remove('active'));
+            const field = this.getAttribute('data-sort');
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            sortGames(sortField);
+            sortGames(field);
         });
     });
-    const defaultBtn = document.querySelector('[data-sort="id"]');
-    if (defaultBtn) defaultBtn.classList.add('active');
+    document.querySelector('[data-sort="id"]')?.classList.add('active');
 }
 
 function sortGames(field) {
-    if (!(field in sortDirection)) {
-        sortDirection[field] = 'asc';
-    } else {
-        sortDirection[field] = sortDirection[field] === 'asc' ? 'desc' : 'asc';
-    }
-
+    sortDirection[field] = sortDirection[field] === 'asc' ? 'desc' : 'asc';
     gamesData.sort((a, b) => {
-        let valA = a[field];
-        let valB = b[field];
-        
-        if (typeof valA === 'number' && typeof valB === 'number') {
-            return sortDirection[field] === 'asc' ? valA - valB : valB - valA;
-        }
-        
-        valA = String(valA).toLowerCase();
-        valB = String(valB).toLowerCase();
-        return sortDirection[field] === 'asc' 
-            ? valA.localeCompare(valB, 'ru') 
-            : valB.localeCompare(valA, 'ru');
+        let valA = a[field], valB = b[field];
+        if (typeof valA === 'number') return sortDirection[field] === 'asc' ? valA - valB : valB - valA;
+        return sortDirection[field] === 'asc' ? String(valA).localeCompare(valB, 'ru') : String(valB).localeCompare(valA, 'ru');
     });
-    
     renderTable();
     setupGradeClicks();
 }
@@ -319,20 +264,32 @@ function setupNavIconHover() {
         if (!icon) return;
         
         const originalSrc = icon.src;
+        const isActive = btn.classList.contains('active');
         
-        // Формируем hover-версию: _off → _on
-        const hoverSrc = originalSrc.replace(/_off\.png$/i, '_on.png');
+        // Определяем, какая это кнопка, и формируем пути
+        const href = btn.getAttribute('href');
+        let offSrc, onSrc;
         
-        btn.addEventListener('mouseenter', () => {
-            if (!btn.classList.contains('active') && originalSrc.includes('_off')) {
-                icon.src = hoverSrc;
-            }
-        });
+        if (href === 'index.html') {
+            offSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_off.png';
+            onSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_on.png';
+        } else if (href === 'games.html') {
+            offSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_off.png';
+            onSrc = 'https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_on.png';
+        }
         
-        btn.addEventListener('mouseleave', () => {
-            if (!btn.classList.contains('active')) {
-                icon.src = originalSrc;
-            }
-        });
+        if (isActive) {
+            icon.src = onSrc;
+        } else {
+            icon.src = offSrc;
+            
+            btn.addEventListener('mouseenter', () => {
+                icon.src = onSrc;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                icon.src = offSrc;
+            });
+        }
     });
 }
