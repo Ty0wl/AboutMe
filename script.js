@@ -257,34 +257,50 @@ function sortGames(field) {
 
 /// ===== СИСТЕМА ПЕРЕВОДОВ =====
 async function setLanguage(langCode) {
-    console.log(`🌐 Загрузка языка: ${langCode}`);
+    console.log(`Загрузка языка: ${langCode}`);
     localStorage.setItem(settings.storageKey, langCode);
     
     const selector = document.getElementById('language-selector');
     if (selector) selector.value = langCode;
 
     try {
-        // Определяем какую страницу переводить
         const page = settings.currentPage || detectCurrentPage();
         const path = `resources/translations/${page}/${langCode}.json`;
-        console.log(`📂 Загружаю перевод страницы: ${path}`);
+        console.log(`Загружаю перевод страницы: ${path}`);
+        
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            el.classList.add('i18n-loading');
+            el.classList.remove('i18n-loaded');
+        });
         
         const response = await fetch(path);
         if (!response.ok) throw new Error(`HTTP ${response.status}: Файл не найден`);
         
         const dictionary = await response.json();
-        console.log('✅ JSON успешно загружен:', Object.keys(dictionary));
+        console.log('JSON успешно загружен:', Object.keys(dictionary));
 
-        // Переводим элементы
-        document.querySelectorAll('[data-i18n]').forEach(element => {
+        // Применяем перевод
+        let replacedCount = 0;
+        elements.forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (dictionary[key]) {
                 element.textContent = dictionary[key];
+                element.classList.remove('i18n-loading');
+                element.classList.add('i18n-loaded');
+                replacedCount++;
             }
         });
+        
+        console.log(`✨ Переведено элементов: ${replacedCount}`);
 
     } catch (error) {
-        console.error(`❌ Ошибка загрузки языка ${langCode}:`, error);
+        console.error(`Ошибка загрузки языка ${langCode}:`, error);
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            el.classList.remove('i18n-loading');
+            el.classList.add('i18n-loaded');
+        });
         if (langCode !== 'ru') setLanguage('ru'); 
     }
 }
@@ -333,8 +349,12 @@ async function openReviewModal(gameId) {
 // ===== ИНИЦИАЛИЗАЦИЯ НАСТРОЕК =====
 function initSettings() {
     settings.currentPage = detectCurrentPage();
-    console.log(`📄 Текущая страница: ${settings.currentPage}`);
+    console.log(`Текущая страница: ${settings.currentPage}`);
     
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.classList.add('i18n-loading');
+    });
+
     const settingsBtn = document.getElementById('settings-btn');
     const settingsPanel = document.getElementById('settings-panel');
     const overlay = document.getElementById('settings-overlay');
