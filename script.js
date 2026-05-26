@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         // Запускаем эффекты с небольшой задержкой
         setTimeout(() => {
-            setupNavIconHover();
             setupLegendParticles();
         }, 100);
     } catch (err) {
