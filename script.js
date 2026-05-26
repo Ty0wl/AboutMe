@@ -98,7 +98,7 @@ function setupGradeClicks() {
     });
 }
 
-// ===== ЧАСТИЦЫ ДЛЯ ЛЕГЕНДЫ (PNG + FALLBACK) =====
+// ===== ЧАСТИЦЫ ДЛЯ ЛЕГЕНДЫ =====
 function setupLegendParticles() {
     console.log('🔍 setupLegendParticles: запуск');
     const badges = document.querySelectorAll('.legend-box .grade-badge');
@@ -144,13 +144,11 @@ function spawnParticles(originX, originY, imagePath) {
     const count = 15;
     
     for (let i = 0; i < count; i++) {
-        const particle = document.createElement('div');
+        const particle = document.createElement('img');
+        particle.src = `${imagePath}?t=${Date.now()}-${i}`;
+        particle.alt = '';
         
-        particle.style.backgroundImage = `url('${imagePath}?t=${Date.now()}')`;
-        particle.style.backgroundSize = 'contain';
-        particle.style.backgroundRepeat = 'no-repeat';
-        particle.style.backgroundPosition = 'center';
-        
+        // Стили
         particle.style.position = 'fixed';
         particle.style.left = originX + 'px';
         particle.style.top = originY + 'px';
@@ -158,25 +156,19 @@ function spawnParticles(originX, originY, imagePath) {
         particle.style.height = '18px';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '999999';
-        particle.style.opacity = '0';
+        particle.style.opacity = '1';
         particle.style.transform = 'translate(-50%, -50%) scale(1)';
+        particle.style.imageRendering = 'pixelated';
         
         document.body.appendChild(particle);
         
-        const tempImg = new Image();
-        tempImg.src = particle.style.backgroundImage;
-        tempImg.onload = function() {
-            particle.style.opacity = '1';
-        };
-        tempImg.onerror = function() {
-            particle.remove();
-        };
-        
+        // Анимация
         const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
         const distance = 70 + Math.random() * 60;
         const tx = Math.cos(angle) * distance;
         const ty = Math.sin(angle) * distance - 30;
         
+        // Форс перерисовки
         particle.offsetHeight;
         
         particle.style.transition = 'all 0.75s cubic-bezier(0.2, 0.8, 0.2, 1)';
