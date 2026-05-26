@@ -342,11 +342,11 @@ body {
     transform: translateX(-50%);
     background-color: #242638;
     border: 2px solid #F04F78;
-    padding: 12px 20px;
+    padding: 15px 20px;
     z-index: 2000;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.7);
 }
 .toast-notification.active { display: flex; }
 
@@ -358,12 +358,28 @@ body {
 
 .toast-close-btn {
     background: transparent;
-    border: 1px solid #525963;
-    color: #FFF;
-    font-family: 'PixelBody', monospace;
+    border: none;
     cursor: pointer;
-    padding: 2px 8px;
-    font-size: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.toast-close-btn:hover {
+    transform: scale(1.15);
+}
+
+.toast-close-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0.9);
+}
+
+.toast-close-btn:hover .toast-close-icon {
+    filter: brightness(1.2);
 }
 
 /* Адаптивность */
