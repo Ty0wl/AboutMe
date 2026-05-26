@@ -9,17 +9,15 @@ let toastTimeout;
 const settings = {
     defaultLang: 'ru',
     storageKey: 'site_language',
-    currentPage: 'index' // Будет определено автоматически
+    currentPage: 'index'
 };
 
-// Определяем текущую страницу
 function detectCurrentPage() {
     const path = window.location.pathname;
     if (path.includes('games.html')) return 'games';
     if (path.includes('index.html') || path === '/' || path.endsWith('/')) return 'index';
-    return 'index'; // по умолчанию
+    return 'index';
 }
-
 
 // ===== ИНИЦИАЛИЗАЦИЯ (ОДИН ВЫЗОВ) =====
 document.addEventListener('DOMContentLoaded', async function() {
@@ -259,7 +257,7 @@ function sortGames(field) {
 async function setLanguage(langCode) {
     console.log(`Загрузка языка: ${langCode}`);
     localStorage.setItem(settings.storageKey, langCode);
-    
+
     const selector = document.getElementById('language-selector');
     if (selector) selector.value = langCode;
 
@@ -267,41 +265,43 @@ async function setLanguage(langCode) {
         const page = settings.currentPage || detectCurrentPage();
         const path = `resources/translations/${page}/${langCode}.json`;
         console.log(`Загружаю перевод страницы: ${path}`);
-        
+
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(el => {
             el.classList.add('i18n-loading');
             el.classList.remove('i18n-loaded');
         });
-        
+
         const response = await fetch(path);
         if (!response.ok) throw new Error(`HTTP ${response.status}: Файл не найден`);
-        
-        const dictionary = await response.json();
-        console.log('JSON успешно загружен:', Object.keys(dictionary));
 
-        // Применяем перевод
+        const dictionary = await response.json();
+        console.log('JSON успешно загружен');
+
+        if (dictionary.page_title) {
+            document.title = dictionary.page_title;
+        }
+
         let replacedCount = 0;
         elements.forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (dictionary[key]) {
-                element.textContent = dictionary[key];
+                element.innerHTML = dictionary[key];
                 element.classList.remove('i18n-loading');
                 element.classList.add('i18n-loaded');
                 replacedCount++;
             }
         });
-        
-        console.log(`✨ Переведено элементов: ${replacedCount}`);
+
+        console.log(`Переведено элементов: ${replacedCount}`);
 
     } catch (error) {
         console.error(`Ошибка загрузки языка ${langCode}:`, error);
-
         document.querySelectorAll('[data-i18n]').forEach(el => {
             el.classList.remove('i18n-loading');
             el.classList.add('i18n-loaded');
         });
-        if (langCode !== 'ru') setLanguage('ru'); 
+        if (langCode !== 'ru') setLanguage('ru');
     }
 }
 

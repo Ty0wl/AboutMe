@@ -1,8 +1,9 @@
 {
+    "page_title": "AboutMe - Game Catalog",
     "settings_title": "Settings",
     "lang_label": "Interface Language",
-    "welcome_title": "Welcome to the Catalog!",
-    "welcome_desc": "Here you can find all the games I've played, along with my personal grades and detailed reviews. Click on a grade in the table to read the review. Use the buttons above to sort the list by any parameter.",
+    "welcome_title": "My game catalog",
+    "welcome_desc": "Here you can find all the games I've played with my personal grades and even more, some of them have reviews! \n <span style='color: #525963'> Click on a grade in the table to read the review. Use the buttons above to sort the list by any of parameters.",
     "legend_title": "Grade Legend:",
     "grade_a_plus": "Must Play!",
     "grade_a": "Recommended",
