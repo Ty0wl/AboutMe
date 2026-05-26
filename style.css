@@ -372,8 +372,8 @@ body {
 }
 
 .toast-close-icon {
-    width: 28px;
-    height: 28px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
     filter: brightness(0.9);
 }
