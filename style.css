@@ -216,16 +216,24 @@ body {
 }
 
 .legend-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 12px;
 }
 
 .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
+    font-size: 11px;
+    justify-content: center;
+    padding: 8px;
+    background-color: rgba(26, 22, 38, 0.3);
+    border-radius: 4px;
+}
+
+.legend-item .grade-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
 }
 
 /* Панель сортировки */
