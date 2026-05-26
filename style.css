@@ -524,9 +524,9 @@ body {
     }
 
     .legend-item .grade-badge {
-        width: 36px;
-        height: 36px;
-        font-size: 15px;
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
     }
 
     /* ===== ПАНЕЛЬ СОРТИРОВКИ ===== */
@@ -635,7 +635,7 @@ body {
     }
 
     .toast-notification span {
-        font-size: 12px;
+        font-size: 8px;
     }
 
     .toast-close-icon {
