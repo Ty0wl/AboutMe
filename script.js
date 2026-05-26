@@ -13,7 +13,7 @@ const settings = {
 
 // ===== ИНИЦИАЛИЗАЦИЯ (ОДИН ВЫЗОВ) =====
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('🚀 Инициализация сайта...');
+    console.log('Инициализация сайта...');
     try {
         await loadReviews();
         await loadGames();
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             setupLegendParticles();
         }, 100);
     } catch (err) {
-        console.error('❌ Ошибка инициализации:', err);
+        console.error('Ошибка инициализации:', err);
     }
 });
 
@@ -36,9 +36,9 @@ async function loadReviews() {
         const res = await fetch('reviews.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         reviewsData = await res.json();
-        console.log('✅ reviews.json загружен:', Object.keys(reviewsData));
+        console.log('reviews.json загружен:', Object.keys(reviewsData));
     } catch (err) {
-        console.error('❌ Ошибка reviews.json:', err);
+        console.error('Ошибка reviews.json:', err);
         reviewsData = {};
     }
 }
@@ -49,9 +49,9 @@ async function loadGames() {
         if (!response.ok) throw new Error('Ошибка загрузки данных');
         gamesData = await response.json();
         renderTable();
-        console.log('✅ games.json загружен');
+        console.log('games.json загружен');
     } catch (error) {
-        console.error('❌ Ошибка games.json:', error);
+        console.error('Ошибка games.json:', error);
         const tbody = document.getElementById('games-table-body');
         if (tbody) {
             tbody.innerHTML = '<tr><td colspan="6" style="color: #F04F78; text-align: center; padding: 20px;">Ошибка загрузки данных</td></tr>';
@@ -247,7 +247,7 @@ function sortGames(field) {
 
 // ===== СИСТЕМА ПЕРЕВОДОВ =====
 async function setLanguage(langCode) {
-    console.log(`🌐 Загрузка языка: ${langCode}`);
+    console.log(`Загрузка языка: ${langCode}`);
     localStorage.setItem(settings.storageKey, langCode);
     
     const selector = document.getElementById('language-selector');
