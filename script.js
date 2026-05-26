@@ -254,7 +254,7 @@ async function setLanguage(langCode) {
     if (selector) selector.value = langCode;
 
     try {
-        const response = await fetch(`translations/${langCode}.json`);
+        const response = await fetch(`resources/translations/${langCode}.json`);
         if (!response.ok) throw new Error('JSON не найден');
         const dictionary = await response.json();
 
