@@ -8,8 +8,18 @@ let toastTimeout;
 // ===== ГЛОБАЛЬНЫЕ НАСТРОЙКИ =====
 const settings = {
     defaultLang: 'ru',
-    storageKey: 'site_language'
+    storageKey: 'site_language',
+    currentPage: 'index' // Будет определено автоматически
 };
+
+// Определяем текущую страницу
+function detectCurrentPage() {
+    const path = window.location.pathname;
+    if (path.includes('games.html')) return 'games';
+    if (path.includes('index.html') || path === '/' || path.endsWith('/')) return 'index';
+    return 'index'; // по умолчанию
+}
+
 
 // ===== ИНИЦИАЛИЗАЦИЯ (ОДИН ВЫЗОВ) =====
 document.addEventListener('DOMContentLoaded', async function() {
@@ -245,19 +255,27 @@ function sortGames(field) {
     setupGradeClicks();
 }
 
-// ===== СИСТЕМА ПЕРЕВОДОВ =====
+/// ===== СИСТЕМА ПЕРЕВОДОВ =====
 async function setLanguage(langCode) {
-    console.log(`Загрузка языка: ${langCode}`);
+    console.log(`🌐 Загрузка языка: ${langCode}`);
     localStorage.setItem(settings.storageKey, langCode);
     
     const selector = document.getElementById('language-selector');
     if (selector) selector.value = langCode;
 
     try {
-        const response = await fetch(`resources/translations/${langCode}.json`);
-        if (!response.ok) throw new Error('JSON не найден');
+        // Определяем какую страницу переводить
+        const page = settings.currentPage || detectCurrentPage();
+        const path = `resources/translations/${page}/${langCode}.json`;
+        console.log(`📂 Загружаю перевод страницы: ${path}`);
+        
+        const response = await fetch(path);
+        if (!response.ok) throw new Error(`HTTP ${response.status}: Файл не найден`);
+        
         const dictionary = await response.json();
+        console.log('✅ JSON успешно загружен:', Object.keys(dictionary));
 
+        // Переводим элементы
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (dictionary[key]) {
@@ -271,8 +289,52 @@ async function setLanguage(langCode) {
     }
 }
 
+// ===== ПЕРЕВОД РЕЦЕНЗИЙ =====
+async function getReviewTranslation(gameId, langCode) {
+    try {
+        const path = `resources/translations/reviews/${langCode}.json`;
+        const response = await fetch(path);
+        if (!response.ok) return null;
+        
+        const reviews = await response.json();
+        return reviews[String(gameId)] || null;
+    } catch (error) {
+        console.error(`Ошибка загрузки перевода рецензии ${gameId}:`, error);
+        return null;
+    }
+}
+
+// Модифицированная функция открытия модального окна
+async function openReviewModal(gameId) {
+    const modal = document.getElementById('review-modal');
+    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
+    
+    // Пробуем загрузить переведённую рецензию
+    const translatedReview = await getReviewTranslation(gameId, currentLang);
+    
+    // Если есть перевод - используем его, иначе берём из reviews.json
+    const review = reviewsData[String(gameId)];
+    
+    if (translatedReview) {
+        document.getElementById('modal-title').textContent = translatedReview.title || `Game #${gameId}`;
+        document.getElementById('modal-text').textContent = translatedReview.text || 'Review text...';
+    } else if (review) {
+        document.getElementById('modal-title').textContent = review.title || `Игра #${gameId}`;
+        document.getElementById('modal-text').textContent = review.text || 'Текст рецензии отсутствует.';
+    } else {
+        document.getElementById('modal-title').textContent = `Game #${gameId}`;
+        document.getElementById('modal-text').textContent = 'Review not available.';
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
 // ===== ИНИЦИАЛИЗАЦИЯ НАСТРОЕК =====
 function initSettings() {
+    settings.currentPage = detectCurrentPage();
+    console.log(`📄 Текущая страница: ${settings.currentPage}`);
+    
     const settingsBtn = document.getElementById('settings-btn');
     const settingsPanel = document.getElementById('settings-panel');
     const overlay = document.getElementById('settings-overlay');
