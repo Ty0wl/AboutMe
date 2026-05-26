@@ -4,23 +4,24 @@ let currentSort = 'id';
 let sortDirection = {};
 let toastTimeout;
 
-document.addEventListener('DOMContentLoaded', function() {
-    loadReviews();
-    loadGames();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadReviews();
+    await loadGames();
     setupSortButtons();
     setupModalEvents();
 });
 
-// Загрузка рецензий
 async function loadReviews() {
     try {
         const res = await fetch('reviews.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         reviewsData = await res.json();
-        console.log('reviews.json успешно загружен');
+        console.log('reviews.json загружен:', Object.keys(reviewsData));
+        return reviewsData;s
     } catch (err) {
         console.error('Ошибка reviews.json:', err);
         reviewsData = {};
+        return {};
     }
 }
 
@@ -31,10 +32,11 @@ async function loadGames() {
         gamesData = await response.json();
         renderTable();
         setupGradeClicks();
+        console.log('games.json загружен, таблица отрисована');
     } catch (error) {
-        console.error('Ошибка:', error);
+        console.error('Ошибка games.json:', error);
         document.getElementById('games-table-body').innerHTML = 
-            '<tr><td colspan="6" style="color: #F04F78; font-size: 24px;">Ошибка загрузки данных. Проверьте games.json</td></tr>';
+            '<tr><td colspan="6" style="color: #F04F78; font-size: 24px;">Ошибка загрузки данных</td></tr>';
     }
 }
 
