@@ -295,5 +295,113 @@
     "genre": "Puzzle, Adventure",
     "name": "The Last Campfire",
     "grade": "A"
+  },
+    {
+    "id": 51,
+    "cover": "resources/gfx/covers/haiku the robot.png",
+    "year": 2022,
+    "type": "Game",
+    "genre": "Metroidvania, Adventure",
+    "name": "Haiku, the Robot",
+    "grade": "A"
+  },
+    {
+    "id": 52,
+    "cover": "resources/gfx/covers/plants vs zombies.png",
+    "year": 2009,
+    "type": "Game Edition",
+    "genre": "Tower Defense, Strategy",
+    "name": "Plants vs. Zombies: Game of the Year Edition",
+    "grade": "A"
+  },
+    {
+    "id": 55,
+    "cover": "resources/gfx/covers/turnip boy commits tax evasion.png",
+    "year": 2021,
+    "type": "Game",
+    "genre": "Action, Adventure, Casual",
+    "name": "Turnip Boy Commits Tax Evasion",
+    "grade": "B"
+  },
+    {
+    "id": 58,
+    "cover": "resources/gfx/covers/is this game trying to kill me.png",
+    "year": 2024,
+    "type": "Game",
+    "genre": "Escape Room, Horror",
+    "name": "Is this game trying to kill me?",
+    "grade": "A+"
+  },
+    {
+    "id": 61,
+    "cover": "resources/gfx/covers/minishoot adventures.png",
+    "year": 2024,
+    "type": "Game",
+    "genre": "Metroidvania, Shoot'em up",
+    "name": "Minishoot' Adventures",
+    "grade": "A+"
+  },
+    {
+    "id": 62,
+    "cover": "resources/gfx/covers/minecraft.png",
+    "year": 2009,
+    "type": "Game",
+    "genre": "Sandbox, Survival",
+    "name": "Minecraft",
+    "grade": "A+"
+  },
+    {
+    "id": 63,
+    "cover": "resources/gfx/covers/scourgebringer.png",
+    "year": 2020,
+    "type": "Game",
+    "genre": "Platformer, Rougelike",
+    "name": "ScourgeBringer",
+    "grade": "C"
+  },
+    {
+    "id": 67,
+    "cover": "resources/gfx/covers/miside.png",
+    "year": 2024,
+    "type": "Game",
+    "genre": "Visual Novell, Horror",
+    "name": "MiSide",
+    "grade": "A+"
+  },
+    {
+    "id": 70,
+    "cover": "resources/gfx/covers/supraland.png",
+    "year": 2019,
+    "type": "Game",
+    "genre": "Metroidvania, Adventure",
+    "name": "Supraland",
+    "grade": "A+"
+  },
+    {
+    "id": 71,
+    "cover": "resources/gfx/covers/supraland six inches under.png",
+    "year": 2022,
+    "type": "Game",
+    "genre": "Metroidvania, Adventure",
+    "name": "Supraland: Six Inches Under",
+    "grade": "A+"
+  },
+    {
+    "id": 74,
+    "cover": "resources/gfx/covers/hob.png",
+    "year": 2017,
+    "type": "Game",
+    "genre": "Metroidvania, Adventure",
+    "name": "Hob",
+    "grade": "A"
+  },
+    {
+    "id": 75,
+    "cover": "resources/gfx/covers/roboquest.png",
+    "year": 2023,
+    "type": "Game",
+    "genre": "FPS, Rougelike",
+    "name": "Roboquest",
+    "grade": "A+"
   }
 ]
