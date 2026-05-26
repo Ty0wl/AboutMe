@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     await loadGames();
     setupSortButtons();
     setupModalEvents();
+    setupLegendParticles();
 });
 
 async function loadReviews() {
@@ -65,7 +66,7 @@ function renderTable() {
 }
 
 function setupGradeClicks() {
-    document.querySelectorAll('.grade-badge').forEach(badge => {
+    document.querySelectorAll('#games-table-body .grade-badge').forEach(badge => {
         badge.style.cursor = 'pointer';
         badge.addEventListener('click', function() {
             const gameId = this.getAttribute('data-id');
@@ -78,6 +79,73 @@ function setupGradeClicks() {
             }
         });
     });
+}
+
+function setupLegendParticles() {
+    const legendBadges = document.querySelectorAll('.legend-box .grade-badge');
+
+    const gradeParticleMap = {
+        'grade-a-plus': 'resources/gfx/particles/particle_a_plus.png',
+        'grade-a':      'resources/gfx/particles/particle_a.png',
+        'grade-b':      'resources/gfx/particles/particle_b.png',
+        'grade-c':      'resources/gfx/particles/particle_c.png',
+        'grade-d':      'resources/gfx/particles/particle_d.png'
+    };
+
+    legendBadges.forEach(badge => {
+        badge.style.cursor = 'pointer';
+        badge.addEventListener('click', (e) => {
+            const rect = badge.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            let particleSrc = 'resources/gfx/particles/particle_default.png';
+            for (const [cls, src] of Object.entries(gradeParticleMap)) {
+                if (badge.classList.contains(cls)) {
+                    particleSrc = src;
+                    break;
+                }
+            }
+            
+            spawnParticles(x, y, particleSrc);
+        });
+    });
+}
+
+function spawnParticles(originX, originY, imagePath) {
+    const count = 12; // Количество частиц за клик
+    for (let i = 0; i < count; i++) {
+        const img = document.createElement('img');
+        img.src = imagePath;
+        
+        Object.assign(img.style, {
+            position: 'fixed',
+            left: `${originX}px`,
+            top: `${originY}px`,
+            width: '18px',
+            height: '18px',
+            pointerEvents: 'none',
+            zIndex: '3000',
+            transition: 'all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1)',
+            opacity: '1',
+            transform: 'translate(-50%, -50%) scale(1)'
+        });
+        
+        document.body.appendChild(img);
+
+        // Случайный вектор разлёта
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 45 + Math.random() * 65;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance - 25; // лёгкий подъём
+
+        requestAnimationFrame(() => {
+            img.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.2)`;
+            img.style.opacity = '0';
+        });
+
+        setTimeout(() => img.remove(), 750);
+    }
 }
 
 // Открытие модального окна

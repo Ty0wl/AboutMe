@@ -349,7 +349,9 @@ body {
     display: flex;
     position: fixed;
     bottom: 20px;
-    transform: translateY(100%);
+    left: 50%;
+    transform: translate(-50%, 150%);
+    
     background-color: #242638;
     border: 2px solid #F04F78;
     padding: 15px 20px;
@@ -358,7 +360,6 @@ body {
     gap: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.7);
     
-    /* Свойства для скрытия и плавности */
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.4s;
@@ -367,7 +368,7 @@ body {
 .toast-notification.active {
     visibility: visible;
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
 }
 
 .toast-close-btn {
@@ -388,6 +389,29 @@ body {
     filter: brightness(0.9);
 }
 .toast-close-btn:hover .toast-close-icon { filter: brightness(1.2); }
+
+/* ===== БЛОК ОПИСАНИЯ ===== */
+.page-description {
+    background-color: #242638;
+    border: 2px solid #525963;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.desc-title {
+    font-family: 'PixelTitle', sans-serif;
+    color: #F79617;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.desc-text {
+    font-family: 'PixelBody', monospace;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: justify;
+}
 
 /* Адаптивность */
 @media (max-width: 768px) {
