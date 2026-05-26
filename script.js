@@ -11,13 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setupModalEvents();
 });
 
+// Загрузка рецензий
 async function loadReviews() {
     try {
         const res = await fetch('reviews.json');
-        if (!res.ok) throw new Error('Файл не найден');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
         reviewsData = await res.json();
+        console.log('reviews.json успешно загружен');
     } catch (err) {
-        console.warn('reviews.json не загружен:', err);
+        console.error('Ошибка reviews.json:', err);
         reviewsData = {};
     }
 }
@@ -76,13 +78,17 @@ function setupGradeClicks() {
     });
 }
 
+// Открытие модального окна
 function openReviewModal(gameId) {
     const modal = document.getElementById('review-modal');
     const titleEl = document.getElementById('modal-title');
     const textEl = document.getElementById('modal-text');
 
-    const review = reviewsData[gameId];
-    if (review) {
+    // Преобразуем ID в строку, т.к. ключи в JSON всегда строки
+    const review = reviewsData[String(gameId)];
+    console.log(`🔍 Поиск ID "${gameId}" в reviews.json →`, review);
+
+    if (review && review.text) {
         titleEl.textContent = review.title || `Игра #${gameId}`;
         textEl.textContent = review.text;
     } else {

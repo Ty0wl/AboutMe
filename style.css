@@ -309,14 +309,20 @@ body {
     cursor: pointer;
     padding: 5px;
 }
-.close-icon { width: 24px; height: 24px; object-fit: contain; }
+
+.close-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    transition: transform 0.2s;
+}
 
 .modal-title {
     font-family: 'PixelTitle', sans-serif;
     color: #F79617;
     font-size: 22px;
     margin-bottom: 15px;
-    padding-right: 40px;
+    padding-right: 45px;
 }
 
 .modal-text {
