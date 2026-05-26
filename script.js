@@ -18,7 +18,7 @@ async function loadReviews() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         reviewsData = await res.json();
         console.log('reviews.json загружен:', Object.keys(reviewsData));
-        return reviewsData;s
+        return reviewsData;
     } catch (err) {
         console.error('Ошибка reviews.json:', err);
         reviewsData = {};

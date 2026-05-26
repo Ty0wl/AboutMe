@@ -15,6 +15,16 @@
     font-display: swap;
 }
 
+/* ========== ЦВЕТА ============ */
+
+:root {
+    --bg-dark: #1A1626;
+    --bg-panel: #242638;
+    --border: #525963;
+    --accent: #F79617;
+    --text: #FFFFFF;
+}
+
 /* ===== БАЗОВЫЕ НАСТРОЙКИ ===== */
 * {
     margin: 0;
@@ -24,15 +34,15 @@
 
 body {
     font-family: 'PixelBody', monospace;
-    background-color: #1A1626;
-    color: #FFFFFF;
+    background-color: var(--bg-dark);
+    color: var(--text);
     font-size: 14px;
     line-height: 1.6;
 }
 
 .info-section {
-    background-color: #242638;
-    border: 2px solid #525963;
+    background-color: var(--bg-panel);
+    border: 2px solid var(--border);
     padding: 25px;
     margin-bottom: 30px;
     display: flex;
@@ -41,28 +51,28 @@ body {
 }
 
 .welcome-title {
-    font-family: 'PixelTitle', sans-serif; /* Тот же шрифт, что у легенды */
-    color: #F79617; /* Оранжевый */
+    font-family: 'PixelTitle', sans-serif;
+    color: var(--accent);
     font-size: 24px;
     margin-bottom: 8px;
 }
 
 .welcome-desc {
     font-family: 'PixelBody', monospace;
-    color: #FFFFFF;
+    color: var(--text);
     font-size: 15px;
     line-height: 1.6;
     text-align: justify;
 }
 
 .highlight-word {
-    color: #F79617;
+    color: var(--accent);
     font-weight: bold;
 }
 
 .section-divider {
     height: 1px;
-    background-color: #525963;
+    background-color: var(--border);
     width: 100%;
     opacity: 0.6;
 }
@@ -80,7 +90,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #242638;
+    background-color: var(--bg-panel);
     padding: 5px 15px;
     display: flex;
     align-items: center;
@@ -90,7 +100,7 @@ body {
 
 .nav-brand {
     font-size: 16px;
-    color: #525963;
+    color: var(--border);
     font-weight: bold;
     letter-spacing: 2px;
     margin-left: auto;
@@ -108,7 +118,7 @@ body {
     height: 60px;
     padding: 0;
     background-color: transparent;
-    border: 2px solid #525963;
+    border: 2px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,12 +128,12 @@ body {
 }
 
 .nav-btn:hover {
-    background-color: #525963;
+    background-color: var(--border);
     transform: translateY(-1px);
 }
 
 .nav-btn.active {
-    background-color: #525963;
+    background-color: var(--border);
 }
 
 .nav-icon {
@@ -168,14 +178,14 @@ body {
 
 .main-title {
     font-family: 'PixelTitle', sans-serif;
-    color: #F79617;
+    color: var(--accent);
     font-size: 28px;
     margin-bottom: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .main-text {
-    color: #FFFFFF;
+    color: var(--text);
     font-size: 16px;
     margin-bottom: 20px;
     line-height: 1.8;
@@ -192,15 +202,15 @@ body {
 
 /* Легенда */
 .legend-box {
-    background-color: #242638;
+    background-color: var(--bg-panel);
     padding: 20px;
     margin-bottom: 30px;
-    border: 2px solid #525963;
+    border: 2px solid var(--border);
 }
 
 .legend-title {
     font-family: 'PixelTitle', sans-serif;
-    color: #F79617;
+    color: var(--accent);
     font-size: 18px;
     margin-bottom: 15px;
 }
