@@ -319,8 +319,7 @@ body {
     height: 108px;
     object-fit: cover;
     border: 2px solid var(--border);
-    transition: opacity 0.3s ease;
-    opacity: 0;
+    display: block;
 }
 
 /* Бейджи оценок */

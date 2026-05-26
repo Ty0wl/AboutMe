@@ -66,8 +66,7 @@ function renderTable() {
                 <img src="${game.cover}" 
                      alt="${game.name}" 
                      class="game-cover" 
-                     loading="lazy"
-                     onerror="this.src='covers/no-image.jpg'">
+                     loading="lazy">
             </td>
             <td>${game.year}</td>
             <td>${game.type}</td>
