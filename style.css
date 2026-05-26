@@ -1,5 +1,8 @@
-/* ====== v2.6 ====== */
-
+/* ====== v2.6a ====== */
+/* ТЕСТ: если видишь это — сайт обновился */
+body {
+    outline: 5px solid #00FF00 !important;
+}
 /* ===== ШРИФТЫ ===== */
 @font-face {
     font-family: 'PixelTitle';
