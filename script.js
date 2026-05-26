@@ -112,7 +112,6 @@ function setupLegendParticles() {
         'grade-d':      'resources/gfx/particles/particle_d.png'
     };
 
-    // Цвета на случай, если картинка не загрузится
     const gradeColorMap = {
         'grade-a-plus': '#13AD66', 'grade-a': '#91DB69', 'grade-b': '#4D9BE6',
         'grade-c': '#F79617', 'grade-d': '#F04F78'
@@ -146,11 +145,13 @@ function spawnParticles(originX, originY, imagePath) {
     const count = 15;
     
     for (let i = 0; i < count; i++) {
-        const particle = document.createElement('img');
-        particle.src = `${imagePath}?t=${Date.now()}`; // Анти-кэш
-        particle.alt = 'particle';
+        const particle = document.createElement('div');
         
-        // Стили
+        particle.style.backgroundImage = `url('${imagePath}?t=${Date.now()}')`;
+        particle.style.backgroundSize = 'contain';
+        particle.style.backgroundRepeat = 'no-repeat';
+        particle.style.backgroundPosition = 'center';
+        
         particle.style.position = 'fixed';
         particle.style.left = originX + 'px';
         particle.style.top = originY + 'px';
@@ -158,16 +159,19 @@ function spawnParticles(originX, originY, imagePath) {
         particle.style.height = '18px';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '999999';
-        particle.style.opacity = '1';
+        particle.style.opacity = '0';
         particle.style.transform = 'translate(-50%, -50%) scale(1)';
-        particle.style.imageRendering = 'pixelated';
         
-        particle.onerror = function() {
-            console.error(' Частица не найдена:', imagePath);
-            this.remove();
-        };
-
         document.body.appendChild(particle);
+        
+        const tempImg = new Image();
+        tempImg.src = particle.style.backgroundImage;
+        tempImg.onload = function() {
+            particle.style.opacity = '1';
+        };
+        tempImg.onerror = function() {
+            particle.remove();
+        };
         
         const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
         const distance = 70 + Math.random() * 60;
