@@ -86,94 +86,95 @@ function setupLegendParticles() {
     console.log('🔍 setupLegendParticles вызвана');
     
     const legendBadges = document.querySelectorAll('.legend-box .grade-badge');
-    console.log(`Найдено бейджей в легенде: ${legendBadges.length}`);
+    console.log(`📊 Найдено бейджей в легенде: ${legendBadges.length}`);
     
-    const gradeParticleMap = {
-        'grade-a-plus': 'resources/gfx/particles/particle_a_plus.png',
-        'grade-a':      'resources/gfx/particles/particle_a.png',
-        'grade-b':      'resources/gfx/particles/particle_b.png',
-        'grade-c':      'resources/gfx/particles/particle_c.png',
-        'grade-d':      'resources/gfx/particles/particle_d.png'
+    const gradeColorMap = {
+        'grade-a-plus': '#13AD66',
+        'grade-a':      '#91DB69',
+        'grade-b':      '#4D9BE6',
+        'grade-c':      '#F79617',
+        'grade-d':      '#F04F78'
     };
 
     legendBadges.forEach((badge, index) => {
-        console.log(`[${index}] Бейдж:`, badge.textContent, 'Классы:', Array.from(badge.classList));
+        console.log(`[${index}] Бейдж: "${badge.textContent}", классы:`, Array.from(badge.classList));
         badge.style.cursor = 'pointer';
         
         badge.addEventListener('click', (e) => {
-            console.log('КЛИК по бейджу!', badge.textContent);
+            console.log('🖱️ КЛИК по бейджу!', badge.textContent);
             e.stopPropagation();
             
             const rect = badge.getBoundingClientRect();
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
+            console.log(`📍 Координаты: x=${x}, y=${y}`);
             
-            console.log(`Координаты: x=${x}, y=${y}`);
-            
-            let particleSrc = 'resources/gfx/particles/particle_a.png';
-            for (const [cls, src] of Object.entries(gradeParticleMap)) {
+            let particleColor = '#F79617';
+            for (const [cls, color] of Object.entries(gradeColorMap)) {
                 if (badge.classList.contains(cls)) {
-                    particleSrc = src;
-                    console.log(`Найдена частица для ${cls}: ${particleSrc}`);
+                    particleColor = color;
+                    console.log(`✅ Цвет для ${cls}: ${particleColor}`);
                     break;
                 }
             }
             
-            spawnParticles(x, y, particleSrc);
+            spawnParticles(x, y, particleColor);
         });
     });
 }
 
-function spawnParticles(originX, originY, imagePath) {
-    console.log(`💥 spawnParticles вызвана с: ${imagePath}`);
+function spawnParticles(originX, originY, color) {
+    console.log(`💥 spawnParticles вызвана, цвет: ${color}, кол-во: 15`);
     
     const count = 15;
     for (let i = 0; i < count; i++) {
-        const img = document.createElement('img');
-        img.src = `${imagePath}?t=${Date.now()}`;
-        img.alt = 'particle';
+        const particle = document.createElement('div');
         
-        Object.assign(img.style, {
+        Object.assign(particle.style, {
             position: 'fixed',
             left: `${originX}px`,
             top: `${originY}px`,
-            width: '20px',
-            height: '20px',
+            width: '14px',
+            height: '14px',
+            backgroundColor: color,
             pointerEvents: 'none',
             zIndex: '3000',
             transition: 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)',
             opacity: '1',
             transform: 'translate(-50%, -50%) scale(1)',
-            imageRendering: 'pixelated'
+            borderRadius: '2px',
+            boxShadow: `0 0 6px ${color}80`
         });
         
-        document.body.appendChild(img);
-        console.log(`Частица ${i} создана`);
+        document.body.appendChild(particle);
+        console.log(`📦 Частица ${i+1}/${count} создана`);
 
+        // Случайный вектор разлёта
         const angle = Math.random() * Math.PI * 2;
         const distance = 50 + Math.random() * 80;
         const tx = Math.cos(angle) * distance;
-        const ty = Math.sin(angle) * distance - 30;
+        const ty = Math.sin(angle) * distance - 30; // лёгкий подъём вверх
 
+        // Запуск анимации в следующем кадре
         requestAnimationFrame(() => {
-            img.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
-            img.style.opacity = '0';
+            particle.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
+            particle.style.opacity = '0';
         });
 
+        // Удаление после анимации
         setTimeout(() => {
-            img.remove();
-            console.log(`🗑️ Частица ${i} удалена`);
+            particle.remove();
+            console.log(`🗑️ Частица ${i+1} удалена`);
         }, 850);
     }
+    console.log('✨ Все частицы запущены');
 }
-
 // Открытие модального окна
 function openReviewModal(gameId) {
     const modal = document.getElementById('review-modal');
     const titleEl = document.getElementById('modal-title');
     const textEl = document.getElementById('modal-text');
 
-    // Преобразуем ID в строку, т.к. ключи в JSON всегда строки
     const review = reviewsData[String(gameId)];
     console.log(`🔍 Поиск ID "${gameId}" в reviews.json →`, review);
 

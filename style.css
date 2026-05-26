@@ -449,7 +449,7 @@ body {
 @media (max-width: 768px) {
     .navbar {
         flex-direction: row;
-        gap: 10px;
+        gap: 8px;
         padding: 5px 10px;
         flex-wrap: nowrap;
     }
@@ -457,33 +457,130 @@ body {
     .nav-brand {
         margin-left: auto;
         margin-right: 0;
-        font-size: 14px;
+        font-size: 12px;
         white-space: nowrap;
     }
 
     .nav-buttons {
         flex-direction: row;
         width: auto;
-        gap: 10px;
+        gap: 8px;
         order: 0;
     }
 
     .nav-btn {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         padding: 0;
         text-align: center;
         flex-shrink: 0;
     }
 
     .nav-icon {
-        width: 25px;
-        height: 25px;
+        width: 22px;
+        height: 22px;
     }
 
+    /* ===== ИНФОРМАЦИОННЫЙ БЛОК ===== */
+    .info-section {
+        padding: 15px;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+
+    .welcome-title {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .welcome-desc {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .legend-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .legend-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .legend-item {
+        font-size: 11px;
+        justify-content: center;
+    }
+
+    .legend-item .grade-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    /* ===== ПАНЕЛЬ СОРТИРОВКИ ===== */
+    .sort-panel {
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        gap: 8px;
+    }
+
+    .sort-label {
+        font-size: 12px;
+        margin-right: 0;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .sort-btn {
+        font-size: 11px;
+        padding: 6px 10px; 
+        flex: 1 1 calc(33.333% - 8px);
+        min-width: 80px;
+    }
+
+    /* ===== ТАБЛИЦА ===== */
+    .games-table {
+        font-size: 11px;
+    }
+
+    .games-table th {
+        font-size: 12px;
+        padding: 8px 5px;
+    }
+
+    .games-table td {
+        padding: 8px 5px;
+    }
+
+    .game-cover {
+        width: 50px;
+        height: 50px;
+    }
+
+    .grade-badge {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
     .home-container {
         flex-direction: column;
         margin-top: 60px;
+        padding: 20px 15px;
+        gap: 25px;
+    }
+
+    .cat-section {
+        flex: 0 0 100%;
+    }
+
+    .cat-image {
+        max-width: 300px;
     }
 
     .text-section {
@@ -491,36 +588,49 @@ body {
     }
 
     .main-title {
-        font-size: 24px;
+        font-size: 20px;
+        margin-bottom: 20px;
     }
 
     .main-text {
-        font-size: 14px;
+        font-size: 13px;
+        line-height: 1.6;
     }
 
-    .games-container {
-        margin-top: 60px;
+    /* ===== МОДАЛЬНОЕ ОКНО ===== */
+    .modal-content {
+        padding: 20px 15px;
+        width: 95%;
     }
 
-    .legend-item {
+    .modal-title {
+        font-size: 16px;
+        padding-right: 35px;
+    }
+
+    .modal-text {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .close-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* ===== УВЕДОМЛЕНИЕ (TOAST) ===== */
+    .toast-notification {
+        padding: 12px 18px;
+        bottom: 15px;
+        gap: 12px;
+    }
+
+    .toast-notification span {
         font-size: 12px;
     }
 
-    .sort-panel {
-        flex-wrap: wrap;
-    }
-
-    .sort-btn {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
-
-    .games-table {
-        font-size: 12px;
-    }
-
-    .game-cover {
-        width: 60px;
-        height: 60px;
+    .toast-close-icon {
+        width: 24px;
+        height: 24px;
     }
 }
