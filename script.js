@@ -124,45 +124,47 @@ function setupLegendParticles() {
 }
 
 function spawnParticles(originX, originY, color) {
-    console.log(`💥 spawnParticles: старт (${color})`);
+    console.log('💥 Частицы запущены, цвет:', color);
     
     const count = 15;
     for (let i = 0; i < count; i++) {
         const particle = document.createElement('div');
         
-        // 🔥 МАКСИМАЛЬНО ПРОСТЫЕ И ЯВНЫЕ СТИЛИ
         particle.style.position = 'fixed';
         particle.style.left = originX + 'px';
         particle.style.top = originY + 'px';
         particle.style.width = '16px';
         particle.style.height = '16px';
         particle.style.backgroundColor = color;
-        particle.style.border = '2px solid #FFFFFF';
+        particle.style.border = '2px solid white';
+        particle.style.borderRadius = '4px';
         particle.style.boxSizing = 'border-box';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '99999';
         particle.style.opacity = '1';
-        particle.style.borderRadius = '4px';
-        particle.style.transform = 'scale(1)';
-        particle.style.transition = 'none';
         
-        document.documentElement.appendChild(particle);
-
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 60 + Math.random() * 100;
+        document.body.appendChild(particle);
+        
+        // Анимация
+        const angle = (Math.PI * 2 * i) / count;
+        const distance = 80 + Math.random() * 50;
         const endX = Math.cos(angle) * distance;
-        const endY = Math.sin(angle) * distance - 40;
-
-        particle.animate([
-            { transform: 'translate(0, 0) scale(1)', opacity: 1, offset: 0 },
-            { transform: `translate(${endX}px, ${endY}px) scale(0)`, opacity: 0, offset: 1 }
-        ], {
-            duration: 800,
-            easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
-            fill: 'forwards'
-        });
-
-        setTimeout(() => particle.remove(), 850);
+        const endY = Math.sin(angle) * distance;
+        
+        // Форсируем перерисовку
+        particle.getBoundingClientRect();
+        
+        // Применяем анимацию
+        particle.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+        particle.style.transform = 'translate(' + endX + 'px, ' + endY + 'px) scale(0)';
+        particle.style.opacity = '0';
+        
+        // Удаляем
+        setTimeout(function() {
+            if (particle.parentNode) {
+                particle.parentNode.removeChild(particle);
+            }
+        }, 850);
     }
 }
 
