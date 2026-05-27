@@ -649,60 +649,6 @@ body {
     100% { background-position: -200% 0; }
 }
 
-/* ===== СТРАНИЦА ЧЕЙНДЖЛОГА — ИСПРАВЛЕНИЯ ===== */
-
-.version-title {
-    font-family: 'PixelBody', monospace;
-    color: var(--border);
-    font-size: 14px;
-    display: inline;
-    margin: 0;
-}
-
-.version-number {
-    font-family: 'PixelBody', monospace;
-    color: var(--accent);
-    font-size: 14px;
-    display: inline;
-    margin-left: 8px;
-    font-weight: bold;
-}
-
-.changelog-latest {
-    background-color: var(--bg-panel);
-    border: 2px solid var(--accent);
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 0 15px rgba(247, 150, 23, 0.2);
-}
-
-.version-card {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    border-radius: 0;
-}
-
-.version-list {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-}
-
-.version-list li {
-    font-family: 'PixelBody', monospace;
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.8;
-    padding-left: 0;
-    position: static;
-}
-
-.version-list li::before {
-    content: none;
-}
-
 /* ===== ЗАЩИТА КОНТЕНТА ===== */
 
 body, p, span, h1, h2, h3, h4, h5, h6, td, th, .welcome-desc, .main-text, .modal-text, .legend-item {
@@ -723,6 +669,69 @@ img {
 
 .nav-icon, .game-cover, .close-icon, .toast-close-icon, .cat-image {
     pointer-events: auto;
+}
+
+/* ===== СТРАНИЦА ЧЕЙНДЖЛОГА (ПОЛНЫЕ СТИЛИ) ===== */
+.changelog-container {
+    margin-top: 80px;
+    padding: 30px 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 🔹 Блок 1: Заголовок */
+.changelog-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.changelog-title {
+    font-family: 'PixelTitle', sans-serif;
+    color: var(--accent);
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.changelog-desc {
+    font-family: 'PixelBody', monospace;
+    color: var(--border);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 🔹 Блок 2: Последнее обновление */
+.changelog-subtitle {
+    font-family: 'PixelTitle', sans-serif;
+    color: var(--accent);
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.version-inline {
+    margin-bottom: 10px;
+}
+
+/* 🔹 Блок 3: История версий */
+.changelog-history {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.version-entry {
+    padding: 15px 0;
+}
+
+.version-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 20px 0;
+    opacity: 0.5;
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
@@ -897,17 +906,35 @@ img {
     .lang-select-wrapper {
         width: 100%;
     }
-    .settings-panel {
-        width: 85%;
+    
+    .changelog-container {
+        padding: 20px 15px;
     }
-    .lang-select-wrapper {
-        width: 100%;
+    .changelog-title {
+        font-size: 22px;
     }
-    .changelog-container {padding: 20px 15px;}
-    .changelog-title { font-size: 22px; }
-    .changelog-desc { font-size: 13px; }
-    .version-number { font-size: 18px; }
-    .version-list li { font-size: 13px; }
-    .changelog-latest { padding: 15px; }
+    .changelog-desc {
+        font-size: 13px;
+    }
+    .changelog-subtitle {
+        font-size: 16px;
+    }
+    .version-title,
+    .version-number {
+        font-size: 13px; /* 🔥 Меньше текст на мобильном */
+    }
+    .version-number {
+        margin-left: 6px;
+    }
+    .version-list li {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+    .changelog-latest {
+        padding: 15px;
+    }
+    .version-divider {
+        margin: 15px 0;
+    }
 
 }
