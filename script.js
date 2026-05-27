@@ -345,32 +345,6 @@ async function getReviewTranslation(gameId, langCode) {
     }
 }
 
-// Модифицированная функция открытия модального окна
-async function openReviewModal(gameId) {
-    const modal = document.getElementById('review-modal');
-    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
-    
-    // Пробуем загрузить переведённую рецензию
-    const translatedReview = await getReviewTranslation(gameId, currentLang);
-    
-    // Если есть перевод - используем его, иначе берём из reviews.json
-    const review = reviewsData[String(gameId)];
-    
-    if (translatedReview) {
-        document.getElementById('modal-title').textContent = translatedReview.title || `Game #${gameId}`;
-        document.getElementById('modal-text').textContent = translatedReview.text || 'Review text...';
-    } else if (review) {
-        document.getElementById('modal-title').textContent = review.title || `Игра #${gameId}`;
-        document.getElementById('modal-text').textContent = review.text || 'Текст рецензии отсутствует.';
-    } else {
-        document.getElementById('modal-title').textContent = `Game #${gameId}`;
-        document.getElementById('modal-text').textContent = 'Review not available.';
-    }
-    
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
 // ===== ИНИЦИАЛИЗАЦИЯ НАСТРОЕК =====
 function initSettings() {
     settings.currentPage = detectCurrentPage();
