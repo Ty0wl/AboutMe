@@ -191,12 +191,34 @@ function spawnParticles(originX, originY, imagePath) {
 }
 
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
-function openReviewModal(gameId) {
+async function openReviewModal(gameId) {
     const modal = document.getElementById('review-modal');
+    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
+    
+    const translatedReview = await getReviewTranslation(gameId, currentLang);
     const review = reviewsData[String(gameId)];
     
-    document.getElementById('modal-title').textContent = review ? review.title : `Игра #${gameId}`;
-    document.getElementById('modal-text').textContent = review ? review.text : 'Текст рецензии отсутствует.';
+    const reviewData = translatedReview || review;
+    
+    if (reviewData) {
+        document.getElementById('modal-title').textContent = reviewData.title || `Game #${gameId}`;
+        
+        if (reviewData.steam_url) {
+            const appId = getSteamAppId(reviewData.steam_url);
+            const screenshotsContainer = document.getElementById('modal-screenshots');
+            
+            if (screenshotsContainer) {
+                screenshotsContainer.innerHTML = '<div class="screenshots-loading">Загрузка скриншотов...</div>';
+                const screenshots = await loadSteamScreenshots(appId);
+                renderScreenshots(screenshots, screenshotsContainer);
+            }
+        }
+        
+        document.getElementById('modal-text').textContent = reviewData.text || 'Review text not available.';
+    } else {
+        document.getElementById('modal-title').textContent = `Game #${gameId}`;
+        document.getElementById('modal-text').textContent = 'Review not available.';
+    }
     
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -401,4 +423,58 @@ function setupContentProtection() {
     });
     
     console.log('Защита контента активирована');
+}
+
+// ===== СТИМ СКРИНШОТЫ =====
+function getSteamAppId(steamUrl) {
+    if (!steamUrl) return null;
+    const match = steamUrl.match(/app\/(\d+)/);
+    return match ? match[1] : null;
+}
+
+// Загрузка скриншотов из Steam
+async function loadSteamScreenshots(appId) {
+    if (!appId) return [];
+    
+    try {
+        // Используем прокси для обхода CORS (или свой бэкенд)
+        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const steamApiUrl = `https://store.steampowered.com/api/appdetails?appids=${appId}&filters=screenshots`;
+        
+        const response = await fetch(proxyUrl + encodeURIComponent(steamApiUrl));
+        const data = await response.json();
+        
+        const screenshots = data[appId]?.data?.screenshots || [];
+        
+        // Возвращаем первые 4 скриншота (fullsize)
+        return screenshots.slice(0, 4).map(screenshot => screenshot.path_full);
+    } catch (error) {
+        console.error(`Ошибка загрузки скриншотов для App ID ${appId}:`, error);
+        return [];
+    }
+}
+
+// Отображение скриншотов в модальном окне
+function renderScreenshots(screenshots, container) {
+    container.innerHTML = '';
+    
+    if (screenshots.length === 0) {
+        container.innerHTML = '<div class="screenshots-loading">Скриншоты не найдены</div>';
+        return;
+    }
+    
+    screenshots.forEach((screenshotUrl, index) => {
+        const img = document.createElement('img');
+        img.src = screenshotUrl;
+        img.alt = `Screenshot ${index + 1}`;
+        img.className = 'screenshot-item';
+        img.loading = 'lazy';
+        
+        // Клик для открытия в полном размере
+        img.addEventListener('click', () => {
+            window.open(screenshotUrl, '_blank');
+        });
+        
+        container.appendChild(img);
+    });
 }

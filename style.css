@@ -780,6 +780,40 @@ img {
     opacity: 0.8;
 }
 
+/* ===== СКРИНШОТЫ ИЗ STEAM В МОДАЛЬНОМ ОКНЕ ===== */
+.screenshots-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.screenshot-item {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.screenshot-item:hover {
+    border-color: var(--accent);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.screenshots-loading {
+    text-align: center;
+    color: var(--border);
+    font-size: 12px;
+    padding: 20px;
+    font-style: italic;
+}
+
 /* ===== АДАПТИВНОСТЬ ===== */
 
 @media (max-width: 768px) {
@@ -967,7 +1001,7 @@ img {
     }
     .version-title,
     .version-number {
-        font-size: 13px; /* 🔥 Меньше текст на мобильном */
+        font-size: 13px;
     }
     .version-number {
         margin-left: 6px;
@@ -981,6 +1015,12 @@ img {
     }
     .version-divider {
         margin: 15px 0;
+    }
+
+    .screenshots-container {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        max-height: 300px;
     }
 
 }
