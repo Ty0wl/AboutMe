@@ -192,38 +192,22 @@ function spawnParticles(originX, originY, imagePath) {
 
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
 async function openReviewModal(gameId) {
-    console.log(`openReviewModal вызван для gameId: ${gameId}`);
-    
     const modal = document.getElementById('review-modal');
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
     
     const translatedReview = await getReviewTranslation(gameId, currentLang);
     const review = reviewsData[String(gameId)];
-    
-    console.log(`reviewData:`, translatedReview || review);
-    
     const reviewData = translatedReview || review;
     
     if (reviewData) {
         document.getElementById('modal-title').textContent = reviewData.title || `Game #${gameId}`;
         
-        console.log(`steam_url: ${reviewData.steam_url}`);
-        
-        if (reviewData.steam_url) {
-            const appId = getSteamAppId(reviewData.steam_url);
-            console.log(`Извлечён App ID: ${appId}`);
-            
-            const screenshotsContainer = document.getElementById('modal-screenshots');
-            console.log(`Контейнер скриншотов:`, screenshotsContainer);
-            
-            if (screenshotsContainer) {
-                screenshotsContainer.innerHTML = '<div class="screenshots-loading">Загрузка скриншотов...</div>';
-                screenshotsContainer.style.display = 'block';
-                
-                const screenshots = await loadSteamScreenshots(appId);
-                console.log(`Получено скриншотов: ${screenshots.length}`);
-                renderScreenshots(screenshots, screenshotsContainer);
-            }
+        const screenshotsContainer = document.getElementById('modal-screenshots');
+        if (screenshotsContainer && reviewData.screenshots && reviewData.screenshots.length > 0) {
+            console.log('🖼️ Загружаем скриншоты из JSON:', reviewData.screenshots);
+            renderScreenshots(reviewData.screenshots, screenshotsContainer);
+        } else if (screenshotsContainer) {
+            screenshotsContainer.style.display = 'none';
         }
         
         document.getElementById('modal-text').textContent = reviewData.text || 'Review text not available.';
@@ -235,7 +219,6 @@ async function openReviewModal(gameId) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
-
 function closeReviewModal() {
     document.getElementById('review-modal').classList.remove('active');
     document.body.style.overflow = '';
@@ -409,57 +392,6 @@ function setupContentProtection() {
     });
     
     console.log('Защита контента активирована');
-}
-
-// ===== СТИМ СКРИНШОТЫ =====
-function getSteamAppId(steamUrl) {
-    if (!steamUrl) return null;
-    const match = steamUrl.match(/app\/(\d+)/);
-    return match ? match[1] : null;
-}
-
-// ОТЛАДОЧНАЯ ВЕРСИЯ — с подробными логами
-async function loadSteamScreenshots(appId) {
-    console.log(`🎮 Запрос скриншотов для App ID: ${appId}`);
-    
-    if (!appId) return [];
-    
-    try {
-        const proxies = [
-            'https://api.allorigins.win/raw?url=',
-            'https://corsproxy.io/?',
-            'https://api.codetabs.com/v1/proxy?quest='
-        ];
-        
-        const steamApiUrl = `https://store.steampowered.com/api/appdetails?appids=${appId}&filters=screenshots`;
-        
-        for (const proxy of proxies) {
-            try {
-                console.log(`📡 Пробуем прокси: ${proxy}`);
-                const response = await fetch(proxy + encodeURIComponent(steamApiUrl));
-                
-                if (!response.ok) continue;
-                
-                const data = await response.json();
-                const screenshots = data[appId]?.data?.screenshots || [];
-                
-                if (screenshots.length > 0) {
-                    console.log(`Успех! Найдено скриншотов: ${screenshots.length}`);
-                    return screenshots.slice(0, 4).map(s => s.path_full);
-                }
-            } catch (e) {
-                console.log(`Прокси не сработал: ${proxy}`);
-                continue;
-            }
-        }
-        
-        console.error('Все прокси не сработали');
-        return [];
-        
-    } catch (error) {
-        console.error(`Ошибка:`, error);
-        return [];
-    }
 }
 
 function renderScreenshots(screenshots, container) {
