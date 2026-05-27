@@ -807,14 +807,14 @@ img {
 }
 .screenshots-container::-webkit-scrollbar-track {
     background: var(--bg-dark);
-    border-radius: 3px;
+    border-radius: 6px;
 }
 .screenshots-container::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: 3px;
+    border-radius: 6px;
 }
 .screenshots-container::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
+    background: var(--border);
 }
 
 .screenshot-item {
