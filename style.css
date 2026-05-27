@@ -649,34 +649,23 @@ body {
     100% { background-position: -200% 0; }
 }
 
-/* ===== СТРАНИЦА ЧЕЙНДЖЛОГА ===== */
-.changelog-container {
-    margin-top: 80px;
-    padding: 30px 20px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
+/* ===== СТРАНИЦА ЧЕЙНДЖЛОГА — ИСПРАВЛЕНИЯ ===== */
 
-.changelog-header {
-    text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-}
-
-.changelog-title {
-    font-family: 'PixelTitle', sans-serif;
-    color: var(--accent);
-    font-size: 28px;
-    margin-bottom: 10px;
-}
-
-.changelog-desc {
+.version-title {
     font-family: 'PixelBody', monospace;
     color: var(--border);
     font-size: 14px;
-    line-height: 1.6;
+    display: inline;
+    margin: 0;
+}
+
+.version-number {
+    font-family: 'PixelBody', monospace;
+    color: var(--accent);
+    font-size: 14px;
+    display: inline;
+    margin-left: 8px;
+    font-weight: bold;
 }
 
 .changelog-latest {
@@ -688,50 +677,17 @@ body {
     box-shadow: 0 0 15px rgba(247, 150, 23, 0.2);
 }
 
-.changelog-subtitle {
-    font-family: 'PixelTitle', sans-serif;
-    color: var(--accent);
-    font-size: 18px;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
 .version-card {
-    background-color: var(--bg-dark);
-    border: 1px solid var(--border);
-    padding: 15px;
-    border-radius: 4px;
-}
-
-.changelog-history {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-.version-entry {
-    padding: 15px 0;
-}
-
-.version-title {
-    font-family: 'PixelBody', monospace;
-    color: var(--border);
-    font-size: 13px;
-    margin-bottom: 5px;
-}
-
-.version-number {
-    font-family: 'PixelTitle', sans-serif;
-    color: var(--text);
-    font-size: 20px;
-    display: block;
-    margin-bottom: 10px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 0;
 }
 
 .version-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 10px 0 0 0;
 }
 
 .version-list li {
@@ -739,25 +695,12 @@ body {
     color: var(--text);
     font-size: 14px;
     line-height: 1.8;
-    padding-left: 15px;
-    position: relative;
+    padding-left: 0;
+    position: static;
 }
 
 .version-list li::before {
-    content: "•";
-    color: var(--accent);
-    position: absolute;
-    left: 0;
-    font-size: 18px;
-    top: -2px;
-}
-
-.version-divider {
-    border: none;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border), transparent);
-    margin: 20px 0;
-    opacity: 0.5;
+    content: none;
 }
 
 /* ===== ЗАЩИТА КОНТЕНТА ===== */
@@ -783,6 +726,7 @@ img {
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: row;
