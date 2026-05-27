@@ -192,7 +192,7 @@ function spawnParticles(originX, originY, imagePath) {
 
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
 async function openReviewModal(gameId) {
-    console.log(`🔍 openReviewModal вызван для gameId: ${gameId}`);
+    console.log(`openReviewModal вызван для gameId: ${gameId}`);
     
     const modal = document.getElementById('review-modal');
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
@@ -200,28 +200,28 @@ async function openReviewModal(gameId) {
     const translatedReview = await getReviewTranslation(gameId, currentLang);
     const review = reviewsData[String(gameId)];
     
-    console.log(`📄 reviewData:`, translatedReview || review);
+    console.log(`reviewData:`, translatedReview || review);
     
     const reviewData = translatedReview || review;
     
     if (reviewData) {
         document.getElementById('modal-title').textContent = reviewData.title || `Game #${gameId}`;
         
-        console.log(`🔗 steam_url: ${reviewData.steam_url}`);
+        console.log(`steam_url: ${reviewData.steam_url}`);
         
         if (reviewData.steam_url) {
             const appId = getSteamAppId(reviewData.steam_url);
-            console.log(`🎯 Извлечён App ID: ${appId}`);
+            console.log(`Извлечён App ID: ${appId}`);
             
             const screenshotsContainer = document.getElementById('modal-screenshots');
-            console.log(`📦 Контейнер скриншотов:`, screenshotsContainer);
+            console.log(`Контейнер скриншотов:`, screenshotsContainer);
             
             if (screenshotsContainer) {
                 screenshotsContainer.innerHTML = '<div class="screenshots-loading">Загрузка скриншотов...</div>';
                 screenshotsContainer.style.display = 'block';
                 
                 const screenshots = await loadSteamScreenshots(appId);
-                console.log(`📸 Получено скриншотов: ${screenshots.length}`);
+                console.log(`Получено скриншотов: ${screenshots.length}`);
                 renderScreenshots(screenshots, screenshotsContainer);
             }
         }
@@ -418,59 +418,52 @@ function getSteamAppId(steamUrl) {
     return match ? match[1] : null;
 }
 
-// 🔥 ОТЛАДОЧНАЯ ВЕРСИЯ — с подробными логами
+// ОТЛАДОЧНАЯ ВЕРСИЯ — с подробными логами
 async function loadSteamScreenshots(appId) {
     console.log(`🎮 Запрос скриншотов для App ID: ${appId}`);
     
-    if (!appId) {
-        console.error('❌ App ID не найден');
-        return [];
-    }
+    if (!appId) return [];
     
     try {
-        const proxyUrl = 'https://api.allorigins.win/raw?url=';
+        const proxies = [
+            'https://api.allorigins.win/raw?url=',
+            'https://corsproxy.io/?',
+            'https://api.codetabs.com/v1/proxy?quest='
+        ];
+        
         const steamApiUrl = `https://store.steampowered.com/api/appdetails?appids=${appId}&filters=screenshots`;
-        const fullUrl = proxyUrl + encodeURIComponent(steamApiUrl);
         
-        console.log(`📡 Запрос к: ${fullUrl}`);
-        
-        const response = await fetch(fullUrl);
-        console.log(`📦 Ответ: статус ${response.status}`);
-        
-        if (!response.ok) {
-            console.error(`❌ HTTP ошибка: ${response.status}`);
-            return [];
+        for (const proxy of proxies) {
+            try {
+                console.log(`📡 Пробуем прокси: ${proxy}`);
+                const response = await fetch(proxy + encodeURIComponent(steamApiUrl));
+                
+                if (!response.ok) continue;
+                
+                const data = await response.json();
+                const screenshots = data[appId]?.data?.screenshots || [];
+                
+                if (screenshots.length > 0) {
+                    console.log(`Успех! Найдено скриншотов: ${screenshots.length}`);
+                    return screenshots.slice(0, 4).map(s => s.path_full);
+                }
+            } catch (e) {
+                console.log(`Прокси не сработал: ${proxy}`);
+                continue;
+            }
         }
         
-        const data = await response.json();
-        console.log('📋 Данные от Steam:', data);
-        
-        // Проверяем структуру ответа
-        if (!data[appId]) {
-            console.error(`❌ Нет данных для App ID ${appId} в ответе`);
-            return [];
-        }
-        if (!data[appId].success) {
-            console.error(`❌ Steam API вернул success: false`);
-            return [];
-        }
-        
-        const screenshots = data[appId]?.data?.screenshots || [];
-        console.log(`✅ Найдено скриншотов: ${screenshots.length}`);
-        
-        return screenshots.slice(0, 4).map(screenshot => {
-            console.log(`🖼️ Скриншот: ${screenshot.path_full}`);
-            return screenshot.path_full;
-        });
+        console.error('Все прокси не сработали');
+        return [];
         
     } catch (error) {
-        console.error(`💥 Ошибка загрузки скриншотов:`, error);
+        console.error(`Ошибка:`, error);
         return [];
     }
 }
 
 function renderScreenshots(screenshots, container) {
-    console.log(`🎨 Отрисовка ${screenshots.length} скриншотов`);
+    console.log(`Отрисовка ${screenshots.length} скриншотов`);
     container.innerHTML = '';
     
     if (screenshots.length === 0) {
@@ -487,13 +480,13 @@ function renderScreenshots(screenshots, container) {
         img.loading = 'lazy';
         
         img.addEventListener('click', () => {
-            console.log(`🖱️ Клик по скриншоту: ${screenshotUrl}`);
+            console.log(`Клик по скриншоту: ${screenshotUrl}`);
             window.open(screenshotUrl, '_blank');
         });
         
         // Лог загрузки каждого изображения
-        img.onload = () => console.log(`✅ Загружен скриншот #${index + 1}`);
-        img.onerror = () => console.error(`❌ Не загружен скриншот #${index + 1}: ${screenshotUrl}`);
+        img.onload = () => console.log(`Загружен скриншот #${index + 1}`);
+        img.onerror = () => console.error(`Не загружен скриншот #${index + 1}: ${screenshotUrl}`);
         
         container.appendChild(img);
     });
