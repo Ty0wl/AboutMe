@@ -14,6 +14,7 @@ const settings = {
 
 function detectCurrentPage() {
     const path = window.location.pathname;
+    if (path.includes('changelog.html')) return 'changelog';
     if (path.includes('games.html')) return 'games';
     if (path.includes('index.html') || path === '/' || path.endsWith('/')) return 'index';
     return 'index';
