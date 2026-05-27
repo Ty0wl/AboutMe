@@ -698,19 +698,32 @@ body {
     }
     .legend-items {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
     .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         justify-content: flex-start;
         background: rgba(0,0,0,0.1);
         border-radius: 4px;
-        padding: 6px;
+        padding: 8px 10px;
+        font-size: 12px;
+        flex-wrap: wrap;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     .legend-item .grade-badge {
-        width: 24px;
-        height: 24px;
+        width: 28px; 
+        height: 28px;
         font-size: 14px;
+        flex-shrink: 0;
+    }
+    .legend-item span:last-child {
+        flex: 1;
+        min-width: 0;
+        line-height: 1.4;
     }
     .sort-panel {
         padding: 12px 15px;
