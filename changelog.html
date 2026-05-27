@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>AboutMe - Changelog</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="resources/gfx/ui/pageicon_cat.png">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-buttons">
+            <!-- Кнопка настроек -->
+            <a href="#" class="nav-btn settings-trigger" id="settings-btn">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_settings_off.png" alt="" class="nav-icon">
+            </a>
+            <a href="index.html" class="nav-btn">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_home_off.png" alt="" class="nav-icon">
+            </a>
+            <a href="games.html" class="nav-btn">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_games_off.png" alt="" class="nav-icon">
+            </a>
+            <a href="changelog.html" class="nav-btn active">
+                <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_changelog_selected.png" alt="" class="nav-icon">
+            </a>
+        </div>
+        <div class="nav-brand">&lt;AboutMe&gt;</div>
+    </nav>
+
+    <!-- Панель настроек -->
+    <div class="settings-overlay" id="settings-overlay"></div>
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-header">
+            <h3 data-i18n="settings_title">Loading...</h3>
+            <button class="settings-close" id="settings-close">✕</button>
+        </div>
+        <div class="settings-content">
+            <div class="setting-item">
+                <span data-i18n="lang_label">Loading...</span>
+                <div class="lang-select-wrapper">
+                    <select id="language-selector" class="pixel-select">
+                        <option value="ru">Русский</option>
+                        <option value="en">English</option>
+                    </select>
+                    <div class="select-arrow">▼</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="changelog-container">
+        
+        <!-- БЛОК 1: -->
+        <section class="changelog-header">
+            <h1 class="changelog-title" data-i18n="changelog_title">Loading...</h1>
+            <p class="changelog-desc" data-i18n="changelog_desc">
+                Loading...
+            </p>
+        </section>
+
+        <!-- БЛОК 2: -->
+        <section class="changelog-latest">
+            <h2 class="changelog-subtitle" data-i18n="latest_update">Loading...</h2>
+            <div class="version-card">
+                <h3 class="version-title" data-i18n="version_label">Loading...</h3>
+                <span class="version-number">4.0</span>
+                <ul class="version-list">
+                    <li data-i18n="v4_0_item">Loading...</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 🔹 БЛОК 3: История версий (обычный текст с разделителями) -->
+        <section class="changelog-history">
+            
+            <div class="version-entry">
+                <h3 class="version-title" data-i18n="version_label">Loading...</h3>
+                <span class="version-number">3.0</span>
+                <ul class="version-list">
+                    <li data-i18n="v3_0_item">Loading...</li>
+                </ul>
+            </div>
+
+            <hr class="version-divider">
+
+            <div class="version-entry">
+                <h3 class="version-title" data-i18n="version_label">Loading...</h3>
+                <span class="version-number">2.0</span>
+                <ul class="version-list">
+                    <li data-i18n="v2_0_item">Loading...</li>
+                </ul>
+            </div>
+
+            <hr class="version-divider">
+
+            <div class="version-entry">
+                <h3 class="version-title" data-i18n="version_label">Loading...</h3>
+                <span class="version-number">1.0</span>
+                <ul class="version-list">
+                    <li data-i18n="v1_0_item">Loading...</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

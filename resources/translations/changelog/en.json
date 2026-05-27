@@ -1,0 +1,13 @@
+{
+    "page_title": "AboutMe - Changelog",
+    "settings_title": "Settings",
+    "lang_label": "Interface Language",
+    "changelog_title": "Changelog",
+    "changelog_desc": "On this page you can view the history of changes on the site.",
+    "latest_update": "Latest Update",
+    "version_label": "Version",
+    "v4_0_item": "- added",
+    "v3_0_item": "- added",
+    "v2_0_item": "- added",
+    "v1_0_item": "- added"
+}
