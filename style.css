@@ -803,7 +803,7 @@ img {
 
 /* Кастомный скроллбар для Chrome/Safari/Edge */
 .screenshots-container::-webkit-scrollbar {
-    height: 6px;
+    height: 12px;
 }
 .screenshots-container::-webkit-scrollbar-track {
     background: var(--bg-dark);
