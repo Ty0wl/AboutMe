@@ -338,11 +338,12 @@ body {
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.grade-a-plus { background-color: #13AD66; }
-.grade-a { background-color: #91DB69; }
-.grade-b { background-color: #4D9BE6; }
-.grade-c { background-color: #F79617; }
-.grade-d { background-color: #F04F78; }
+.grade-a { background-color: #13AD66; }
+.grade-b { background-color: #91DB69; }
+.grade-c { background-color: #4D9BE6; }
+.grade-d { background-color: #F79617; }
+.grade-e { background-color: #F04F78; }
+.grade-f { background-color: #e14ff0; }
 
 .grade-badge:hover {
     transform: scale(1.15);
@@ -523,7 +524,7 @@ body {
 .settings-panel {
     position: fixed;
     top: 0; left: 0; bottom: 0;
-    width: 300px; /* 🔥 Десктопная ширина */
+    width: 300px;
     background-color: var(--bg-panel);
     border-right: 2px solid var(--accent);
     z-index: 2001;
@@ -820,10 +821,32 @@ body {
         width: 100%;
     }
     .settings-panel {
-        width: 85%; /* 🔥 Мобильная ширина */
+        width: 85%;
     }
     .lang-select-wrapper {
         width: 100%;
     }
 
+}
+
+/* ===== ЗАЩИТА КОНТЕНТА ===== */
+
+body, p, span, h1, h2, h3, h4, h5, h6, td, th, .welcome-desc, .main-text, .modal-text, .legend-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input, textarea {
+    user-select: text !important;
+}
+
+img {
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.nav-icon, .game-cover, .close-icon, .toast-close-icon, .cat-image {
+    pointer-events: auto;
 }

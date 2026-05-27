@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         setupModalEvents();
         setupGradeClicks();
         initSettings();
+        setupContentProtection();
         
         setTimeout(() => {
             setupLegendParticles();
@@ -119,15 +120,16 @@ function setupGradeClicks() {
 
 // ===== ЧАСТИЦЫ ДЛЯ ЛЕГЕНДЫ =====
 function setupLegendParticles() {
-    console.log('🔍 setupLegendParticles: запуск');
+    console.log('setupLegendParticles: запуск');
     const badges = document.querySelectorAll('.legend-box .grade-badge');
 
     const gradeParticleMap = {
-        'grade-a-plus': 'resources/gfx/particles/particle_a_plus.png',
-        'grade-a':      'resources/gfx/particles/particle_a.png',
+        'grade-a': 'resources/gfx/particles/particle_a.png',
         'grade-b':      'resources/gfx/particles/particle_b.png',
         'grade-c':      'resources/gfx/particles/particle_c.png',
-        'grade-d':      'resources/gfx/particles/particle_d.png'
+        'grade-d':      'resources/gfx/particles/particle_d.png',
+        'grade-e':      'resources/gfx/particles/particle_e.png',
+        'grade-f':      'resources/gfx/particles/particle_f.png',
     };
 
     badges.forEach(badge => {
@@ -384,4 +386,18 @@ function initSettings() {
 
     const savedLang = localStorage.getItem(settings.storageKey) || settings.defaultLang;
     setLanguage(savedLang);
+}
+
+// ===== ЗАЩИТА ОТ КОПИРОВАНИЯ И ПРАВОГО КЛИКА =====
+function setupContentProtection() {
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('selectstart', (e) => e.preventDefault());
+    document.addEventListener('copy', (e) => e.preventDefault());
+    document.addEventListener('cut', (e) => e.preventDefault());
+    document.querySelectorAll('img').forEach(img => {
+        img.setAttribute('draggable', 'false');
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+    });
+    
+    console.log('Защита контента активирована');
 }

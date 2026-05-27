@@ -6,7 +6,7 @@
     "type": "Game Edition",
     "genre": "Metroidvania, Souls-like",
     "name": "Hollow Knight: Voidheart Edition",
-    "grade": "A+",
+    "grade": "A",
     "review": 1
   },
   {
@@ -16,8 +16,8 @@
     "type": "Game Edition",
     "genre": "Beat'em Up, Co-op",
     "name": "Castle Crashers Remastered",
-    "grade": "A+",
-    "review": 1
+    "grade": "A",
+    "review": 0
   },
   {
     "id": 4,
@@ -26,7 +26,7 @@
     "type": "Game",
     "genre": "Platformer, Co-op",
     "name": "BattleBlock Theater",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -36,7 +36,7 @@
     "type": "Game",
     "genre": "Point&Click, Puzzle",
     "name": "Journey of a Roach",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -46,7 +46,7 @@
     "type": "Game Edition",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock / Remastered",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -56,7 +56,7 @@
     "type": "Game Edition",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock 2 / Remastered",
-    "grade": "B",
+    "grade": "C",
     "review": 0
   },
   {
@@ -66,7 +66,7 @@
     "type": "DLC",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock 2: Minerva's Den / Remastered",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -76,7 +76,7 @@
     "type": "Game",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock Infinite",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -86,7 +86,7 @@
     "type": "DLC",
     "genre": "FPS, Immersive-Sim",
     "name": "BioShock Infinite: Burial at Sea Ep.1",
-    "grade": "B",
+    "grade": "C",
     "review": 0
   },
   {
@@ -96,7 +96,7 @@
     "type": "DLC",
     "genre": "Stealth, Immersive-Sim",
     "name": "BioShock Infinite: Burial at Sea Ep.2",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -106,7 +106,7 @@
     "type": "Game Edition",
     "genre": "Stealth, Platformer",
     "name": "Mark of the Ninja: Remastered",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -116,7 +116,7 @@
     "type": "Game",
     "genre": "Action, Roguelike",
     "name": "The binding of Isaac: Rebirth",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -126,7 +126,7 @@
     "type": "DLC Bundle",
     "genre": "Action, Roguelike",
     "name": "TBOI: Afterbirth / Afterbirth+",
-    "grade": "C",
+    "grade": "D",
     "review": 0
   },
   {
@@ -136,7 +136,7 @@
     "type": "DLC Bundle",
     "genre": "Action, Roguelike",
     "name": "TBOI: Repentance / Repentance+",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -146,7 +146,7 @@
     "type": "Game",
     "genre": "Survival, Online Co-op",
     "name": "Don't Starve Together",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -156,7 +156,7 @@
     "type": "Game",
     "genre": "Stealth, Horror",
     "name": "Gloomwood",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -166,7 +166,7 @@
     "type": "Game Edition",
     "genre": "Slasher, Metroidvania",
     "name": "Darksiders Warmastered Edition",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -176,7 +176,7 @@
     "type": "Game",
     "genre": "Survival Horror, Action",
     "name": "Alan Wake",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -186,7 +186,7 @@
     "type": "Game Edition",
     "genre": "Stealth, Action",
     "name": "Dishonored: Definitive Edition",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -196,7 +196,7 @@
     "type": "Game",
     "genre": "Stealth, Action",
     "name": "Dishonored 2",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -206,7 +206,7 @@
     "type": "Game",
     "genre": "Metroidvania, Souls-like",
     "name": "Death's Door",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -216,7 +216,7 @@
     "type": "Game",
     "genre": "Action, Rougelike",
     "name": "Enter the Gungeon",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -226,7 +226,7 @@
     "type": "Game Edition",
     "genre": "Action Adventure, Survival",
     "name": "Tomb Raider: Game of the Year Edition",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -236,7 +236,7 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "KUNAI",
-    "grade": "B",
+    "grade": "C",
     "review": 0
   },
   {
@@ -246,7 +246,7 @@
     "type": "Game",
     "genre": "Horror, Strategy, Tabletop",
     "name": "Buckshot Roulette",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -256,7 +256,7 @@
     "type": "Game",
     "genre": "Horror, Strategy, Tabletop",
     "name": "Inscryption",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -266,7 +266,7 @@
     "type": "Game",
     "genre": "Action, Roguevania",
     "name": "Dead Cells",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -276,7 +276,7 @@
     "type": "DLC Bundle",
     "genre": "Action, Roguevania",
     "name": "Dead Cells: Medley of Pain",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -286,7 +286,7 @@
     "type": "Game",
     "genre": "Puzzle, Platformer, Co-op",
     "name": "Shift Happens",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -296,7 +296,7 @@
     "type": "Game",
     "genre": "Action, Roguelike",
     "name": "Revita",
-    "grade": "B",
+    "grade": "C",
     "review": 0
   },
   {
@@ -306,7 +306,7 @@
     "type": "Game",
     "genre": "Metroidvania, Souls-like",
     "name": "Nine Sols",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
   {
@@ -316,7 +316,7 @@
     "type": "Game",
     "genre": "FPS, Online Co-op",
     "name": "Deep Rock Galactic",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
   {
@@ -326,7 +326,7 @@
     "type": "Game",
     "genre": "Puzzle, Adventure",
     "name": "The Last Campfire",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
     {
@@ -336,7 +336,7 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Haiku, the Robot",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
     {
@@ -346,7 +346,7 @@
     "type": "Game Edition",
     "genre": "Tower Defense, Strategy",
     "name": "Plants vs. Zombies: Game of the Year Edition",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
     {
@@ -356,7 +356,7 @@
     "type": "Game",
     "genre": "Action, Adventure, Casual",
     "name": "Turnip Boy Commits Tax Evasion",
-    "grade": "B",
+    "grade": "C",
     "review": 0
   },
     {
@@ -366,7 +366,7 @@
     "type": "Game",
     "genre": "Escape Room, Horror",
     "name": "Is this game trying to kill me?",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
     {
@@ -376,7 +376,7 @@
     "type": "Game",
     "genre": "Metroidvania, Shoot'em up",
     "name": "Minishoot' Adventures",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
     {
@@ -386,7 +386,7 @@
     "type": "Game",
     "genre": "Sandbox, Survival",
     "name": "Minecraft",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
     {
@@ -396,7 +396,7 @@
     "type": "Game",
     "genre": "Platformer, Rougelike",
     "name": "ScourgeBringer",
-    "grade": "C",
+    "grade": "D",
     "review": 0
   },
     {
@@ -406,7 +406,7 @@
     "type": "Game",
     "genre": "Visual Novell, Horror",
     "name": "MiSide",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
     {
@@ -416,7 +416,7 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Supraland",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
     {
@@ -426,7 +426,7 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Supraland: Six Inches Under",
-    "grade": "A+",
+    "grade": "A",
     "review": 0
   },
     {
@@ -436,7 +436,7 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Hob",
-    "grade": "A",
+    "grade": "B",
     "review": 0
   },
     {
@@ -446,7 +446,177 @@
     "type": "Game",
     "genre": "FPS, Rougelike",
     "name": "Roboquest",
-    "grade": "A+",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 77,
+    "cover": "resources/gfx/covers/tboi.jpg",
+    "year": 2011,
+    "type": "Game",
+    "genre": "Action, Rougelike",
+    "name": "The binding of Isaac",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 78,
+    "cover": "resources/gfx/covers/the legend of bum bo.jpg",
+    "year": 2019,
+    "type": "Game",
+    "genre": "Strategy, Rougelike",
+    "name": "The Legend of Bum-Bo",
+    "grade": "D",
+    "review": 0
+  },
+    {
+    "id": 79,
+    "cover": "resources/gfx/covers/bully scholarship edition.jpg",
+    "year": 2007,
+    "type": "Game Edition",
+    "genre": "Action Adventure, Open World",
+    "name": "Bully: Scholarship Edition",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 81,
+    "cover": "resources/gfx/covers/nuclear throne.jpg",
+    "year": 2015,
+    "type": "Game",
+    "genre": "Action, Rougelike",
+    "name": "Nuclear THrone",
+    "grade": "C",
+    "review": 0
+  },
+    {
+    "id": 82,
+    "cover": "resources/gfx/covers/slime rancher.jpg",
+    "year": 2017,
+    "type": "Game",
+    "genre": "Adventure, Sandbox",
+    "name": "Slime Rancher",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 85,
+    "cover": "resources/gfx/covers/castle crashers painter boss paradise.jpg",
+    "year": 2025,
+    "type": "DLC",
+    "genre": "Beat'em Up, Co-op",
+    "name": "Castle Crashers: Painter Boss Paradise",
+    "grade": "C",
+    "review": 0
+  },
+    {
+    "id": 86,
+    "cover": "resources/gfx/covers/hollow knight silksong.jpg",
+    "year": 2025,
+    "type": "Game",
+    "genre": "Metroidvania, Souls-like",
+    "name": "Hollow Knight: Silksong",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 87,
+    "cover": "resources/gfx/covers/leap year.jpg",
+    "year": 2024,
+    "type": "Game",
+    "genre": "Puzzle, Platformer",
+    "name": "Leap Year",
+    "grade": "C",
+    "review": 0
+  },
+    {
+    "id": 88,
+    "cover": "resources/gfx/covers/supraworld.jpg",
+    "year": "-",
+    "type": "Early Access",
+    "genre": "Metroidvania, Adventure",
+    "name": "Supraworld",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 89,
+    "cover": "resources/gfx/covers/pico park classic edition.jpg",
+    "year": 2016,
+    "type": "Game Edition",
+    "genre": "Platformer, Online Co-op",
+    "name": "PICO PARK: Classic Edition",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 90,
+    "cover": "resources/gfx/covers/rayman origins.jpg",
+    "year": 2011,
+    "type": "Game",
+    "genre": "Platformer, Co-op",
+    "name": "Rayman Origins",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 91,
+    "cover": "resources/gfx/covers/rayman legends.jpg",
+    "year": 2013,
+    "type": "Game",
+    "genre": "Platformer, Co-op",
+    "name": "Rayman Legends",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 92,
+    "cover": "resources/gfx/covers/hades.jpg",
+    "year": 2020,
+    "type": "Game",
+    "genre": "Action, Rougelike",
+    "name": "Hades",
+    "grade": "F",
+    "review": 0
+  },
+    {
+    "id": 93,
+    "cover": "resources/gfx/covers/my coworker is an idiot.jpg",
+    "year": 2022,
+    "type": "Game",
+    "genre": "Puzzle, Online Co-op",
+    "name": "My Coworker Is An Idiot",
+    "grade": "C",
+    "review": 0
+  },
+    {
+    "id": 95,
+    "cover": "resources/gfx/covers/blazing beaks.jpg",
+    "year": 2019,
+    "type": "Game",
+    "genre": "Action, Rougelike",
+    "name": "Blazing Beaks",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 96,
+    "cover": "resources/gfx/covers/organized inside.jpg",
+    "year": 2025,
+    "type": "Game",
+    "genre": "Cozy, Casual",
+    "name": "Organized Inside",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 102,
+    "cover": "resources/gfx/covers/forgive me father.jpg",
+    "year": 2022,
+    "type": "Game",
+    "genre": "FPS, Old Fashion",
+    "name": "Forgive Me Father",
+    "grade": "B",
     "review": 0
   }
 ]
