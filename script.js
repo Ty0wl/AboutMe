@@ -192,33 +192,44 @@ function spawnParticles(originX, originY, imagePath) {
 
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
 async function openReviewModal(gameId) {
+    console.log(`Открытие рецензии для gameId: ${gameId}`);
+    
     const modal = document.getElementById('review-modal');
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
     
     const translatedReview = await getReviewTranslation(gameId, currentLang);
     const review = reviewsData[String(gameId)];
-    const reviewData = translatedReview || review;
+    
+    const reviewData = {
+        ...review,
+        ...translatedReview
+    };
+    
+    console.log('reviewData:', reviewData);
+    console.log('screenshots:', reviewData?.screenshots);
     
     if (reviewData) {
         document.getElementById('modal-title').textContent = reviewData.title || `Game #${gameId}`;
         
         const screenshotsContainer = document.getElementById('modal-screenshots');
+        console.log('Контейнер:', screenshotsContainer);
+        console.log('screenshots.length:', reviewData?.screenshots?.length);
+        
         if (screenshotsContainer && reviewData.screenshots && reviewData.screenshots.length > 0) {
-            console.log('🖼️ Загружаем скриншоты из JSON:', reviewData.screenshots);
+            console.log('Показываем скриншоты');
             renderScreenshots(reviewData.screenshots, screenshotsContainer);
         } else if (screenshotsContainer) {
+            console.log('Скрываем контейнер (нет скриншотов)');
             screenshotsContainer.style.display = 'none';
         }
         
         document.getElementById('modal-text').textContent = reviewData.text || 'Review text not available.';
-    } else {
-        document.getElementById('modal-title').textContent = `Game #${gameId}`;
-        document.getElementById('modal-text').textContent = 'Review not available.';
     }
     
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
+
 function closeReviewModal() {
     document.getElementById('review-modal').classList.remove('active');
     document.body.style.overflow = '';
