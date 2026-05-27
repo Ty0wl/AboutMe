@@ -11,6 +11,7 @@
 <body>
     <nav class="navbar">
         <div class="nav-buttons">
+            <!-- Кнопка настроек -->
             <a href="#" class="nav-btn settings-trigger" id="settings-btn">
                 <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_settings_off.png" alt="" class="nav-icon">
             </a>
@@ -58,31 +59,27 @@
             </p>
         </section>
 
-        <!-- БЛОК 2: Последнее обновление (выделено рамкой) -->
-        <section class="changelog-latest">
-            <h2 class="changelog-subtitle" data-i18n="latest_update">Loading...</h2>
-    
-            <div class="version-inline">
-                <span class="version-title" data-i18n="version_label">Loading...</span>
-                <span class="version-number">4.0</span>
-            </div>
-            <ul class="version-list">
-                <li data-i18n="v4_0_item">Loading...</li>
-            </ul>
-        </section>
-
-        <!-- БЛОК 3: История версий -->
+        <!-- БЛОК 2: История версий -->
         <section class="changelog-history">
             
+            <!-- Версия 4.0 -->
+            <div class="version-entry version-latest">
+                <div class="version-inline">
+                    <span class="version-title" data-i18n="version_label">Loading...</span>
+                    <span class="version-number version-number-latest">4.0</span>
+                </div>
+                <div class="version-content" data-i18n="v4_0_item">Loading...</div>
+            </div>
+
+            <hr class="version-divider">
+
             <!-- Версия 3.0 -->
             <div class="version-entry">
                 <div class="version-inline">
                     <span class="version-title" data-i18n="version_label">Loading...</span>
                     <span class="version-number">3.0</span>
                 </div>
-                <ul class="version-list">
-                    <li data-i18n="v3_0_item">Loading...</li>
-                </ul>
+                <div class="version-content" data-i18n="v3_0_item">Loading...</div>
             </div>
 
             <hr class="version-divider">
@@ -93,9 +90,7 @@
                     <span class="version-title" data-i18n="version_label">Loading...</span>
                     <span class="version-number">2.0</span>
                 </div>
-                <ul class="version-list">
-                    <li data-i18n="v2_0_item">Loading...</li>
-                </ul>
+                <div class="version-content" data-i18n="v2_0_item">Loading...</div>
             </div>
 
             <hr class="version-divider">
@@ -106,9 +101,7 @@
                     <span class="version-title" data-i18n="version_label">Loading...</span>
                     <span class="version-number">1.0</span>
                 </div>
-                <ul class="version-list">
-                    <li data-i18n="v1_0_item">Loading...</li>
-                </ul>
+                <div class="version-content" data-i18n="v1_0_item">Loading...</div>
             </div>
 
         </section>
