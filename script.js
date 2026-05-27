@@ -192,24 +192,36 @@ function spawnParticles(originX, originY, imagePath) {
 
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
 async function openReviewModal(gameId) {
+    console.log(`🔍 openReviewModal вызван для gameId: ${gameId}`);
+    
     const modal = document.getElementById('review-modal');
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
     
     const translatedReview = await getReviewTranslation(gameId, currentLang);
     const review = reviewsData[String(gameId)];
     
+    console.log(`📄 reviewData:`, translatedReview || review);
+    
     const reviewData = translatedReview || review;
     
     if (reviewData) {
         document.getElementById('modal-title').textContent = reviewData.title || `Game #${gameId}`;
         
+        console.log(`🔗 steam_url: ${reviewData.steam_url}`);
+        
         if (reviewData.steam_url) {
             const appId = getSteamAppId(reviewData.steam_url);
+            console.log(`🎯 Извлечён App ID: ${appId}`);
+            
             const screenshotsContainer = document.getElementById('modal-screenshots');
+            console.log(`📦 Контейнер скриншотов:`, screenshotsContainer);
             
             if (screenshotsContainer) {
                 screenshotsContainer.innerHTML = '<div class="screenshots-loading">Загрузка скриншотов...</div>';
+                screenshotsContainer.style.display = 'block';
+                
                 const screenshots = await loadSteamScreenshots(appId);
+                console.log(`📸 Получено скриншотов: ${screenshots.length}`);
                 renderScreenshots(screenshots, screenshotsContainer);
             }
         }
@@ -406,34 +418,64 @@ function getSteamAppId(steamUrl) {
     return match ? match[1] : null;
 }
 
-// Загрузка скриншотов из Steam
+// 🔥 ОТЛАДОЧНАЯ ВЕРСИЯ — с подробными логами
 async function loadSteamScreenshots(appId) {
-    if (!appId) return [];
+    console.log(`🎮 Запрос скриншотов для App ID: ${appId}`);
+    
+    if (!appId) {
+        console.error('❌ App ID не найден');
+        return [];
+    }
     
     try {
-        // Используем прокси для обхода CORS (или свой бэкенд)
         const proxyUrl = 'https://api.allorigins.win/raw?url=';
         const steamApiUrl = `https://store.steampowered.com/api/appdetails?appids=${appId}&filters=screenshots`;
+        const fullUrl = proxyUrl + encodeURIComponent(steamApiUrl);
         
-        const response = await fetch(proxyUrl + encodeURIComponent(steamApiUrl));
+        console.log(`📡 Запрос к: ${fullUrl}`);
+        
+        const response = await fetch(fullUrl);
+        console.log(`📦 Ответ: статус ${response.status}`);
+        
+        if (!response.ok) {
+            console.error(`❌ HTTP ошибка: ${response.status}`);
+            return [];
+        }
+        
         const data = await response.json();
+        console.log('📋 Данные от Steam:', data);
+        
+        // Проверяем структуру ответа
+        if (!data[appId]) {
+            console.error(`❌ Нет данных для App ID ${appId} в ответе`);
+            return [];
+        }
+        if (!data[appId].success) {
+            console.error(`❌ Steam API вернул success: false`);
+            return [];
+        }
         
         const screenshots = data[appId]?.data?.screenshots || [];
+        console.log(`✅ Найдено скриншотов: ${screenshots.length}`);
         
-        // Возвращаем первые 4 скриншота (fullsize)
-        return screenshots.slice(0, 4).map(screenshot => screenshot.path_full);
+        return screenshots.slice(0, 4).map(screenshot => {
+            console.log(`🖼️ Скриншот: ${screenshot.path_full}`);
+            return screenshot.path_full;
+        });
+        
     } catch (error) {
-        console.error(`Ошибка загрузки скриншотов для App ID ${appId}:`, error);
+        console.error(`💥 Ошибка загрузки скриншотов:`, error);
         return [];
     }
 }
 
-// Отображение скриншотов в модальном окне
 function renderScreenshots(screenshots, container) {
+    console.log(`🎨 Отрисовка ${screenshots.length} скриншотов`);
     container.innerHTML = '';
     
     if (screenshots.length === 0) {
         container.innerHTML = '<div class="screenshots-loading">Скриншоты не найдены</div>';
+        container.style.display = 'block';
         return;
     }
     
@@ -444,11 +486,17 @@ function renderScreenshots(screenshots, container) {
         img.className = 'screenshot-item';
         img.loading = 'lazy';
         
-        // Клик для открытия в полном размере
         img.addEventListener('click', () => {
+            console.log(`🖱️ Клик по скриншоту: ${screenshotUrl}`);
             window.open(screenshotUrl, '_blank');
         });
         
+        // Лог загрузки каждого изображения
+        img.onload = () => console.log(`✅ Загружен скриншот #${index + 1}`);
+        img.onerror = () => console.error(`❌ Не загружен скриншот #${index + 1}: ${screenshotUrl}`);
+        
         container.appendChild(img);
     });
+    
+    container.style.display = 'grid';
 }
