@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="resources/gfx/ui/pageicon_cat.png">
     <style>
-        /* ===== СТИЛИ 404 СТРАНИЦЫ ===== */
+        /* ===== 404 PAGE STYLES ===== */
         .error-container {
             min-height: 100vh;
             display: flex;
@@ -25,7 +25,7 @@
             font-family: 'PixelTitle', sans-serif;
             font-size: 72px;
             color: var(--accent);
-            text-shadow: 4px 4px 0 var(--border);
+            text-shadow: 0 0 20px rgba(247, 150, 23, 0.6);
             margin-bottom: 20px;
             line-height: 1;
         }
@@ -47,9 +47,9 @@
         }
 
         .error-cat {
-            width: 120px;
+            width: 160px;
             height: auto;
-            margin: 20px 0;
+            margin: 20px 0 30px;
             image-rendering: pixelated;
             animation: float 3s ease-in-out infinite;
         }
@@ -62,13 +62,13 @@
         .error-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
+            gap: 10px;
+            padding: 14px 32px;
             background-color: var(--bg-panel);
             color: var(--text);
             border: 2px solid var(--accent);
             font-family: 'PixelBody', monospace;
-            font-size: 14px;
+            font-size: 16px;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s;
@@ -89,13 +89,12 @@
             opacity: 0.7;
         }
 
-        /* Адаптивность */
         @media (max-width: 768px) {
             .error-code { font-size: 48px; }
             .error-title { font-size: 20px; }
             .error-text { font-size: 13px; }
-            .error-cat { width: 100px; }
-            .error-btn { padding: 10px 20px; font-size: 13px; }
+            .error-cat { width: 130px; }
+            .error-btn { padding: 12px 24px; font-size: 14px; }
         }
     </style>
 </head>
@@ -112,15 +111,14 @@
              class="error-cat"
              onerror="this.src='https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/cat.png'">
         
-        <a href="/" class="error-btn"> <span>Go back home</span> </a>
+        <a href="https://Ty0wl.github.io/AboutMe/index.html" class="error-btn"> <span>Go back home</span> </a>
         
         <p class="error-hint">
-            If you sure that it's a bug, dm me!
+            If you sure, that it's a bug, message me!
         </p>
     </main>
 
     <script>
-        // ===== БОНУС: Случайные сообщения для 404 =====
         const funnyMessages = [
             "Dice dropped this page out of a table...",
             "This page ran away to catch the mouse...",
