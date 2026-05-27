@@ -155,7 +155,7 @@ function setupLegendParticles() {
 }
 
 function spawnParticles(originX, originY, imagePath) {
-    const count = 15;
+    const count = 25;
     
     for (let i = 0; i < count; i++) {
         const particle = document.createElement('img');

@@ -685,7 +685,17 @@ img {
     text-align: center;
     margin-bottom: 40px;
     padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.changelog-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
 
 .changelog-title {
@@ -723,16 +733,10 @@ img {
     margin-bottom: 10px;
 }
 
-.version-title {
-    font-family: 'PixelBody', monospace;
-    color: var(--border);
-    font-size: 14px;
-}
-
 .version-number {
-    font-family: 'PixelBody', monospace;
+    font-family: 'PixelTitle', sans-serif;
     color: var(--text);
-    font-size: 14px;
+    font-size: 20px;
     font-weight: normal;
 }
 
@@ -740,6 +744,11 @@ img {
     color: var(--accent);
     font-weight: bold;
     text-shadow: 0 0 10px rgba(247, 150, 23, 0.5);
+}
+
+.version-number-old {
+    color: var(--text);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .version-content {
