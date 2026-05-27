@@ -787,34 +787,34 @@ img {
     flex-wrap: nowrap !important;
     gap: 12px;
     margin: 15px 0;
-    padding: 0 0 10px 0;
-    
+    padding: 0 0 12px 0;
     overflow-x: auto !important;
     overflow-y: hidden !important;
     white-space: nowrap;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    
-    /* Стилизация скроллбара */
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent) var(--bg-dark);
+
+    scrollbar-width: auto;
+    scrollbar-color: var(--border) var(--bg-dark);
 }
 
-/* Кастомный скроллбар для Chrome/Safari/Edge */
 .screenshots-container::-webkit-scrollbar {
-    height: 12px;
+    height: 10px;
 }
+
 .screenshots-container::-webkit-scrollbar-track {
     background: var(--bg-dark);
-    border-radius: 6px;
+    border-radius: 5px;
 }
+
 .screenshots-container::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: 6px;
+    border-radius: 5px;
 }
+
 .screenshots-container::-webkit-scrollbar-thumb:hover {
-    background: var(--border);
+    background: var(--accent);
 }
 
 .screenshot-item {
