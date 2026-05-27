@@ -782,16 +782,19 @@ img {
 
 /* ===== СКРИНШОТЫ ИЗ STEAM В МОДАЛЬНОМ ОКНЕ ===== */
 .screenshots-container {
-    display: flex;
-    flex-direction: row;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     gap: 12px;
     margin: 15px 0;
-    padding-bottom: 12px; /* Место для скроллбара */
-    overflow-x: auto;
-    overflow-y: hidden;
+    padding: 0 0 10px 0;
+    
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory; /* Эффект "прилипания" при прокрутке */
+    scroll-snap-type: x mandatory;
     
     /* Стилизация скроллбара */
     scrollbar-width: thin;
@@ -815,15 +818,16 @@ img {
 }
 
 .screenshot-item {
-    flex: 0 0 auto; /* Запрещаем сжатие/растягивание */
-    width: 340px;   /* Фиксированная ширина */
-    height: 190px;  /* Высота под 16:9 */
+    flex: 0 0 340px !important;
+    width: 340px !important;
+    height: 190px !important;
     object-fit: cover;
     border: 2px solid var(--border);
     border-radius: 4px;
     cursor: pointer;
     transition: transform 0.2s, border-color 0.2s;
-    scroll-snap-align: start; /* Точка прилипания */
+    scroll-snap-align: start;
+    display: inline-block;
 }
 
 .screenshot-item:hover {
@@ -1042,8 +1046,8 @@ img {
     }
 
     .screenshot-item {
-        width: 260px;
-        height: 146px;
+        width: 260px !important;
+        height: 146px !important;
+        flex: 0 0 260px !important;
     }
-
 }
