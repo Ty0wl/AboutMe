@@ -782,36 +782,54 @@ img {
 
 /* ===== СКРИНШОТЫ ИЗ STEAM В МОДАЛЬНОМ ОКНЕ ===== */
 .screenshots-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
     margin: 15px 0;
-    max-height: 400px;
-    overflow-y: auto;
+    padding-bottom: 12px; /* Место для скроллбара */
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory; /* Эффект "прилипания" при прокрутке */
+    
+    /* Стилизация скроллбара */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-dark);
+}
+
+/* Кастомный скроллбар для Chrome/Safari/Edge */
+.screenshots-container::-webkit-scrollbar {
+    height: 6px;
+}
+.screenshots-container::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+    border-radius: 3px;
+}
+.screenshots-container::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+.screenshots-container::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
 }
 
 .screenshot-item {
-    width: 100%;
-    aspect-ratio: 16/9;
+    flex: 0 0 auto; /* Запрещаем сжатие/растягивание */
+    width: 340px;   /* Фиксированная ширина */
+    height: 190px;  /* Высота под 16:9 */
     object-fit: cover;
     border: 2px solid var(--border);
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: transform 0.2s, border-color 0.2s;
+    scroll-snap-align: start; /* Точка прилипания */
 }
 
 .screenshot-item:hover {
     border-color: var(--accent);
     transform: scale(1.02);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-.screenshots-loading {
-    text-align: center;
-    color: var(--border);
-    font-size: 12px;
-    padding: 20px;
-    font-style: italic;
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
@@ -1021,6 +1039,11 @@ img {
         grid-template-columns: 1fr;
         gap: 8px;
         max-height: 300px;
+    }
+
+    .screenshot-item {
+        width: 260px;
+        height: 146px;
     }
 
 }
