@@ -854,6 +854,58 @@ img {
     transition: none;
 }
 
+/* ===== ИНДИКАТОР НАЛИЧИЯ РЕЦЕНЗИИ (БЛИК) ===== */
+.grade-badge.has-review {
+    position: relative;
+    overflow: hidden; /* Обрезаем блик за пределами кнопки */
+}
+
+.grade-badge.has-review::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 50%;
+    height: 200%;
+    
+    /* Диагональный полупрозрачный блик */
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+    );
+    
+    transform: skewX(-20deg); /* Наклон для пиксель-стиля */
+    pointer-events: none; /* Не мешает кликам */
+    animation: review-shine 4s infinite;
+    animation-play-state: paused; /* Стартуем только при наведении/в фокусе */
+}
+
+/* Запуск анимации при наведении или когда кнопка в фокусе */
+.grade-badge.has-review:hover::after,
+.grade-badge.has-review:focus::after {
+    animation-play-state: running;
+}
+
+/* Сама анимация: блик пробегает слева направо */
+@keyframes review-shine {
+    0% { left: -100%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* Для пользователей, которые предпочитают минимум анимаций */
+@media (prefers-reduced-motion: reduce) {
+    .grade-badge.has-review::after {
+        display: none;
+    }
+    .grade-badge.has-review {
+        /* Альтернатива: тонкая рамка */
+        box-shadow: inset 0 0 0 1px rgba(247, 150, 23, 0.5);
+    }
+}
+
 /* ===== АДАПТИВНОСТЬ ===== */
 
 @media (max-width: 768px) {

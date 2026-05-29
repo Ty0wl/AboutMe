@@ -90,10 +90,10 @@ function renderTable() {
             <td>${game.genre}</td>
             <td>${game.name}</td>
             <td>
-                <span class="grade-badge grade-${game.grade.toLowerCase().replace('+', '-plus')}" 
-                      data-id="${game.id}" 
-                      data-review="${game.review}">
-                    ${game.grade}
+                <span class="grade-badge grade-${game.grade.toLowerCase().replace('+', '-plus')} ${game.review === '1' ? 'has-review' : ''}" 
+                data-id="${game.id}" 
+                data-review="${game.review}">
+                ${game.grade}
                 </span>
             </td>
         `;
@@ -105,15 +105,29 @@ function renderTable() {
 function setupGradeClicks() {
     const badges = document.querySelectorAll('#games-table-body .grade-badge');
     badges.forEach(badge => {
-        badge.style.cursor = 'pointer';
+        const hasReview = badge.getAttribute('data-review') === '1';
+        
+        badge.style.cursor = hasReview ? 'pointer' : 'default';
+        
+        if (hasReview) {
+            badge.setAttribute('aria-label', `Открыть рецензию: ${badge.textContent}`);
+            badge.setAttribute('tabindex', '0'); // Делаем фокусируемой с клавиатуры
+            badge.classList.add('has-review');
+        }
+        
         badge.addEventListener('click', function() {
             const gameId = this.getAttribute('data-id');
-            const hasReview = this.getAttribute('data-review') === '1';
-
             if (hasReview) {
                 openReviewModal(gameId);
             } else {
                 showReviewToast();
+            }
+        });
+        
+        badge.addEventListener('keydown', (e) => {
+            if (hasReview && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                openReviewModal(badge.getAttribute('data-id'));
             }
         });
     });
