@@ -810,7 +810,9 @@ img {
     border-radius: 0;
     cursor: pointer;
     scroll-snap-align: start;
-    image-rendering: pixelated;
+    
+    image-rendering: auto; 
+    -webkit-image-rendering: auto;
 }
 
 .screenshot-item:hover {
@@ -839,7 +841,7 @@ img {
     position: absolute;
     top: 0;
     left: 0;
-    transition: background 0.2s, left 0.05s ease-out;
+    transition: background 0.2s, left 0.15s ease-out;
 }
 
 .custom-scrollbar-thumb:hover {
@@ -1111,17 +1113,9 @@ img {
     }
     
     .screenshot-item {
-        flex: 0 0 420px !important;
-        width: 420px !important;
-        height: 236px !important; /* Строго 16:9 под оригинал 1920x1080 */
-        object-fit: cover;
-        border: 2px solid var(--border);
-        border-radius: 0;
-        cursor: pointer;
-        scroll-snap-align: start;
-    
-        image-rendering: auto; 
-        -webkit-image-rendering: auto;
+        width: 260px !important;
+        height: 146px !important;
+        flex: 0 0 260px !important;
     }
     
     .custom-scrollbar {
