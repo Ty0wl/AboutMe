@@ -1,4 +1,5 @@
 // ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
+
 let gamesData = [];
 let reviewsData = {};
 let currentSort = 'id';
@@ -6,6 +7,7 @@ let sortDirection = {};
 let toastTimeout;
 
 // ===== ГЛОБАЛЬНЫЕ НАСТРОЙКИ =====
+
 const settings = {
     defaultLang: 'ru',
     storageKey: 'site_language',
@@ -21,6 +23,7 @@ function detectCurrentPage() {
 }
 
 // ===== ИНИЦИАЛИЗАЦИЯ (ОДИН ВЫЗОВ) =====
+
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('Инициализация сайта...');
     try {
@@ -41,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // ===== ЗАГРУЗКА ДАННЫХ =====
+
 async function loadReviews() {
     try {
         const res = await fetch('reviews.json');
@@ -70,6 +74,7 @@ async function loadGames() {
 }
 
 // ===== ОТРИСОВКА ТАБЛИЦЫ =====
+
 function renderTable() {
     const tbody = document.getElementById('games-table-body');
     if (!tbody) return;
@@ -102,6 +107,7 @@ function renderTable() {
 }
 
 // ===== КЛИКИ ПО ОЦЕНКАМ + АНИМАЦИЯ БЛИКА =====
+
 function setupGradeClicks() {
     const badges = document.querySelectorAll('#games-table-body .grade-badge');
     
@@ -109,25 +115,18 @@ function setupGradeClicks() {
         const hasReview = badge.getAttribute('data-review') === '1';
         
         if (hasReview) {
-            // Добавляем класс для стилей
             badge.classList.add('has-review');
             badge.style.cursor = 'pointer';
             badge.setAttribute('aria-label', `Открыть рецензию: ${badge.textContent}`);
             badge.setAttribute('tabindex', '0');
             
-            // Запуск анимации при наведении (только один раз за сеанс)
+            // БЛИК: включаем при наведении, выключаем при уходе
             badge.addEventListener('mouseenter', function() {
-                // Если анимация уже идёт или уже проигрывалась — не перезапускаем
-                if (this.classList.contains('shine-active')) return;
-                
                 this.classList.add('shine-active');
             });
             
-            // Когда анимация закончилась — убираем класс (можно будет запустить снова)
-            badge.addEventListener('animationend', function(e) {
-                if (e.animationName === 'review-shine') {
-                    this.classList.remove('shine-active');
-                }
+            badge.addEventListener('mouseleave', function() {
+                this.classList.remove('shine-active');
             });
             
             // Клик — открытие рецензии
@@ -136,7 +135,7 @@ function setupGradeClicks() {
                 openReviewModal(this.getAttribute('data-id'));
             });
             
-            // Поддержка клавиатуры (Enter/Space)
+            // Поддержка клавиатуры
             badge.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -145,7 +144,6 @@ function setupGradeClicks() {
             });
             
         } else {
-            // Нет рецензии — обычный курсор и тост
             badge.style.cursor = 'default';
             badge.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -156,6 +154,7 @@ function setupGradeClicks() {
 }
 
 // ===== ЧАСТИЦЫ ДЛЯ ЛЕГЕНДЫ =====
+
 function setupLegendParticles() {
     console.log('setupLegendParticles: запуск');
     const badges = document.querySelectorAll('.legend-box .grade-badge');
@@ -227,6 +226,7 @@ function spawnParticles(originX, originY, imagePath) {
 }
 
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
+
 async function openReviewModal(gameId) {
     console.log(`Открытие рецензии для gameId: ${gameId}`);
     
@@ -297,6 +297,7 @@ function setupModalEvents() {
 }
 
 // ===== СОРТИРОВКА =====
+
 function setupSortButtons() {
     document.querySelectorAll('.sort-btn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -321,6 +322,7 @@ function sortGames(field) {
 }
 
 /// ===== СИСТЕМА ПЕРЕВОДОВ =====
+
 async function setLanguage(langCode) {
     console.log(`Загрузка языка: ${langCode}`);
     localStorage.setItem(settings.storageKey, langCode);
@@ -373,6 +375,7 @@ async function setLanguage(langCode) {
 }
 
 // ===== ПЕРЕВОД РЕЦЕНЗИЙ =====
+
 async function getReviewTranslation(gameId, langCode) {
     try {
         const path = `resources/translations/reviews/${langCode}.json`;
@@ -388,6 +391,7 @@ async function getReviewTranslation(gameId, langCode) {
 }
 
 // ===== ИНИЦИАЛИЗАЦИЯ НАСТРОЕК =====
+
 function initSettings() {
     settings.currentPage = detectCurrentPage();
     console.log(`Текущая страница: ${settings.currentPage}`);
@@ -428,6 +432,7 @@ function initSettings() {
 }
 
 // ===== ЗАЩИТА ОТ КОПИРОВАНИЯ И ПРАВОГО КЛИКА =====
+
 function setupContentProtection() {
     document.addEventListener('contextmenu', (e) => e.preventDefault());
     document.addEventListener('selectstart', (e) => e.preventDefault());
@@ -475,23 +480,18 @@ function renderScreenshots(screenshots, container) {
     }, 150);
 }
 
-// ===== КАСТОМНЫЙ СКРОЛЛБАР =====
+// ===== КАСТОМНЫЙ СКРОЛЛБАР (УПРОЩЁННЫЙ) =====
 
 function initCustomScrollbar() {
     const container = document.getElementById('modal-screenshots');
     const scrollbar = document.querySelector('.custom-scrollbar');
     const thumb = document.querySelector('.custom-scrollbar-thumb');
     
-    // Проверка наличия элементов
-    if (!container || !scrollbar || !thumb) {
-        console.warn('Элементы скроллбара не найдены');
-        return;
-    }
+    if (!container || !scrollbar || !thumb) return;
     
     let isDragging = false;
     let animationFrame = null;
 
-    // Плавное обновление позиции ползунка (через requestAnimationFrame)
     function updateThumbPosition() {
         if (animationFrame) return;
         
@@ -500,7 +500,6 @@ function initCustomScrollbar() {
             const clientWidth = container.clientWidth;
             const scrollLeft = container.scrollLeft;
             
-            // Скрываем ползунок, если прокрутка не нужна
             if (scrollWidth <= clientWidth) {
                 scrollbar.style.opacity = '0';
                 scrollbar.style.pointerEvents = 'none';
@@ -511,11 +510,9 @@ function initCustomScrollbar() {
             scrollbar.style.opacity = '1';
             scrollbar.style.pointerEvents = 'auto';
             
-            // Ширина ползунка пропорциональна видимой области
             const thumbWidth = Math.max(50, (clientWidth / scrollWidth) * clientWidth);
             thumb.style.width = thumbWidth + 'px';
             
-            // Позиция ползунка
             const maxScroll = scrollWidth - clientWidth;
             const percent = maxScroll > 0 ? scrollLeft / maxScroll : 0;
             const availableTrack = clientWidth - thumbWidth;
@@ -525,22 +522,17 @@ function initCustomScrollbar() {
         });
     }
 
-    // Начало перетаскивания
     const onDragStart = (e) => {
         isDragging = true;
         document.body.style.cursor = 'grabbing';
         e.preventDefault();
-        e.stopPropagation();
     };
 
-    // Движение мыши
     const onDragMove = (e) => {
         if (!isDragging) return;
         
         const rect = scrollbar.getBoundingClientRect();
         let mouseX = e.clientX - rect.left;
-        
-        // Ограничиваем в пределах трека
         mouseX = Math.max(0, Math.min(mouseX, rect.width));
         
         const percent = mouseX / rect.width;
@@ -550,7 +542,6 @@ function initCustomScrollbar() {
         updateThumbPosition();
     };
 
-    // Конец перетаскивания
     const onDragEnd = () => {
         if (isDragging) {
             isDragging = false;
@@ -558,7 +549,6 @@ function initCustomScrollbar() {
         }
     };
 
-    // Клик по треку (быстрый переход)
     const onTrackClick = (e) => {
         if (e.target === thumb) return;
         
@@ -567,36 +557,24 @@ function initCustomScrollbar() {
         const percent = mouseX / rect.width;
         const maxScroll = container.scrollWidth - container.clientWidth;
         
-        container.scrollTo({
-            left: percent * maxScroll,
-            behavior: 'smooth'
-        });
-    };
-
-    // Прокрутка колёсиком
-    const onWheel = (e) => {
-        e.preventDefault();
-        container.scrollLeft += e.deltaY * 1.5;
+        container.scrollLeft = percent * maxScroll;
         updateThumbPosition();
     };
-    
+
     // Навешиваем обработчики
     thumb.addEventListener('mousedown', onDragStart, { passive: false });
     document.addEventListener('mousemove', onDragMove, { passive: true });
     document.addEventListener('mouseup', onDragEnd, { passive: true });
     scrollbar.addEventListener('click', onTrackClick, { passive: true });
-    container.addEventListener('wheel', onWheel, { passive: false });
     container.addEventListener('scroll', updateThumbPosition, { passive: true });
 
-    // Инициализация
     updateThumbPosition();
-
+    
     return () => {
         thumb.removeEventListener('mousedown', onDragStart);
         document.removeEventListener('mousemove', onDragMove);
         document.removeEventListener('mouseup', onDragEnd);
         scrollbar.removeEventListener('click', onTrackClick);
-        container.removeEventListener('wheel', onWheel);
         container.removeEventListener('scroll', updateThumbPosition);
         if (animationFrame) cancelAnimationFrame(animationFrame);
     };

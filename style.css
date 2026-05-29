@@ -865,37 +865,41 @@ img {
     width: 50%;
     height: 200%;
     
+    /* Мягкий диагональный блик */
     background: linear-gradient(
         120deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.5) 45%,
-        rgba(255, 255, 255, 0.8) 50%,
-        rgba(255, 255, 255, 0.5) 55%,
+        rgba(255, 255, 255, 0.4) 45%,
+        rgba(255, 255, 255, 0.7) 50%,
+        rgba(255, 255, 255, 0.4) 55%,
         transparent 100%
     );
     
     transform: skewX(-20deg);
     pointer-events: none;
     
-    /* Анимация всегда готова, но скрыта */
-    animation: review-shine 0.5s ease-out forwards;
+    /* Анимация: выключена по умолчанию, без задержек */
+    animation: review-shine 2s linear infinite;
     animation-play-state: paused;
-    opacity: 1; /* Всегда видим, когда анимация идёт */
-    visibility: hidden; /* Скрыт по умолчанию */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.1s;
 }
 
-/* Класс-триггер: показываем и запускаем */
+/* Класс-триггер: показываем и запускаем цикл */
 .grade-badge.has-review.shine-active::after {
     animation-play-state: running;
+    opacity: 1;
     visibility: visible;
 }
 
+/* Сама анимация: блик бесконечно бегает слева направо */
 @keyframes review-shine {
     0% {
         left: -100%;
     }
     100% {
-        left: 180%;
+        left: 200%;
     }
 }
 
