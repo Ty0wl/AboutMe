@@ -437,7 +437,6 @@ function renderScreenshots(screenshots, container) {
     container.style.display = 'grid';
 }
 
-// ===== КАСТОМНЫЙ СКРОЛЛБАР ДЛЯ СКРИНШОТОВ =====
 function initCustomScrollbar() {
     const container = document.getElementById('modal-screenshots');
     const scrollbar = document.querySelector('.custom-scrollbar');
@@ -448,6 +447,39 @@ function initCustomScrollbar() {
     let isDragging = false;
     let startX;
     let startLeft;
+    let animationId = null;
+    
+    function smoothScroll(targetPosition, duration = 300) {
+        const startPosition = container.scrollLeft;
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+        
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            
+            container.scrollLeft = startPosition + (distance * easeOut);
+            
+            if (timeElapsed < duration) {
+                animationId = requestAnimationFrame(animation);
+            }
+        }
+        
+        if (animationId) cancelAnimationFrame(animationId);
+        animationId = requestAnimationFrame(animation);
+    }
+    
+    container.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        
+        const scrollAmount = e.deltaY * 2;
+        const targetPosition = container.scrollLeft + scrollAmount;
+        
+        smoothScroll(targetPosition, 150);
+    }, { passive: false });
     
     // Обновление позиции скроллбара
     function updateScrollbar() {
@@ -456,18 +488,18 @@ function initCustomScrollbar() {
         const scrollLeft = container.scrollLeft;
         
         // Ширина ползунка пропорциональна контенту
-        const thumbWidth = Math.max(50, (clientWidth / scrollWidth) * clientWidth);
+        const thumbWidth = Math.max(80, (clientWidth / scrollWidth) * clientWidth);
         thumb.style.width = thumbWidth + 'px';
         
         // Позиция ползунка
         const maxScroll = scrollWidth - clientWidth;
         const maxThumbLeft = clientWidth - thumbWidth;
-        const thumbLeft = (scrollLeft / maxScroll) * maxThumbLeft;
+        const thumbLeft = maxScroll > 0 ? (scrollLeft / maxScroll) * maxThumbLeft : 0;
         
         thumb.style.left = thumbLeft + 'px';
     }
     
-    // Клик по треку
+    // Клик по треку с плавной прокруткой
     scrollbar.addEventListener('click', (e) => {
         if (e.target === thumb) return;
         
@@ -475,8 +507,9 @@ function initCustomScrollbar() {
         const clickX = e.clientX - rect.left;
         const scrollWidth = container.scrollWidth - container.clientWidth;
         const clickRatio = clickX / rect.width;
+        const targetPosition = clickRatio * scrollWidth;
         
-        container.scrollLeft = clickRatio * scrollWidth;
+        smoothScroll(targetPosition, 300);
     });
     
     // Drag ползунка
@@ -484,7 +517,7 @@ function initCustomScrollbar() {
         isDragging = true;
         startX = e.clientX;
         startLeft = container.scrollLeft;
-        thumb.classList.add('active');
+        thumb.style.cursor = 'grabbing';
         e.preventDefault();
     });
     
@@ -500,15 +533,30 @@ function initCustomScrollbar() {
     });
     
     document.addEventListener('mouseup', () => {
-        isDragging = false;
-        thumb.classList.remove('active');
+        if (isDragging) {
+            isDragging = false;
+            thumb.style.cursor = 'grab';
+        }
     });
     
     // Синхронизация при скролле
-    container.addEventListener('scroll', updateScrollbar);
+    let scrollTimeout;
+    container.addEventListener('scroll', () => {
+        updateScrollbar();
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+        
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateScrollbar, 50);
+    }, { passive: true });
     
     // Инициализация
-    setTimeout(updateScrollbar, 100);
+    setTimeout(() => {
+        updateScrollbar();
+        container.classList.add('scrollbar-ready');
+    }, 100);
 }
 
 // Модифицированная renderScreenshots

@@ -782,6 +782,7 @@ img {
 }
 
 /* ===== СКРИНШОТЫ ИЗ STEAM В МОДАЛЬНОМ ОКНЕ ===== */
+
 .screenshots-container {
     display: flex !important;
     flex-direction: row !important;
@@ -792,8 +793,14 @@ img {
     overflow-y: hidden !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none;
+    
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.screenshots-container {
+    overscroll-behavior-x: none;
 }
 
 .screenshots-container::-webkit-scrollbar {
@@ -838,7 +845,6 @@ img {
     position: absolute;
     top: 0;
     left: 0;
-    transition: background 0.2s;
 }
 
 .custom-scrollbar-thumb:hover {
@@ -847,6 +853,14 @@ img {
 
 .custom-scrollbar-thumb:active {
     cursor: grabbing;
+}
+
+.custom-scrollbar-thumb {
+    transition: background 0.2s, left 0.1s ease-out;
+}
+
+.custom-scrollbar-thumb:active {
+    transition: none;
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
