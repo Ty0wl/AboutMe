@@ -799,23 +799,14 @@ img {
     scrollbar-color: var(--border) var(--bg-dark);
 }
 
-.screenshots-container::-webkit-scrollbar {
-    height: 10px;
+.screenshots-container::-webkit-scrollbar-button {
+    display: none !important;
 }
 
-.screenshots-container::-webkit-scrollbar-track {
-    background: var(--bg-dark);
-    border-radius: 5px;
-}
-
-.screenshots-container::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 5px;
-}
-
-.screenshots-container::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
-}
+.screenshots-container::-webkit-scrollbar { height: 10px; }
+.screenshots-container::-webkit-scrollbar-track { background: var(--bg-dark); border-radius: 5px; }
+.screenshots-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+.screenshots-container::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 .screenshot-item {
     flex: 0 0 340px !important;
@@ -827,7 +818,6 @@ img {
     cursor: pointer;
     transition: transform 0.2s, border-color 0.2s;
     scroll-snap-align: start;
-    display: inline-block;
 }
 
 .screenshot-item:hover {
