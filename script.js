@@ -423,106 +423,111 @@ function renderScreenshots(screenshots, container) {
         img.loading = 'lazy';
         
         img.addEventListener('click', () => {
-            console.log(`Клик по скриншоту: ${screenshotUrl}`);
             window.open(screenshotUrl, '_blank');
         });
         
-        // Лог загрузки каждого изображения
         img.onload = () => console.log(`Загружен скриншот #${index + 1}`);
-        img.onerror = () => console.error(`Не загружен скриншот #${index + 1}: ${screenshotUrl}`);
+        img.onerror = () => console.error(`Ошибка загрузки: ${screenshotUrl}`);
         
         container.appendChild(img);
     });
     
-    container.style.display = 'grid';
+    container.style.display = 'flex';
+    
+    setTimeout(() => {
+        initCustomScrollbar();
+    }, 150);
 }
 
-// ===== КАСТОМНЫЙ СКРОЛЛБАР (АБСОЛЮТНОЕ СЛЕДОВАНИЕ) =====
+// ===== КАСТОМНЫЙ СКРОЛЛБАР =====
 
 function initCustomScrollbar() {
     const container = document.getElementById('modal-screenshots');
     const scrollbar = document.querySelector('.custom-scrollbar');
     const thumb = document.querySelector('.custom-scrollbar-thumb');
     
-    if (!container || !scrollbar || !thumb) return;
+    // Проверка наличия элементов
+    if (!container || !scrollbar || !thumb) {
+        console.warn('Элементы скроллбара не найдены');
+        return;
+    }
     
     let isDragging = false;
+    let animationFrame = null;
 
-    // 1. Расчет размеров и обновление ползунка
+    // Плавное обновление позиции ползунка (через requestAnimationFrame)
     function updateThumbPosition() {
-        const scrollWidth = container.scrollWidth;
-        const clientWidth = container.clientWidth;
-        const scrollLeft = container.scrollLeft;
+        if (animationFrame) return;
         
-        // Если контент меньше контейнера, скрываем ползунок
-        if (scrollWidth <= clientWidth) {
-            scrollbar.style.opacity = '0';
-            return;
-        }
-        
-        scrollbar.style.opacity = '1';
-        
-        // Вычисляем ширину ползунка (пропорционально контенту)
-        const thumbWidth = Math.max(60, (clientWidth / scrollWidth) * clientWidth);
-        thumb.style.width = thumbWidth + 'px';
-        
-        // Вычисляем позицию (0% ... 100%)
-        const maxScroll = scrollWidth - clientWidth;
-        const percent = scrollLeft / maxScroll;
-        
-        // Двигаем ползунок
-        const availableTrack = clientWidth - thumbWidth;
-        thumb.style.left = (percent * availableTrack) + 'px';
+        animationFrame = requestAnimationFrame(() => {
+            const scrollWidth = container.scrollWidth;
+            const clientWidth = container.clientWidth;
+            const scrollLeft = container.scrollLeft;
+            
+            // Скрываем ползунок, если прокрутка не нужна
+            if (scrollWidth <= clientWidth) {
+                scrollbar.style.opacity = '0';
+                scrollbar.style.pointerEvents = 'none';
+                animationFrame = null;
+                return;
+            }
+            
+            scrollbar.style.opacity = '1';
+            scrollbar.style.pointerEvents = 'auto';
+            
+            // Ширина ползунка пропорциональна видимой области
+            const thumbWidth = Math.max(50, (clientWidth / scrollWidth) * clientWidth);
+            thumb.style.width = thumbWidth + 'px';
+            
+            // Позиция ползунка
+            const maxScroll = scrollWidth - clientWidth;
+            const percent = maxScroll > 0 ? scrollLeft / maxScroll : 0;
+            const availableTrack = clientWidth - thumbWidth;
+            
+            thumb.style.left = (percent * availableTrack) + 'px';
+            animationFrame = null;
+        });
     }
 
-    // 2. Начало перетаскивания
-    thumb.addEventListener('mousedown', (e) => {
+    // Начало перетаскивания
+    const onDragStart = (e) => {
         isDragging = true;
-        document.body.style.cursor = 'grabbing'; // Курсор-рука
-        e.preventDefault(); // Запрет выделения текста
-    });
+        document.body.style.cursor = 'grabbing';
+        e.preventDefault();
+        e.stopPropagation();
+    };
 
-    // 3. Движение мыши (вешаем на document, чтобы не терять фокус)
-    document.addEventListener('mousemove', (e) => {
+    // Движение мыши
+    const onDragMove = (e) => {
         if (!isDragging) return;
-
-        const rect = scrollbar.getBoundingClientRect();
         
-        // Координата мыши относительно левого края трека
+        const rect = scrollbar.getBoundingClientRect();
         let mouseX = e.clientX - rect.left;
         
-        // Ограничиваем, чтобы не улетало за границы трека (Clamping)
-        if (mouseX < 0) mouseX = 0;
-        if (mouseX > rect.width) mouseX = rect.width;
-
-        // Вычисляем процент прокрутки (0.0 ... 1.0)
+        // Ограничиваем в пределах трека
+        mouseX = Math.max(0, Math.min(mouseX, rect.width));
+        
         const percent = mouseX / rect.width;
-
-        // Применяем к контейнеру скриншотов
         const maxScroll = container.scrollWidth - container.clientWidth;
+        
         container.scrollLeft = percent * maxScroll;
+        updateThumbPosition();
+    };
 
-        // Двигаем ползунок визуально
-        const thumbWidth = thumb.offsetWidth;
-        const availableTrack = rect.width - thumbWidth;
-        thumb.style.left = (percent * availableTrack) + 'px';
-    });
-
-    // 4. Конец перетаскивания
-    document.addEventListener('mouseup', () => {
+    // Конец перетаскивания
+    const onDragEnd = () => {
         if (isDragging) {
             isDragging = false;
-            document.body.style.cursor = ''; // Возврат курсора
+            document.body.style.cursor = '';
         }
-    });
+    };
 
-    // 5. Клик по пустому месту трека (мгновенный прыжок)
-    scrollbar.addEventListener('click', (e) => {
+    // Клик по треку (быстрый переход)
+    const onTrackClick = (e) => {
         if (e.target === thumb) return;
         
         const rect = scrollbar.getBoundingClientRect();
-        let mouseX = e.clientX - rect.left;
-        
+        const mouseX = e.clientX - rect.left;
         const percent = mouseX / rect.width;
         const maxScroll = container.scrollWidth - container.clientWidth;
         
@@ -530,13 +535,33 @@ function initCustomScrollbar() {
             left: percent * maxScroll,
             behavior: 'smooth'
         });
-    });
+    };
 
-    // 6. Синхронизация при обычном скролле (колесико)
-    container.addEventListener('scroll', () => {
-        if (!isDragging) updateThumbPosition();
-    });
+    // Прокрутка колёсиком
+    const onWheel = (e) => {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY * 1.5;
+        updateThumbPosition();
+    };
+    
+    // Навешиваем обработчики
+    thumb.addEventListener('mousedown', onDragStart, { passive: false });
+    document.addEventListener('mousemove', onDragMove, { passive: true });
+    document.addEventListener('mouseup', onDragEnd, { passive: true });
+    scrollbar.addEventListener('click', onTrackClick, { passive: true });
+    container.addEventListener('wheel', onWheel, { passive: false });
+    container.addEventListener('scroll', updateThumbPosition, { passive: true });
 
     // Инициализация
-    setTimeout(updateThumbPosition, 100);
+    updateThumbPosition();
+
+    return () => {
+        thumb.removeEventListener('mousedown', onDragStart);
+        document.removeEventListener('mousemove', onDragMove);
+        document.removeEventListener('mouseup', onDragEnd);
+        scrollbar.removeEventListener('click', onTrackClick);
+        container.removeEventListener('wheel', onWheel);
+        container.removeEventListener('scroll', updateThumbPosition);
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+    };
 }

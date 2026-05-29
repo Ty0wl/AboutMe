@@ -1058,14 +1058,19 @@ img {
     }
 
     .screenshots-container {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        max-height: 300px;
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+        max-height: none !important;
     }
-
+    
     .screenshot-item {
         width: 260px !important;
         height: 146px !important;
         flex: 0 0 260px !important;
+    }
+    
+    .custom-scrollbar {
+        height: 10px;
     }
 }
