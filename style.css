@@ -365,10 +365,10 @@ body {
 .modal-content {
     background-color: var(--bg-panel);
     border: 3px solid var(--border);
-    padding: 25px;
-    max-width: 650px;
-    width: 90%;
-    max-height: 80vh;
+    padding: 30px;
+    max-width: 1000px;
+    width: 85%;
+    max-height: 90vh;
     overflow-y: auto;
     position: relative;
     box-shadow: 0 6px 25px rgba(0,0,0,0.7);
@@ -376,7 +376,7 @@ body {
 
 .modal-close-btn {
     position: absolute;
-    top: 12px; right: 12px;
+    top: 15px; right: 15px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -393,16 +393,16 @@ body {
 .modal-title {
     font-family: 'PixelTitle', sans-serif;
     color: var(--accent);
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 22px;
+    margin-bottom: 20px;
     padding-right: 45px;
 }
 
 .modal-text {
     font-family: 'PixelBody', monospace;
     color: var(--text);
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.7;
     text-align: justify;
     text-indent: 1.5em;
     white-space: pre-line;
@@ -457,6 +457,7 @@ body {
 .toast-close-btn:hover .toast-close-icon { filter: brightness(1.2); }
 
 /* ===== СТИЛИ ДЛЯ ВЫБОРА ЯЗЫКА ===== */
+
 .lang-select-wrapper {
     position: relative;
     display: inline-block;
@@ -671,7 +672,7 @@ img {
     pointer-events: auto;
 }
 
-/* ===== СТРАНИЦА ЧЕЙНДЖЛОГА (ПОЛНЫЕ СТИЛИ) ===== */
+/* ===== СТРАНИЦА ЧЕЙНДЖЛОГА ===== */
 
 .changelog-container {
     margin-top: 80px;
@@ -785,12 +786,10 @@ img {
     display: flex !important;
     flex-direction: row !important;
     gap: 12px;
-    margin: 15px 0 5px 0;
+    margin: 20px 0 10px 0;
     padding: 0;
     overflow-x: auto !important;
     overflow-y: hidden !important;
-    
-    /* Скрываем нативный скроллбар */
     scrollbar-width: none !important;
     -ms-overflow-style: none;
     scroll-behavior: smooth;
@@ -802,9 +801,9 @@ img {
 }
 
 .screenshot-item {
-    flex: 0 0 340px !important;
-    width: 340px !important;
-    height: 190px !important;
+    flex: 0 0 420px !important;
+    width: 420px !important;
+    height: 236px !important;
     object-fit: cover;
     border: 2px solid var(--border);
     border-radius: 0;
@@ -818,9 +817,10 @@ img {
     transform: scale(1.02);
 }
 
+/* КАСТОМНЫЙ СКРОЛЛБАР */
 .custom-scrollbar {
     width: 100%;
-    height: 10px;
+    height: 12px;
     background: var(--bg-dark);
     border: 2px solid var(--border);
     border-radius: 0;
