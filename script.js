@@ -436,3 +436,107 @@ function renderScreenshots(screenshots, container) {
     
     container.style.display = 'grid';
 }
+
+// ===== КАСТОМНЫЙ СКРОЛЛБАР ДЛЯ СКРИНШОТОВ =====
+function initCustomScrollbar() {
+    const container = document.getElementById('modal-screenshots');
+    const scrollbar = document.querySelector('.custom-scrollbar');
+    const thumb = document.querySelector('.custom-scrollbar-thumb');
+    
+    if (!container || !scrollbar || !thumb) return;
+    
+    let isDragging = false;
+    let startX;
+    let startLeft;
+    
+    // Обновление позиции скроллбара
+    function updateScrollbar() {
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+        const scrollLeft = container.scrollLeft;
+        
+        // Ширина ползунка пропорциональна контенту
+        const thumbWidth = Math.max(50, (clientWidth / scrollWidth) * clientWidth);
+        thumb.style.width = thumbWidth + 'px';
+        
+        // Позиция ползунка
+        const maxScroll = scrollWidth - clientWidth;
+        const maxThumbLeft = clientWidth - thumbWidth;
+        const thumbLeft = (scrollLeft / maxScroll) * maxThumbLeft;
+        
+        thumb.style.left = thumbLeft + 'px';
+    }
+    
+    // Клик по треку
+    scrollbar.addEventListener('click', (e) => {
+        if (e.target === thumb) return;
+        
+        const rect = scrollbar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const scrollWidth = container.scrollWidth - container.clientWidth;
+        const clickRatio = clickX / rect.width;
+        
+        container.scrollLeft = clickRatio * scrollWidth;
+    });
+    
+    // Drag ползунка
+    thumb.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startLeft = container.scrollLeft;
+        thumb.classList.add('active');
+        e.preventDefault();
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        const deltaX = e.clientX - startX;
+        const scrollWidth = container.scrollWidth - container.clientWidth;
+        const clientWidth = container.clientWidth;
+        const moveRatio = deltaX / clientWidth;
+        
+        container.scrollLeft = startLeft + (moveRatio * scrollWidth);
+    });
+    
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        thumb.classList.remove('active');
+    });
+    
+    // Синхронизация при скролле
+    container.addEventListener('scroll', updateScrollbar);
+    
+    // Инициализация
+    setTimeout(updateScrollbar, 100);
+}
+
+// Модифицированная renderScreenshots
+function renderScreenshots(screenshots, container) {
+    console.log('🎨 renderScreenshots вызвана');
+    container.innerHTML = '';
+    
+    if (screenshots.length === 0) {
+        container.innerHTML = '<div class="screenshots-loading">Скриншоты не найдены</div>';
+        return;
+    }
+    
+    screenshots.forEach((screenshotUrl, index) => {
+        const img = document.createElement('img');
+        img.src = screenshotUrl;
+        img.alt = `Screenshot ${index + 1}`;
+        img.className = 'screenshot-item';
+        img.loading = 'lazy';
+        
+        img.addEventListener('click', () => {
+            window.open(screenshotUrl, '_blank');
+        });
+        
+        container.appendChild(img);
+    });
+    
+    // 🔥 Инициализируем кастомный скроллбар после загрузки
+    setTimeout(() => {
+        initCustomScrollbar();
+    }, 100);
+}
