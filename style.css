@@ -839,7 +839,7 @@ img {
     position: absolute;
     top: 0;
     left: 0;
-    transition: background 0.2s, left 0.1s ease-out;
+    transition: background 0.2s, left 0.05s ease-out;
 }
 
 .custom-scrollbar-thumb:hover {
@@ -865,7 +865,6 @@ img {
     width: 50%;
     height: 200%;
     
-    /* Мягкий диагональный блик */
     background: linear-gradient(
         120deg,
         transparent 0%,
@@ -877,30 +876,21 @@ img {
     
     transform: skewX(-20deg);
     pointer-events: none;
-    
-    /* Анимация: выключена по умолчанию, без задержек */
-    animation: review-shine 2s linear infinite;
+    animation: review-shine 0.5s ease-out infinite;
     animation-play-state: paused;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.1s;
 }
 
-/* Класс-триггер: показываем и запускаем цикл */
 .grade-badge.has-review.shine-active::after {
     animation-play-state: running;
     opacity: 1;
     visibility: visible;
 }
 
-/* Сама анимация: блик бесконечно бегает слева направо */
 @keyframes review-shine {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 200%;
-    }
+    0% { left: -100%; }
+    100% { left: 200%; }
 }
 
 /* Для пользователей, предпочитающих минимум анимаций */
