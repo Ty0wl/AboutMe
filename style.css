@@ -857,7 +857,7 @@ img {
 /* ===== ИНДИКАТОР НАЛИЧИЯ РЕЦЕНЗИИ (БЛИК) ===== */
 .grade-badge.has-review {
     position: relative;
-    overflow: hidden; /* Обрезаем блик за пределами кнопки */
+    overflow: hidden;
 }
 
 .grade-badge.has-review::after {
@@ -868,40 +868,52 @@ img {
     width: 50%;
     height: 200%;
     
-    /* Диагональный полупрозрачный блик */
+    /* Мягкий диагональный блик */
     background: linear-gradient(
         120deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.5) 45%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0.5) 55%,
         transparent 100%
     );
     
-    transform: skewX(-20deg); /* Наклон для пиксель-стиля */
-    pointer-events: none; /* Не мешает кликам */
-    animation: review-shine 4s infinite;
-    animation-play-state: paused; /* Стартуем только при наведении/в фокусе */
+    transform: skewX(-20deg);
+    pointer-events: none;
+    
+    /* Анимация: выключена по умолчанию */
+    animation: review-shine 0.5s ease-out forwards;
+    animation-play-state: paused;
+    opacity: 0;
 }
 
-/* Запуск анимации при наведении или когда кнопка в фокусе */
-.grade-badge.has-review:hover::after,
-.grade-badge.has-review:focus::after {
+/* Класс-триггер: запускает анимацию */
+.grade-badge.has-review.shine-active::after {
     animation-play-state: running;
+    opacity: 1;
 }
 
 /* Сама анимация: блик пробегает слева направо */
 @keyframes review-shine {
-    0% { left: -100%; }
-    20% { left: 150%; }
-    100% { left: 150%; }
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        left: 180%;
+        opacity: 0;
+    }
 }
 
-/* Для пользователей, которые предпочитают минимум анимаций */
+/* Для пользователей, предпочитающих минимум анимаций */
 @media (prefers-reduced-motion: reduce) {
     .grade-badge.has-review::after {
         display: none;
     }
     .grade-badge.has-review {
-        /* Альтернатива: тонкая рамка */
         box-shadow: inset 0 0 0 1px rgba(247, 150, 23, 0.5);
     }
 }

@@ -101,35 +101,57 @@ function renderTable() {
     });
 }
 
-// ===== КЛИКИ ПО ОЦЕНКАМ В ТАБЛИЦЕ =====
+// ===== КЛИКИ ПО ОЦЕНКАМ + АНИМАЦИЯ БЛИКА =====
 function setupGradeClicks() {
     const badges = document.querySelectorAll('#games-table-body .grade-badge');
+    
     badges.forEach(badge => {
         const hasReview = badge.getAttribute('data-review') === '1';
         
-        badge.style.cursor = hasReview ? 'pointer' : 'default';
-        
         if (hasReview) {
-            badge.setAttribute('aria-label', `Открыть рецензию: ${badge.textContent}`);
-            badge.setAttribute('tabindex', '0'); // Делаем фокусируемой с клавиатуры
+            // Добавляем класс для стилей
             badge.classList.add('has-review');
-        }
-        
-        badge.addEventListener('click', function() {
-            const gameId = this.getAttribute('data-id');
-            if (hasReview) {
-                openReviewModal(gameId);
-            } else {
+            badge.style.cursor = 'pointer';
+            badge.setAttribute('aria-label', `Открыть рецензию: ${badge.textContent}`);
+            badge.setAttribute('tabindex', '0');
+            
+            // Запуск анимации при наведении (только один раз за сеанс)
+            badge.addEventListener('mouseenter', function() {
+                // Если анимация уже идёт или уже проигрывалась — не перезапускаем
+                if (this.classList.contains('shine-active')) return;
+                
+                this.classList.add('shine-active');
+            });
+            
+            // Когда анимация закончилась — убираем класс (можно будет запустить снова)
+            badge.addEventListener('animationend', function(e) {
+                if (e.animationName === 'review-shine') {
+                    this.classList.remove('shine-active');
+                }
+            });
+            
+            // Клик — открытие рецензии
+            badge.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openReviewModal(this.getAttribute('data-id'));
+            });
+            
+            // Поддержка клавиатуры (Enter/Space)
+            badge.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openReviewModal(badge.getAttribute('data-id'));
+                }
+            });
+            
+        } else {
+            // Нет рецензии — обычный курсор и тост
+            badge.style.cursor = 'default';
+            badge.addEventListener('click', function(e) {
+                e.stopPropagation();
                 showReviewToast();
-            }
-        });
-        
-        badge.addEventListener('keydown', (e) => {
-            if (hasReview && (e.key === 'Enter' || e.key === ' ')) {
-                e.preventDefault();
-                openReviewModal(badge.getAttribute('data-id'));
-            }
-        });
+            });
+        }
     });
 }
 
