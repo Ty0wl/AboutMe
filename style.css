@@ -876,7 +876,8 @@ img {
     
     transform: skewX(-20deg);
     pointer-events: none;
-    animation: review-shine 0.5s ease-out infinite;
+    
+    animation: review-shine 1.5s ease-out infinite;
     animation-play-state: paused;
     opacity: 0;
     visibility: hidden;
@@ -890,17 +891,13 @@ img {
 
 @keyframes review-shine {
     0% { left: -100%; }
+    33.33% { left: 200%; }
     100% { left: 200%; }
 }
 
-/* Для пользователей, предпочитающих минимум анимаций */
 @media (prefers-reduced-motion: reduce) {
-    .grade-badge.has-review::after {
-        display: none;
-    }
-    .grade-badge.has-review {
-        box-shadow: inset 0 0 0 1px rgba(247, 150, 23, 0.5);
-    }
+    .grade-badge.has-review::after { display: none; }
+    .grade-badge.has-review { box-shadow: inset 0 0 0 1px rgba(247, 150, 23, 0.5); }
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
@@ -1114,9 +1111,17 @@ img {
     }
     
     .screenshot-item {
-        width: 260px !important;
-        height: 146px !important;
-        flex: 0 0 260px !important;
+        flex: 0 0 420px !important;
+        width: 420px !important;
+        height: 236px !important; /* Строго 16:9 под оригинал 1920x1080 */
+        object-fit: cover;
+        border: 2px solid var(--border);
+        border-radius: 0;
+        cursor: pointer;
+        scroll-snap-align: start;
+    
+        image-rendering: auto; 
+        -webkit-image-rendering: auto;
     }
     
     .custom-scrollbar {
