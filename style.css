@@ -793,9 +793,6 @@ img {
     overflow-y: hidden !important;
     scrollbar-width: none !important;
     -ms-overflow-style: none;
-    
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: none;
 }
@@ -868,7 +865,6 @@ img {
     width: 50%;
     height: 200%;
     
-    /* Мягкий диагональный блик */
     background: linear-gradient(
         120deg,
         transparent 0%,
@@ -881,30 +877,25 @@ img {
     transform: skewX(-20deg);
     pointer-events: none;
     
-    /* Анимация: выключена по умолчанию */
+    /* Анимация всегда готова, но скрыта */
     animation: review-shine 0.5s ease-out forwards;
     animation-play-state: paused;
-    opacity: 0;
+    opacity: 1; /* Всегда видим, когда анимация идёт */
+    visibility: hidden; /* Скрыт по умолчанию */
 }
 
-/* Класс-триггер: запускает анимацию */
+/* Класс-триггер: показываем и запускаем */
 .grade-badge.has-review.shine-active::after {
     animation-play-state: running;
-    opacity: 1;
+    visibility: visible;
 }
 
-/* Сама анимация: блик пробегает слева направо */
 @keyframes review-shine {
     0% {
         left: -100%;
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
     }
     100% {
         left: 180%;
-        opacity: 0;
     }
 }
 
