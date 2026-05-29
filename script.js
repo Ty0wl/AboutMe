@@ -513,7 +513,7 @@ function initCustomScrollbar() {
 
 // Модифицированная renderScreenshots
 function renderScreenshots(screenshots, container) {
-    console.log('🎨 renderScreenshots вызвана');
+    console.log('renderScreenshots вызвана');
     container.innerHTML = '';
     
     if (screenshots.length === 0) {
