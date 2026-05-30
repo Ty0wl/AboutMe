@@ -468,7 +468,8 @@ function renderScreenshots(screenshots, container) {
     }, 150);
 }
 
-// ===== КАСТОМНЫЙ СКРОЛЛБАР =====
+// ===== КАСТОМНЫЙ СКРОЛЛБАР + ПЛАВНАЯ ПРОКРУТКА КОЛЁСИКОМ =====
+
 function initCustomScrollbar() {
     const container = document.getElementById('modal-screenshots');
     const scrollArea = document.querySelector('.screenshots-scroll-area');
@@ -476,16 +477,37 @@ function initCustomScrollbar() {
     const thumb = document.querySelector('.custom-scrollbar-thumb');
     
     if (!container || !scrollArea || !scrollbar || !thumb) return;
-    if (scrollArea.dataset.scrollInit === 'true') return; // Защита от дублирования обработчиков
+    if (scrollArea.dataset.scrollInit === 'true') return;
     scrollArea.dataset.scrollInit = 'true';
 
     let isDragging = false;
-    let animationFrame = null;
+    let thumbRaf = null;
 
+    // ПЕРЕМЕННЫЕ ДЛЯ ПЛАВНОГО СКРОЛЛА
+    let scrollTarget = 0;
+    let scrollCurrent = 0;
+    let scrollRaf = null;
+
+    // Функция плавной интерполяции (Lerp)
+    function smoothScrollLoop() {
+        // Двигаемся на 12% к цели каждый кадр (регулируй 0.12 для большей/меньшей плавности)
+        scrollCurrent += (scrollTarget - scrollCurrent) * 0.12;
+        container.scrollLeft = scrollCurrent;
+        updateThumbPosition();
+
+        // Если разница меньше 0.5px, останавливаем анимацию
+        if (Math.abs(scrollTarget - scrollCurrent) > 0.5) {
+            scrollRaf = requestAnimationFrame(smoothScrollLoop);
+        } else {
+            scrollRaf = null;
+            scrollCurrent = scrollTarget; // Фиксируем точное значение
+        }
+    }
+
+    // Обновление позиции ползунка (для перетаскивания и синхронизации)
     function updateThumbPosition() {
-        if (animationFrame) return;
-        
-        animationFrame = requestAnimationFrame(() => {
+        if (thumbRaf) return;
+        thumbRaf = requestAnimationFrame(() => {
             const scrollWidth = container.scrollWidth;
             const clientWidth = container.clientWidth;
             const scrollLeft = container.scrollLeft;
@@ -493,7 +515,7 @@ function initCustomScrollbar() {
             if (scrollWidth <= clientWidth) {
                 scrollbar.style.opacity = '0';
                 scrollbar.style.pointerEvents = 'none';
-                animationFrame = null;
+                thumbRaf = null;
                 return;
             }
             
@@ -508,21 +530,35 @@ function initCustomScrollbar() {
             const availableTrack = clientWidth - thumbWidth;
             
             thumb.style.left = (percent * availableTrack) + 'px';
-            animationFrame = null;
+            thumbRaf = null;
         });
     }
 
+    // КОЛЁСИКО: накапливаем дельту и запускаем плавный цикл
     scrollArea.addEventListener('wheel', (e) => {
-        if (container.scrollWidth <= container.clientWidth) return;
         e.preventDefault();
-        container.scrollLeft += e.deltaY * 0.8;
-        updateThumbPosition();
+        
+        scrollTarget += e.deltaY * 0.8; // Чувствительность прокрутки
+        // Ограничиваем в пределах контента
+        scrollTarget = Math.max(0, Math.min(scrollTarget, container.scrollWidth - container.clientWidth));
+        
+        if (!scrollRaf) {
+            scrollCurrent = container.scrollLeft;
+            scrollRaf = requestAnimationFrame(smoothScrollLoop);
+        }
     }, { passive: false });
 
+    // Перетаскивание ползунка
     const onDragStart = (e) => {
         isDragging = true;
         document.body.style.cursor = 'grabbing';
         e.preventDefault();
+        
+        // Останавливаем плавный скролл, чтобы не конфликтовал с drag
+        if (scrollRaf) {
+            cancelAnimationFrame(scrollRaf);
+            scrollRaf = null;
+        }
     };
 
     const onDragMove = (e) => {
@@ -533,7 +569,11 @@ function initCustomScrollbar() {
         
         const percent = mouseX / rect.width;
         const maxScroll = container.scrollWidth - container.clientWidth;
-        container.scrollLeft = percent * maxScroll;
+        
+        // Синхронизируем целевую и текущую позицию, чтобы после drag всё работало ровно
+        scrollTarget = percent * maxScroll;
+        scrollCurrent = scrollTarget;
+        container.scrollLeft = scrollCurrent;
         updateThumbPosition();
     };
 
@@ -550,15 +590,25 @@ function initCustomScrollbar() {
         const mouseX = e.clientX - rect.left;
         const percent = mouseX / rect.width;
         const maxScroll = container.scrollWidth - container.clientWidth;
-        container.scrollLeft = percent * maxScroll;
-        updateThumbPosition();
+        
+        scrollTarget = percent * maxScroll;
+        scrollCurrent = container.scrollLeft;
+        if (!scrollRaf) scrollRaf = requestAnimationFrame(smoothScrollLoop);
     };
 
+    // Навешиваем обработчики
     thumb.addEventListener('mousedown', onDragStart, { passive: false });
     document.addEventListener('mousemove', onDragMove, { passive: true });
     document.addEventListener('mouseup', onDragEnd, { passive: true });
     scrollbar.addEventListener('click', onTrackClick, { passive: true });
     container.addEventListener('scroll', updateThumbPosition, { passive: true });
 
+    // Инициализация
     updateThumbPosition();
+    
+    return () => {
+        if (scrollRaf) cancelAnimationFrame(scrollRaf);
+        if (thumbRaf) cancelAnimationFrame(thumbRaf);
+        scrollArea.dataset.scrollInit = 'false';
+    };
 }
