@@ -802,6 +802,7 @@ img {
 }
 
 .screenshot-item {
+    pointer-events: auto !important;
     flex: 0 0 420px !important;
     width: 420px !important;
     height: 236px !important;
