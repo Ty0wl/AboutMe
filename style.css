@@ -787,7 +787,7 @@ img {
     display: flex !important;
     flex-direction: row !important;
     gap: 12px;
-    margin: 0 !important;
+    margin: 0 0 5px 0 !important;
     padding: 0;
     overflow-x: auto !important;
     overflow-y: hidden !important;
@@ -812,11 +812,13 @@ img {
     scroll-snap-align: start;
     image-rendering: auto;
     -webkit-image-rendering: auto;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .screenshot-item:hover {
     border-color: var(--accent);
-    transform: scale(1.02);
+    transform: scale(1.15);
+    z-index: 10;
 }
 
 /* КАСТОМНЫЙ СКРОЛЛБАР */
