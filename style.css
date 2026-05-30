@@ -441,6 +441,7 @@ body {
     justify-content: center;
     gap: 12px;
     margin-bottom: 12px;
+    line-height: 1; 
 }
 
 .review-icon {
@@ -448,14 +449,14 @@ body {
     height: 32px;
     object-fit: contain;
     image-rendering: pixelated;
-    pointer-events: auto !important; /* Разрешаем события */
+    pointer-events: auto !important;
+    transform: translateY(-3px);
 }
 
 .review-title {
     font-family: 'PixelTitle', sans-serif;
     color: var(--accent);
     font-size: 22px;
-    line-height: 1.2;
     text-align: center;
 }
 
