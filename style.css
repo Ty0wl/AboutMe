@@ -437,20 +437,9 @@ body {
 
 .review-header {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 12px;
+    align-items: center;
     margin-bottom: 12px;
-    line-height: 1; 
-}
-
-.review-icon {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    image-rendering: pixelated;
-    pointer-events: auto !important;
-    transform: translateY(-3px);
 }
 
 .review-title {
@@ -458,6 +447,7 @@ body {
     color: var(--accent);
     font-size: 22px;
     text-align: center;
+    line-height: 1.2;
 }
 
 .review-quote {

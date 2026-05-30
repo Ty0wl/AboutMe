@@ -294,7 +294,6 @@ async function openReviewModal(gameId) {
         // 1. Заголовок + Иконка
         document.getElementById('modal-title').innerHTML = `
             <div class="review-header">
-                <img src="${reviewData.icon || ''}" alt="" class="review-icon" loading="lazy">
                 <span>${reviewData.title || `Game #${gameId}`}</span>
             </div>
         `;
