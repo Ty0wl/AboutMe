@@ -566,7 +566,6 @@ body {
     scroll-snap-align: start;
     image-rendering: auto;
     -webkit-image-rendering: auto;
-    pointer-events: auto !important; /* Разрешаем клики */
     transition: border-color 0.2s;
 }
 
