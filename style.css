@@ -795,7 +795,6 @@ img {
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: none;
-
     -webkit-mask-image: linear-gradient(
         to right,
         transparent 0px,
@@ -810,6 +809,48 @@ img {
         black calc(100% - 60px),
         transparent 100%
     );
+    
+    /* Плавный переход между состояниями маски */
+    transition: -webkit-mask-image 0.3s ease, mask-image 0.3s ease;
+}
+
+.screenshots-container.mask-start {
+    -webkit-mask-image: linear-gradient(
+        to right,
+        black 0px,
+        black 60px,
+        black calc(100% - 60px),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        black 0px,
+        black 60px,
+        black calc(100% - 60px),
+        transparent 100%
+    );
+}
+
+.screenshots-container.mask-end {
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0px,
+        black 60px,
+        black calc(100% - 60px),
+        black 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0px,
+        black 60px,
+        black calc(100% - 60px),
+        black 100%
+    );
+}
+
+.screenshots-container.mask-both {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
 }
 
 .screenshots-container::-webkit-scrollbar {

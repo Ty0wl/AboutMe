@@ -504,6 +504,23 @@ function initCustomScrollbar() {
         }
     }
 
+    function updateMasks() {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        const currentScroll = container.scrollLeft;
+        container.classList.remove('mask-start', 'mask-end', 'mask-both');
+        const isAtStart = currentScroll <= 1;
+        const isAtEnd = currentScroll >= maxScroll - 1;
+        if (maxScroll <= 0) {
+            container.classList.add('mask-both');
+        } else if (isAtStart && isAtEnd) {
+            container.classList.add('mask-both');
+        } else if (isAtStart) {
+            container.classList.add('mask-start');
+        } else if (isAtEnd) {
+            container.classList.add('mask-end');
+        }
+    }
+
     // Обновление позиции ползунка (для перетаскивания и синхронизации)
     function updateThumbPosition() {
         if (thumbRaf) return;
@@ -547,6 +564,11 @@ function initCustomScrollbar() {
             scrollRaf = requestAnimationFrame(smoothScrollLoop);
         }
     }, { passive: false });
+
+    container.addEventListener('scroll', () => {
+        updateThumbPosition();
+        updateMasks();
+    }, { passive: true });
 
     // Перетаскивание ползунка
     const onDragStart = (e) => {
@@ -601,11 +623,10 @@ function initCustomScrollbar() {
     document.addEventListener('mousemove', onDragMove, { passive: true });
     document.addEventListener('mouseup', onDragEnd, { passive: true });
     scrollbar.addEventListener('click', onTrackClick, { passive: true });
-    container.addEventListener('scroll', updateThumbPosition, { passive: true });
 
     // Инициализация
     updateThumbPosition();
-    
+    updateMasks();
     return () => {
         if (scrollRaf) cancelAnimationFrame(scrollRaf);
         if (thumbRaf) cancelAnimationFrame(thumbRaf);
