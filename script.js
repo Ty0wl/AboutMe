@@ -488,9 +488,15 @@ function setupContentProtection() {
     document.addEventListener('selectstart', (e) => e.preventDefault());
     document.addEventListener('copy', (e) => e.preventDefault());
     document.addEventListener('cut', (e) => e.preventDefault());
+
+    document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    });
+    
     document.querySelectorAll('img').forEach(img => {
         img.setAttribute('draggable', 'false');
-        img.addEventListener('dragstart', (e) => e.preventDefault());
     });
     
     console.log('Защита контента активирована');
