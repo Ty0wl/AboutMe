@@ -787,7 +787,7 @@ img {
     display: flex !important;
     flex-direction: row !important;
     gap: 12px;
-    margin: 20px 0 10px 0;
+    margin: 0 !important;
     padding: 0;
     overflow-x: auto !important;
     overflow-y: hidden !important;
@@ -795,6 +795,21 @@ img {
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: none;
+
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0px,
+        black 60px,
+        black calc(100% - 60px),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0px,
+        black 60px,
+        black calc(100% - 60px),
+        transparent 100%
+    );
 }
 
 .screenshots-container::-webkit-scrollbar {
@@ -911,31 +926,6 @@ img {
 
 .screenshots-scroll-area > * {
     pointer-events: auto;
-}
-
-/* ===== ДЫМКА ПО КРАЯМ СКРИНШОТОВ ===== */
-
-.screenshots-scroll-area::before,
-.screenshots-scroll-area::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 60px;
-    z-index: 2;
-    pointer-events: none;
-}
-
-/* Левая дымка */
-.screenshots-scroll-area::before {
-    left: 0;
-    background: linear-gradient(to right, var(--bg-panel) 0%, transparent 100%);
-}
-
-/* Правая дымка */
-.screenshots-scroll-area::after {
-    right: 0;
-    background: linear-gradient(to left, var(--bg-panel) 0%, transparent 100%);
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
