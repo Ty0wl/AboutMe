@@ -227,7 +227,13 @@ function renderRatingIcons(value, type = 'star', max = 5) {
     let html = '<div class="rating-icons">';
     for (let i = 1; i <= max; i++) {
         const src = i <= value ? icons.filled : icons.empty;
-        html += `<img src="${src}" alt="${i <= value ? 'filled' : 'empty'}" class="rating-icon" loading="lazy">`;
+        html += `<img src="${src}" 
+                        alt="${i <= value ? 'filled' : 'empty'}" 
+                        class="rating-icon" 
+                        width="32" 
+                        height="32"
+                        draggable="false"
+                        loading="lazy">`;
     }
     html += '</div>';
     return html;

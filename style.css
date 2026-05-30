@@ -487,29 +487,33 @@ body {
 .stat-label {
     font-family: 'PixelTitle', sans-serif;
     color: #FFFFFF;
-    font-size: 14px; /* Размер как у цитаты */
+    font-size: 14px;
 }
 
 .rating-icons {
     display: flex;
     gap: 6px;
     align-items: center;
+    margin-top: -2px;
 }
 
-.rating-icons {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    transform: translateY(-4px); 
-    margin-bottom: 4px; 
+.rating-icon {
+    width: 32px !important;
+    height: 32px !important;
+    image-rendering: pixelated !important;
+    image-rendering: -moz-crisp-edges !important;
+    image-rendering: crisp-edges !important;
+    
+    object-fit: contain;
+    pointer-events: auto !important;
 }
 
 .stat-desc {
     font-family: 'PixelBody', monospace;
     color: #FFFFFF;
-    font-size: 13px; /* Чуть меньше цитаты */
+    font-size: 13px;
     line-height: 1.5;
-    color: #ccc; /* Чуть мягче белого */
+    color: #ccc;
     margin-top: 4px;
     margin-left: 4px;
 }
@@ -533,7 +537,6 @@ body {
     font-size: 14px;
 }
 
-/* 🔥 Новый класс для ЗНАЧЕНИЙ (обычный текст) */
 .meta-value {
     font-family: 'PixelBody', monospace;
     color: #ccc;
@@ -546,7 +549,7 @@ body {
     display: flex !important;
     flex-direction: row !important;
     gap: 12px;
-    margin: 0 0 5px 0 !important; /* Отступ 5px снизу до скроллбара */
+    margin: 0 0 5px 0 !important;
     padding: 0;
     overflow-x: auto !important;
     overflow-y: hidden !important;
@@ -779,7 +782,6 @@ img {
     -khtml-user-drag: none !important;
     -moz-user-drag: none !important;
     -o-user-drag: none !important;
-    user-drag: none !important;
     pointer-events: none;
 }
 
@@ -790,7 +792,6 @@ img {
     -khtml-user-drag: none !important;
     -moz-user-drag: none !important;
     -o-user-drag: none !important;
-    user-drag: none !important;
 }
 
 /* ===== СТРАНИЦА ЧЕЙНДЖЛОГА ===== */
