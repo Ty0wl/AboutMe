@@ -239,7 +239,7 @@ function renderReviewStats(container, data) {
     
     let html = '<div class="review-stats">';
     
-    // Основные категории
+    // === 1. Основные категории (Геймплей, Сюжет, Музыка, Сложность) ===
     const categories = [
         { key: 'gameplay', label: 'Геймплей', type: 'star' },
         { key: 'story', label: 'Сюжет', type: 'star' },
@@ -263,13 +263,19 @@ function renderReviewStats(container, data) {
         html += `</div>`;
     });
     
-    html += '</div>';
+    html += '</div>'; // Закрываем .review-stats
     
-    // Технические параметры
+    // === 2. Технические параметры (Оптимизация, Время) — БЕЗ разделителя ===
     if (data.meta) {
         html += '<div class="review-meta">';
-        if (data.meta.optimization) html += `<div class="meta-item">Оптимизация: ${data.meta.optimization}</div>`;
-        if (data.meta.duration) html += `<div class="meta-item">Продолжительность: ${data.meta.duration}</div>`;
+        
+        if (data.meta.optimization) {
+            html += `<div class="meta-item">Оптимизация: <span class="meta-value">${data.meta.optimization}</span></div>`;
+        }
+        if (data.meta.duration) {
+            html += `<div class="meta-item">Продолжительность: <span class="meta-value">${data.meta.duration}</span></div>`;
+        }
+        
         html += '</div>';
     }
     

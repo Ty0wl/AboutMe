@@ -518,16 +518,27 @@ body {
 .review-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid var(--border);
+    gap: 16px 24px;
+    margin-top: 12px;
+    padding-top: 0;
+    border-top: none;
 }
 
 .meta-item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
     font-family: 'PixelTitle', sans-serif;
     color: #FFFFFF;
     font-size: 14px;
+}
+
+/* 🔥 Новый класс для ЗНАЧЕНИЙ (обычный текст) */
+.meta-value {
+    font-family: 'PixelBody', monospace;
+    color: #ccc;
+    font-size: 13px;
+    font-weight: normal;
 }
 
 /* ===== СКРИНШОТЫ ИЗ STEAM В МОДАЛЬНОМ ОКНЕ ===== */
@@ -800,64 +811,228 @@ img {
 .version-divider { border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 20px 0; opacity: 0.5; }
 .version-latest + .version-divider { margin: 25px 0; opacity: 0.8; }
 
-/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ РЕЦЕНЗИИ ===== */
+/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ (УМЕНЬШЕНИЕ ИНТЕРФЕЙСА) ===== */
 @media (max-width: 768px) {
-    .modal-content {
-        padding: 20px 12px;
-        width: 98%;
-        max-height: 95vh;
+    /* === Базовые настройки === */
+    body {
+        font-size: 12px;
     }
-    .review-header {
-        gap: 8px;
-        margin-bottom: 8px;
+
+    /* === Навигация === */
+    .navbar {
+        padding: 4px 8px;
+        height: auto;
     }
-    .review-icon {
-        width: 24px !important;
-        height: 24px !important;
+    .nav-buttons {
+        gap: 6px;
     }
-    .review-title {
-        font-size: 18px;
-        line-height: 1.3;
+    .nav-btn {
+        width: 36px !important;
+        height: 36px !important;
     }
-    .review-quote {
-        font-size: 13px;
-        max-width: 100%;
-        margin-bottom: 15px;
-        padding: 0 5px;
+    .nav-icon {
+        width: 20px !important;
+        height: 20px !important;
     }
-    .screenshots-scroll-area {
-        height: auto !important; /* Авто-высота под адаптивные скриншоты */
-        margin: 15px 0 8px 0;
+    .nav-brand {
+        font-size: 11px;
+        letter-spacing: 1px;
     }
-    .screenshot-item {
-        width: 85vw !important;  /* Адаптивная ширина под экран */
-        height: auto !important;
-        aspect-ratio: 16 / 9;    /* Сохраняем кинематографичные пропорции */
-        flex: 0 0 85vw !important;
+
+    /* === Основной контент === */
+    .games-container,
+    .home-container,
+    .changelog-container {
+        padding: 15px 10px;
+        margin-top: 60px;
     }
-    .rating-icons {
-        gap: 4px; /* Чуть плотнее для мобильных */
+
+    .info-section {
+        padding: 12px;
+        gap: 12px;
     }
-    .rating-icon {
-        width: 24px !important;
-        height: 24px !important;
+    .welcome-title {
+        font-size: 16px;
     }
-    .stat-label {
+    .welcome-desc {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+    .legend-title {
         font-size: 14px;
     }
-    .stat-desc {
-        font-size: 12px;
-        line-height: 1.4;
-        margin-left: 0;
-        padding-left: 4px;
-    }
-    .review-meta {
-        flex-direction: column;
+    .legend-item {
+        font-size: 11px;
+        padding: 6px 8px;
         gap: 6px;
-        margin-top: 15px;
-        padding-top: 12px;
+    }
+    .legend-item .grade-badge {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 12px !important;
+    }
+
+    /* === Панель сортировки === */
+    .sort-panel {
+        padding: 10px;
+        gap: 6px;
+    }
+    .sort-label {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+    .sort-btn {
+        font-size: 10px !important;
+        padding: 4px 8px !important;
+        min-width: 60px;
+    }
+
+    /* === Таблица игр === */
+    .games-table {
+        font-size: 10px !important;
+    }
+    .games-table th {
+        font-size: 11px !important;
+        padding: 6px 4px !important;
+    }
+    .games-table td {
+        padding: 6px 4px !important;
+    }
+    .game-cover {
+        width: 48px !important;
+        height: 48px !important;
+    }
+    .grade-badge {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 13px !important;
+    }
+
+    /* === Модальное окно рецензии === */
+    .modal-content {
+        padding: 15px 10px !important;
+        width: 96% !important;
+        max-height: 95vh;
+    }
+    .modal-close-btn {
+        top: 10px;
+        right: 10px;
+    }
+    .close-icon {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .review-header {
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    .review-title {
+        font-size: 16px !important;
+    }
+    .review-quote {
+        font-size: 11px !important;
+        margin-bottom: 12px;
+    }
+
+    .screenshots-scroll-area {
+        height: auto !important;
+        margin: 12px 0 6px 0;
+    }
+    .screenshot-item {
+        width: 85vw !important;
+        height: auto !important;
+        aspect-ratio: 16/9;
+        flex: 0 0 85vw !important;
+        border-width: 1px !important;
+    }
+
+    .custom-scrollbar {
+        height: 10px !important;
+        margin-bottom: 8px;
+    }
+    .custom-scrollbar-thumb {
+        width: 60px !important;
+    }
+
+    .stat-label {
+        font-size: 12px !important;
+    }
+    .stat-desc {
+        font-size: 11px !important;
+    }
+    .rating-icon {
+        width: 22px !important;
+        height: 22px !important;
+    }
+    .rating-icons {
+        gap: 3px;
+    }
+
+    .review-meta {
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 10px;
     }
     .meta-item {
-        font-size: 13px;
+        font-size: 11px !important;
+    }
+
+    /* === Уведомления (Toast) === */
+    .toast-notification {
+        padding: 10px 15px !important;
+        bottom: 12px;
+        gap: 10px;
+    }
+    .toast-notification span {
+        font-size: 11px !important;
+    }
+    .toast-close-icon {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    /* === Панель настроек === */
+    .settings-panel {
+        width: 90% !important;
+        padding: 15px;
+    }
+    .settings-header h3 {
+        font-size: 16px;
+    }
+    .settings-close {
+        font-size: 20px;
+    }
+    .setting-item {
+        font-size: 12px;
+    }
+    .pixel-select {
+        font-size: 11px;
+        padding: 5px 25px 5px 8px;
+    }
+    .select-arrow {
+        font-size: 9px;
+        right: 6px;
+    }
+
+    /* === Чейнджлог === */
+    .changelog-title {
+        font-size: 18px;
+    }
+    .changelog-desc {
+        font-size: 11px;
+    }
+    .version-number {
+        font-size: 14px;
+    }
+    .version-content {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    /* === Частицы (адаптация) === */
+    .legend-box .grade-badge {
+        width: 28px !important;
+        height: 28px !important;
     }
 }
