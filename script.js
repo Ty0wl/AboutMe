@@ -508,23 +508,38 @@ function initCustomScrollbar() {
 function updateFogOpacity() {
     const maxScroll = container.scrollWidth - container.clientWidth;
     
-    // Если скролла нет вообще (всё влезает) — скрываем туман полностью
+    console.log('DEBUG:', {
+        scrollWidth: container.scrollWidth,
+        clientWidth: container.clientWidth,
+        maxScroll: maxScroll,
+        currentScroll: container.scrollLeft
+    });
+    
     if (maxScroll <= 1) {
+        console.log('Нет скролла, скрываем обе дымки');
         container.style.setProperty('--left-fog-opacity', '0');
         container.style.setProperty('--right-fog-opacity', '0');
         return;
     }
 
     const currentScroll = container.scrollLeft;
-    const fadeZone = 80; // Зона плавного затухания (в пикселях)
+    const fadeZone = 200;
 
-    // Левая дымка: 1.0 в начале → 0.0, когда отскроллили на fadeZone
     let leftOp = 1 - (currentScroll / fadeZone);
-    container.style.setProperty('--left-fog-opacity', Math.max(0, Math.min(1, leftOp)));
-
-    // Правая дымка: 1.0 в конце → 0.0, когда до конца осталось fadeZone
+    leftOp = Math.max(0, Math.min(1, leftOp));
+    
     let rightOp = 1 - ((maxScroll - currentScroll) / fadeZone);
-    container.style.setProperty('--right-fog-opacity', Math.max(0, Math.min(1, rightOp)));
+    rightOp = Math.max(0, Math.min(1, rightOp));
+    
+    console.log('🌫️ Fog opacity:', {
+        leftOp: leftOp.toFixed(3),
+        rightOp: rightOp.toFixed(3),
+        fadeZone: fadeZone,
+        distanceFromEnd: (maxScroll - currentScroll)
+    });
+    
+    container.style.setProperty('--left-fog-opacity', leftOp);
+    container.style.setProperty('--right-fog-opacity', rightOp);
 }
 
     // Обновление позиции ползунка (для перетаскивания и синхронизации)
