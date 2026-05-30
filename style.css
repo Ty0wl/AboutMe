@@ -489,7 +489,8 @@ body {
 .stat-header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    line-height: 1; 
 }
 
 .stat-label {
@@ -504,15 +505,12 @@ body {
     align-items: center;
 }
 
-.rating-icon {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
-    
-    pointer-events: auto !important;
+.rating-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    transform: translateY(-4px); 
+    margin-bottom: 4px; 
 }
 
 .stat-desc {
