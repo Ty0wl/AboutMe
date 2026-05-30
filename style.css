@@ -435,12 +435,12 @@ body {
 
 /* --- НОВЫЕ СТИЛИ ДЛЯ СТРУКТУРЫ РЕЦЕНЗИИ --- */
 
-/* 1. Заголовок + Иконка */
 .review-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .review-icon {
@@ -456,26 +456,28 @@ body {
     color: var(--accent);
     font-size: 22px;
     line-height: 1.2;
+    text-align: center;
 }
 
-/* 2. Цитата */
 .review-quote {
     font-family: 'PixelBody', monospace;
     color: var(--border);
     font-size: 14px;
     font-style: italic;
-    margin-bottom: 20px;
+    text-align: center;
+    margin: 0 auto 20px auto;
+    max-width: 85%;
     line-height: 1.5;
-    padding-left: 10px;
-    border-left: 3px solid var(--border);
+    border: none;
+    padding: 0;
 }
 
-/* 4. Блок оценок и описаний */
 .review-stats {
-    margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-top: 20px;
+    text-align: left;
 }
 
 .stat-item {
@@ -498,15 +500,18 @@ body {
 
 .rating-icons {
     display: flex;
-    gap: 3px;
+    gap: 6px;
     align-items: center;
 }
 
 .rating-icon {
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    
     pointer-events: auto !important;
 }
 
@@ -780,54 +785,64 @@ img { -webkit-user-drag: none; pointer-events: none; } /* Глобальный �
 .version-divider { border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 20px 0; opacity: 0.5; }
 .version-latest + .version-divider { margin: 25px 0; opacity: 0.8; }
 
-/* ===== АДАПТИВНОСТЬ ===== */
+/* ===== МОБИЛЬНАЯ АДАПТАЦИЯ РЕЦЕНЗИИ ===== */
 @media (max-width: 768px) {
-    .navbar { flex-direction: row; gap: 8px; padding: 5px 10px; flex-wrap: nowrap; }
-    .nav-brand { margin-left: auto; margin-right: 0; font-size: 12px; white-space: nowrap; }
-    .nav-buttons { flex-direction: row; width: auto; gap: 8px; order: 0; }
-    .nav-btn { width: 40px; height: 40px; padding: 0; text-align: center; flex-shrink: 0; }
-    .nav-icon { width: 22px; height: 22px; }
-    .info-section { padding: 15px; margin-bottom: 20px; gap: 15px; }
-    .welcome-title { font-size: 18px; margin-bottom: 6px; }
-    .welcome-desc { font-size: 12px; line-height: 1.5; }
-    .legend-title { font-size: 16px; margin-bottom: 12px; }
-    .legend-items { display: grid; grid-template-columns: 1fr; gap: 8px; }
-    .legend-item { display: flex; align-items: center; gap: 10px; justify-content: flex-start; background: rgba(0,0,0,0.1); border-radius: 4px; padding: 8px 10px; font-size: 12px; flex-wrap: wrap; word-wrap: break-word; overflow-wrap: break-word; }
-    .legend-item .grade-badge { width: 28px; height: 28px; font-size: 14px; flex-shrink: 0; }
-    .legend-item span:last-child { flex: 1; min-width: 0; line-height: 1.4; }
-    .sort-panel { padding: 12px 15px; margin-bottom: 15px; gap: 8px; }
-    .sort-label { font-size: 12px; margin-right: 0; width: 100%; text-align: center; margin-bottom: 5px; }
-    .sort-btn { font-size: 11px; padding: 6px 10px; flex: 1 1 calc(33.333% - 8px); min-width: 80px; }
-    .games-table { font-size: 11px; }
-    .games-table th { font-size: 12px; padding: 8px 5px; }
-    .games-table td { padding: 8px 5px; }
-    .game-cover { width: 50px; height: 50px; }
-    .grade-badge { width: 36px; height: 36px; font-size: 15px; }
-    .home-container { flex-direction: column; margin-top: 60px; padding: 20px 15px; gap: 25px; }
-    .cat-section { flex: 0 0 100%; }
-    .cat-image { max-width: 300px; }
-    .text-section { text-align: center; }
-    .main-title { font-size: 20px; margin-bottom: 20px; }
-    .main-text { font-size: 13px; line-height: 1.6; }
-    .modal-content { padding: 20px 15px; width: 95%; }
-    .modal-title { font-size: 16px; padding-right: 35px; }
-    .modal-text { font-size: 13px; line-height: 1.5; }
-    .close-icon { width: 28px; height: 28px; }
-    .toast-notification { padding: 12px 18px; bottom: 15px; gap: 12px; }
-    .toast-notification span { font-size: 11px; }
-    .toast-close-icon { width: 24px; height: 24px; }
-    .settings-panel { width: 85%; }
-    .lang-select-wrapper { width: 100%; }
-    .changelog-container { padding: 20px 15px; }
-    .changelog-title { font-size: 22px; }
-    .changelog-desc { font-size: 13px; }
-    .changelog-subtitle { font-size: 16px; }
-    .version-title, .version-number { font-size: 13px; }
-    .version-number { margin-left: 6px; }
-    .version-list li { font-size: 13px; line-height: 1.6; }
-    .changelog-latest { padding: 15px; }
-    .version-divider { margin: 15px 0; }
-    .screenshots-container { display: flex !important; flex-direction: row !important; gap: 8px !important; max-height: none !important; }
-    .screenshot-item { width: 260px !important; height: 146px !important; flex: 0 0 260px !important; }
-    .custom-scrollbar { height: 10px; }
+    .modal-content {
+        padding: 20px 12px;
+        width: 98%;
+        max-height: 95vh;
+    }
+    .review-header {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    .review-icon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .review-title {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+    .review-quote {
+        font-size: 13px;
+        max-width: 100%;
+        margin-bottom: 15px;
+        padding: 0 5px;
+    }
+    .screenshots-scroll-area {
+        height: auto !important; /* Авто-высота под адаптивные скриншоты */
+        margin: 15px 0 8px 0;
+    }
+    .screenshot-item {
+        width: 85vw !important;  /* Адаптивная ширина под экран */
+        height: auto !important;
+        aspect-ratio: 16 / 9;    /* Сохраняем кинематографичные пропорции */
+        flex: 0 0 85vw !important;
+    }
+    .rating-icons {
+        gap: 4px; /* Чуть плотнее для мобильных */
+    }
+    .rating-icon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    .stat-label {
+        font-size: 14px;
+    }
+    .stat-desc {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-left: 0;
+        padding-left: 4px;
+    }
+    .review-meta {
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 15px;
+        padding-top: 12px;
+    }
+    .meta-item {
+        font-size: 13px;
+    }
 }
