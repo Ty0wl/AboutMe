@@ -102,21 +102,24 @@
     </div>
 </main>
 
-    <!-- Модальное окно -->
-    <div id="review-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="modal-close" class="modal-close-btn">
-                <img src="resources/gfx/ui/icon_close_off.png" alt="Close" class="close-icon">
-            </button>
-            <h2 id="modal-title" class="modal-title">Loading...</h2>
+<!-- Модальное окно -->
+<div id="review-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button id="modal-close" class="modal-close-btn">
+            <img src="resources/gfx/ui/icon_close_off.png" alt="Close" class="close-icon">
+        </button>
+        <h2 id="modal-title" class="modal-title">Loading...</h2>
+        
+        <div class="screenshots-scroll-area">
             <div id="modal-screenshots" class="screenshots-container"></div>
             <div class="custom-scrollbar">
                 <div class="custom-scrollbar-thumb"></div>
             </div>
-            <p id="modal-text" class="modal-text">Loading...</p>
         </div>
+        
+        <p id="modal-text" class="modal-text">Loading...</p>
     </div>
-
+</div>
     <!-- Уведомление -->
     <div id="review-toast" class="toast-notification">
         <span data-i18n="toast_text">Loading...</span>

@@ -106,8 +106,7 @@ function renderTable() {
     });
 }
 
-// ===== КЛИКИ ПО ОЦЕНКАМ + АНИМАЦИЯ БЛИКА =====
-
+// ===== КЛИКИ ПО ОЦЕНКАМ =====
 function setupGradeClicks() {
     const badges = document.querySelectorAll('#games-table-body .grade-badge');
     
@@ -120,22 +119,11 @@ function setupGradeClicks() {
             badge.setAttribute('aria-label', `Открыть рецензию: ${badge.textContent}`);
             badge.setAttribute('tabindex', '0');
             
-            // БЛИК: включаем при наведении, выключаем при уходе
-            badge.addEventListener('mouseenter', function() {
-                this.classList.add('shine-active');
-            });
-            
-            badge.addEventListener('mouseleave', function() {
-                this.classList.remove('shine-active');
-            });
-            
-            // Клик — открытие рецензии
             badge.addEventListener('click', function(e) {
                 e.stopPropagation();
                 openReviewModal(this.getAttribute('data-id'));
             });
             
-            // Поддержка клавиатуры
             badge.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -480,15 +468,17 @@ function renderScreenshots(screenshots, container) {
     }, 150);
 }
 
-// ===== КАСТОМНЫЙ СКРОЛЛБАР (УПРОЩЁННЫЙ) =====
-
+// ===== КАСТОМНЫЙ СКРОЛЛБАР =====
 function initCustomScrollbar() {
     const container = document.getElementById('modal-screenshots');
+    const scrollArea = document.querySelector('.screenshots-scroll-area');
     const scrollbar = document.querySelector('.custom-scrollbar');
     const thumb = document.querySelector('.custom-scrollbar-thumb');
     
-    if (!container || !scrollbar || !thumb) return;
-    
+    if (!container || !scrollArea || !scrollbar || !thumb) return;
+    if (scrollArea.dataset.scrollInit === 'true') return; // Защита от дублирования обработчиков
+    scrollArea.dataset.scrollInit = 'true';
+
     let isDragging = false;
     let animationFrame = null;
 
@@ -522,6 +512,13 @@ function initCustomScrollbar() {
         });
     }
 
+    scrollArea.addEventListener('wheel', (e) => {
+        if (container.scrollWidth <= container.clientWidth) return;
+        e.preventDefault();
+        container.scrollLeft += e.deltaY * 1.2;
+        updateThumbPosition();
+    }, { passive: false });
+
     const onDragStart = (e) => {
         isDragging = true;
         document.body.style.cursor = 'grabbing';
@@ -530,14 +527,12 @@ function initCustomScrollbar() {
 
     const onDragMove = (e) => {
         if (!isDragging) return;
-        
         const rect = scrollbar.getBoundingClientRect();
         let mouseX = e.clientX - rect.left;
         mouseX = Math.max(0, Math.min(mouseX, rect.width));
         
         const percent = mouseX / rect.width;
         const maxScroll = container.scrollWidth - container.clientWidth;
-        
         container.scrollLeft = percent * maxScroll;
         updateThumbPosition();
     };
@@ -551,17 +546,14 @@ function initCustomScrollbar() {
 
     const onTrackClick = (e) => {
         if (e.target === thumb) return;
-        
         const rect = scrollbar.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const percent = mouseX / rect.width;
         const maxScroll = container.scrollWidth - container.clientWidth;
-        
         container.scrollLeft = percent * maxScroll;
         updateThumbPosition();
     };
 
-    // Навешиваем обработчики
     thumb.addEventListener('mousedown', onDragStart, { passive: false });
     document.addEventListener('mousemove', onDragMove, { passive: true });
     document.addEventListener('mouseup', onDragEnd, { passive: true });
@@ -569,13 +561,4 @@ function initCustomScrollbar() {
     container.addEventListener('scroll', updateThumbPosition, { passive: true });
 
     updateThumbPosition();
-    
-    return () => {
-        thumb.removeEventListener('mousedown', onDragStart);
-        document.removeEventListener('mousemove', onDragMove);
-        document.removeEventListener('mouseup', onDragEnd);
-        scrollbar.removeEventListener('click', onTrackClick);
-        container.removeEventListener('scroll', updateThumbPosition);
-        if (animationFrame) cancelAnimationFrame(animationFrame);
-    };
 }
