@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title></title>
+    <title>Games</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="resources/gfx/ui/pageicon_cat.png">
 </head>
 <body>
+    <!-- НАВИГАЦИЯ -->
     <nav class="navbar">
         <div class="nav-buttons">
-            <!-- Кнопка настроек -->
             <a href="#" class="nav-btn settings-trigger" id="settings-btn">
                 <img src="https://raw.githubusercontent.com/Ty0wl/AboutMe/main/resources/gfx/ui/icon_settings_off.png" alt="" class="nav-icon">
             </a>
@@ -28,7 +28,7 @@
         <div class="nav-brand">&lt;AboutMe&gt;</div>
     </nav>
 
-    <!-- Панель настроек -->
+    <!-- ПАНЕЛЬ НАСТРОЕК -->
     <div class="settings-overlay" id="settings-overlay"></div>
     <div class="settings-panel" id="settings-panel">
         <div class="settings-header">
@@ -49,78 +49,85 @@
         </div>
     </div>
 
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="games-container">
-    
-    <section class="info-section">
-        <div class="welcome-text">
-            <h3 class="welcome-title" data-i18n="welcome_title">Loading...</h3>
-            <p class="welcome-desc" data-i18n="welcome_desc">
-                Loading...
-            </p>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <div class="legend-box">
-            <h3 class="legend-title" data-i18n="legend_title">Loading...</h3>
-            <div class="legend-items">
-                <div class="legend-item"><span class="grade-badge grade-a">A</span> <span data-i18n="grade_a">Loading...</span></div>
-                <div class="legend-item"><span class="grade-badge grade-b">B</span> <span data-i18n="grade_b">Loading...</span></div>
-                <div class="legend-item"><span class="grade-badge grade-c">C</span> <span data-i18n="grade_c">Loading...</span></div>
-                <div class="legend-item"><span class="grade-badge grade-d">D</span> <span data-i18n="grade_d">Loading...</span></div>
-                <div class="legend-item"><span class="grade-badge grade-e">E</span> <span data-i18n="grade_e">Loading...</span></div>
-                <div class="legend-item"><span class="grade-badge grade-f">F</span> <span data-i18n="grade_f">Loading...</span></div>
+        <section class="info-section">
+            <div class="welcome-text">
+                <h3 class="welcome-title" data-i18n="welcome_title">Loading...</h3>
+                <p class="welcome-desc" data-i18n="welcome_desc">Loading...</p>
             </div>
-        </div>
-    </section>
 
-    <div class="sort-panel">
-        <span class="sort-label" data-i18n="sort_label">Loading...</span>
-        <button class="sort-btn" data-sort="id">ID</button>
-        <button class="sort-btn" data-sort="name" data-i18n="sort_name">Loading...</button>
-        <button class="sort-btn" data-sort="year" data-i18n="sort_year">Loading...</button>
-        <button class="sort-btn" data-sort="type" data-i18n="sort_type">Loading...</button>
-        <button class="sort-btn" data-sort="genre" data-i18n="sort_genre">Loading...</button>
-        <button class="sort-btn" data-sort="grade" data-i18n="sort_grade">Loading...</button>
-    </div>
+            <div class="section-divider"></div>
 
-    <div class="table-wrapper">
-    <table class="games-table">
-        <thead>
-            <tr>
-                <th data-i18n="th_cover">Loading...</th>
-                <th data-i18n="th_year">Loading...</th>
-                <th data-i18n="th_type">Loading...</th>
-                <th data-i18n="th_genre">Loading...</th>
-                <th data-i18n="th_name">Loading...</th>
-                <th data-i18n="th_grade">Loading...</th>
-            </tr>
-        </thead>
-        <tbody id="games-table-body">
-        </tbody>
-    </table>
-    </div>
-</main>
-
-<!-- Модальное окно -->
-<div id="review-modal" class="modal-overlay">
-    <div class="modal-content">
-        <button id="modal-close" class="modal-close-btn">
-            <img src="resources/gfx/ui/icon_close_off.png" alt="Close" class="close-icon">
-        </button>
-        <h2 id="modal-title" class="modal-title">Loading...</h2>
-        
-        <div class="screenshots-scroll-area">
-            <div id="modal-screenshots" class="screenshots-container"></div>
-            <div class="custom-scrollbar">
-                <div class="custom-scrollbar-thumb"></div>
+            <div class="legend-box">
+                <h3 class="legend-title" data-i18n="legend_title">Loading...</h3>
+                <div class="legend-items">
+                    <div class="legend-item"><span class="grade-badge grade-a">A</span> <span data-i18n="grade_a">Loading...</span></div>
+                    <div class="legend-item"><span class="grade-badge grade-b">B</span> <span data-i18n="grade_b">Loading...</span></div>
+                    <div class="legend-item"><span class="grade-badge grade-c">C</span> <span data-i18n="grade_c">Loading...</span></div>
+                    <div class="legend-item"><span class="grade-badge grade-d">D</span> <span data-i18n="grade_d">Loading...</span></div>
+                    <div class="legend-item"><span class="grade-badge grade-e">E</span> <span data-i18n="grade_e">Loading...</span></div>
+                    <div class="legend-item"><span class="grade-badge grade-f">F</span> <span data-i18n="grade_f">Loading...</span></div>
+                </div>
             </div>
+        </section>
+
+        <div class="sort-panel">
+            <span class="sort-label" data-i18n="sort_label">Loading...</span>
+            <button class="sort-btn" data-sort="id">ID</button>
+            <button class="sort-btn" data-sort="name" data-i18n="sort_name">Loading...</button>
+            <button class="sort-btn" data-sort="year" data-i18n="sort_year">Loading...</button>
+            <button class="sort-btn" data-sort="type" data-i18n="sort_type">Loading...</button>
+            <button class="sort-btn" data-sort="genre" data-i18n="sort_genre">Loading...</button>
+            <button class="sort-btn" data-sort="grade" data-i18n="sort_grade">Loading...</button>
         </div>
-        
-        <p id="modal-text" class="modal-text">Loading...</p>
+
+        <div class="table-wrapper">
+            <table class="games-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="th_cover">Loading...</th>
+                        <th data-i18n="th_year">Loading...</th>
+                        <th data-i18n="th_type">Loading...</th>
+                        <th data-i18n="th_genre">Loading...</th>
+                        <th data-i18n="th_name">Loading...</th>
+                        <th data-i18n="th_grade">Loading...</th>
+                    </tr>
+                </thead>
+                <tbody id="games-table-body">
+                    <!-- Таблица генерируется через JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- МОДАЛЬНОЕ ОКНО РЕЦЕНЗИИ (НОВАЯ СТРУКТУРА) -->
+    <div id="review-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close-btn">
+                <img src="resources/gfx/ui/icon_close_off.png" alt="Close" class="close-icon">
+            </button>
+            
+            <!-- 1. Заголовок + Иконка игры -->
+            <div id="modal-title" class="review-title"></div>
+            
+            <!-- 2. Цитата -->
+            <p id="modal-quote" class="review-quote" style="display: none;"></p>
+            
+            <!-- 3. Скриншоты + Скроллбар -->
+            <div class="screenshots-scroll-area">
+                <div id="modal-screenshots" class="screenshots-container"></div>
+                <div class="custom-scrollbar">
+                    <div class="custom-scrollbar-thumb"></div>
+                </div>
+            </div>
+            
+            <!-- 4. Оценки, описания и мета-данные -->
+            <div id="review-stats"></div>
+        </div>
     </div>
-</div>
-    <!-- Уведомление -->
+
+    <!-- УВЕДОМЛЕНИЕ (TOAST) -->
     <div id="review-toast" class="toast-notification">
         <span data-i18n="toast_text">Loading...</span>
         <button id="toast-close" class="toast-close-btn">

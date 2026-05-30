@@ -618,5 +618,155 @@
     "name": "Forgive Me Father",
     "grade": "B",
     "review": 0
+  },
+    {
+    "id": 106,
+    "cover": "resources/gfx/covers/the lions song.jpg",
+    "year": 2016,
+    "type": "Game",
+    "genre": "Point&Click, Choices Matter",
+    "name": "The Lion's Song",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 107,
+    "cover": "resources/gfx/covers/swords n souls neverseen.jpg",
+    "year": 2019,
+    "type": "Remake",
+    "genre": "Auto Battler, Grind",
+    "name": "Swords & Souls: Neverseen",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 109,
+    "cover": "resources/gfx/covers/rusty lake collection.jpg",
+    "year": "2015-2025",
+    "type": "Game Bundle",
+    "genre": "Point&Click, Puzzle",
+    "name": "Rusty Lake Collection",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 110,
+    "cover": "resources/gfx/covers/the witness.jpg",
+    "year": 2016,
+    "type": "Game",
+    "genre": "Cozy, Puzzle",
+    "name": "The Witness",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 111,
+    "cover": "resources/gfx/covers/florence.jpg",
+    "year": 2020,
+    "type": "Game",
+    "genre": "Point&Click, Casual",
+    "name": "Florence",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 113,
+    "cover": "resources/gfx/covers/poco.jpg",
+    "year": 2025,
+    "type": "Game",
+    "genre": "Point&Click, Adventure",
+    "name": "Poco",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 115,
+    "cover": "resources/gfx/covers/creature kitchen.jpg",
+    "year": 2026,
+    "type": "Game",
+    "genre": "Cooking, Creepy Cozy",
+    "name": "Creature Kitchen",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 117,
+    "cover": "resources/gfx/covers/gamblers table.jpg",
+    "year": 2026,
+    "type": "Game",
+    "genre": "Clicker, Casual",
+    "name": "Gambler's Table",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 118,
+    "cover": "resources/gfx/covers/peak.jpg",
+    "year": 2025,
+    "type": "Game",
+    "genre": "Simulator, Online Co-op",
+    "name": "Peak",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 120,
+    "cover": "resources/gfx/covers/batman arkham asylum.jpg",
+    "year": 2010,
+    "type": "Game Edition",
+    "genre": "Combat, Meroidvania",
+    "name": "Batman Arkham: Asylum GOTY",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 127,
+    "cover": "resources/gfx/covers/meltopia.jpg",
+    "year": 2026,
+    "type": "Game",
+    "genre": "Simulator, Casual",
+    "name": "Meltopia",
+    "grade": "C",
+    "review": 0
+  },
+    {
+    "id": 129,
+    "cover": "resources/gfx/covers/holy grail for dummies.jpg",
+    "year": 2026,
+    "type": "Early Access",
+    "genre": "Metroidvania, Adventure",
+    "name": "HOLY GRAIL for DUMMIES",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 131,
+    "cover": "resources/gfx/covers/webbed.jpg",
+    "year": 2021,
+    "type": "Game",
+    "genre": "Platformer, Adventure",
+    "name": "Webbed",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 132,
+    "cover": "resources/gfx/covers/shelldiver.jpg",
+    "year": 2025,
+    "type": "Game",
+    "genre": "Clicker, Casual",
+    "name": "Shelldiver",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 135,
+    "cover": "resources/gfx/covers/leaf it alones.jpg",
+    "year": 2025,
+    "type": "Game",
+    "genre": "Clicker, Casual",
+    "name": "Leaf it Alone",
+    "grade": "B",
+    "review": 0
   }
 ]

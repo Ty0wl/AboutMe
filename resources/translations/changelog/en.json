@@ -6,7 +6,7 @@
     "changelog_desc": "On this page you can browse the history of site updates.",
     "latest_update": "Latest Update",
     "version_label": "Version",
-    "v4_0_item": "• added changelog page with site history",
+    "v4_0_item": "• added changelog page with site history<br>• added screenshots to the reviews<br>• added visual effect to show review availability",
     "v3_0_item": "• added settings panel<br>• added English language support<br>• optimized memory usage on your device<br>• added more games<br>• updated the rating system<br>• added custom 404 error page<br>• updated cat sprite",
     "v2_0_item": "• added game reviews<br>• added notification for missing reviews<br>• added animations for grade badges<br>• improved texture quality<br>• redesigned navigation icons<br>• added even more games",
     "v1_0_item": "• added home page and game catalog<br>• added navigation icons and cat sprites<br>• added first games to the table<br>• implemented table sorting<br>• added active page highlighting in navigation<br>• added custom pixel fonts<br>• added favicon"

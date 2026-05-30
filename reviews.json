@@ -1,8 +1,8 @@
 {
   "1": {
     "title": "Hollow Knight: Voidheart Edition",
-    "text": "Loading...",
-    "steam_url": "https://store.steampowered.com/app/367520/Hollow_Knight/",
+    "icon": "resources/gfx/ui/game_icons/hollow_knight.png",
+    "quote": "\"Loading...\"",
     "screenshots": [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_5384f9f8b96a0b9934b2bc35a4058376211636d2.1920x1080.jpg?t=1776125684",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_d5b6edd94e77ba6db31c44d8a3c09d807ab27751.1920x1080.jpg?t=1776125684",
@@ -15,6 +15,21 @@
       "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/ss_fbe692d154a3d9dd627966d5445c4647ae0f71ce.1920x1080.jpg?t=1776125684",
       "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/ss_1552562bd322fb94fd8c5a6595e75f1e6808db41.1920x1080.jpg?t=1776125684",
       "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/ss_5478c9192023a3b3e438c030caa0809b62523587.1920x1080.jpg?t=1776125684"
-    ]
+    ],
+    "ratings": {
+      "gameplay": 5,
+      "story": 4,
+      "music": 5,
+      "difficulty": 5
+    },
+    "descriptions": {
+      "gameplay": "Loading...",
+      "story": "Loading...",
+      "music": "Loading..."
+    },
+    "meta": {
+      "optimization": "Loading...",
+      "duration": "Loading..."
+    }
   }
 }
