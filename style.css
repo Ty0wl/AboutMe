@@ -749,12 +749,32 @@ body {
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* ===== ЗАЩИТА КОНТЕНТА ===== */
-body, p, span, h1, h2, h3, h4, h5, h6, td, th, .welcome-desc, .main-text, .modal-text, .legend-item {
-    -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+
+body, p, span, h1, h2, h3, h4, h5, h6, td, th, 
+.welcome-desc, .main-text, .modal-text, .legend-item,
+.grade-badge, .screenshot-item {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
 }
-input, textarea { user-select: text !important; }
-img { -webkit-user-drag: none; pointer-events: none; } /* Глобальный запрет, переопределяется для скриншотов */
-.nav-icon, .game-cover, .close-icon, .toast-close-icon, .cat-image, .screenshot-item, .review-icon, .rating-icon { pointer-events: auto; }
+
+input, textarea {
+    user-select: text !important;
+}
+
+img {
+    -webkit-user-drag: none !important;
+    -khtml-user-drag: none !important;
+    -moz-user-drag: none !important;
+    -o-user-drag: none !important;
+    pointer-events: none;
+}
+
+.nav-icon, .game-cover, .close-icon, .toast-close-icon, .cat-image,
+.screenshot-item, .rating-icon, .review-icon, .grade-badge {
+    pointer-events: auto !important;
+}
 
 /* ===== СТРАНИЦА ЧЕЙНДЖЛОГА ===== */
 .changelog-container { margin-top: 80px; padding: 30px 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
