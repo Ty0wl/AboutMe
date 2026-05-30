@@ -476,11 +476,7 @@ function initCustomScrollbar() {
     const scrollbar = document.querySelector('.custom-scrollbar');
     const thumb = document.querySelector('.custom-scrollbar-thumb');
     
-    if (!container || !scrollArea || !scrollbar || !thumb) {
-        console.error('Не найдены элементы скроллбара');
-        return;
-    }
-    
+    if (!container || !scrollArea || !scrollbar || !thumb) return;
     if (scrollArea.dataset.scrollInit === 'true') return;
     scrollArea.dataset.scrollInit = 'true';
 
@@ -490,25 +486,21 @@ function initCustomScrollbar() {
     let scrollCurrent = 0;
     let scrollRaf = null;
 
-    function updateFogOpacity() {
-        const maxScroll = container.scrollWidth - container.clientWidth;
+    // Плавная прокрутка
+    function smoothScrollLoop() {
+        scrollCurrent += (scrollTarget - scrollCurrent) * 0.12;
+        container.scrollLeft = scrollCurrent;
+        updateThumbPosition();
         
-        if (maxScroll <= 1) {
-            container.style.setProperty('--left-fog-opacity', '0');
-            container.style.setProperty('--right-fog-opacity', '0');
-            return;
+        if (Math.abs(scrollTarget - scrollCurrent) > 0.5) {
+            scrollRaf = requestAnimationFrame(smoothScrollLoop);
+        } else {
+            scrollRaf = null;
+            scrollCurrent = scrollTarget;
         }
-
-        const currentScroll = container.scrollLeft;
-        const progress = currentScroll / maxScroll;
-
-        const leftOp = progress >= 0.1 ? 1 : 0;
-        const rightOp = progress <= 0.9 ? 1 : 0;
-
-        container.style.setProperty('--left-fog-opacity', leftOp);
-        container.style.setProperty('--right-fog-opacity', rightOp);
     }
 
+    // Обновление ползунка
     function updateThumbPosition() {
         if (thumbRaf) return;
         
@@ -533,7 +525,7 @@ function initCustomScrollbar() {
             const maxScroll = scrollWidth - clientWidth;
             const percent = maxScroll > 0 ? scrollLeft / maxScroll : 0;
             const availableTrack = clientWidth - thumbWidth;
-
+            
             const clampedLeft = Math.max(0, Math.min(availableTrack, percent * availableTrack));
             thumb.style.left = clampedLeft + 'px';
             
@@ -541,20 +533,7 @@ function initCustomScrollbar() {
         });
     }
 
-    function smoothScrollLoop() {
-        scrollCurrent += (scrollTarget - scrollCurrent) * 0.12;
-        container.scrollLeft = scrollCurrent;
-        updateThumbPosition();
-        updateFogOpacity();
-        
-        if (Math.abs(scrollTarget - scrollCurrent) > 0.5) {
-            scrollRaf = requestAnimationFrame(smoothScrollLoop);
-        } else {
-            scrollRaf = null;
-            scrollCurrent = scrollTarget;
-        }
-    }
-
+    // Обработчики
     scrollArea.addEventListener('wheel', (e) => {
         e.preventDefault();
         scrollTarget += e.deltaY * 0.8;
@@ -566,10 +545,7 @@ function initCustomScrollbar() {
         }
     }, { passive: false });
 
-    container.addEventListener('scroll', () => {
-        updateThumbPosition();
-        updateFogOpacity();
-    }, { passive: true });
+    container.addEventListener('scroll', updateThumbPosition, { passive: true });
 
     const onDragStart = (e) => {
         isDragging = true;
@@ -592,7 +568,6 @@ function initCustomScrollbar() {
         scrollCurrent = scrollTarget;
         container.scrollLeft = scrollCurrent;
         updateThumbPosition();
-        updateFogOpacity();
     };
 
     const onDragEnd = () => {
@@ -612,7 +587,6 @@ function initCustomScrollbar() {
         scrollTarget = percent * maxScroll;
         scrollCurrent = container.scrollLeft;
         if (!scrollRaf) scrollRaf = requestAnimationFrame(smoothScrollLoop);
-        updateFogOpacity();
     };
 
     thumb.addEventListener('mousedown', onDragStart, { passive: false });
@@ -621,5 +595,4 @@ function initCustomScrollbar() {
     scrollbar.addEventListener('click', onTrackClick, { passive: true });
 
     updateThumbPosition();
-    updateFogOpacity();
 }
