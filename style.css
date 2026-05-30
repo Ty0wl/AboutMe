@@ -898,8 +898,6 @@ img {
     .grade-badge.has-review { box-shadow: inset 0 0 0 1px rgba(247, 150, 23, 0.5); }
 }
 
-/* ===== ХИТБОКС ПРОКРУТКИ СКРИНШОТОВ ===== */
-
 .screenshots-scroll-area {
     position: relative;
     width: 100%;
@@ -908,7 +906,7 @@ img {
     background: transparent;
     z-index: 10;
     cursor: default;
-    pointer-events: auto;
+    pointer-events: none; 
 }
 
 .screenshots-scroll-area > * {

@@ -534,7 +534,7 @@ function initCustomScrollbar() {
     }
 
     // Обработчики
-    scrollArea.addEventListener('wheel', (e) => {
+    container.addEventListener('wheel', (e) => {
         e.preventDefault();
         scrollTarget += e.deltaY * 0.8;
         scrollTarget = Math.max(0, Math.min(scrollTarget, container.scrollWidth - container.clientWidth));
