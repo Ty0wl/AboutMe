@@ -768,12 +768,18 @@ img {
     -khtml-user-drag: none !important;
     -moz-user-drag: none !important;
     -o-user-drag: none !important;
+    user-drag: none !important;
     pointer-events: none;
 }
 
 .nav-icon, .game-cover, .close-icon, .toast-close-icon, .cat-image,
 .screenshot-item, .rating-icon, .review-icon, .grade-badge {
     pointer-events: auto !important;
+    -webkit-user-drag: none !important;
+    -khtml-user-drag: none !important;
+    -moz-user-drag: none !important;
+    -o-user-drag: none !important;
+    user-drag: none !important;
 }
 
 /* ===== СТРАНИЦА ЧЕЙНДЖЛОГА ===== */

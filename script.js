@@ -512,6 +512,7 @@ function renderScreenshots(screenshots, container) {
         img.alt = `Screenshot ${index + 1}`;
         img.className = 'screenshot-item';
         img.loading = 'lazy';
+        img.draggable = false; // 🔥 Запрещаем перетаскивание
         
         img.addEventListener('click', () => {
             window.open(screenshotUrl, '_blank');

@@ -2,13 +2,13 @@
     "1": {
         "title": "Hollow Knight: Voidheart Edition",
         "icon": "resources/gfx/ui/game_icons/hollow_knight.png",
-        "quote": "Путь начинается с одного прыжка в бездну.",
+        "quote": "Эталонная метроидвания",
     
         "ratings": {
             "gameplay": 5,
             "story": 4,
             "music": 5,
-            "difficulty": 3
+            "difficulty": 5
         },
     
         "descriptions": {
@@ -19,7 +19,7 @@
     
         "meta": {
             "optimization": "Без багов",
-            "duration": "≈ 40 часов"
+            "duration": "≈ 45 часов"
         }
     }
 }
