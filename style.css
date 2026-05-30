@@ -868,11 +868,9 @@ img {
     border-radius: 0;
     cursor: pointer;
     scroll-snap-align: start;
-    
-    image-rendering: auto; 
+    image-rendering: auto;
     -webkit-image-rendering: auto;
 }
-
 .screenshot-item:hover {
     border-color: var(--accent);
     transform: scale(1.02);
