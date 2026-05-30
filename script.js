@@ -504,22 +504,27 @@ function initCustomScrollbar() {
         }
     }
 
-    function updateMasks() {
-        const maxScroll = container.scrollWidth - container.clientWidth;
-        const currentScroll = container.scrollLeft;
-        container.classList.remove('mask-start', 'mask-end', 'mask-both');
-        const isAtStart = currentScroll <= 1;
-        const isAtEnd = currentScroll >= maxScroll - 1;
-        if (maxScroll <= 0) {
-            container.classList.add('mask-both');
-        } else if (isAtStart && isAtEnd) {
-            container.classList.add('mask-both');
-        } else if (isAtStart) {
-            container.classList.add('mask-start');
-        } else if (isAtEnd) {
-            container.classList.add('mask-end');
-        }
+function updateFogOpacity() {
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    
+    // Если скролла нет вообще (всё влезает) — скрываем туман полностью
+    if (maxScroll <= 1) {
+        container.style.setProperty('--left-fog-opacity', '0');
+        container.style.setProperty('--right-fog-opacity', '0');
+        return;
     }
+
+    const currentScroll = container.scrollLeft;
+    const fadeZone = 80; // Зона плавного затухания (в пикселях)
+
+    // Левая дымка: 1.0 в начале → 0.0, когда отскроллили на fadeZone
+    let leftOp = 1 - (currentScroll / fadeZone);
+    container.style.setProperty('--left-fog-opacity', Math.max(0, Math.min(1, leftOp)));
+
+    // Правая дымка: 1.0 в конце → 0.0, когда до конца осталось fadeZone
+    let rightOp = 1 - ((maxScroll - currentScroll) / fadeZone);
+    container.style.setProperty('--right-fog-opacity', Math.max(0, Math.min(1, rightOp)));
+}
 
     // Обновление позиции ползунка (для перетаскивания и синхронизации)
     function updateThumbPosition() {
@@ -567,7 +572,7 @@ function initCustomScrollbar() {
 
     container.addEventListener('scroll', () => {
         updateThumbPosition();
-        updateMasks();
+        updateFogOpacity();
     }, { passive: true });
 
     // Перетаскивание ползунка
@@ -626,7 +631,7 @@ function initCustomScrollbar() {
 
     // Инициализация
     updateThumbPosition();
-    updateMasks();
+    updateFogOpacity();
     return () => {
         if (scrollRaf) cancelAnimationFrame(scrollRaf);
         if (thumbRaf) cancelAnimationFrame(thumbRaf);

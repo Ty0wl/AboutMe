@@ -795,64 +795,70 @@ img {
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: none;
-
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0px,
-        black 60px,
-        black calc(100% - 60px),
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        transparent 0px,
-        black 60px,
-        black calc(100% - 60px),
-        transparent 100%
-    );
-    
-    -webkit-transition: -webkit-mask-image 0.3s ease;
-    transition: mask-image 0.3s ease;
-    will-change: mask-image, -webkit-mask-image;
+    position: relative;
+    --left-fog-opacity: 1;
+    --right-fog-opacity: 1;
 }
 
-.screenshots-container.mask-start {
-    -webkit-mask-image: linear-gradient(
-        to right,
-        black 0px,
-        black 60px,
-        black calc(100% - 60px),
-        transparent 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        black 0px,
-        black 60px,
-        black calc(100% - 60px),
-        transparent 100%
-    );
+.screenshots-container::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 60px;
+    background: linear-gradient(to right, var(--bg-panel) 0%, transparent 100%);
+    opacity: var(--left-fog-opacity);
+    transition: none;
+    pointer-events: none;
+    z-index: 5;
 }
 
-.screenshots-container.mask-end {
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0px,
-        black 60px,
-        black calc(100% - 60px),
-        black 100%
-    );
-    mask-image: linear-gradient(
-        to right,
-        transparent 0px,
-        black 60px,
-        black calc(100% - 60px),
-        black 100%
-    );
+.screenshots-container::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 60px;
+    background: linear-gradient(to left, var(--bg-panel) 0%, transparent 100%);
+    opacity: var(--right-fog-opacity);
+    transition: none;
+    pointer-events: none;
+    z-index: 5;
 }
 
-.screenshots-container.mask-both {
-    -webkit-mask-image: none !important;
-    mask-image: none !important;
+
+.screenshots-container:not(.mask-start):not(.mask-end):not(.mask-both)::before,
+.screenshots-container:not(.mask-start):not(.mask-end):not(.mask-both)::after {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s 0s;
+}
+
+.screenshots-container.mask-start::before {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+.screenshots-container.mask-start::after {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s 0s;
+}
+
+.screenshots-container.mask-end::before {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s 0s;
+}
+.screenshots-container.mask-end::after {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+.screenshots-container.mask-both::before,
+.screenshots-container.mask-both::after {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
 }
 
 .screenshots-container::-webkit-scrollbar {
