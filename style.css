@@ -795,6 +795,7 @@ img {
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: none;
+
     -webkit-mask-image: linear-gradient(
         to right,
         transparent 0px,
@@ -810,8 +811,9 @@ img {
         transparent 100%
     );
     
-    /* Плавный переход между состояниями маски */
-    transition: -webkit-mask-image 0.3s ease, mask-image 0.3s ease;
+    -webkit-transition: -webkit-mask-image 0.3s ease;
+    transition: mask-image 0.3s ease;
+    will-change: mask-image, -webkit-mask-image;
 }
 
 .screenshots-container.mask-start {
