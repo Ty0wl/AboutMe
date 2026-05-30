@@ -494,6 +494,7 @@ function initCustomScrollbar() {
         scrollCurrent += (scrollTarget - scrollCurrent) * 0.12;
         container.scrollLeft = scrollCurrent;
         updateThumbPosition();
+        updateFogOpacity();
 
         // Если разница меньше 0.5px, останавливаем анимацию
         if (Math.abs(scrollTarget - scrollCurrent) > 0.5) {
@@ -602,6 +603,7 @@ function updateFogOpacity() {
         scrollCurrent = scrollTarget;
         container.scrollLeft = scrollCurrent;
         updateThumbPosition();
+        updateFogOpacity();
     };
 
     const onDragEnd = () => {
@@ -621,6 +623,7 @@ function updateFogOpacity() {
         scrollTarget = percent * maxScroll;
         scrollCurrent = container.scrollLeft;
         if (!scrollRaf) scrollRaf = requestAnimationFrame(smoothScrollLoop);
+        updateFogOpacity();
     };
 
     // Навешиваем обработчики
