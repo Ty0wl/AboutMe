@@ -824,43 +824,6 @@ img {
     z-index: 5;
 }
 
-
-.screenshots-container:not(.mask-start):not(.mask-end):not(.mask-both)::before,
-.screenshots-container:not(.mask-start):not(.mask-end):not(.mask-both)::after {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s ease, visibility 0s 0s;
-}
-
-.screenshots-container.mask-start::before {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s 0.3s;
-}
-.screenshots-container.mask-start::after {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s ease, visibility 0s 0s;
-}
-
-.screenshots-container.mask-end::before {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s ease, visibility 0s 0s;
-}
-.screenshots-container.mask-end::after {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s 0.3s;
-}
-
-.screenshots-container.mask-both::before,
-.screenshots-container.mask-both::after {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s 0.3s;
-}
-
 .screenshots-container::-webkit-scrollbar {
     display: none !important;
 }
@@ -877,6 +840,7 @@ img {
     image-rendering: auto;
     -webkit-image-rendering: auto;
 }
+
 .screenshot-item:hover {
     border-color: var(--accent);
     transform: scale(1.02);
