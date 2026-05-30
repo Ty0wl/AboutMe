@@ -482,69 +482,47 @@ function initCustomScrollbar() {
 
     let isDragging = false;
     let thumbRaf = null;
-
-    // ПЕРЕМЕННЫЕ ДЛЯ ПЛАВНОГО СКРОЛЛА
     let scrollTarget = 0;
     let scrollCurrent = 0;
     let scrollRaf = null;
 
-    // Функция плавной интерполяции (Lerp)
     function smoothScrollLoop() {
-        // Двигаемся на 12% к цели каждый кадр (регулируй 0.12 для большей/меньшей плавности)
         scrollCurrent += (scrollTarget - scrollCurrent) * 0.12;
         container.scrollLeft = scrollCurrent;
         updateThumbPosition();
         updateFogOpacity();
-
-        // Если разница меньше 0.5px, останавливаем анимацию
+        
         if (Math.abs(scrollTarget - scrollCurrent) > 0.5) {
             scrollRaf = requestAnimationFrame(smoothScrollLoop);
         } else {
             scrollRaf = null;
-            scrollCurrent = scrollTarget; // Фиксируем точное значение
+            scrollCurrent = scrollTarget;
         }
     }
 
-function updateFogOpacity() {
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    
-    console.log('DEBUG:', {
-        scrollWidth: container.scrollWidth,
-        clientWidth: container.clientWidth,
-        maxScroll: maxScroll,
-        currentScroll: container.scrollLeft
-    });
-    
-    if (maxScroll <= 1) {
-        console.log('Нет скролла, скрываем обе дымки');
-        container.style.setProperty('--left-fog-opacity', '0');
-        container.style.setProperty('--right-fog-opacity', '0');
-        return;
+    function updateFogOpacity() {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        
+        if (maxScroll <= 1) {
+            container.style.setProperty('--left-fog-opacity', '0');
+            container.style.setProperty('--right-fog-opacity', '0');
+            return;
+        }
+
+        const currentScroll = container.scrollLeft;
+        const progress = currentScroll / maxScroll;
+
+        // Пороговые переключения
+        const leftOp = progress >= 0.1 ? 1 : 0;
+        const rightOp = progress <= 0.9 ? 1 : 0;
+
+        container.style.setProperty('--left-fog-opacity', leftOp);
+        container.style.setProperty('--right-fog-opacity', rightOp);
     }
 
-    const currentScroll = container.scrollLeft;
-    const fadeZone = 200;
-
-    let leftOp = 1 - (currentScroll / fadeZone);
-    leftOp = Math.max(0, Math.min(1, leftOp));
-    
-    let rightOp = 1 - ((maxScroll - currentScroll) / fadeZone);
-    rightOp = Math.max(0, Math.min(1, rightOp));
-    
-    console.log('🌫️ Fog opacity:', {
-        leftOp: leftOp.toFixed(3),
-        rightOp: rightOp.toFixed(3),
-        fadeZone: fadeZone,
-        distanceFromEnd: (maxScroll - currentScroll)
-    });
-    
-    container.style.setProperty('--left-fog-opacity', leftOp);
-    container.style.setProperty('--right-fog-opacity', rightOp);
-}
-
-    // Обновление позиции ползунка (для перетаскивания и синхронизации)
     function updateThumbPosition() {
         if (thumbRaf) return;
+        
         thumbRaf = requestAnimationFrame(() => {
             const scrollWidth = container.scrollWidth;
             const clientWidth = container.clientWidth;
@@ -560,24 +538,24 @@ function updateFogOpacity() {
             scrollbar.style.opacity = '1';
             scrollbar.style.pointerEvents = 'auto';
             
-            const thumbWidth = Math.max(50, (clientWidth / scrollWidth) * clientWidth);
+            const thumbWidth = Math.max(40, (clientWidth / scrollWidth) * clientWidth);
             thumb.style.width = thumbWidth + 'px';
             
             const maxScroll = scrollWidth - clientWidth;
             const percent = maxScroll > 0 ? scrollLeft / maxScroll : 0;
             const availableTrack = clientWidth - thumbWidth;
             
-            thumb.style.left = (percent * availableTrack) + 'px';
+            // Клампинг: держит ползунок внутри трека
+            const clampedLeft = Math.max(0, Math.min(availableTrack, percent * availableTrack));
+            thumb.style.left = clampedLeft + 'px';
+            
             thumbRaf = null;
         });
     }
 
-    // КОЛЁСИКО: накапливаем дельту и запускаем плавный цикл
     scrollArea.addEventListener('wheel', (e) => {
         e.preventDefault();
-        
-        scrollTarget += e.deltaY * 0.8; // Чувствительность прокрутки
-        // Ограничиваем в пределах контента
+        scrollTarget += e.deltaY * 0.8;
         scrollTarget = Math.max(0, Math.min(scrollTarget, container.scrollWidth - container.clientWidth));
         
         if (!scrollRaf) {
@@ -591,13 +569,10 @@ function updateFogOpacity() {
         updateFogOpacity();
     }, { passive: true });
 
-    // Перетаскивание ползунка
     const onDragStart = (e) => {
         isDragging = true;
         document.body.style.cursor = 'grabbing';
         e.preventDefault();
-        
-        // Останавливаем плавный скролл, чтобы не конфликтовал с drag
         if (scrollRaf) {
             cancelAnimationFrame(scrollRaf);
             scrollRaf = null;
@@ -613,7 +588,6 @@ function updateFogOpacity() {
         const percent = mouseX / rect.width;
         const maxScroll = container.scrollWidth - container.clientWidth;
         
-        // Синхронизируем целевую и текущую позицию, чтобы после drag всё работало ровно
         scrollTarget = percent * maxScroll;
         scrollCurrent = scrollTarget;
         container.scrollLeft = scrollCurrent;
@@ -641,15 +615,14 @@ function updateFogOpacity() {
         updateFogOpacity();
     };
 
-    // Навешиваем обработчики
     thumb.addEventListener('mousedown', onDragStart, { passive: false });
     document.addEventListener('mousemove', onDragMove, { passive: true });
     document.addEventListener('mouseup', onDragEnd, { passive: true });
     scrollbar.addEventListener('click', onTrackClick, { passive: true });
 
-    // Инициализация
     updateThumbPosition();
     updateFogOpacity();
+    
     return () => {
         if (scrollRaf) cancelAnimationFrame(scrollRaf);
         if (thumbRaf) cancelAnimationFrame(thumbRaf);

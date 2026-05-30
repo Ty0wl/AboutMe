@@ -800,28 +800,27 @@ img {
     --right-fog-opacity: 1;
 }
 
-.screenshots-container::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 60px;
-    background: linear-gradient(to right, var(--bg-panel) 0%, transparent 100%);
-    opacity: var(--left-fog-opacity);
-    transition: none;
-    pointer-events: none;
-    z-index: 5;
-}
-
+.screenshots-container::before,
 .screenshots-container::after {
     content: '';
     position: absolute;
-    right: 0; top: 0; bottom: 0;
+    top: 0; bottom: 0;
     width: 60px;
-    background: linear-gradient(to left, var(--bg-panel) 0%, transparent 100%);
-    opacity: var(--right-fog-opacity);
-    transition: none;
     pointer-events: none;
     z-index: 5;
+    transition: opacity 0.3s ease;
+}
+
+.screenshots-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-panel) 0%, transparent 100%);
+    opacity: var(--left-fog-opacity);
+}
+
+.screenshots-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-panel) 0%, transparent 100%);
+    opacity: var(--right-fog-opacity);
 }
 
 .screenshots-container::-webkit-scrollbar {
@@ -857,6 +856,7 @@ img {
     cursor: pointer;
     position: relative;
     margin-bottom: 10px;
+    overflow: hidden;
 }
 
 .custom-scrollbar-thumb {
