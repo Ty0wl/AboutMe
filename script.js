@@ -515,7 +515,7 @@ function initCustomScrollbar() {
     scrollArea.addEventListener('wheel', (e) => {
         if (container.scrollWidth <= container.clientWidth) return;
         e.preventDefault();
-        container.scrollLeft += e.deltaY * 1.2;
+        container.scrollLeft += e.deltaY * 0.8;
         updateThumbPosition();
     }, { passive: false });
 
