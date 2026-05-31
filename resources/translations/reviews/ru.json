@@ -1,7 +1,6 @@
 {
     "1": {
         "title": "Hollow Knight: Voidheart Edition",
-        "icon": "resources/gfx/ui/game_icons/hollow_knight.png",
         "quote": "Эталон качественной метроидвании",
     
         "ratings": {
@@ -22,8 +21,6 @@
         "meta": {
             "optimization": "Без багов",
             "duration": "≈ 45 часов"
-        },
-
-        "verdict": "A"
+        }
     }
 }
