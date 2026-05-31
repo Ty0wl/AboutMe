@@ -754,3 +754,33 @@ function initCustomScrollbar() {
 
     updateThumbPosition();
 }
+
+function applyReviewTranslations() {
+    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
+    const elements = document.querySelectorAll('#review-stats [data-i18n]');
+    
+    console.log(`🔍 Найдено элементов для перевода: ${elements.length}`);
+    
+    const translations = {
+        'review_gameplay': currentLang === 'en' ? 'Gameplay' : 'Геймплей',
+        'review_story': currentLang === 'en' ? 'Story' : 'Сюжет',
+        'review_graphics': currentLang === 'en' ? 'Graphics' : 'Графика',
+        'review_music': currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
+        'review_difficulty': currentLang === 'en' ? 'Difficulty' : 'Сложность',
+        'review_optimization': currentLang === 'en' ? 'Optimization' : 'Оптимизация',
+        'review_duration': currentLang === 'en' ? 'Duration' : 'Продолжительность',
+        'review_verdict': currentLang === 'en' ? 'Final Verdict' : 'Итоговая оценка'
+    };
+    
+    elements.forEach((el, index) => {
+        const key = el.getAttribute('data-i18n');
+        console.log(`  [${index}] Ключ: ${key}, Текст: "${el.textContent}"`);
+        
+        if (translations[key]) {
+            el.textContent = translations[key];
+            console.log(`    ✅ Переведено на: "${translations[key]}"`);
+        } else {
+            console.log(`    ❌ Перевод не найден!`);
+        }
+    });
+}
