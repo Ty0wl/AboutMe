@@ -23,5 +23,11 @@
     "th_genre": "Жанр",
     "th_name": "Название",
     "th_grade": "Оценка",
-    "toast_text": "Рецензия ещё не добавлена!"
+    "toast_text": "Рецензия ещё не добавлена!",
+    "review_gameplay": "Геймплей:",
+    "review_story": "Сюжет:",
+    "review_music": "Музыка и звуки:",
+    "review_difficulty": "Сложность:",
+    "review_optimization": "Оптимизация:",
+    "review_duration": "Продолжительность:"
 }

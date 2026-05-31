@@ -23,5 +23,11 @@
     "th_genre": "Genre",
     "th_name": "Name",
     "th_grade": "Grade",
-    "toast_text": "Review not added yet!"
+    "toast_text": "Review not added yet!",
+    "review_gameplay": "Gameplay:",
+    "review_story": "Story:",
+    "review_music": "Music & Sounds:",
+    "review_difficulty": "Difficulty:",
+    "review_optimization": "Optimization:",
+    "review_duration": "Duration:"
 }
