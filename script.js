@@ -243,14 +243,25 @@ function renderRatingIcons(value, type = 'star', max = 5) {
 function renderReviewStats(container, data) {
     if (!data.ratings && !data.meta) return;
     
+    // Получаем переводы (или используем русские по умолчанию)
+    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
+    const translations = {
+        gameplay: currentLang === 'en' ? 'Gameplay' : 'Геймплей',
+        story: currentLang === 'en' ? 'Story' : 'Сюжет',
+        music: currentLang === 'en' ? 'Music' : 'Музыка',
+        difficulty: currentLang === 'en' ? 'Difficulty' : 'Сложность',
+        optimization: currentLang === 'en' ? 'Optimization' : 'Оптимизация',
+        duration: currentLang === 'en' ? 'Duration' : 'Продолжительность'
+    };
+    
     let html = '<div class="review-stats">';
     
-    // === 1. Основные категории (Геймплей, Сюжет, Музыка, Сложность) ===
+    // Основные категории
     const categories = [
-        { key: 'gameplay', label: 'Геймплей', type: 'star' },
-        { key: 'story', label: 'Сюжет', type: 'star' },
-        { key: 'music', label: 'Музыка', type: 'star' },
-        { key: 'difficulty', label: 'Сложность', type: 'skull' }
+        { key: 'gameplay', label: translations.gameplay, type: 'star' },
+        { key: 'story', label: translations.story, type: 'star' },
+        { key: 'music', label: translations.music, type: 'star' },
+        { key: 'difficulty', label: translations.difficulty, type: 'skull' }
     ];
 
     categories.forEach(cat => {
@@ -269,17 +280,17 @@ function renderReviewStats(container, data) {
         html += `</div>`;
     });
     
-    html += '</div>'; // Закрываем .review-stats
+    html += '</div>';
     
-    // === 2. Технические параметры (Оптимизация, Время) — БЕЗ разделителя ===
+    // Технические параметры
     if (data.meta) {
         html += '<div class="review-meta">';
         
         if (data.meta.optimization) {
-            html += `<div class="meta-item">Оптимизация: <span class="meta-value">${data.meta.optimization}</span></div>`;
+            html += `<div class="meta-item">${translations.optimization}: <span class="meta-value">${data.meta.optimization}</span></div>`;
         }
         if (data.meta.duration) {
-            html += `<div class="meta-item">Продолжительность: <span class="meta-value">${data.meta.duration}</span></div>`;
+            html += `<div class="meta-item">${translations.duration}: <span class="meta-value">${data.meta.duration}</span></div>`;
         }
         
         html += '</div>';
