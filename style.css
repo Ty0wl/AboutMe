@@ -491,20 +491,21 @@ body {
 }
 
 .rating-icons {
-    display: flex;
+    display: inline-flex;
     gap: 6px;
     align-items: center;
-    margin-top: -3px;
 }
-
 .rating-icon {
     width: 32px !important;
     height: 32px !important;
+    vertical-align: -3px;
     image-rendering: pixelated !important;
     image-rendering: -moz-crisp-edges !important;
     image-rendering: crisp-edges !important;
     object-fit: contain;
     pointer-events: auto !important;
+    -webkit-transform: translateZ(0); 
+    transform: translateZ(0);
 }
 
 .stat-desc {
@@ -521,24 +522,22 @@ body {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: 12px;
-    padding-top: 0;
-    border-top: none;
+    margin-top: 20px;
 }
 
 .meta-item {
     display: flex;
     align-items: baseline;
-    gap: 6px;
+    gap: 8px;
     font-family: 'PixelTitle', sans-serif;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .meta-value {
     font-family: 'PixelTitle', sans-serif;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: normal;
 }
 
