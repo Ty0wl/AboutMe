@@ -202,7 +202,6 @@ body {
     margin-right: auto;
 }
 
-/* Легенда */
 .legend-box {
     background-color: var(--bg-panel);
     padding: 20px;
@@ -237,7 +236,6 @@ body {
     font-size: 15px;
 }
 
-/* Панель сортировки */
 .sort-panel {
     background-color: var(--bg-panel);
     padding: 15px 20px;
@@ -276,7 +274,6 @@ body {
     background-color: var(--border);
 }
 
-/* Таблица */
 .table-wrapper {
     overflow-x: auto;
     background-color: var(--bg-panel);
@@ -323,7 +320,6 @@ body {
     margin: 0 auto;
 }
 
-/* Бейджи оценок */
 .grade-badge {
     display: inline-flex;
     align-items: center;
@@ -350,7 +346,6 @@ body {
     filter: brightness(1.2) drop-shadow(0 0 4px rgba(255,255,255,0.4));
 }
 
-/* ===== ИНДИКАТОР НАЛИЧИЯ РЕЦЕНЗИИ (БЛИК) ===== */
 .grade-badge.has-review {
     position: relative;
     overflow: hidden;
@@ -363,19 +358,9 @@ body {
     left: -100%;
     width: 50%;
     height: 200%;
-    
-    background: linear-gradient(
-        120deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.4) 45%,
-        rgba(255, 255, 255, 0.7) 50%,
-        rgba(255, 255, 255, 0.4) 55%,
-        transparent 100%
-    );
-    
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.4) 45%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.4) 55%, transparent 100%);
     transform: skewX(-20deg);
     pointer-events: none;
-    
     animation: review-shine 2.5s ease-out infinite;
     animation-play-state: running;
     opacity: 1;
@@ -433,8 +418,7 @@ body {
     transition: transform 0.2s;
 }
 
-/* --- НОВЫЕ СТИЛИ ДЛЯ СТРУКТУРЫ РЕЦЕНЗИИ --- */
-
+/* ===== РЕЦЕНЗИЯ: ЗАГОЛОВОК И ЦИТАТА ===== */
 .review-header {
     display: flex;
     justify-content: center;
@@ -463,6 +447,7 @@ body {
     padding: 0;
 }
 
+/* ===== РЕЦЕНЗИЯ: ОЦЕНКИ И ОПИСАНИЯ ===== */
 .review-stats {
     display: flex;
     flex-direction: column;
@@ -555,7 +540,6 @@ body {
     image-rendering: pixelated !important;
     image-rendering: -moz-crisp-edges !important;
     image-rendering: crisp-edges !important;
-    
     object-fit: contain;
     pointer-events: auto !important;
 }
@@ -576,9 +560,10 @@ body {
     font-weight: normal;
 }
 
+/* ===== РЕЦЕНЗИЯ: ИТОГОВАЯ ОЦЕНКА ===== */
 .review-verdict {
-    margin-top: 30px;
-    padding-top: 24px;
+    margin-top: 16px;
+    padding-top: 8px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -620,15 +605,13 @@ body {
     border: 2px solid #FFFFFF;
     cursor: pointer;
     transition: transform 0.2s ease, filter 0.2s ease;
-    position: relative;
-    overflow: hidden;
     line-height: 1;
-    padding: 0;
+    padding: 0 !important;
     text-align: center;
-    vertical-align: middle;
+    margin: 0 auto;
+    position: relative;
 }
 
-/* Цвета оценок как в легенде */
 .verdict-a { background-color: #13AD66; }
 .verdict-b { background-color: #91DB69; }
 .verdict-c { background-color: #4D9BE6; }
@@ -641,7 +624,7 @@ body {
     filter: brightness(1.2) drop-shadow(0 0 8px rgba(255,255,255,0.5));
 }
 
-/* ===== СКРИНШОТЫ ИЗ STEAM В МОДАЛЬНОМ ОКНЕ ===== */
+/* ===== СКРИНШОТЫ ===== */
 .screenshots-container {
     display: flex !important;
     flex-direction: row !important;
@@ -674,7 +657,7 @@ body {
     transition: border-color 0.2s;
 }
 
-/* КАСТОМНЫЙ СКРОЛЛБАР */
+/* ===== СКРОЛЛБАР ===== */
 .custom-scrollbar {
     width: 100%;
     height: 12px;
@@ -707,29 +690,27 @@ body {
     cursor: grabbing;
 }
 
-/* ===== ХИТБОКС ПРОКРУТКИ СКРИНШОТОВ ===== */
 .screenshots-scroll-area {
     position: relative;
     width: 100%;
-    height: 260px; /* Высота блока скриншотов */
+    height: 260px;
     margin: 20px 0 10px 0;
     background: transparent;
     z-index: 10;
     cursor: default;
-    pointer-events: none; /* Прозрачен для мыши, чтобы работали ховеры скриншотов */
+    pointer-events: none;
 }
 
 .screenshots-scroll-area > * {
-    pointer-events: auto; /* Дочерние элементы (скриншоты) кликабельны */
+    pointer-events: auto;
 }
 
-/* ===== УВЕДОМЛЕНИЕ (TOAST) ===== */
+/* ===== TOAST ===== */
 .toast-notification {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translate(-50%, 150%);
-    
     display: flex;
     background-color: var(--bg-panel);
     border: 2px solid #F04F78;
@@ -739,7 +720,6 @@ body {
     gap: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.7);
     max-width: 90vw;
-    
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.4s;
@@ -770,7 +750,7 @@ body {
 }
 .toast-close-btn:hover .toast-close-icon { filter: brightness(1.2); }
 
-/* ===== СТИЛИ ДЛЯ ВЫБОРА ЯЗЫКА ===== */
+/* ===== ЯЗЫК ===== */
 .lang-select-wrapper {
     position: relative;
     display: inline-block;
@@ -807,7 +787,7 @@ body {
     font-size: 10px;
 }
 
-/* ===== ПАНЕЛЬ НАСТРОЕК ===== */
+/* ===== НАСТРОЙКИ ===== */
 .settings-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -860,7 +840,6 @@ body {
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
 /* ===== ЗАЩИТА КОНТЕНТА ===== */
-
 body, p, span, h1, h2, h3, h4, h5, h6, td, th, 
 .welcome-desc, .main-text, .modal-text, .legend-item,
 .grade-badge, .screenshot-item {
@@ -891,7 +870,7 @@ img {
     -o-user-drag: none !important;
 }
 
-/* ===== СТРАНИЦА ЧЕЙНДЖЛОГА ===== */
+/* ===== ЧЕЙНДЖЛОГ ===== */
 .changelog-container { margin-top: 80px; padding: 30px 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
 .changelog-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; position: relative; }
 .changelog-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
@@ -911,271 +890,75 @@ img {
 
 /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
 @media (max-width: 768px) {
-    /* === Базовые настройки === */
-    body {
-        font-size: 12px;
-    }
-
-    /* === Навигация === */
-    .navbar {
-        padding: 4px 8px;
-    }
-    .nav-buttons {
-        gap: 6px;
-    }
-    .nav-btn {
-        width: 36px !important;
-        height: 36px !important;
-    }
-    .nav-icon {
-        width: 20px !important;
-        height: 20px !important;
-    }
-    .nav-brand {
-        font-size: 11px;
-    }
-
-    /* === ГЛАВНАЯ СТРАНИЦА (кот + текст) === */
-    .home-container {
-        flex-direction: column;
-        margin-top: 60px;
-        padding: 20px 15px;
-        gap: 25px;
-    }
-    .cat-section {
-        flex: 0 0 100%;
-        width: 100%;
-    }
-    .cat-image {
-        max-width: 100% !important;
-        width: 100%;
-        height: auto;
-    }
-    .text-section {
-        flex: 1;
-        text-align: center;
-        width: 100%;
-    }
-    .main-title {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-    .main-text {
-        font-size: 13px;
-        line-height: 1.6;
-    }
-
-    /* === ЛЕГЕНДА ОЦЕНОК (возвращаем сетку) === */
-    .legend-box {
-        padding: 15px;
-    }
-    .legend-title {
-        font-size: 16px;
-        margin-bottom: 12px;
-    }
-    .legend-items {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 8px !important;
-    }
-    .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        justify-content: flex-start;
-        background: rgba(0,0,0,0.1);
-        border-radius: 4px;
-        padding: 8px 10px;
-        font-size: 12px;
-        flex-wrap: nowrap;
-    }
-    .legend-item .grade-badge {
-        width: 28px !important;
-        height: 28px !important;
-        font-size: 14px !important;
-        flex-shrink: 0;
-    }
-
-    /* === СОРТИРОВКА (возвращаем сетку) === */
-    .sort-panel {
-        padding: 12px 15px;
-        margin-bottom: 15px;
-        gap: 8px;
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .sort-label {
-        font-size: 12px;
-        margin-right: 0;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 5px;
-    }
-    .sort-btn {
-        font-size: 11px !important;
-        padding: 6px 10px !important;
-        flex: 1 1 calc(33.333% - 8px);
-        min-width: 80px;
-    }
-
-    /* === ТАБЛИЦА ИГР === */
-    .table-wrapper {
-        overflow-x: auto;
-    }
-    .games-table {
-        font-size: 10px !important;
-        min-width: 600px;
-    }
-    .games-table th {
-        font-size: 11px !important;
-        padding: 6px 4px !important;
-    }
-    .games-table td {
-        padding: 6px 4px !important;
-    }
-    .game-cover {
-        width: 48px !important;
-        height: 48px !important;
-    }
-    .grade-badge {
-        width: 32px !important;
-        height: 32px !important;
-        font-size: 13px !important;
-    }
-
-    /* === МОДАЛЬНОЕ ОКНО РЕЦЕНЗИИ === */
-    .modal-overlay {
-        align-items: flex-start;
-        padding: 10px 0;
-    }
-    .modal-content {
-        padding: 20px 15px !important;
-        width: 95% !important;
-        max-height: 95vh;
-        overflow-y: auto;
-        margin: 10px auto;
-    }
-    .modal-close-btn {
-        top: 10px;
-        right: 10px;
-    }
-    .close-icon {
-        width: 28px !important;
-        height: 28px !important;
-    }
-
-    .review-header {
-        margin-bottom: 8px;
-    }
-    .review-title {
-        font-size: 18px !important;
-    }
-    .review-quote {
-        font-size: 14px !important;
-        max-width: 100%;
-        margin-bottom: 15px;
-        padding: 0 5px;
-    }
-
-    .screenshots-scroll-area {
-        height: auto !important;
-        margin: 15px 0 8px 0;
-    }
-    .screenshot-item {
-        width: 85vw !important;
-        height: auto !important;
-        aspect-ratio: 16/9;
-        flex: 0 0 85vw !important;
-        border-width: 1px !important;
-    }
-    .custom-scrollbar {
-        height: 10px !important;
-        margin-bottom: 8px;
-    }
-
-    .stat-label {
-        font-size: 14px !important;
-    }
-    .stat-desc {
-        font-size: 11px !important;
-        line-height: 1.4;
-    }
+    body { font-size: 12px; }
+    .navbar { padding: 4px 8px; }
+    .nav-buttons { gap: 6px; }
+    .nav-btn { width: 36px !important; height: 36px !important; }
+    .nav-icon { width: 20px !important; height: 20px !important; }
+    .nav-brand { font-size: 11px; }
     
-    /* ПОДТЯГИВАЕМ ИКОНКИ НА МОБИЛЬНЫХ */
-    .rating-icons {
-        margin-top: -6px;
-    }
-    .rating-icon {
-        width: 24px !important;
-        height: 24px !important;
-        vertical-align: 0;
-    }
-
-    .review-meta {
-        gap: 8px;
-        margin-top: 12px;
-    }
-    .meta-item {
-        font-size: 14px !important;
-    }
-    .meta-value {
-        font-size: 14px !important;
-    }
-    .verdict-badge {
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 20px !important;
-        padding: 0 !important;
-    }
-    .toast-notification {
-        padding: 10px 15px !important;
-        bottom: 12px;
-        gap: 10px;
-        max-width: 95vw;
-    }
-    .toast-notification span {
-        font-size: 11px !important;
-    }
-    .toast-close-icon {
-        width: 22px !important;
-        height: 22px !important;
-    }
-
-    /* === ПАНЕЛЬ НАСТРОЕК === */
-    .settings-panel {
-        width: 90% !important;
-        padding: 15px;
-    }
-    .settings-header h3 {
-        font-size: 16px;
-    }
-    .setting-item {
-        font-size: 12px;
-    }
-    .pixel-select {
-        font-size: 11px;
-        padding: 5px 25px 5px 8px;
-    }
-
-    /* === Чейнджлог === */
-    .changelog-title {
-        font-size: 18px;
-    }
-    .changelog-desc {
-        font-size: 11px;
-    }
-    .version-number {
-        font-size: 14px;
-    }
-    .version-content {
-        font-size: 11px;
-        line-height: 1.4;
-    }
-
-    /* === Частицы (адаптация) === */
-    .legend-box .grade-badge {
-        width: 28px !important;
-        height: 28px !important;
-    }
+    .home-container { flex-direction: column; margin-top: 60px; padding: 20px 15px; gap: 25px; }
+    .cat-section { flex: 0 0 100%; width: 100%; }
+    .cat-image { max-width: 100% !important; width: 100%; height: auto; }
+    .text-section { flex: 1; text-align: center; width: 100%; }
+    .main-title { font-size: 20px; margin-bottom: 20px; }
+    .main-text { font-size: 13px; line-height: 1.6; }
     
+    .legend-box { padding: 15px; }
+    .legend-title { font-size: 16px; margin-bottom: 12px; }
+    .legend-items { display: grid !important; grid-template-columns: 1fr !important; gap: 8px !important; }
+    .legend-item { display: flex; align-items: center; gap: 10px; justify-content: flex-start; background: rgba(0,0,0,0.1); border-radius: 4px; padding: 8px 10px; font-size: 12px; flex-wrap: nowrap; }
+    .legend-item .grade-badge { width: 28px !important; height: 28px !important; font-size: 14px !important; flex-shrink: 0; }
+    
+    .sort-panel { padding: 12px 15px; margin-bottom: 15px; gap: 8px; display: flex; flex-wrap: wrap; }
+    .sort-label { font-size: 12px; margin-right: 0; width: 100%; text-align: center; margin-bottom: 5px; }
+    .sort-btn { font-size: 11px !important; padding: 6px 10px !important; flex: 1 1 calc(33.333% - 8px); min-width: 80px; }
+    
+    .table-wrapper { overflow-x: auto; }
+    .games-table { font-size: 10px !important; min-width: 600px; }
+    .games-table th { font-size: 11px !important; padding: 6px 4px !important; }
+    .games-table td { padding: 6px 4px !important; }
+    .game-cover { width: 48px !important; height: 48px !important; }
+    .grade-badge { width: 32px !important; height: 32px !important; font-size: 13px !important; }
+    
+    .modal-overlay { align-items: flex-start; padding: 10px 0; }
+    .modal-content { padding: 20px 15px !important; width: 95% !important; max-height: 95vh; overflow-y: auto; margin: 10px auto; }
+    .modal-close-btn { top: 10px; right: 10px; }
+    .close-icon { width: 28px !important; height: 28px !important; }
+    
+    .review-header { margin-bottom: 8px; }
+    .review-title { font-size: 18px !important; }
+    .review-quote { font-size: 14px !important; max-width: 100%; margin-bottom: 15px; padding: 0 5px; }
+    
+    .screenshots-scroll-area { height: auto !important; margin: 15px 0 8px 0; }
+    .screenshot-item { width: 85vw !important; height: auto !important; aspect-ratio: 16/9; flex: 0 0 85vw !important; border-width: 1px !important; }
+    .custom-scrollbar { height: 10px !important; margin-bottom: 8px; }
+    
+    .stat-label { font-size: 14px !important; }
+    .stat-desc { font-size: 11px !important; line-height: 1.4; }
+    
+    .rating-icons { margin-top: -6px; }
+    .rating-icon { width: 24px !important; height: 24px !important; vertical-align: 0; }
+    
+    .review-meta { gap: 8px; margin-top: 12px; }
+    .meta-item { font-size: 14px !important; }
+    .meta-value { font-size: 14px !important; }
+    
+    .verdict-badge { width: 48px !important; height: 48px !important; font-size: 20px !important; padding: 0 !important; }
+    
+    .toast-notification { padding: 10px 15px !important; bottom: 12px; gap: 10px; max-width: 95vw; }
+    .toast-notification span { font-size: 11px !important; }
+    .toast-close-icon { width: 22px !important; height: 22px !important; }
+    
+    .settings-panel { width: 90% !important; padding: 15px; }
+    .settings-header h3 { font-size: 16px; }
+    .setting-item { font-size: 12px; }
+    .pixel-select { font-size: 11px; padding: 5px 25px 5px 8px; }
+    
+    .changelog-title { font-size: 18px; }
+    .changelog-desc { font-size: 11px; }
+    .version-number { font-size: 14px; }
+    .version-content { font-size: 11px; line-height: 1.4; }
+    
+    .legend-box .grade-badge { width: 28px !important; height: 28px !important; }
 }

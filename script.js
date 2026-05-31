@@ -12,7 +12,7 @@ const settings = {
     currentPage: 'index'
 };
 
-// Пути к иконкам рейтингов (НАСТРОЙ ЭТИ ПУТИ ПОД СВОЙ РЕПОЗИТОРИЙ)
+// Пути к иконкам рейтингов
 const RATING_ICONS = {
     star: {
         empty: 'resources/gfx/ui/rating/star_empty.png',
@@ -32,7 +32,7 @@ function detectCurrentPage() {
     return 'index';
 }
 
-// ===== ИНИЦИАЛИЗАЦИЯ (ОДИН ВЫЗОВ) =====
+// ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('Инициализация сайта...');
     try {
@@ -221,8 +221,7 @@ function spawnParticles(originX, originY, imagePath) {
 
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
 
-// Генерация HTML для иконок рейтинга
-
+// Генерация иконок рейтинга
 function renderRatingIcons(value, type = 'star', max = 5) {
     const icons = RATING_ICONS[type];
     let html = '<div class="rating-icons">';
@@ -231,8 +230,8 @@ function renderRatingIcons(value, type = 'star', max = 5) {
         html += `<img src="${src}" 
                         alt="${i <= value ? 'filled' : 'empty'}" 
                         class="rating-icon" 
-                        width="32" 
-                        height="32"
+                        width="24" 
+                        height="24"
                         draggable="false"
                         loading="lazy">`;
     }
@@ -240,14 +239,13 @@ function renderRatingIcons(value, type = 'star', max = 5) {
     return html;
 }
 
-// Рендер блока оценок и описаний (Блок 4)
-// Рендер блока оценок и описаний (Блок 4)
+// Рендер блока оценок и описаний
 function renderReviewStats(container, data) {
     if (!data.ratings && !data.meta && !data.verdict) return;
     
     let html = '<div class="review-stats">';
     
-    // Категории с data-i18n атрибутами
+    // Категории с data-i18n
     const categories = [
         { key: 'gameplay', i18n: 'review_gameplay', type: 'star' },
         { key: 'story', i18n: 'review_story', type: 'star' },
@@ -311,9 +309,10 @@ function renderReviewStats(container, data) {
     
     container.insertAdjacentHTML('beforeend', html);
     
-    // Применяем переводы для новых элементов
+    // Применяем переводы
     applyReviewTranslations();
     
+    // Партиклы для вердикта
     setTimeout(() => {
         const verdictBadge = document.getElementById('verdict-badge');
         if (verdictBadge) {
@@ -324,14 +323,13 @@ function renderReviewStats(container, data) {
     }, 100);
 }
 
-// 🔥 Новая функция для применения переводов к элементам рецензии
+// Применение переводов к элементам рецензии
 function applyReviewTranslations() {
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
     const elements = document.querySelectorAll('#review-stats [data-i18n]');
     
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
-        // Простая замена без загрузки JSON (так как ключи уже в коде)
         const translations = {
             'review_gameplay': currentLang === 'en' ? 'Gameplay' : 'Геймплей',
             'review_story': currentLang === 'en' ? 'Story' : 'Сюжет',
@@ -349,7 +347,7 @@ function applyReviewTranslations() {
     });
 }
 
-// Функция партиклов для вердикта
+// Партиклы для вердикта
 function spawnVerdictParticles(e) {
     const rect = e.target.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
@@ -386,19 +384,19 @@ async function openReviewModal(gameId) {
     };
     
     if (reviewData) {
-        // 1. Заголовок + Иконка
+        // Заголовок
         document.getElementById('modal-title').innerHTML = `
             <div class="review-header">
                 <span>${reviewData.title || `Game #${gameId}`}</span>
             </div>
         `;
         
-        // 2. Цитата
+        // Цитата
         const quoteText = reviewData.quote ? `"${reviewData.quote}"` : '';
         document.getElementById('modal-quote').textContent = quoteText;
         document.getElementById('modal-quote').style.display = reviewData.quote ? 'block' : 'none';
         
-        // 3. Скриншоты
+        // Скриншоты
         const screenshotsContainer = document.getElementById('modal-screenshots');
         if (screenshotsContainer && reviewData.screenshots && reviewData.screenshots.length > 0) {
             renderScreenshots(reviewData.screenshots, screenshotsContainer);
@@ -407,9 +405,9 @@ async function openReviewModal(gameId) {
             screenshotsContainer.style.display = 'none';
         }
         
-        // 4. Оценки и описания
+        // Оценки
         const statsContainer = document.getElementById('review-stats');
-        statsContainer.innerHTML = ''; // Очистка
+        statsContainer.innerHTML = '';
         renderReviewStats(statsContainer, reviewData);
     }
     
@@ -471,7 +469,7 @@ function sortGames(field) {
     setupGradeClicks();
 }
 
-/// ===== СИСТЕМА ПЕРЕВОДОВ =====
+// ===== ПЕРЕВОДЫ =====
 async function setLanguage(langCode) {
     console.log(`Загрузка языка: ${langCode}`);
     localStorage.setItem(settings.storageKey, langCode);
@@ -537,7 +535,7 @@ async function getReviewTranslation(gameId, langCode) {
     }
 }
 
-// ===== ИНИЦИАЛИЗАЦИЯ НАСТРОЕК =====
+// ===== НАСТРОЙКИ =====
 function initSettings() {
     settings.currentPage = detectCurrentPage();
     console.log(`Текущая страница: ${settings.currentPage}`);
@@ -577,7 +575,7 @@ function initSettings() {
     setLanguage(savedLang);
 }
 
-// ===== ЗАЩИТА ОТ КОПИРОВАНИЯ И ПРАВОГО КЛИКА =====
+// ===== ЗАЩИТА КОНТЕНТА =====
 function setupContentProtection() {
     document.addEventListener('contextmenu', (e) => e.preventDefault());
     document.addEventListener('selectstart', (e) => e.preventDefault());
@@ -613,7 +611,7 @@ function renderScreenshots(screenshots, container) {
         img.alt = `Screenshot ${index + 1}`;
         img.className = 'screenshot-item';
         img.loading = 'lazy';
-        img.draggable = false; // 🔥 Запрещаем перетаскивание
+        img.draggable = false;
         
         img.addEventListener('click', () => {
             window.open(screenshotUrl, '_blank');
@@ -632,7 +630,7 @@ function renderScreenshots(screenshots, container) {
     }, 150);
 }
 
-// ===== КАСТОМНЫЙ СКРОЛЛБАР + ПЛАВНАЯ ПРОКРУТКА КОЛЁСИКОМ =====
+// ===== КАСТОМНЫЙ СКРОЛЛБАР =====
 function initCustomScrollbar() {
     const container = document.getElementById('modal-screenshots');
     const scrollArea = document.querySelector('.screenshots-scroll-area');
@@ -649,7 +647,6 @@ function initCustomScrollbar() {
     let scrollCurrent = 0;
     let scrollRaf = null;
 
-    // Плавная прокрутка
     function smoothScrollLoop() {
         scrollCurrent += (scrollTarget - scrollCurrent) * 0.12;
         container.scrollLeft = scrollCurrent;
@@ -663,7 +660,6 @@ function initCustomScrollbar() {
         }
     }
 
-    // Обновление ползунка
     function updateThumbPosition() {
         if (thumbRaf) return;
         
@@ -696,7 +692,6 @@ function initCustomScrollbar() {
         });
     }
 
-    // Обработчики
     container.addEventListener('wheel', (e) => {
         e.preventDefault();
         scrollTarget += e.deltaY * 0.8;
