@@ -496,16 +496,15 @@ body {
     align-items: center;
 }
 .rating-icon {
-    width: 32px !important;
-    height: 32px !important;
-    vertical-align: -3px;
+    width: 24px !important;
+    height: 24px !important;
+    vertical-align: -2px; 
     image-rendering: pixelated !important;
     image-rendering: -moz-crisp-edges !important;
     image-rendering: crisp-edges !important;
+    
     object-fit: contain;
     pointer-events: auto !important;
-    -webkit-transform: translateZ(0); 
-    transform: translateZ(0);
 }
 
 .stat-desc {
@@ -942,8 +941,8 @@ img {
     }
 
     .rating-icon {
-        width: 24px !important;
-        height: 24px !important;
+        width: 20px !important;
+        height: 20px !important;
     }
 
     .review-meta {
