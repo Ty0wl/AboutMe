@@ -309,15 +309,14 @@ function renderReviewStats(container, data) {
         html += '</div>';
     }
 
-    // Финальная оценка (квадратный бейдж с партиклами)
     if (data.verdict) {
-        const verdictClass = `verdict-${data.verdict.toLowerCase().replace('+', '-plus').replace('-', '-')}`;
+        const verdictClass = `verdict-${data.verdict.toLowerCase()}`;
         html += `<div class="review-verdict">
-                    <span class="verdict-label">${t.verdict}</span>
-                    <div class="verdict-badge ${verdictClass}" id="verdict-badge" data-grade="${data.verdict}">
-                        ${data.verdict}
-                    </div>
-                </div>`;
+                <span class="verdict-label">${t.verdict}</span>
+                <div class="verdict-badge ${verdictClass}" id="verdict-badge" data-grade="${data.verdict}">
+                    ${data.verdict}
+                </div>
+            </div>`;
     }
     
     container.insertAdjacentHTML('beforeend', html);
@@ -333,14 +332,14 @@ function renderReviewStats(container, data) {
     }, 100);
 }
 
-// 🔥 Функция партиклов для вердикта (как в легенде)
+// Функция партиклов для вердикта
 function spawnVerdictParticles(e) {
     const rect = e.target.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
     
-    // Определяем цвет частиц по оценке
     const grade = e.target.getAttribute('data-grade') || 'A';
+    const gradeLower = grade.toLowerCase();
     
     const particleMap = {
         'a': 'resources/gfx/particles/particle_a.png',
@@ -348,7 +347,7 @@ function spawnVerdictParticles(e) {
         'c': 'resources/gfx/particles/particle_c.png',
         'd': 'resources/gfx/particles/particle_d.png',
         'e': 'resources/gfx/particles/particle_e.png',
-        'f': 'resources/gfx/particles/particle_f.png',
+        'f': 'resources/gfx/particles/particle_f.png'
     };
     
     const particlePath = particleMap[gradeLower] || 'resources/gfx/particles/particle_a.png';
