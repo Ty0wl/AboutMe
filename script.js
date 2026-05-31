@@ -239,9 +239,33 @@ function renderRatingIcons(value, type = 'star', max = 5) {
     return html;
 }
 
+// Применение переводов к элементам рецензии (вынесена вверх для надёжности)
+function applyReviewTranslations() {
+    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
+    const elements = document.querySelectorAll('#review-stats [data-i18n]');
+    
+    const translations = {
+        'review_gameplay': currentLang === 'en' ? 'Gameplay' : 'Геймплей',
+        'review_story': currentLang === 'en' ? 'Story' : 'Сюжет',
+        'review_graphics': currentLang === 'en' ? 'Graphics' : 'Графика',
+        'review_music': currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
+        'review_difficulty': currentLang === 'en' ? 'Difficulty' : 'Сложность',
+        'review_optimization': currentLang === 'en' ? 'Optimization' : 'Оптимизация',
+        'review_duration': currentLang === 'en' ? 'Duration' : 'Продолжительность',
+        'review_verdict': currentLang === 'en' ? 'Final Verdict' : 'Итоговая оценка'
+    };
+    
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[key]) {
+            el.textContent = translations[key];
+        }
+    });
+}
+
 // Рендер блока оценок и описаний
 function renderReviewStats(container, data) {
-    if (!data.ratings && !data.meta && !data.verdict) return;
+    if (!data.ratings && !data.meta) return;
     
     let html = '<div class="review-stats">';
     
@@ -295,78 +319,11 @@ function renderReviewStats(container, data) {
         
         html += '</div>';
     }
-
-    // Финальная оценка
-    if (data.verdict) {
-        const verdictClass = `verdict-${data.verdict.toLowerCase()}`;
-        html += `<div class="review-verdict">
-                    <span class="verdict-label" data-i18n="review_verdict">Loading...</span>
-                    <div class="verdict-badge ${verdictClass}" id="verdict-badge" data-grade="${data.verdict}">
-                        ${data.verdict}
-                    </div>
-                 </div>`;
-    }
     
     container.insertAdjacentHTML('beforeend', html);
     
-    // Применяем переводы
-    applyReviewTranslations();
-    
-    // Партиклы для вердикта
-    setTimeout(() => {
-        const verdictBadge = document.getElementById('verdict-badge');
-        if (verdictBadge) {
-            verdictBadge.addEventListener('click', (e) => {
-                spawnVerdictParticles(e);
-            });
-        }
-    }, 100);
-}
-
-// Применение переводов к элементам рецензии
-function applyReviewTranslations() {
-    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
-    const elements = document.querySelectorAll('#review-stats [data-i18n]');
-    
-    elements.forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        const translations = {
-            'review_gameplay': currentLang === 'en' ? 'Gameplay' : 'Геймплей',
-            'review_story': currentLang === 'en' ? 'Story' : 'Сюжет',
-            'review_graphics': currentLang === 'en' ? 'Graphics' : 'Графика',
-            'review_music': currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
-            'review_difficulty': currentLang === 'en' ? 'Difficulty' : 'Сложность',
-            'review_optimization': currentLang === 'en' ? 'Optimization' : 'Оптимизация',
-            'review_duration': currentLang === 'en' ? 'Duration' : 'Продолжительность',
-            'review_verdict': currentLang === 'en' ? 'Final Verdict' : 'Итоговая оценка'
-        };
-        
-        if (translations[key]) {
-            el.textContent = translations[key];
-        }
-    });
-}
-
-// Партиклы для вердикта
-function spawnVerdictParticles(e) {
-    const rect = e.target.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    
-    const grade = e.target.getAttribute('data-grade') || 'A';
-    const gradeLower = grade.toLowerCase();
-    
-    const particleMap = {
-        'a': 'resources/gfx/particles/particle_a.png',
-        'b': 'resources/gfx/particles/particle_b.png',
-        'c': 'resources/gfx/particles/particle_c.png',
-        'd': 'resources/gfx/particles/particle_d.png',
-        'e': 'resources/gfx/particles/particle_e.png',
-        'f': 'resources/gfx/particles/particle_f.png'
-    };
-    
-    const particlePath = particleMap[gradeLower] || 'resources/gfx/particles/particle_a.png';
-    spawnParticles(x, y, particlePath);
+    // Применяем переводы (с небольшой задержкой для гарантии рендера)
+    setTimeout(applyReviewTranslations, 10);
 }
 
 async function openReviewModal(gameId) {
@@ -753,34 +710,4 @@ function initCustomScrollbar() {
     scrollbar.addEventListener('click', onTrackClick, { passive: true });
 
     updateThumbPosition();
-}
-
-function applyReviewTranslations() {
-    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
-    const elements = document.querySelectorAll('#review-stats [data-i18n]');
-    
-    console.log(`🔍 Найдено элементов для перевода: ${elements.length}`);
-    
-    const translations = {
-        'review_gameplay': currentLang === 'en' ? 'Gameplay' : 'Геймплей',
-        'review_story': currentLang === 'en' ? 'Story' : 'Сюжет',
-        'review_graphics': currentLang === 'en' ? 'Graphics' : 'Графика',
-        'review_music': currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
-        'review_difficulty': currentLang === 'en' ? 'Difficulty' : 'Сложность',
-        'review_optimization': currentLang === 'en' ? 'Optimization' : 'Оптимизация',
-        'review_duration': currentLang === 'en' ? 'Duration' : 'Продолжительность',
-        'review_verdict': currentLang === 'en' ? 'Final Verdict' : 'Итоговая оценка'
-    };
-    
-    elements.forEach((el, index) => {
-        const key = el.getAttribute('data-i18n');
-        console.log(`  [${index}] Ключ: ${key}, Текст: "${el.textContent}"`);
-        
-        if (translations[key]) {
-            el.textContent = translations[key];
-            console.log(`    ✅ Переведено на: "${translations[key]}"`);
-        } else {
-            console.log(`    ❌ Перевод не найден!`);
-        }
-    });
 }
