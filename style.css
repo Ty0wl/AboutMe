@@ -453,7 +453,7 @@ body {
 .review-quote {
     font-family: 'PixelBody', monospace;
     color: var(--border);
-    font-size: 14px;
+    font-size: 16px;
     font-style: italic;
     text-align: center;
     margin: 0 auto 20px auto;
@@ -487,14 +487,14 @@ body {
 .stat-label {
     font-family: 'PixelTitle', sans-serif;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .rating-icons {
     display: flex;
     gap: 6px;
     align-items: center;
-    margin-top: -2px;
+    margin-top: -3px;
 }
 
 .rating-icon {
@@ -503,7 +503,6 @@ body {
     image-rendering: pixelated !important;
     image-rendering: -moz-crisp-edges !important;
     image-rendering: crisp-edges !important;
-    
     object-fit: contain;
     pointer-events: auto !important;
 }
@@ -518,11 +517,10 @@ body {
     margin-left: 4px;
 }
 
-/* Мета-информация (Оптимизация, Время) */
 .review-meta {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px 24px;
+    flex-direction: column;
+    gap: 8px;
     margin-top: 12px;
     padding-top: 0;
     border-top: none;
@@ -538,9 +536,9 @@ body {
 }
 
 .meta-value {
-    font-family: 'PixelBody', monospace;
-    color: #ccc;
-    font-size: 13px;
+    font-family: 'PixelTitle', sans-serif;
+    color: #FFFFFF;
+    font-size: 14px;
     font-weight: normal;
 }
 
@@ -932,10 +930,34 @@ img {
         font-size: 16px !important;
     }
     .review-quote {
-        font-size: 11px !important;
-        margin-bottom: 12px;
+        font-size: 14px !important;
+        margin-bottom: 15px;
     }
 
+    .stat-label {
+        font-size: 14px !important;
+    }
+
+    .rating-icons {
+        margin-top: -1px;
+    }
+
+    .rating-icon {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .review-meta {
+        gap: 6px;
+    }
+
+    .meta-item {
+        font-size: 12px !important;
+    }
+
+    .meta-value {
+        font-size: 12px !important;
+    }
     .screenshots-scroll-area {
         height: auto !important;
         margin: 12px 0 6px 0;
@@ -954,29 +976,6 @@ img {
     }
     .custom-scrollbar-thumb {
         width: 60px !important;
-    }
-
-    .stat-label {
-        font-size: 12px !important;
-    }
-    .stat-desc {
-        font-size: 11px !important;
-    }
-    .rating-icon {
-        width: 22px !important;
-        height: 22px !important;
-    }
-    .rating-icons {
-        gap: 3px;
-    }
-
-    .review-meta {
-        gap: 8px;
-        margin-top: 12px;
-        padding-top: 10px;
-    }
-    .meta-item {
-        font-size: 11px !important;
     }
 
     /* === Уведомления (Toast) === */
