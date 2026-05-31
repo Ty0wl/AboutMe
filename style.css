@@ -475,6 +475,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    padding: 12px 0;
+    position: relative;
 }
 
 .stat-item:not(:last-child)::after {
