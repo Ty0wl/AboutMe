@@ -241,27 +241,30 @@ function renderRatingIcons(value, type = 'star', max = 5) {
 
 // Рендер блока оценок и описаний (Блок 4)
 function renderReviewStats(container, data) {
-    if (!data.ratings && !data.meta) return;
+    if (!data.ratings && !data.meta && !data.verdict) return;
     
-    // Получаем переводы (или используем русские по умолчанию)
+    // Переводы (RU/EN)
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
-    const translations = {
+    const t = {
         gameplay: currentLang === 'en' ? 'Gameplay' : 'Геймплей',
         story: currentLang === 'en' ? 'Story' : 'Сюжет',
-        music: currentLang === 'en' ? 'Music' : 'Музыка',
+        graphics: currentLang === 'en' ? 'Graphics' : 'Графика',
+        music: currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
         difficulty: currentLang === 'en' ? 'Difficulty' : 'Сложность',
         optimization: currentLang === 'en' ? 'Optimization' : 'Оптимизация',
-        duration: currentLang === 'en' ? 'Duration' : 'Продолжительность'
+        duration: currentLang === 'en' ? 'Duration' : 'Продолжительность',
+        verdict: currentLang === 'en' ? 'FINAL VERDICT' : 'ОБЩИЙ ИТОГ'
     };
-    
+
     let html = '<div class="review-stats">';
     
-    // Основные категории
+    // 1. Основные категории (в нужном порядке)
     const categories = [
-        { key: 'gameplay', label: translations.gameplay, type: 'star' },
-        { key: 'story', label: translations.story, type: 'star' },
-        { key: 'music', label: translations.music, type: 'star' },
-        { key: 'difficulty', label: translations.difficulty, type: 'skull' }
+        { key: 'gameplay', label: t.gameplay, type: 'star' },
+        { key: 'story', label: t.story, type: 'star' },
+        { key: 'graphics', label: t.graphics, type: 'star' },
+        { key: 'music', label: t.music, type: 'star' },
+        { key: 'difficulty', label: t.difficulty, type: 'skull' }
     ];
 
     categories.forEach(cat => {
@@ -282,18 +285,26 @@ function renderReviewStats(container, data) {
     
     html += '</div>';
     
-    // Технические параметры
+    // 2. Технические параметры
     if (data.meta) {
         html += '<div class="review-meta">';
         
         if (data.meta.optimization) {
-            html += `<div class="meta-item">${translations.optimization}: <span class="meta-value">${data.meta.optimization}</span></div>`;
+            html += `<div class="meta-item">${t.optimization}: <span class="meta-value">${data.meta.optimization}</span></div>`;
         }
         if (data.meta.duration) {
-            html += `<div class="meta-item">${translations.duration}: <span class="meta-value">${data.meta.duration}</span></div>`;
+            html += `<div class="meta-item">${t.duration}: <span class="meta-value">${data.meta.duration}</span></div>`;
         }
         
         html += '</div>';
+    }
+
+    // 3. Финальная оценка
+    if (data.verdict) {
+        html += `<div class="review-verdict">
+                    <span class="verdict-label">${t.verdict}</span>
+                    <span class="verdict-badge">${data.verdict}</span>
+                 </div>`;
     }
     
     container.insertAdjacentHTML('beforeend', html);
