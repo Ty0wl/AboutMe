@@ -245,7 +245,6 @@ function renderRatingIcons(value, type = 'star', max = 5) {
 function renderReviewStats(container, data) {
     if (!data.ratings && !data.meta && !data.verdict) return;
     
-    // Переводы (RU/EN)
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
     const t = {
         gameplay: currentLang === 'en' ? 'Gameplay' : 'Геймплей',
@@ -260,7 +259,7 @@ function renderReviewStats(container, data) {
 
     let html = '<div class="review-stats">';
     
-    // Категации в правильном порядке
+    // Категории (все с разделителями)
     const categories = [
         { key: 'gameplay', label: t.gameplay, type: 'star' },
         { key: 'story', label: t.story, type: 'star' },
@@ -287,10 +286,11 @@ function renderReviewStats(container, data) {
     
     html += '</div>'; // Закрываем .review-stats
     
-    // Технические параметры
+    // Технические параметры (ОДИН блок без внутренних разделителей)
     if (data.meta) {
         html += '<div class="review-meta">';
         
+        // Оптимизация (с разделителем ОТ сложности)
         if (data.meta.optimization) {
             html += `<div class="stat-item">
                         <div class="stat-header">
@@ -298,8 +298,10 @@ function renderReviewStats(container, data) {
                         </div>
                     </div>`;
         }
+        
+        // Продолжительность (БЕЗ разделителя)
         if (data.meta.duration) {
-            html += `<div class="stat-item">
+            html += `<div class="stat-item no-divider">
                         <div class="stat-header">
                             <span class="stat-label">${t.duration}: <span class="meta-value">${data.meta.duration}</span></span>
                         </div>
@@ -309,19 +311,19 @@ function renderReviewStats(container, data) {
         html += '</div>';
     }
 
+    // Финальная оценка
     if (data.verdict) {
         const verdictClass = `verdict-${data.verdict.toLowerCase()}`;
         html += `<div class="review-verdict">
-                <span class="verdict-label">${t.verdict}</span>
-                <div class="verdict-badge ${verdictClass}" id="verdict-badge" data-grade="${data.verdict}">
-                    ${data.verdict}
-                </div>
-            </div>`;
+                    <span class="verdict-label">${t.verdict}</span>
+                    <div class="verdict-badge ${verdictClass}" id="verdict-badge" data-grade="${data.verdict}">
+                        ${data.verdict}
+                    </div>
+                </div>`;
     }
     
     container.insertAdjacentHTML('beforeend', html);
     
-    // Добавляем обработчик партиклов для вердикта
     setTimeout(() => {
         const verdictBadge = document.getElementById('verdict-badge');
         if (verdictBadge) {

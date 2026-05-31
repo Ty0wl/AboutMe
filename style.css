@@ -1102,11 +1102,25 @@ img {
     .meta-value {
         font-size: 14px !important;
     }
-    .verdict-badge {
-        font-size: 22px !important;
-        padding: 6px 16px;
-    }
-
+.verdict-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    font-family: 'PixelTitle', sans-serif;
+    font-size: 22px !important;
+    font-weight: bold;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    line-height: 1;
+    padding: 0;
+}
     /* === УВЕДОМЛЕНИЯ === */
     .toast-notification {
         padding: 10px 15px !important;
