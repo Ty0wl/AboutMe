@@ -245,27 +245,15 @@ function renderRatingIcons(value, type = 'star', max = 5) {
 function renderReviewStats(container, data) {
     if (!data.ratings && !data.meta && !data.verdict) return;
     
-    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
-    const t = {
-        gameplay: currentLang === 'en' ? 'Gameplay' : 'Геймплей',
-        story: currentLang === 'en' ? 'Story' : 'Сюжет',
-        graphics: currentLang === 'en' ? 'Graphics' : 'Графика',
-        music: currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
-        difficulty: currentLang === 'en' ? 'Difficulty' : 'Сложность',
-        optimization: currentLang === 'en' ? 'Optimization' : 'Оптимизация',
-        duration: currentLang === 'en' ? 'Duration' : 'Продолжительность',
-        verdict: currentLang === 'en' ? 'FINAL VERDICT' : 'ИТОГОВАЯ ОЦЕНКА'
-    };
-
     let html = '<div class="review-stats">';
     
-    // Категории (все с разделителями)
+    // Категории с data-i18n атрибутами
     const categories = [
-        { key: 'gameplay', label: t.gameplay, type: 'star' },
-        { key: 'story', label: t.story, type: 'star' },
-        { key: 'graphics', label: t.graphics, type: 'star' },
-        { key: 'music', label: t.music, type: 'star' },
-        { key: 'difficulty', label: t.difficulty, type: 'skull' }
+        { key: 'gameplay', i18n: 'review_gameplay', type: 'star' },
+        { key: 'story', i18n: 'review_story', type: 'star' },
+        { key: 'graphics', i18n: 'review_graphics', type: 'star' },
+        { key: 'music', i18n: 'review_music', type: 'star' },
+        { key: 'difficulty', i18n: 'review_difficulty', type: 'skull' }
     ];
 
     categories.forEach(cat => {
@@ -274,7 +262,7 @@ function renderReviewStats(container, data) {
         
         html += `<div class="stat-item">`;
         html += `<div class="stat-header">`;
-        html += `<span class="stat-label">${cat.label}</span>`;
+        html += `<span class="stat-label" data-i18n="${cat.i18n}">Loading...</span>`;
         html += renderRatingIcons(val, cat.type);
         html += `</div>`;
         
@@ -284,28 +272,27 @@ function renderReviewStats(container, data) {
         html += `</div>`;
     });
     
-    html += '</div>'; // Закрываем .review-stats
+    html += '</div>';
     
-    // Технические параметры (ОДИН блок без внутренних разделителей)
+    // Технические параметры
     if (data.meta) {
         html += '<div class="review-meta">';
         
-        // Оптимизация (с разделителем ОТ сложности)
         if (data.meta.optimization) {
             html += `<div class="stat-item">
                         <div class="stat-header">
-                            <span class="stat-label">${t.optimization}: <span class="meta-value">${data.meta.optimization}</span></span>
+                            <span class="stat-label" data-i18n="review_optimization">Loading...</span>
+                            <span class="meta-value">${data.meta.optimization}</span>
                         </div>
-                    </div>`;
+                     </div>`;
         }
-        
-        // Продолжительность (БЕЗ разделителя)
         if (data.meta.duration) {
             html += `<div class="stat-item no-divider">
                         <div class="stat-header">
-                            <span class="stat-label">${t.duration}: <span class="meta-value">${data.meta.duration}</span></span>
+                            <span class="stat-label" data-i18n="review_duration">Loading...</span>
+                            <span class="meta-value">${data.meta.duration}</span>
                         </div>
-                    </div>`;
+                     </div>`;
         }
         
         html += '</div>';
@@ -315,14 +302,17 @@ function renderReviewStats(container, data) {
     if (data.verdict) {
         const verdictClass = `verdict-${data.verdict.toLowerCase()}`;
         html += `<div class="review-verdict">
-                    <span class="verdict-label">${t.verdict}</span>
+                    <span class="verdict-label" data-i18n="review_verdict">Loading...</span>
                     <div class="verdict-badge ${verdictClass}" id="verdict-badge" data-grade="${data.verdict}">
                         ${data.verdict}
                     </div>
-                </div>`;
+                 </div>`;
     }
     
     container.insertAdjacentHTML('beforeend', html);
+    
+    // Применяем переводы для новых элементов
+    applyReviewTranslations();
     
     setTimeout(() => {
         const verdictBadge = document.getElementById('verdict-badge');
@@ -332,6 +322,31 @@ function renderReviewStats(container, data) {
             });
         }
     }, 100);
+}
+
+// 🔥 Новая функция для применения переводов к элементам рецензии
+function applyReviewTranslations() {
+    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
+    const elements = document.querySelectorAll('#review-stats [data-i18n]');
+    
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        // Простая замена без загрузки JSON (так как ключи уже в коде)
+        const translations = {
+            'review_gameplay': currentLang === 'en' ? 'Gameplay' : 'Геймплей',
+            'review_story': currentLang === 'en' ? 'Story' : 'Сюжет',
+            'review_graphics': currentLang === 'en' ? 'Graphics' : 'Графика',
+            'review_music': currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
+            'review_difficulty': currentLang === 'en' ? 'Difficulty' : 'Сложность',
+            'review_optimization': currentLang === 'en' ? 'Optimization' : 'Оптимизация',
+            'review_duration': currentLang === 'en' ? 'Duration' : 'Продолжительность',
+            'review_verdict': currentLang === 'en' ? 'Final Verdict' : 'Итоговая оценка'
+        };
+        
+        if (translations[key]) {
+            el.textContent = translations[key];
+        }
+    });
 }
 
 // Функция партиклов для вердикта
