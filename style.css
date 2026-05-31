@@ -466,7 +466,7 @@ body {
 .review-stats {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
     margin-top: 20px;
     text-align: left;
 }
@@ -475,6 +475,23 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
+}
+
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--border) 20%,
+        var(--border) 80%,
+        transparent 100%
+    );
+    opacity: 0.5;
 }
 
 .stat-header {
@@ -553,6 +570,18 @@ body {
     text-align: center;
 }
 
+.review-verdict {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+}
+
 .verdict-label {
     font-family: 'PixelTitle', sans-serif;
     color: var(--border);
@@ -562,14 +591,33 @@ body {
 }
 
 .verdict-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
     font-family: 'PixelTitle', sans-serif;
-    font-size: 28px !important;
+    font-size: 22px !important;
+    font-weight: bold;
     color: #FFFFFF !important;
-    background-color: var(--accent); /* Оранжевый фон как у бейджа */
-    padding: 8px 20px;
     border: 2px solid #FFFFFF;
-    box-shadow: 0 0 10px rgba(247, 150, 23, 0.5);
-    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Цвета оценок как в легенде */
+.verdict-a { background-color: #13AD66; }
+.verdict-b { background-color: #91DB69; }
+.verdict-c { background-color: #4D9BE6; }
+.verdict-d { background-color: #F79617; }
+.verdict-e { background-color: #F04F78; }
+.verdict-f { background-color: #e14ff0; }
+
+.verdict-badge:hover {
+    transform: scale(1.15);
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(255,255,255,0.5));
 }
 
 /* ===== СКРИНШОТЫ ИЗ STEAM В МОДАЛЬНОМ ОКНЕ ===== */

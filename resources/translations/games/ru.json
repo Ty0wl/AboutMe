@@ -29,5 +29,6 @@
     "review_music": "Музыка и звуки:",
     "review_difficulty": "Сложность:",
     "review_optimization": "Оптимизация:",
-    "review_duration": "Продолжительность:"
+    "review_duration": "Продолжительность:",
+    "review_verdict": "Итоговая оценка:"
 }

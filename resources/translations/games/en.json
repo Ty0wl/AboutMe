@@ -29,5 +29,6 @@
     "review_music": "Music & Sounds:",
     "review_difficulty": "Difficulty:",
     "review_optimization": "Optimization:",
-    "review_duration": "Duration:"
+    "review_duration": "Duration:",
+    "review_verdict": "Final Grade:"
 }

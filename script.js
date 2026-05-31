@@ -222,6 +222,7 @@ function spawnParticles(originX, originY, imagePath) {
 // ===== МОДАЛЬНОЕ ОКНО И ТОАСТ =====
 
 // Генерация HTML для иконок рейтинга
+
 function renderRatingIcons(value, type = 'star', max = 5) {
     const icons = RATING_ICONS[type];
     let html = '<div class="rating-icons">';
@@ -240,6 +241,7 @@ function renderRatingIcons(value, type = 'star', max = 5) {
 }
 
 // Рендер блока оценок и описаний (Блок 4)
+// Рендер блока оценок и описаний (Блок 4)
 function renderReviewStats(container, data) {
     if (!data.ratings && !data.meta && !data.verdict) return;
     
@@ -253,12 +255,12 @@ function renderReviewStats(container, data) {
         difficulty: currentLang === 'en' ? 'Difficulty' : 'Сложность',
         optimization: currentLang === 'en' ? 'Optimization' : 'Оптимизация',
         duration: currentLang === 'en' ? 'Duration' : 'Продолжительность',
-        verdict: currentLang === 'en' ? 'FINAL VERDICT' : 'ОБЩИЙ ИТОГ'
+        verdict: currentLang === 'en' ? 'FINAL VERDICT' : 'ИТОГОВАЯ ОЦЕНКА'
     };
 
     let html = '<div class="review-stats">';
     
-    // 1. Основные категории (в нужном порядке)
+    // Категации в правильном порядке
     const categories = [
         { key: 'gameplay', label: t.gameplay, type: 'star' },
         { key: 'story', label: t.story, type: 'star' },
@@ -283,31 +285,74 @@ function renderReviewStats(container, data) {
         html += `</div>`;
     });
     
-    html += '</div>';
+    html += '</div>'; // Закрываем .review-stats
     
-    // 2. Технические параметры
+    // Технические параметры
     if (data.meta) {
         html += '<div class="review-meta">';
         
         if (data.meta.optimization) {
-            html += `<div class="meta-item">${t.optimization}: <span class="meta-value">${data.meta.optimization}</span></div>`;
+            html += `<div class="stat-item">
+                        <div class="stat-header">
+                            <span class="stat-label">${t.optimization}: <span class="meta-value">${data.meta.optimization}</span></span>
+                        </div>
+                    </div>`;
         }
         if (data.meta.duration) {
-            html += `<div class="meta-item">${t.duration}: <span class="meta-value">${data.meta.duration}</span></div>`;
+            html += `<div class="stat-item">
+                        <div class="stat-header">
+                            <span class="stat-label">${t.duration}: <span class="meta-value">${data.meta.duration}</span></span>
+                        </div>
+                    </div>`;
         }
         
         html += '</div>';
     }
 
-    // 3. Финальная оценка
+    // Финальная оценка (квадратный бейдж с партиклами)
     if (data.verdict) {
+        const verdictClass = `verdict-${data.verdict.toLowerCase().replace('+', '-plus').replace('-', '-')}`;
         html += `<div class="review-verdict">
                     <span class="verdict-label">${t.verdict}</span>
-                    <span class="verdict-badge">${data.verdict}</span>
-                 </div>`;
+                    <div class="verdict-badge ${verdictClass}" id="verdict-badge" data-grade="${data.verdict}">
+                        ${data.verdict}
+                    </div>
+                </div>`;
     }
     
     container.insertAdjacentHTML('beforeend', html);
+    
+    // Добавляем обработчик партиклов для вердикта
+    setTimeout(() => {
+        const verdictBadge = document.getElementById('verdict-badge');
+        if (verdictBadge) {
+            verdictBadge.addEventListener('click', (e) => {
+                spawnVerdictParticles(e);
+            });
+        }
+    }, 100);
+}
+
+// 🔥 Функция партиклов для вердикта (как в легенде)
+function spawnVerdictParticles(e) {
+    const rect = e.target.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    
+    // Определяем цвет частиц по оценке
+    const grade = e.target.getAttribute('data-grade') || 'A';
+    
+    const particleMap = {
+        'a': 'resources/gfx/particles/particle_a.png',
+        'b': 'resources/gfx/particles/particle_b.png',
+        'c': 'resources/gfx/particles/particle_c.png',
+        'd': 'resources/gfx/particles/particle_d.png',
+        'e': 'resources/gfx/particles/particle_e.png',
+        'f': 'resources/gfx/particles/particle_f.png',
+    };
+    
+    const particlePath = particleMap[gradeLower] || 'resources/gfx/particles/particle_a.png';
+    spawnParticles(x, y, particlePath);
 }
 
 async function openReviewModal(gameId) {
