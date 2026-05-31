@@ -515,16 +515,23 @@ body {
 }
 
 .stat-header {
-    display: flex;
+    display: flex !important;
     align-items: center;
     gap: 12px;
     line-height: 1; 
+    width: 100%;
 }
 
 .stat-label {
     font-family: 'PixelTitle', sans-serif;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     font-size: 16px;
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    flex-shrink: 0; 
+    white-space: nowrap; 
 }
 
 .rating-icons {
