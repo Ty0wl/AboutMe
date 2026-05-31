@@ -479,10 +479,22 @@ body {
     position: relative;
 }
 
-.stat-item:not(:last-child)::after {
+.stat-item.no-divider::after {
+    display: none;
+}
+
+.review-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.review-meta::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
     height: 1px;
@@ -494,6 +506,7 @@ body {
         transparent 100%
     );
     opacity: 0.5;
+    margin-bottom: 8px;
 }
 
 .stat-header {
@@ -535,13 +548,6 @@ body {
     color: #ccc;
     margin-top: 4px;
     margin-left: 4px;
-}
-
-.review-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 20px;
 }
 
 .meta-item {
@@ -607,6 +613,9 @@ body {
     transition: transform 0.2s ease, filter 0.2s ease;
     position: relative;
     overflow: hidden;
+    text-align: center;
+    line-height: 1;
+    padding: 0;
 }
 
 /* Цвета оценок как в легенде */
@@ -1102,25 +1111,11 @@ img {
     .meta-value {
         font-size: 14px !important;
     }
-.verdict-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    font-family: 'PixelTitle', sans-serif;
-    font-size: 22px !important;
-    font-weight: bold;
-    color: #FFFFFF !important;
-    border: 2px solid #FFFFFF;
-    cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    line-height: 1;
-    padding: 0;
-}
+    .verdict-badge {
+        font-size: 22px !important;
+        padding: 6px 16px;
+    }
+
     /* === УВЕДОМЛЕНИЯ === */
     .toast-notification {
         padding: 10px 15px !important;
