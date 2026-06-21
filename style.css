@@ -470,11 +470,11 @@ body {
     transition: border-color 0.2s;
 }
 
-/* Контейнер заголовка и рейтинга */
 .stat-header {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding-bottom: 10px;
     border-bottom: 1px dashed var(--border);
@@ -489,19 +489,23 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: auto;
     visibility: visible !important;
     opacity: 1 !important;
-    position: static !important;
 }
-
-.stat-label::before { content: ''; margin: 0; }
 
 /* Иконки рейтинга */
 .rating-icons {
     display: flex;
-    gap: 4px;
-    margin-top: 0;
-    margin-left: 24px; /* Отступ под текст */
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: auto;
 }
 
 .rating-icon {
@@ -509,6 +513,7 @@ body {
     height: 18px !important;
     image-rendering: pixelated !important;
     pointer-events: auto !important;
+    vertical-align: middle; 
 }
 
 /* Акцентный блок для текста описания */
