@@ -494,6 +494,8 @@ body {
     position: static !important;
 }
 
+.stat-label::before { content: ''; margin: 0; }
+
 /* Иконки рейтинга */
 .rating-icons {
     display: flex;
