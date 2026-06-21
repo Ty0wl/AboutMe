@@ -423,13 +423,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .review-title {
     font-family: 'PixelTitle', sans-serif;
     color: var(--accent);
-    font-size: 22px;
+    font-size: 24px;
     text-align: center;
     line-height: 1.2;
 }
@@ -440,110 +440,84 @@ body {
     font-size: 16px;
     font-style: italic;
     text-align: center;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 24px auto;
     max-width: 85%;
     line-height: 1.5;
     border: none;
     padding: 0;
 }
 
-/* ===== РЕЦЕНЗИЯ: ОЦЕНКИ И ОПИСАНИЯ ===== */
+/* ===== РЕЦЕНЗИЯ: СЕТКА ОЦЕНОК (2 КОЛОНКИ) ===== */
 .review-stats {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 10px;
     text-align: left;
 }
 
-.review-stats > .stat-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
-    opacity: 0.6;
-}
-
+/* Карточка оценки */
 .stat-item {
+    background: var(--bg-panel);
+    border: 2px solid var(--border);
+    padding: 16px;
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 24px 0;
-    position: relative;
-}
-
-.stat-desc {
-    font-family: 'PixelBody', monospace;
-    color: #ccc;
-    font-size: 13px;
-    line-height: 1.6;
-    text-align: justify;
-    text-indent: 1.5em;
-    margin: 0;
-}
-
-.stat-item.no-divider::after {
-    display: none;
-}
-
-.review-meta {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    position: relative;
-}
-
-.review-meta::before {
-    content: '';
-    position: absolute;
-    top: -12px;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
-    opacity: 0.6;
-}
-
-.review-meta .stat-item {
-    padding: 16px 0;
-}
-
-.review-meta .stat-item::after {
-    display: none !important;
-}
-
-.stat-header {
-    display: flex !important;
-    align-items: center;
     gap: 12px;
-    line-height: 1; 
+    transition: border-color 0.2s;
+}
+
+.stat-item:hover {
+    border-color: var(--accent);
+}
+
+/* Разделение заголовка и рейтинга */
+.stat-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
     width: 100%;
 }
 
+/* Крупные заголовки с иконкой */
 .stat-label {
     font-family: 'PixelTitle', sans-serif;
-    color: #FFFFFF !important;
-    font-size: 16px;
-    display: inline-block !important;
+    color: var(--accent) !important;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex !important;
+    align-items: center;
+    line-height: 1;
+    
     visibility: visible !important;
     opacity: 1 !important;
     position: static !important;
-    flex-shrink: 0; 
-    white-space: nowrap; 
 }
 
+/* Декоративная стрелка */
+.stat-label::before {
+    content: '▸';
+    margin-right: 8px;
+    color: var(--text);
+    font-size: 16px;
+}
+
+/* Иконки рейтинга */
 .rating-icons {
-    display: inline-flex;
-    gap: 6px;
-    align-items: center;
-    margin-top: -8px; 
+    display: flex;
+    gap: 4px;
+    margin-top: 0;
+    margin-left: 24px; /* Отступ под текст */
 }
 
 .rating-icon {
-    width: 24px !important;
-    height: 24px !important;
+    width: 22px !important;
+    height: 22px !important;
     image-rendering: pixelated !important;
     image-rendering: -moz-crisp-edges !important;
     image-rendering: crisp-edges !important;
@@ -551,20 +525,64 @@ body {
     pointer-events: auto !important;
 }
 
-.meta-item {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    font-family: 'PixelTitle', sans-serif;
-    color: #FFFFFF;
-    font-size: 16px;
+/* Акцентный блок для текста описания */
+.stat-desc {
+    font-family: 'PixelBody', monospace;
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: left;
+    
+    background: var(--bg-dark);
+    border-left: 3px solid var(--accent);
+    padding: 12px;
+    border-radius: 0 4px 4px 0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.meta-value {
-    font-family: 'PixelTitle', sans-serif;
-    color: #FFFFFF;
+/* Технические параметры (Оптимизация, Время) */
+.review-meta {
+    grid-column: 1 / -1; /* Растянуть на обе колонки */
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    margin-top: 10px;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.review-meta .stat-item {
+    background: transparent;
+    border: none;
+    padding: 0;
+    flex: 1;
+}
+
+.review-meta .stat-item .stat-header {
+    border-bottom: none;
+    padding-bottom: 0;
+    gap: 4px;
+}
+
+.review-meta .stat-label {
+    color: var(--text) !important;
     font-size: 16px;
-    font-weight: normal;
+    text-transform: none;
+}
+
+.review-meta .stat-label::before {
+    content: '';
+    margin: 0;
+}
+
+/* Скрываем старые разделители */
+.review-stats > .stat-item:not(:last-child)::after,
+.review-meta::before,
+.review-meta .stat-item::after {
+    display: none !important;
 }
 
 /* ===== СКРИНШОТЫ ===== */
@@ -832,7 +850,6 @@ img {
 .version-latest + .version-divider { margin: 25px 0; opacity: 0.8; }
 
 /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
-
 @media (max-width: 768px) {
     body { font-size: 12px; }
     
@@ -872,8 +889,8 @@ img {
         overflow-y: auto;
     }
     .modal-content { 
-        padding: 20px 15px !important; 
-        width: 95% !important; 
+        padding: 20px 10px !important; 
+        width: 98% !important; 
         max-height: none !important;
         margin: 10px auto;
         overflow-y: visible;
@@ -881,28 +898,55 @@ img {
     .modal-close-btn { top: 10px; right: 10px; }
     .close-icon { width: 28px !important; height: 28px !important; }
     
-    .review-header { margin-bottom: 8px; }
+    .review-header { margin-bottom: 12px; }
     .review-title { font-size: 18px !important; }
     .review-quote { font-size: 14px !important; max-width: 100%; margin-bottom: 15px; padding: 0 5px; }
     
+    /* МОБИЛЬНАЯ АДАПТАЦИЯ РЕЦЕНЗИИ */
+    .review-stats {
+        grid-template-columns: 1fr; /* Одна колонка */
+        gap: 12px;
+    }
+
+    .stat-item {
+        padding: 12px;
+    }
+
+    .stat-label {
+        font-size: 16px;
+    }
+
+    .stat-label::before {
+        font-size: 14px;
+    }
+
+    .rating-icons {
+        margin-left: 20px;
+    }
+    
+    .rating-icon {
+        width: 18px !important;
+        height: 18px !important;
+    }
+
+    .stat-desc {
+        font-size: 12px;
+        padding: 10px;
+        line-height: 1.5;
+    }
+
+    .review-meta {
+        flex-direction: column; /* Тех. данные друг под другом */
+        gap: 16px;
+        margin-top: 10px;
+    }
+    
+    /* Скриншоты на мобильном */
     .screenshots-scroll-area { height: auto !important; margin: 15px 0 8px 0; }
     .screenshot-item { width: 85vw !important; height: auto !important; aspect-ratio: 16/9; flex: 0 0 85vw !important; border-width: 1px !important; }
     .custom-scrollbar { height: 10px !important; margin-bottom: 8px; }
     
-    .stat-label { font-size: 14px !important; }
-    .stat-desc { font-size: 11px !important; line-height: 1.4; }
-    
-    .rating-icons { margin-top: -4px; }
-    .rating-icon { 
-        width: 20px !important;
-        height: 20px !important;
-        vertical-align: 0; 
-    }
-    
-    .review-meta { gap: 8px; margin-top: 12px; }
-    .meta-item { font-size: 14px !important; }
-    .meta-value { font-size: 14px !important; }
-    
+    /* Toast и настройки */
     .toast-notification { padding: 10px 15px !important; bottom: 12px; gap: 10px; max-width: 95vw; }
     .toast-notification span { font-size: 11px !important; }
     .toast-close-icon { width: 22px !important; height: 22px !important; }

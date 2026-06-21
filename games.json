@@ -236,7 +236,7 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "KUNAI",
-    "grade": "C",
+    "grade": "B",
     "review": 0
   },
   {
@@ -426,6 +426,16 @@
     "type": "Game",
     "genre": "Metroidvania, Adventure",
     "name": "Supraland: Six Inches Under",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 72,
+    "cover": "resources/gfx/covers/deathspank.jpg",
+    "year": 2010,
+    "type": "Game",
+    "genre": "RPG, Adventure",
+    "name": "DeathSpank",
     "grade": "A",
     "review": 0
   },
@@ -766,6 +776,56 @@
     "type": "Game",
     "genre": "Clicker, Casual",
     "name": "Leaf it Alone",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 137,
+    "cover": "resources/gfx/covers/machinarium.jpg",
+    "year": 2009,
+    "type": "Game",
+    "genre": "Puzzle, Adventure",
+    "name": "Machinarium",
+    "grade": "A",
+    "review": 0
+  },
+    {
+    "id": 140,
+    "cover": "resources/gfx/covers/chef knight.jpg",
+    "year": 2026,
+    "type": "Game",
+    "genre": "Clicker, Casual",
+    "name": "Chef Knight",
+    "grade": "B",
+    "review": 0
+  }, 
+    {
+    "id": 141,
+    "cover": "resources/gfx/covers/you know the drill.jpg",
+    "year": 2026,
+    "type": "Game",
+    "genre": "Clicker, Casual",
+    "name": "You Know The Drill",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 142,
+    "cover": "resources/gfx/covers/increknight.jpg",
+    "year": 2026,
+    "type": "Game",
+    "genre": "Clicker, Casual",
+    "name": "IncreKnight",
+    "grade": "B",
+    "review": 0
+  },
+    {
+    "id": 147,
+    "cover": "resources/gfx/covers/loot loop.jpg",
+    "year": 2026,
+    "type": "Game",
+    "genre": "Clicker, Casual",
+    "name": "Loot Loop",
     "grade": "B",
     "review": 0
   }
