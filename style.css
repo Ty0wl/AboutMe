@@ -448,12 +448,12 @@ body {
 }
 
 /* ===== РЕЦЕНЗИЯ: СЕТКА ОЦЕНОК (2 КОЛОНКИ) ===== */
+
 .review-stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-top: 10px;
-    text-align: left;
 }
 
 /* Карточка оценки */
@@ -464,19 +464,17 @@ body {
     border-radius: 4px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
+    text-align: center;
     transition: border-color 0.2s;
 }
 
-.stat-item:hover {
-    border-color: var(--accent);
-}
-
-/* Разделение заголовка и рейтинга */
+/* Контейнер заголовка и рейтинга */
 .stat-header {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 8px;
     padding-bottom: 10px;
     border-bottom: 1px dashed var(--border);
@@ -490,21 +488,10 @@ body {
     font-size: 18px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    display: flex !important;
-    align-items: center;
-    line-height: 1;
-    
+    line-height: 1.2;
     visibility: visible !important;
     opacity: 1 !important;
     position: static !important;
-}
-
-/* Декоративная стрелка */
-.stat-label::before {
-    content: '▸';
-    margin-right: 8px;
-    color: var(--text);
-    font-size: 16px;
 }
 
 /* Иконки рейтинга */
@@ -516,12 +503,9 @@ body {
 }
 
 .rating-icon {
-    width: 22px !important;
-    height: 22px !important;
+    width: 18px !important;
+    height: 18px !important;
     image-rendering: pixelated !important;
-    image-rendering: -moz-crisp-edges !important;
-    image-rendering: crisp-edges !important;
-    object-fit: contain;
     pointer-events: auto !important;
 }
 
