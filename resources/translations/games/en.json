@@ -35,5 +35,6 @@
     "filter_label": "Filters:",
     "filter_reviews": "Only with reviews",
     "filter_perfect": "Mastered",
-    "review_completion": "Completion bar"
+    "review_completion": "Completion bar",
+    "review_misc": "Other"
 }

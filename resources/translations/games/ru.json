@@ -35,5 +35,6 @@
     "filter_label": "Фильтры:",
     "filter_reviews": "Только с рецензиями",
     "filter_perfect": "Перфекционист",
-    "review_completion": "Прогресс прохождения"
+    "review_completion": "Прогресс прохождения",
+    "review_misc": "Прочее"
 }
