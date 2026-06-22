@@ -72,6 +72,7 @@
             </div>
         </section>
 
+        <!-- СОРТИРОВКА И ФИЛЬТРЫ -->
         <div class="sort-panel">
             <span class="sort-label" data-i18n="sort_label">Loading...</span>
             <button class="sort-btn" data-sort="id">ID</button>
@@ -82,6 +83,19 @@
             <button class="sort-btn" data-sort="grade" data-i18n="sort_grade">Loading...</button>
         </div>
 
+        <div class="filter-panel">
+            <span class="filter-label" data-i18n="filter_label">Фильтры:</span>
+            <label class="filter-checkbox">
+                <input type="checkbox" id="filter-reviews">
+                <span data-i18n="filter_reviews">Только с рецензиями</span>
+            </label>
+            <label class="filter-checkbox">
+                <input type="checkbox" id="filter-perfect">
+                <span data-i18n="filter_perfect">Перфекционист</span>
+            </label>
+        </div>
+
+        <!-- ТАБЛИЦА -->
         <div class="table-wrapper">
             <table class="games-table">
                 <thead>
@@ -95,26 +109,22 @@
                     </tr>
                 </thead>
                 <tbody id="games-table-body">
-                    <!-- Таблица генерируется через JS -->
+                    <!-- Генерируется через JS -->
                 </tbody>
             </table>
         </div>
     </main>
 
-    <!-- МОДАЛЬНОЕ ОКНО РЕЦЕНЗИИ (НОВАЯ СТРУКТУРА) -->
+    <!-- МОДАЛЬНОЕ ОКНО РЕЦЕНЗИИ -->
     <div id="review-modal" class="modal-overlay">
         <div class="modal-content">
             <button id="modal-close" class="modal-close-btn">
                 <img src="resources/gfx/ui/icon_close_off.png" alt="Close" class="close-icon">
             </button>
             
-            <!-- 1. Заголовок + Иконка игры -->
             <div id="modal-title" class="review-title"></div>
-            
-            <!-- 2. Цитата -->
             <p id="modal-quote" class="review-quote" style="display: none;"></p>
             
-            <!-- 3. Скриншоты + Скроллбар -->
             <div class="screenshots-scroll-area">
                 <div id="modal-screenshots" class="screenshots-container"></div>
                 <div class="custom-scrollbar">
@@ -122,12 +132,11 @@
                 </div>
             </div>
             
-            <!-- 4. Оценки, описания и мета-данные -->
             <div id="review-stats"></div>
         </div>
     </div>
 
-    <!-- УВЕДОМЛЕНИЕ (TOAST) -->
+    <!-- УВЕДОМЛЕНИЕ -->
     <div id="review-toast" class="toast-notification">
         <span data-i18n="toast_text">Loading...</span>
         <button id="toast-close" class="toast-close-btn">

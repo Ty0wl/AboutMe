@@ -3,6 +3,7 @@
     "title": "Hollow Knight: Voidheart Edition",
     "icon": "resources/gfx/ui/game_icons/hollow_knight.png",
     "quote": "\"Loading...\"",
+    "game_%": 100,
     "screenshots": [
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_5384f9f8b96a0b9934b2bc35a4058376211636d2.1920x1080.jpg?t=1776125684",
       "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_d5b6edd94e77ba6db31c44d8a3c09d807ab27751.1920x1080.jpg?t=1776125684",
