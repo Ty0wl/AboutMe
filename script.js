@@ -203,7 +203,8 @@ function applyReviewTranslations() {
         'review_difficulty': currentLang === 'en' ? 'Difficulty' : 'Сложность',
         'review_optimization': currentLang === 'en' ? 'Optimization' : 'Оптимизация',
         'review_duration': currentLang === 'en' ? 'Duration' : 'Продолжительность',
-        'review_completion': currentLang === 'en' ? 'Completion' : 'Прогресс'
+        'review_completion': currentLang === 'en' ? 'Completion' : 'Прогресс прохождения',
+        'review_misc': currentLang === 'en' ? 'Miscellaneous' : 'Прочее'
     };
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -233,39 +234,43 @@ function renderReviewStats(container, data) {
     });
     html += '</div>';
     
-    // Прогресс-бар (теперь с классом completion-label)
-    const completionPercent = data['game_%'] || 0;
-    if (completionPercent > 0) {
-        html += `<div class="completion-section">
-                    <div class="completion-label" data-i18n="review_completion">Прогресс</div>
-                    <div class="completion-bar-container">
-                        <div class="completion-bar-fill" style="width: ${completionPercent}%"></div>
-                        <span class="completion-bar-text">${completionPercent}%</span>
-                    </div>
-                </div>`;
-    }
-    
     // Блок "Прочее" (оформлен как карточка с заголовком)
     if (data.meta && (data.meta.optimization || data.meta.duration)) {
         html += '<div class="misc-section">';
-        html += '<div class="misc-title" data-i18n="review_misc">Прочее</div>';
+        html += '<div class="misc-header"><div class="misc-title" data-i18n="review_misc">Прочее</div></div>';
         html += '<div class="misc-content">';
         
         if (data.meta.optimization) {
             html += `<div class="misc-item">
                         <span class="misc-label" data-i18n="review_optimization">Оптимизация</span>
                         <span class="misc-value">${data.meta.optimization}</span>
-                    </div>`;
+                     </div>`;
         }
         
         if (data.meta.duration) {
             html += `<div class="misc-item">
                         <span class="misc-label" data-i18n="review_duration">Продолжительность</span>
                         <span class="misc-value">${data.meta.duration}</span>
-                    </div>`;
+                     </div>`;
         }
         
         html += '</div></div>';
+    }
+    
+    // Прогресс-бар (последняя ячейка)
+    const completionPercent = data['game_%'] || 0;
+    if (completionPercent > 0) {
+        html += `<div class="completion-section">
+                    <div class="completion-header">
+                        <div class="completion-label" data-i18n="review_completion">Прогресс прохождения</div>
+                    </div>
+                    <div class="completion-bar-wrapper">
+                        <div class="completion-bar-container">
+                            <div class="completion-bar-fill" style="width: ${completionPercent}%"></div>
+                        </div>
+                        <span class="completion-percentage">${completionPercent}%</span>
+                    </div>
+                 </div>`;
     }
 
     container.insertAdjacentHTML('beforeend', html);

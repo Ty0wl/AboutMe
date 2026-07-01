@@ -253,42 +253,27 @@ body {
     padding: 12px; border-radius: 0 4px 4px 0; margin: 0; width: 100%; box-sizing: border-box;
 }
 
-/* Технические параметры (блок "Прочее") */
-.review-meta, .misc-section {
-    grid-column: 1 / -1; display: flex; flex-direction: row;
-    gap: 24px; justify-content: center; margin-top: 10px; padding: 12px;
-    background: rgba(26, 22, 38, 0.5); border-radius: 4px;
-}
-.review-meta .stat-item, .misc-item {
-    background: transparent; border: none; padding: 0; flex: 1;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-}
-.review-meta .stat-item .stat-header { border-bottom: none; padding-bottom: 0; gap: 4px; width: auto; }
-.review-meta .stat-label { color: var(--text) !important; font-size: 16px; text-transform: none; }
-.review-meta .stat-label::before { content: ''; margin: 0; }
-.misc-label { font-family: 'PixelTitle', sans-serif; color: var(--border); font-size: 12px; text-transform: uppercase; }
-.misc-value { font-family: 'PixelBody', monospace; color: var(--text); font-size: 14px; font-weight: bold; }
-
-/* Скрыть старые разделители */
-.review-stats > .stat-item:not(:last-child)::after,
-.review-meta::before, .review-meta .stat-item::after { display: none !important; }
-
-/* Прогресс-бар прохождения */
-.completion-section {
-    grid-column: 1 / -1; background: var(--bg-panel); border: 2px solid var(--border);
-    padding: 16px; border-radius: 4px; margin-top: 10px;
-}
+/* Прогресс-бар прохождения (последняя ячейка) */
 .completion-section {
     grid-column: 1 / -1;
     background: var(--bg-panel);
     border: 2px solid var(--border);
     padding: 16px;
     border-radius: 4px;
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
+}
+
+.completion-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
+    width: 100%;
 }
 
 .completion-label {
@@ -300,17 +285,22 @@ body {
     margin: 0;
 }
 
-.completion-bar-container {
+.completion-bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     width: 100%;
     max-width: 600px;
-    height: 24px;
+}
+
+.completion-bar-container {
+    flex: 1;
+    height: 28px;
     background: var(--bg-dark);
-    border: 3px solid var(--border);
+    border: 4px solid var(--border);
     border-radius: 2px;
     overflow: hidden;
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
 .completion-bar-fill {
@@ -318,24 +308,9 @@ body {
     background: linear-gradient(90deg, var(--accent) 0%, #FFA500 100%);
     transition: width 0.5s ease;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 8px;
 }
 
-.completion-bar-text {
-    position: relative;
-    font-family: 'PixelTitle', sans-serif;
-    font-size: 14px;
-    color: #FFFFFF;
-    text-shadow: 0 0 4px rgba(0,0,0,0.8);
-    white-space: nowrap;
-    margin-left: auto;
-    padding-left: 8px;
-}
-
-/* Засечки с правильным расстоянием */
+/* Засечки с правильным расстоянием (каждые 20px) */
 .completion-bar-fill::before {
     content: '';
     position: absolute;
@@ -346,11 +321,20 @@ body {
     background: repeating-linear-gradient(
         90deg,
         transparent,
-        transparent 14px,
-        rgba(0,0,0,0.15) 14px,
-        rgba(0,0,0,0.15) 16px
+        transparent 18px,
+        rgba(0,0,0,0.2) 18px,
+        rgba(0,0,0,0.2) 20px
     );
     pointer-events: none;
+}
+
+.completion-percentage {
+    font-family: 'PixelTitle', sans-serif;
+    font-size: 16px;
+    color: var(--accent);
+    white-space: nowrap;
+    min-width: 50px;
+    text-align: right;
 }
 
 /* Блок "Прочее" (оформлен как карточка) */
@@ -360,11 +344,17 @@ body {
     border: 2px solid var(--border);
     padding: 16px;
     border-radius: 4px;
-    margin-top: 10px;
+}
+
+.misc-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border);
+    width: 100%;
+    margin-bottom: 12px;
 }
 
 .misc-title {
@@ -374,16 +364,12 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--border);
-    width: 100%;
-    text-align: center;
 }
 
 .misc-content {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 24px;
     justify-content: center;
     width: 100%;
 }
@@ -393,10 +379,11 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    padding: 8px 16px;
+    padding: 12px 24px;
     background: var(--bg-dark);
     border-radius: 4px;
-    min-width: 150px;
+    min-width: 180px;
+    border: 2px solid var(--border);
 }
 
 .misc-label {
@@ -413,6 +400,7 @@ body {
     font-size: 14px;
     font-weight: bold;
 }
+
 /* ===== СКРИНШОТЫ ===== */
 .screenshots-container {
     display: flex !important; flex-direction: row !important; gap: 12px; margin: 0 0 5px 0 !important; padding: 0;
@@ -595,10 +583,16 @@ img {
     .rating-icon { width: 18px !important; height: 18px !important; }
     .stat-desc { font-size: 12px; padding: 10px; line-height: 1.5; }
     
-    .review-meta, .misc-section { flex-direction: column; gap: 16px; margin-top: 10px; }
     .completion-section { padding: 12px; }
-    .completion-bar-container { height: 16px; }
-    .completion-bar-text { font-size: 11px; }
+    .completion-label { font-size: 16px; }
+    .completion-bar-wrapper { flex-direction: column; gap: 8px; }
+    .completion-bar-container { height: 20px; }
+    .completion-percentage { font-size: 14px; text-align: center; }
+    
+    .misc-section { padding: 12px; }
+    .misc-title { font-size: 16px; }
+    .misc-content { flex-direction: column; gap: 12px; }
+    .misc-item { min-width: 100%; padding: 10px 16px; }
     
     .screenshots-scroll-area { height: auto !important; margin: 15px 0 8px 0; }
     .screenshot-item { width: 85vw !important; height: auto !important; aspect-ratio: 16/9; flex: 0 0 85vw !important; border-width: 1px !important; }
