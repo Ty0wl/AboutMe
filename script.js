@@ -234,34 +234,6 @@ function renderReviewStats(container, data) {
         html += `</div>`;
     });
     html += '</div>';
-    
-    // Блок "Прочее"
-    if (data.meta && (data.meta.optimization || data.meta.duration)) {
-        const miscText = translations['review_misc'] || 'Прочее';
-        const optText = translations['review_optimization'] || 'Оптимизация:';
-        const durText = translations['review_duration'] || 'Продолжительность:';
-        
-        html += `<div class="misc-section">
-                    <div class="misc-header"><div class="misc-title">${miscText}</div></div>
-                    <div class="misc-content">`;
-        
-        if (data.meta.optimization) {
-            html += `<div class="misc-item">
-                        <span class="misc-label">${optText}</span>
-                        <span class="misc-value">${data.meta.optimization}</span>
-                    </div>`;
-        }
-        
-        if (data.meta.duration) {
-            html += `<div class="misc-item">
-                        <span class="misc-label">${durText}</span>
-                        <span class="misc-value">${data.meta.duration}</span>
-                    </div>`;
-        }
-        
-        html += '</div></div>';
-    }
-
     container.insertAdjacentHTML('beforeend', html);
 }
 

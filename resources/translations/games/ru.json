@@ -29,12 +29,7 @@
     "review_story": "Сюжет:",
     "review_music": "Музыка и звуки:",
     "review_difficulty": "Сложность:",
-    "review_optimization": "Оптимизация:",
-    "review_duration": "Продолжительность:",
-    "review_verdict": "Итоговая оценка:",
     "filter_label": "Фильтры:",
     "filter_reviews": "Только с рецензиями",
-    "filter_perfect": "Перфекционист",
-    "review_completion": "Прогресс прохождения",
-    "review_misc": "Прочее"
+    "filter_perfect": "Перфекционист"
 }

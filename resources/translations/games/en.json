@@ -29,12 +29,7 @@
     "review_story": "Story:",
     "review_music": "Music & Sounds:",
     "review_difficulty": "Difficulty:",
-    "review_optimization": "Optimization:",
-    "review_duration": "Duration:",
-    "review_verdict": "Final Grade:",
     "filter_label": "Filters:",
     "filter_reviews": "Only with reviews",
-    "filter_perfect": "Mastered",
-    "review_completion": "Completion bar",
-    "review_misc": "Other"
+    "filter_perfect": "Mastered"
 }
