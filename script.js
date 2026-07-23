@@ -282,13 +282,17 @@ function applyFilters() {
     const filterReviews = document.getElementById('filter-reviews')?.checked || false;
     const filterPerfect = document.getElementById('filter-perfect')?.checked || false;
     const rows = document.querySelectorAll('.game-row');
+    
     rows.forEach(row => {
         const hasReview = parseInt(row.dataset.review) === 1;
         const isPerfect = parseInt(row.dataset.perfect) === 1;
-        const completion = parseInt(row.dataset.completion) || 0;
+        
         let shouldHide = false;
+        
         if (filterReviews && !hasReview) shouldHide = true;
-        if (filterPerfect && (completion === 0 || completion < 100)) shouldHide = true;
+        
+        if (filterPerfect && !isPerfect) shouldHide = true;
+        
         row.classList.toggle('hidden', shouldHide);
     });
 }
