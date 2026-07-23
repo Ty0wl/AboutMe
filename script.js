@@ -192,11 +192,13 @@ function renderRatingIcons(value, type = 'star', max = 5) {
     return html;
 }
 
-function applyReviewTranslations() {
-    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
-    const elements = document.querySelectorAll('#review-stats [data-i18n]');
+function renderReviewStats(container, data) {
+    if (!data.ratings && !data.meta) return;
     
-    // Строго соответствуем ключам из твоих файлов ru.json / en.json
+    // Получаем текущий язык
+    const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
+    
+    // Словарь переводов для заголовков
     const translations = {
         'review_gameplay': currentLang === 'en' ? 'Gameplay:' : 'Геймплей:',
         'review_graphics': currentLang === 'en' ? 'Graphics:' : 'Графика:',
@@ -205,20 +207,9 @@ function applyReviewTranslations() {
         'review_difficulty': currentLang === 'en' ? 'Difficulty:' : 'Сложность:',
         'review_optimization': currentLang === 'en' ? 'Optimization:' : 'Оптимизация:',
         'review_duration': currentLang === 'en' ? 'Duration:' : 'Продолжительность:',
-        'review_completion': currentLang === 'en' ? 'Completion Progress' : 'Прогресс прохождения',
         'review_misc': currentLang === 'en' ? 'Miscellaneous' : 'Прочее'
     };
     
-    elements.forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[key]) {
-            el.textContent = translations[key];
-        }
-    });
-}
-
-function renderReviewStats(container, data) {
-    if (!data.ratings && !data.meta) return;
     let html = '<div class="review-stats">';
     
     const categories = [
@@ -228,10 +219,15 @@ function renderReviewStats(container, data) {
         { key: 'music', i18n: 'review_music', type: 'star' },
         { key: 'difficulty', i18n: 'review_difficulty', type: 'skull' }
     ];
+    
     categories.forEach(cat => {
         const val = data.ratings?.[cat.key] ?? 0;
         const desc = data.descriptions?.[cat.key] || '';
-        html += `<div class="stat-item"><div class="stat-header"><span class="stat-label" data-i18n="${cat.i18n}">Loading...</span>`;
+        const labelText = translations[cat.i18n] || 'Loading...';
+        
+        html += `<div class="stat-item">
+                    <div class="stat-header">
+                        <span class="stat-label">${labelText}</span>`;
         html += renderRatingIcons(val, cat.type);
         html += `</div>`;
         if (desc) html += `<div class="stat-desc">${desc}</div>`;
@@ -241,45 +237,32 @@ function renderReviewStats(container, data) {
     
     // Блок "Прочее"
     if (data.meta && (data.meta.optimization || data.meta.duration)) {
-        html += '<div class="misc-section">';
-        html += '<div class="misc-header"><div class="misc-title" data-i18n="review_misc">Прочее</div></div>';
-        html += '<div class="misc-content">';
+        const miscText = translations['review_misc'] || 'Прочее';
+        const optText = translations['review_optimization'] || 'Оптимизация:';
+        const durText = translations['review_duration'] || 'Продолжительность:';
+        
+        html += `<div class="misc-section">
+                    <div class="misc-header"><div class="misc-title">${miscText}</div></div>
+                    <div class="misc-content">`;
         
         if (data.meta.optimization) {
             html += `<div class="misc-item">
-                        <span class="misc-label" data-i18n="review_optimization">Оптимизация</span>
+                        <span class="misc-label">${optText}</span>
                         <span class="misc-value">${data.meta.optimization}</span>
-                     </div>`;
+                    </div>`;
         }
         
         if (data.meta.duration) {
             html += `<div class="misc-item">
-                        <span class="misc-label" data-i18n="review_duration">Продолжительность</span>
+                        <span class="misc-label">${durText}</span>
                         <span class="misc-value">${data.meta.duration}</span>
-                     </div>`;
+                    </div>`;
         }
         
         html += '</div></div>';
     }
-    
-    // Прогресс-бар
-    const completionPercent = data['game_%'] || 0;
-    if (completionPercent > 0) {
-        html += `<div class="completion-section">
-                    <div class="completion-header">
-                        <div class="completion-label" data-i18n="review_completion">Прогресс прохождения</div>
-                    </div>
-                    <div class="completion-bar-wrapper">
-                        <div class="completion-bar-container">
-                            <div class="completion-bar-fill" style="width: ${completionPercent}%"></div>
-                        </div>
-                        <span class="completion-percentage">${completionPercent}%</span>
-                    </div>
-                 </div>`;
-    }
 
     container.insertAdjacentHTML('beforeend', html);
-    setTimeout(applyReviewTranslations, 10);
 }
 
 async function openReviewModal(gameId) {
