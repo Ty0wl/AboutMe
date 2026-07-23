@@ -83,17 +83,21 @@
             <button class="sort-btn" data-sort="grade" data-i18n="sort_grade">Loading...</button>
         </div>
 
-        <div class="filter-panel">
-            <span class="filter-label" data-i18n="filter_label">Фильтры:</span>
-            <label class="filter-checkbox">
-                <input type="checkbox" id="filter-reviews">
-                <span data-i18n="filter_reviews">Только с рецензиями</span>
-            </label>
-            <label class="filter-checkbox">
-                <input type="checkbox" id="filter-perfect">
-                <span data-i18n="filter_perfect">Перфекционист</span>
-            </label>
-        </div>
+        <!-- Панель фильтров -->
+    <div class="filter-panel">
+        <span class="filter-label" data-i18n="filter_label">Фильтры:</span>
+    
+        <label class="filter-btn-wrapper">
+            <input type="checkbox" id="filter-reviews">
+            <span class="filter-btn" data-i18n="filter_reviews">Только с рецензиями</span>
+        </label>
+    
+        <label class="filter-btn-wrapper">
+            <input type="checkbox" id="filter-perfect">
+            <span class="filter-btn" data-i18n="filter_perfect">Перфекционист</span>
+        </label>
+
+    </div>
 
         <!-- ТАБЛИЦА -->
         <div class="table-wrapper">

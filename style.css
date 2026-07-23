@@ -127,37 +127,51 @@ body {
 /* Панель фильтров */
 .filter-panel {
     background-color: var(--bg-panel);
-    padding: 12px 20px; margin-bottom: 20px;
-    display: flex; align-items: center; gap: 20px;
-    flex-wrap: wrap; border: 2px solid var(--border);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    border: 2px solid var(--border);
 }
-.filter-label { font-family: 'PixelTitle', sans-serif; color: var(--accent); font-size: 14px; margin-right: 10px; }
-.filter-checkbox {
-    display: flex; align-items: center; gap: 10px;
-    cursor: pointer;
+.filter-label {
+    font-family: 'PixelTitle', sans-serif;
+    color: var(--accent);
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+/* Скрываем стандартный чекбокс */
+.filter-btn-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+/* Стилизуем label точно как кнопку сортировки */
+.filter-btn {
+    padding: 6px 12px;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    border: 2px solid var(--border);
     font-family: 'PixelBody', monospace;
-    font-size: 13px; color: var(--text);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
     user-select: none;
 }
-/* 🔥 ПИКСЕЛЬНЫЕ ЧЕКБОКСЫ */
-.filter-checkbox input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    background-image: url('resources/gfx/ui/checkbox_empty.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-    margin: 0;
-    border: none;
-    image-rendering: pixelated;
+
+.filter-btn:hover {
+    background-color: var(--border);
+    transform: translateY(-2px);
 }
-.filter-checkbox input[type="checkbox"]:checked {
-    background-image: url('resources/gfx/ui/checkbox_filled.png');
+
+/* Состояние "включено" (когда чекбокс отмечен) */
+.filter-btn-wrapper input[type="checkbox"]:checked + .filter-btn {
+    background-color: var(--border);
+    border-color: var(--accent);
+    color: var(--accent);
 }
-.filter-checkbox:hover { color: var(--accent); }
 .game-row.hidden { display: none; }
 
 /* Таблица */
@@ -575,24 +589,22 @@ img {
     .sort-btn { font-size: 11px !important; padding: 6px 10px !important; flex: 1 1 calc(33.333% - 8px); min-width: 80px; }
     
     /* 🔥 ФИЛЬТРЫ НА МОБИЛЬНЫХ */
-    .filter-panel { 
-        padding: 12px 15px; 
-        margin-bottom: 15px; 
-        gap: 12px; 
-        display: flex; 
-        flex-direction: column; 
-        align-items: flex-start; 
+    .filter-panel {
+        padding: 12px 15px;
+        gap: 8px;
     }
-    .filter-label { font-size: 12px; margin-right: 0; margin-bottom: 4px; }
-    .filter-checkbox { 
-        font-size: 12px; 
-        width: 100%; 
-        justify-content: flex-start; /* Аккуратное выравнивание по левому краю */
-        padding-left: 10px;
+    .filter-label {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+        margin-right: 0;
+        font-size: 12px;
     }
-    .filter-checkbox input[type="checkbox"] {
-        width: 24px; /* Увеличен для удобного нажатия пальцем */
-        height: 24px;
+    .filter-btn {
+        flex: 1 1 calc(50% - 8px); /* Две кнопки в ряд */
+        text-align: center;
+        font-size: 12px !important;
+        padding: 8px 10px !important; /* Чуть больше для удобного нажатия пальцем */
     }
     
     .table-wrapper { overflow-x: auto; }

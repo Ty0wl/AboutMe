@@ -195,20 +195,25 @@ function renderRatingIcons(value, type = 'star', max = 5) {
 function applyReviewTranslations() {
     const currentLang = localStorage.getItem(settings.storageKey) || 'ru';
     const elements = document.querySelectorAll('#review-stats [data-i18n]');
+    
+    // Строго соответствуем ключам из твоих файлов ru.json / en.json
     const translations = {
-        'review_gameplay': currentLang === 'en' ? 'Gameplay' : 'Геймплей',
-        'review_story': currentLang === 'en' ? 'Story' : 'Сюжет',
-        'review_graphics': currentLang === 'en' ? 'Graphics' : 'Графика',
-        'review_music': currentLang === 'en' ? 'Music & Sound' : 'Музыка и звук',
-        'review_difficulty': currentLang === 'en' ? 'Difficulty' : 'Сложность',
-        'review_optimization': currentLang === 'en' ? 'Optimization' : 'Оптимизация',
-        'review_duration': currentLang === 'en' ? 'Duration' : 'Продолжительность',
-        'review_completion': currentLang === 'en' ? 'Completion' : 'Прогресс прохождения',
+        'review_gameplay': currentLang === 'en' ? 'Gameplay:' : 'Геймплей:',
+        'review_graphics': currentLang === 'en' ? 'Graphics:' : 'Графика:',
+        'review_story': currentLang === 'en' ? 'Story:' : 'Сюжет:',
+        'review_music': currentLang === 'en' ? 'Music & Sounds:' : 'Музыка и звуки:',
+        'review_difficulty': currentLang === 'en' ? 'Difficulty:' : 'Сложность:',
+        'review_optimization': currentLang === 'en' ? 'Optimization:' : 'Оптимизация:',
+        'review_duration': currentLang === 'en' ? 'Duration:' : 'Продолжительность:',
+        'review_completion': currentLang === 'en' ? 'Completion Progress' : 'Прогресс прохождения',
         'review_misc': currentLang === 'en' ? 'Miscellaneous' : 'Прочее'
     };
+    
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (translations[key]) el.textContent = translations[key];
+        if (translations[key]) {
+            el.textContent = translations[key];
+        }
     });
 }
 
