@@ -41,7 +41,7 @@
     "name": "Journey of a Roach",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 6,
@@ -52,7 +52,7 @@
     "name": "BioShock / Remastered",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 7,
@@ -63,7 +63,7 @@
     "name": "BioShock 2 / Remastered",
     "grade": "C",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 8,
@@ -74,7 +74,7 @@
     "name": "BioShock 2: Minerva's Den / Remastered",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 9,
@@ -85,7 +85,7 @@
     "name": "BioShock Infinite",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 10,
@@ -96,7 +96,7 @@
     "name": "BioShock Infinite: Burial at Sea Ep.1",
     "grade": "C",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 11,
@@ -107,7 +107,7 @@
     "name": "BioShock Infinite: Burial at Sea Ep.2",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 12,
@@ -129,7 +129,7 @@
     "name": "The binding of Isaac: Rebirth",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 14,
@@ -140,7 +140,7 @@
     "name": "TBOI: Afterbirth / Afterbirth+",
     "grade": "D",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 15,
@@ -151,7 +151,7 @@
     "name": "TBOI: Repentance / Repentance+",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 16,
@@ -206,7 +206,7 @@
     "name": "Dishonored: Definitive Edition",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 27,
@@ -228,7 +228,7 @@
     "name": "Death's Door",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 30,
@@ -239,7 +239,7 @@
     "name": "Enter the Gungeon",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 32,
@@ -261,7 +261,7 @@
     "name": "KUNAI",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 35,
@@ -338,7 +338,7 @@
     "name": "Nine Sols",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
   {
     "id": 47,
@@ -360,7 +360,7 @@
     "name": "The Last Campfire",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 51,
@@ -371,7 +371,7 @@
     "name": "Haiku, the Robot",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 52,
@@ -393,7 +393,7 @@
     "name": "Turnip Boy Commits Tax Evasion",
     "grade": "C",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 58,
@@ -404,7 +404,7 @@
     "name": "Is this game trying to kill me?",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 61,
@@ -415,7 +415,7 @@
     "name": "Minishoot' Adventures",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 62,
@@ -448,7 +448,7 @@
     "name": "MiSide",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 70,
@@ -459,7 +459,7 @@
     "name": "Supraland",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 71,
@@ -470,18 +470,18 @@
     "name": "Supraland: Six Inches Under",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 72,
-    "cover": "resources/gfx/covers/deathspank.jpg",
-    "year": 2010,
+    "cover": "resources/gfx/covers/deathspank trilogy.jpg",
+    "year": "2010-2011",
     "type": "Game",
     "genre": "RPG, Adventure",
-    "name": "DeathSpank",
+    "name": "DeathSpank Trilogy",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 74,
@@ -492,7 +492,7 @@
     "name": "Hob",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 75,
@@ -514,7 +514,7 @@
     "name": "The binding of Isaac",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 78,
@@ -580,7 +580,7 @@
     "name": "Hollow Knight: Silksong",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 87,
@@ -634,7 +634,7 @@
     "name": "Rayman Legends",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 92,
@@ -656,7 +656,7 @@
     "name": "My Coworker Is An Idiot",
     "grade": "C",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 95,
@@ -667,7 +667,7 @@
     "name": "Blazing Beaks",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 96,
@@ -722,7 +722,7 @@
     "name": "Rusty Lake Collection",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 110,
@@ -744,7 +744,7 @@
     "name": "Florence",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 113,
@@ -755,7 +755,7 @@
     "name": "Poco",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 115,
@@ -766,7 +766,7 @@
     "name": "Creature Kitchen",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 117,
@@ -777,7 +777,7 @@
     "name": "Gambler's Table",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 118,
@@ -810,7 +810,7 @@
     "name": "Meltopia",
     "grade": "C",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 129,
@@ -821,7 +821,7 @@
     "name": "HOLY GRAIL for DUMMIES",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 131,
@@ -832,7 +832,7 @@
     "name": "Webbed",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 132,
@@ -843,7 +843,7 @@
     "name": "Shelldiver",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 135,
@@ -854,7 +854,7 @@
     "name": "Leaf it Alone",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 137,
@@ -865,7 +865,7 @@
     "name": "Machinarium",
     "grade": "A",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 140,
@@ -876,7 +876,7 @@
     "name": "Chef Knight",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   }, 
     {
     "id": 141,
@@ -887,7 +887,7 @@
     "name": "You Know The Drill",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 142,
@@ -898,7 +898,7 @@
     "name": "IncreKnight",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   },
     {
     "id": 147,
@@ -909,6 +909,6 @@
     "name": "Loot Loop",
     "grade": "B",
     "review": 0,
-    "perfect": 0
+    "perfect": 1
   }
 ]

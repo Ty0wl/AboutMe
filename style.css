@@ -133,15 +133,29 @@ body {
 }
 .filter-label { font-family: 'PixelTitle', sans-serif; color: var(--accent); font-size: 14px; margin-right: 10px; }
 .filter-checkbox {
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; gap: 10px;
     cursor: pointer;
     font-family: 'PixelBody', monospace;
     font-size: 13px; color: var(--text);
     user-select: none;
 }
+/* 🔥 ПИКСЕЛЬНЫЕ ЧЕКБОКСЫ */
 .filter-checkbox input[type="checkbox"] {
-    width: 18px; height: 18px; cursor: pointer;
-    accent-color: var(--accent);
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-image: url('resources/gfx/ui/checkbox_empty.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    margin: 0;
+    border: none;
+    image-rendering: pixelated;
+}
+.filter-checkbox input[type="checkbox"]:checked {
+    background-image: url('resources/gfx/ui/checkbox_filled.png');
 }
 .filter-checkbox:hover { color: var(--accent); }
 .game-row.hidden { display: none; }
@@ -214,7 +228,14 @@ body {
 .modal-close-btn { position: absolute; top: 15px; right: 15px; background: transparent; border: none; cursor: pointer; padding: 5px; }
 .close-icon { width: 36px; height: 36px; object-fit: contain; transition: transform 0.2s; }
 
-/* ===== РЕЦЕНЗИЯ: ЗАГОЛОВОК И ЦИТАТА ===== */
+/* ===== РЕЦЕНЗИЯ: СТАРЫЙ ДИЗАЙН (БЕЗ БЕНТО-БОКСОВ) ===== */
+.review-stats {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    text-align: left;
+}
+
 .review-header { display: flex; justify-content: center; align-items: center; margin-bottom: 16px; }
 .review-title { font-family: 'PixelTitle', sans-serif; color: var(--accent); font-size: 24px; text-align: center; line-height: 1.2; }
 .review-quote {
@@ -223,63 +244,97 @@ body {
     margin: 0 auto 24px auto; max-width: 85%; line-height: 1.5; border: none; padding: 0;
 }
 
-/* ===== РЕЦЕНЗИЯ: СЕТКА ОЦЕНОК ===== */
-.review-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 10px; }
-
 .stat-item {
-    background: var(--bg-panel); border: 2px solid var(--border);
-    padding: 16px; border-radius: 4px;
-    display: flex; flex-direction: column; align-items: center;
-    gap: 12px; text-align: center; transition: border-color 0.2s;
-}
-.stat-header {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 8px; padding-bottom: 10px; border-bottom: 1px dashed var(--border); width: 100%;
-}
-.stat-label {
-    font-family: 'PixelTitle', sans-serif; color: var(--accent) !important;
-    font-size: 18px; text-transform: uppercase; letter-spacing: 1px; line-height: 1.2;
-    margin: 0; padding: 0; text-align: center; width: auto;
-    visibility: visible !important; opacity: 1 !important;
-}
-.rating-icons { display: flex; gap: 5px; align-items: center; justify-content: center; margin: 0; padding: 0; width: auto; }
-.rating-icon {
-    width: 18px !important; height: 18px !important;
-    image-rendering: pixelated !important; pointer-events: auto !important; vertical-align: middle;
-}
-.stat-desc {
-    font-family: 'PixelBody', monospace; color: #ccc; font-size: 13px; line-height: 1.6; text-align: left;
-    background: var(--bg-dark); border-left: 3px solid var(--accent);
-    padding: 12px; border-radius: 0 4px 4px 0; margin: 0; width: 100%; box-sizing: border-box;
-}
-
-/* Прогресс-бар прохождения (последняя ячейка) */
-.completion-section {
-    grid-column: 1 / -1;
-    background: var(--bg-panel);
-    border: 2px solid var(--border);
-    padding: 16px;
-    border-radius: 4px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 12px;
-}
-
-.completion-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 8px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--border);
+    padding: 16px 0;
+    position: relative;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
+    opacity: 0.6;
+}
+
+.stat-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.stat-label {
+    font-family: 'PixelTitle', sans-serif;
+    color: var(--accent) !important;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+}
+
+.rating-icons {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.rating-icon {
+    width: 20px !important;
+    height: 20px !important;
+    image-rendering: pixelated !important;
+    pointer-events: auto !important;
+}
+
+.stat-desc {
+    font-family: 'PixelBody', monospace;
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: left;
+    margin-top: 4px;
+    padding-left: 0;
+    border-left: none;
+    background: transparent;
+    border-radius: 0;
+}
+
+/* Прогресс-бар и Прочее без рамок */
+.completion-section, .misc-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 0;
+    position: relative;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.completion-header, .misc-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-bottom: 0;
+    border-bottom: none;
     width: 100%;
 }
 
-.completion-label {
+.completion-label, .misc-title {
     font-family: 'PixelTitle', sans-serif;
     color: var(--accent);
-    font-size: 18px;
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 0;
@@ -290,14 +345,15 @@ body {
     align-items: center;
     gap: 12px;
     width: 100%;
-    max-width: 600px;
+    max-width: 100%;
+    margin-top: 8px;
 }
 
 .completion-bar-container {
     flex: 1;
-    height: 28px;
+    height: 20px;
     background: var(--bg-dark);
-    border: 4px solid var(--border);
+    border: 3px solid var(--border);
     border-radius: 2px;
     overflow: hidden;
     position: relative;
@@ -310,80 +366,40 @@ body {
     position: relative;
 }
 
-/* Засечки с правильным расстоянием (каждые 20px) */
 .completion-bar-fill::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 18px,
-        rgba(0,0,0,0.2) 18px,
-        rgba(0,0,0,0.2) 20px
-    );
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 18px, rgba(0,0,0,0.2) 18px, rgba(0,0,0,0.2) 20px);
     pointer-events: none;
 }
 
 .completion-percentage {
     font-family: 'PixelTitle', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--accent);
     white-space: nowrap;
-    min-width: 50px;
+    min-width: 45px;
     text-align: right;
-}
-
-/* Блок "Прочее" (оформлен как карточка) */
-.misc-section {
-    grid-column: 1 / -1;
-    background: var(--bg-panel);
-    border: 2px solid var(--border);
-    padding: 16px;
-    border-radius: 4px;
-}
-
-.misc-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--border);
-    width: 100%;
-    margin-bottom: 12px;
-}
-
-.misc-title {
-    font-family: 'PixelTitle', sans-serif;
-    color: var(--accent);
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
 }
 
 .misc-content {
     display: flex;
     flex-direction: row;
     gap: 24px;
-    justify-content: center;
-    width: 100%;
+    margin-top: 8px;
 }
 
 .misc-item {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 24px;
-    background: var(--bg-dark);
-    border-radius: 4px;
-    min-width: 180px;
-    border: 2px solid var(--border);
+    align-items: flex-start;
+    gap: 4px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    min-width: auto;
 }
 
 .misc-label {
@@ -554,10 +570,30 @@ img {
     .legend-item { display: flex; align-items: center; gap: 10px; justify-content: flex-start; background: rgba(0,0,0,0.1); border-radius: 4px; padding: 8px 10px; font-size: 12px; flex-wrap: nowrap; }
     .legend-item .grade-badge { width: 28px !important; height: 28px !important; font-size: 14px !important; flex-shrink: 0; }
     
-    .sort-panel, .filter-panel { padding: 12px 15px; margin-bottom: 15px; gap: 8px; display: flex; flex-wrap: wrap; }
-    .sort-label, .filter-label { font-size: 12px; margin-right: 0; width: 100%; text-align: center; margin-bottom: 5px; }
+    .sort-panel { padding: 12px 15px; margin-bottom: 15px; gap: 8px; display: flex; flex-wrap: wrap; }
+    .sort-label { font-size: 12px; margin-right: 0; width: 100%; text-align: center; margin-bottom: 5px; }
     .sort-btn { font-size: 11px !important; padding: 6px 10px !important; flex: 1 1 calc(33.333% - 8px); min-width: 80px; }
-    .filter-checkbox { font-size: 12px; width: 100%; justify-content: center; }
+    
+    /* 🔥 ФИЛЬТРЫ НА МОБИЛЬНЫХ */
+    .filter-panel { 
+        padding: 12px 15px; 
+        margin-bottom: 15px; 
+        gap: 12px; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+    .filter-label { font-size: 12px; margin-right: 0; margin-bottom: 4px; }
+    .filter-checkbox { 
+        font-size: 12px; 
+        width: 100%; 
+        justify-content: flex-start; /* Аккуратное выравнивание по левому краю */
+        padding-left: 10px;
+    }
+    .filter-checkbox input[type="checkbox"] {
+        width: 24px; /* Увеличен для удобного нажатия пальцем */
+        height: 24px;
+    }
     
     .table-wrapper { overflow-x: auto; }
     .games-table { font-size: 10px !important; min-width: 600px; }
@@ -567,8 +603,19 @@ img {
     .grade-badge { width: 32px !important; height: 32px !important; font-size: 13px !important; }
     .perfect-ribbon { width: 28px; height: 28px; top: -4px; right: -4px; }
     
-    .modal-overlay { align-items: flex-start; padding: 10px 0; }
-    .modal-content { padding: 20px 10px !important; width: 98% !important; max-height: none !important; margin: 10px auto; overflow-y: visible; }
+    /* 🔥 ИСПРАВЛЕННЫЙ СКРОЛЛ МОДАЛЬНОГО ОКНА */
+    .modal-overlay { 
+        align-items: flex-start; 
+        padding: 10px 0;
+        overflow-y: auto; /* Разрешаем скролл оверлея */
+    }
+    .modal-content { 
+        padding: 20px 15px !important; 
+        width: 95% !important; 
+        max-height: 90vh !important; /* Ограничиваем высоту */
+        margin: 10px auto;
+        overflow-y: auto; /* Включаем скролл внутри контента */
+    }
     .modal-close-btn { top: 10px; right: 10px; }
     .close-icon { width: 28px !important; height: 28px !important; }
     
@@ -576,23 +623,14 @@ img {
     .review-title { font-size: 18px !important; }
     .review-quote { font-size: 14px !important; max-width: 100%; margin-bottom: 15px; padding: 0 5px; }
     
-    .review-stats { grid-template-columns: 1fr !important; gap: 12px; }
-    .stat-item { padding: 12px; }
-    .stat-label { font-size: 16px; }
-    .rating-icons { margin-left: 0; }
+    .stat-label { font-size: 14px; }
     .rating-icon { width: 18px !important; height: 18px !important; }
-    .stat-desc { font-size: 12px; padding: 10px; line-height: 1.5; }
+    .stat-desc { font-size: 12px; line-height: 1.5; }
     
-    .completion-section { padding: 12px; }
-    .completion-label { font-size: 16px; }
-    .completion-bar-wrapper { flex-direction: column; gap: 8px; }
-    .completion-bar-container { height: 20px; }
-    .completion-percentage { font-size: 14px; text-align: center; }
+    .completion-bar-container { height: 16px; }
+    .completion-percentage { font-size: 12px; min-width: 40px; }
     
-    .misc-section { padding: 12px; }
-    .misc-title { font-size: 16px; }
     .misc-content { flex-direction: column; gap: 12px; }
-    .misc-item { min-width: 100%; padding: 10px 16px; }
     
     .screenshots-scroll-area { height: auto !important; margin: 15px 0 8px 0; }
     .screenshot-item { width: 85vw !important; height: auto !important; aspect-ratio: 16/9; flex: 0 0 85vw !important; border-width: 1px !important; }

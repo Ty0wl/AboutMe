@@ -234,7 +234,7 @@ function renderReviewStats(container, data) {
     });
     html += '</div>';
     
-    // Блок "Прочее" (оформлен как карточка с заголовком)
+    // Блок "Прочее"
     if (data.meta && (data.meta.optimization || data.meta.duration)) {
         html += '<div class="misc-section">';
         html += '<div class="misc-header"><div class="misc-title" data-i18n="review_misc">Прочее</div></div>';
@@ -257,7 +257,7 @@ function renderReviewStats(container, data) {
         html += '</div></div>';
     }
     
-    // Прогресс-бар (последняя ячейка)
+    // Прогресс-бар
     const completionPercent = data['game_%'] || 0;
     if (completionPercent > 0) {
         html += `<div class="completion-section">
